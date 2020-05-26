@@ -1,0 +1,65 @@
+\documentclass[manuscript, review, screen, timestamp]{acmart}
+
+\usepackage{subcaption}
+
+\begin{document}
+% Title portion
+\title{The gem5 Simulator: Version 20.0+}
+\subtitle{A new era for the open-source computer architecture simulator}
+
+\author{Jason Lowe-Power}
+\orcid{0000-0002-8880-8703}
+\affiliation{%
+  \institution{University of California, Davis}
+  }
+\email{jlowepower@ucdavis.edu}
+\author{Many more to come soon!}
+
+% Probably should create an authors file.
+%
+%%% FOR DRAM POWER AND ELASTIC TRACES
+% Matthias Jung (matthias.jung@iese.fraunhofer.de)
+% Subash Kannoth (subash.kannoth@iese.fraunhofer.de)
+% Omar Naji (?)
+% Éder F. Zulian (zulian@eit.uni-kl.de)
+% Christian Weis (weis@eit.uni-kl.de)
+% Norbert Wehn (wehn@eit.uni-kl.de)
+% Abdul Mutaal Ahmad (?)
+% Thomas Grass (?)
+% Andreas Hansson (?)
+% Stephan Diestelhorst (stephan.diestelhorst@gmail.com)
+% Wendy Elsasser (wendy.elsasser@arm.com)
+% Radhika Jagtap (radhika.jagtap@arm.com)
+
+
+\setcopyright{none}
+
+\begin{abstract}
+    (A sentence about gem5 at a high level.)
+    (A sentence about all the features of gem5.)
+    The gem5 simulator has been under active development over the last nine years since the original gem5 paper was published.
+    In this time, there have been over 7500 commits to the codebase from over 250 unique contributors which have improved the simulator by adding new features, fixing bugs, and increasing the code quality.
+    Due to its popularity, the gem5 community has instituted a new meritocratic governance model to encourage community-centric contributions.
+    (Come back to this.)
+\end{abstract}
+
+\maketitle
+\renewcommand{\shortauthors}{Lowe-Power and the gem5 Community}
+
+\input{intro}
+\input{changes}
+\input{other-work}
+
+\section{Acknowledgements}
+
+The development of gem5 is distributed.
+It is likely we have missed someone that should be acknowledged.
+
+NSF CCRI. Brookhaven.
+
+List all contributors that did not reply to the message about this paper.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}
