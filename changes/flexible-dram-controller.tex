@@ -1,0 +1,22 @@
+\subsection[Flexible DRAM Controller]{Flexible DRAM Controller\footnote{by Wendy Elsasser, Matthais Jung, and others}}
+
+Heard back, waiting for text.
+
+\subsubsection[DRAMPower and DRAM Power-Down Modes]{\footnote{by Matthias Jung, Subash Kannoth, Omar Naji, Eder F. Zulian, Christian Weis, ...}}
+
+Across applications, DRAM is a significant contributor to the overall system power.
+For example, the DRAM access energy per bit is up to three orders of magnitude higher compared to an on-chip memory access.
+Therefore, an accurate and fast power estimation is crucial for an efficient design space exploration.
+DRAMPower (cite: DRAMPower: Open-source DRAM Power \& Energy Estimation Tool Karthik Chandrasekar, Christian Weis, Yonghui Li, Sven Goossens, Matthias Jung, Omar Naji, Benny Akesson, Norbert Wehn, and Kees Goossens URL: \url{http://www.drampower.info}) is an open source tool for fast and accurate power and energy estimation for several DRAM memories based on JEDEC standards.
+It supports unique features like power-down, bank-wise power estimation, per bank refresh, partial array self-refresh, and many more.
+
+In contrast to Micron’s DRAM Power estimation spread sheet (cite Micron. DDR3 SDRAM System Power Calculator), which estimates the power from device manufacturer’s data sheet and workload specifications (e.g. Rowbuffer-Hit-Rate or Read-Write-Ratio), DRAMPower uses the actual timings from the memory transactions, which leads to a much higher accuracy in power estimation.
+Furthermore, the DRAMPower tool performs DRAM command trace analysis based on memory state transitions and hence, avoids cycle-by-cycle evaluation, thus speeding up simulations.
+
+For the efficient integration of DRAMPower into gem5, we changed the tool from a standalone simulator to a library that could be used in discrete event-based simulators for calculating the power consumption online during the simulation.
+Furthermore, we integrate the power-down modes into the DRAM controller model of gem5 (cite: 3.	Integrating DRAM Power-Down Modes in gem5 and Quantifying their Impact R. Jagtap, M. Jung, W. Elsasser, C. Weis, A. Hansson, N. Wehn. ACM International Symposium on Memory Systems (MEMSYS 2017), October, 2017, Washington, DC, USA) in order to provide the research community a tool for power-down analysis for a breadth of use cases. We further evaluated the model with real HPC workloads, illustrating the value of integrating low power functionality into a full system simulator.
+
+\subsubsection[Quality of Service Extensions]{Quality of Service Extensions\footnote{by Matteo Andreozzi}}
+
+Heard back, waiting for text.
+It may be a bit late.

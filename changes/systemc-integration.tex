@@ -1,0 +1,62 @@
+\subsection[SystemC Integration]{SystemC Integration}
+
+While the open and configurable architecture of gem5 is of particular interest
+in academia, the industry's main tool for virtual prototyping is SystemC
+Transaction Level Modelling (TLM)~\cite{systemc_ieee11}. Many hardware vendors
+provide SystemC TLM models of their IP and there are tools, such as Synopsys
+Platform Architect\footnote{\url{https://www.synopsys.com/verification/virtual-prototyping/platform-architect.html}},
+that assist in building a virtual system and analyzing it. Also, many research
+projects use SystemC TLM, as they benefit from the rich ecosystem of accurate
+of-the-shelf models of real hardware components. However, there is a lack of
+accurate and modifiable CPU models in SystemC since the model providers want to
+protect their IP. This makes the combination of gem5 with SystemC very
+attractive.
+
+\subsubsection[gem5 to SystemC Bridge]{gem5 to SystemC Bridge\footnote{By Chistian Menard, Jeronimo Castrillon, and Matthias Jung}}
+
+SystemC TLM and gem5 were developed around the same time and are based on
+similar underlying ideas. As a consequence, the hardware model used by TLM is
+surprisingly close to the model of gem5. In both approaches, the system is
+organized as a set of components that communicate by exchanging data packets
+via a well defined protocol. The protocol abstracts over the physical
+connection wires that would be used in a register transfer level (RTL)
+simulation and thereby significantly increases simulation speed. In gem5,
+components use \emph{master} and \emph{slave} ports to communicate to other
+components, whereas in SystemC TLM, connections are established via
+\emph{initiator} and \emph{target} sockets. Also, the three protocols
+\emph{atomic}, \emph{timing} and \emph{functional} provided by gem5 find their
+equivalent in the \emph{blocking}, \emph{non-blocking} and \emph{debug}
+protocols of TLM. The major difference in both protocols is the treatment of
+backpressure, which is implemented by a retry phase in gem5 and with the
+exclusion rule of TLM.
+
+\begin{figure}
+    \centering
+    \subcaptionbox{gem5 to SystemC\label{fig:example:gem5_to_sc}}{
+      \includegraphics[height=4cm]{fig/gem5_to_systemc.pdf}
+    }
+    \subcaptionbox{SystemC to gem5\label{fig:example:sc_to_gem5}}{
+      \includegraphics[height=4cm]{fig/systemc_to_gem5.pdf}
+    }
+    \subcaptionbox{both directions\label{fig:example:twoway}}{
+      \includegraphics[height=4cm]{fig/twoway.pdf}
+    }
+    \caption{Possible scenarios for binding gem5 and SystemC.}
+    \label{fig:gem5_tlm_example}
+\end{figure}
+
+The similarity of the two approaches enabled us to create a light-weight
+compatibility layer. In our approach, co-simulation is achieved by hosting the
+gem5 simulation on top of a SystemC simulation. For this, we replaced the gem5
+discrete event kernel with a SystemC process that is managed by the SystemC
+kernel. A set of transactors further enables communication between the two
+simulation domains by translating between the two protocols as is shown in
+Figure~\ref{fig:gem5_tlm_example}. This work was published
+in~\cite{menard2017-system-systemc} where we documented our approach and showed
+that the transaction between gem5 and TLM only introduces a low overhead of
+about \(8\%\). The source code as well as basic usage examples can be found in
+\texttt{util/tlm} of the gem5 repository.
+
+\subsubsection[SystemC in gem5]{SystemC in gem5\footnote{By Gabriel Black}}
+
+Haven't heard anything back, yet.
