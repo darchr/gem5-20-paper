@@ -1,7 +1,58 @@
-\subsection[Classic Caches Improvements]{Classic Caches Improvements\footnote{by Nikos Nikoleris and Andreas Hanson}}
+\subsection[Classic Caches Improvements]{Classic Caches Improvements\footnote{by Nikos Nikoleris}}
 
-Haven't heard back, yet.
+The classic memory system implements a snooping MOESI-like coherence protocol that allows for flexible, configurable cache hierarchies that do not need a change of the coherence protocol for different topologies.
+The coherence protocol is primarily implemented in the Cache with some support also implemented in CoherentXBar and crucial optimizations in the SnoopFilter.
 
-\subsubsection[Snooping Support and Snoop Filtering]{Snooping Support and Snoop Filtering\footnote{by Stephan Diestelhorst}}
+Over the years, the components of the classic memory systems have received a lot of contributions that enhanced the accuracy and allowed for more flexibility in gem5 to model the on-chip memory system.
 
-Heard back, waiting for text.
+\subsubsection[Non-Coherent Cache]{Non-Coherent Cache}
+The cache model in gem5 implements the full coherence protocol and as a result can be used in any level of the coherent memory subsystem (e.g., L1 data cache or instruction cache, last-level cache).
+The non-coherent cache is a stripped down version of the cache model and can only be placed below the point-of-coherence (closer to memory).
+Below the point-of-coherence, the non-coherent cache receives only requests for fetches and writebacks and itself performs only fetches and writebacks to memory below.
+As such the non-coherent cache is a greatly simplified version in terms of handling the coherence protocol compared to the regular Cache while otherwise supporting the same flexibility (e.g., configurable tags, replacement policies, inclusive or exclusive, etc.).
+
+The non-coherent cache can be used to model system-level caches.
+System-level Caches are often larger in size and can be used by CPUs and other devices in the system.
+
+\subsubsection[Write Streaming Optimizations]{Write Streaming Optimizations}
+
+Write streaming is a common access pattern that is typically encountered when software initializes or copies large memory buffers (e.g., memset, memcpy).
+Write streaming can create a lot of pressure to the memory system both for off-chip memory bandwidth and on-chip cache capacity.
+These streaming writes will result in invalidation to other caches and fetches from off-chip memory to fill-in cache lines that are immediately overwritten with new data.
+In addition, these fills can thrash the L1 or L2 cache.
+
+Common optimizations~\cite{} ([1] Conway, Pat, Nathan Kalyanasundharam, Gregg Donley, Kevin Lepak, and Bill Hughes. Cache hierarchy and memory subsystem of the AMD Opteron processor. IEEE micro 30, no. 2 (2010): 16-29) coalesce writes to form full cache line writes and avoid unnecessary data fetches.
+As a result, we can achieve significant reduction in on-chip memory traffic and off-chip memory bandwidth.
+In addition, when the buffer we write to is larger than the size of the L1 cache we need to avoid thrashing the L1.
+
+We have implemented a simple mechanism to detect write streaming memory access patterns.
+The mechanism can attach to any cache in the system but has been primarily designed for use in L1 data cache.
+It can detect a single write-streaming access pattern with configurable thresholds for switching to write coalescing and switching to bypassing allocation in the current cache level and avoid thrashing.
+
+\subsubsection[Cache Maintenance Operations]{Cache Maintenance Operations}
+
+Typically, the contents of the cache are handled by the coherence protocol.
+For most user-level code, caches are invisible.
+This greatly simplifies programming and ensures software portability.
+However, when interfacing with devices or persistent memory, the effect of caching becomes visible to the programmer.
+In such cases, a user might have to trigger a writeback which propagates all the way to the device or the persistent memory.
+In other cases, a cache invalidation will ensure that a subsequent load will fetch the newest version of the data from a buffer of the main memory.
+
+Cache maintenance operations (CMOs) are now supported in gem5 in a way that can deal with arbitrary cache hierarchies.
+An operation can either clean and/or invalidate a cache line.
+A clean
+operation will find the dirty copy and trigger a writeback and an invalidate operation will find all copies of the cache line and invalidate them and the combined operation will perform both actions.
+The effects of CMOs are defined with reference to a configurable point in the system.
+For example, a clean and invalidate to the point-of-coherence will all copies of the block above the point-of-coherence, invalidate them, and if any of them is dirty trigger a writeback to the memory below the point-of-coherence.
+
+\subsubsection[Snooping Support and Snoop Filtering]{Snooping Support and Snoop Filtering}
+
+In large systems, broadcasting snoop messages is slow; costs energy and time; and can cause significant scalability bottlenecks.
+Therefore, directories and filters are used to keep track of which caches / nodes are keeping a copy of a particular cached line.
+We added a snoop filter to gem5 which is a distributed component that keeps track of the coherence state of all lines cached “above” it, similar to the AMD Probe Filter~\cite{} (Conway, Pat, Nathan Kalyanasundharam).
+For example, if the snoop filter sits next to (in front of) the L3 cache, it knows about all lines in the L2 and L1 caches that are connected to that L3 cache.
+
+Using the snoop filter, we can reduce the amount of messages from $O(N^2)$ to $O(N)$ with $N$ concurrent masters in the system.
+Modelling the snoop filter / directory separately from the cache allows us to use different organizations for the filter and the cache, and distributing area between shared caches vs coherence tracking filters / directories.
+We also model the effect of limited filter capacity through back-invalidations that remove cache entries if the filter becomes full; allowing for more realistic cache performance metrics.
+Finally, the more centralized coherence tracking in the filter allows for more tight checking of correct function of the distributed coherence protocol in the classic memory system.
