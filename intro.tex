@@ -1,4 +1,104 @@
-This is a placeholder for the introduction text.
 
-Dummy citation. Having at least one citation keeps bibtex
-happy~\cite{Binkert-gem5-2011}.
+
+\section{The gem5 Simulator}
+
+The gem5 simulator~\cite{Binkert-gem5-2011} is an open source community-supported computer architecture simulator system.
+It consists of a simulator core and models for everything from out of order processors, to DRAM, to network devices.
+The gem5 project consists of the gem5 simulator\footnote{\url{https://gem5.googlesource.com/public/gem5}}, documentation\footnote{\url{https://www.gem5.org/}}, and common resources\footnote{\url{https://gem5.googlesource.com/public/gem5-resources}} that enable computer architecture research.
+
+The gem5 project is governed by a meritocratic, consensus-based community governance document\footnote{\url{https://www.gem5.org/governance/}} with a goal to provide a tool to further the state of the art in computer architecture.
+
+
+\begin{itemize}
+    \item Give a high-level overview of gem5
+    \item What are the main features
+    \item What sets it apart from other architecture simulators
+    \begin{itemize}
+        \item Governance and community-oriented
+        \item Used by multiple companies and by many academics
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{gem5's main features}
+
+ISA support.
+
+CPU models that can be used with (almost) any ISA.
+
+Memory system.
+
+Two different cache models.
+
+``Classic caches'': I would like to come up with a better name than this.
+Maybe ``Composable caches''?
+
+Ruby allows for user-defined cache coherence protocols.
+We provide the following protocols.
+
+Ruby also works with Garnet detailed network model.
+
+Full system support.
+
+
+
+\subsection{The past nine years}
+
+The gem5 simulator has been wildly successful in the past nine years since the initial release of gem5.
+
+\begin{itemize}
+    \item Talk about the citations to gem5. Lots of use.
+    \item Very active development community
+    \item Lots of commits
+    \item Lots of committers
+\end{itemize}
+
+Show a figure with the number of commits per year.
+
+Show a figure with the number of unique contributors per year.
+
+Unfortunately, this success brought growing pains.
+Cite "gem5 Horrors"~\cite{Power-gem5horrors-2015}.
+
+\subsection{gem5 now}
+
+To solve these problems we
+\begin{itemize}
+    \item Instituted a governance structure
+    \item Improved documentation (cite Learning gem5)
+    \item Worked to fund raise (CCRI)
+    \item Moved development model to modern tools (git, gerrit)
+    \item Created a contributing document to help people get started
+\end{itemize}
+
+\subsubsection{Changes in gem5}
+
+In addition to these systematic changes there has also been lots of improvements to the codebase.
+Section~\ref{sec:changes} contains all of the details.
+
+These include... (a long list).
+
+\subsubsection{Using gem5 in research and education}
+
+This talks about how to use gem5 in your research and your education.
+
+Start with \url{gem5.org}.
+
+\subsection{The future of gem5}
+
+The future of gem5 is bright.
+
+\begin{itemize}
+    \item Lots of new stuff coming in a new roadmap that's coming soon!
+    \begin{itemize}
+        \item Improved python interface
+        \item New RAM models (including NVM)
+        \item Garnet 3.0
+        \item Models for ML accelerators
+        \item Known-good configurations
+        \item Many more.
+    \end{itemize}
+    \item Here, we talk about how to contribute to gem5.
+    \item We will do a better job recognizing contributions. The gem5 project is only successful with the community is vibrant. We have taken positive steps towards making it easier to contribute (like a governance document and contributing documentation), but we need to do more. We will encourage everyone to contribute.
+    \item More educational material coming!
+    \item More workshops, tutorials, etc.
+\end{itemize}
