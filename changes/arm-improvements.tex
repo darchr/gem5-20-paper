@@ -7,3 +7,17 @@ Note: May want to add something about \url{https://community.arm.com/developer/i
 \subsubsection[ARMv8 Support]{ARMv8 Support\footnote{by Giacomo Gabrielli}}
 
 Heard back, waiting for text.
+
+\subsubsection[Trusted Firmware Support]{Trusted Firmware Support\footnote{by Adrian Herrera}}
+
+Trusted Firmware (TF-A) is Arm's reference implementation of Secure World software for A-profile architectures.
+It enables Secure Boot flow models, and provides implementations for the Secure Monitor executing at Exception Level 3 (EL3) as well as for several Arm low-level software interface standards, including System Control and Management Interface (SCMI) driver for accessing System Control Processors (SCP), Power State Coordination Interface (PSCI) library support for power management, and Secure Monitor Call5 (SMC) handling.
+
+TF-A is supported on multiple Platforms, each of them characterized by its set of hardware components and their location in the memory map.
+From the list of ADPs (Arm Development Platforms), it is worth mentioning the Juno ADP and the Fixed Virtual Platforms (FVP) ADP family.
+However, the Arm reference platforms in gem5 are part of the \verb|VExpress_GEM5_Base| family.
+These are loosely based on a Versatile Express RS1 platform with a slightly modified memory map. TF-A implementations are provided for both Juno and FVPs, however not for \verb|VExpress_GEM5_Base|.
+
+Towards unifying Arm's platform landscape, we now provide a \verb|VExpress_GEM5_Foundation| platform as part of gem5's \verb|VExpress_GEM5_Base| family.
+This is based on and compatible with FVP Foundation, meaning all Foundation software may run unmodified in gem5, including but not limited to TF-A.
+This allows for simulating boot flows based on UEFI implementations (U-boot, EDK II), and brings us a step closer to Windows support in gem5.
