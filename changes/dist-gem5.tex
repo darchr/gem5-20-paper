@@ -1,7 +1,28 @@
-\subsection[dist-gem5: Support for Distributed Computing]{dist-gem5: Support for Distributed Computing\footnote{by Gabor Dozsa}}
+\subsection[dist-gem5: Support for Distributed System Modeling]{dist-gem5: Support for Distributed System Modeling\footnote{by Mohammad Alian}}
 
-Haven't heard back, yet.
+Designing distributed systems requires careful analysis of the complex interplay between processor
+microarchitecture, memory subsystem, inter-node network, and software layers.
+However, simulating a multi-node computer system using one gem5 process can take an eon.
+Responding to the need for efficient simulation of multi-node computer systems, dist-gem5 enables parallel, distributed simulation of a hierarchical, computer cluster using multiple gem5 processes.
+dist-gem5 spawns several gem5 processes, in which each of them can simulate one or several computer systems (i.e., compute node) or a scale-out network topology (i.e., network node).
+dist-gem5 automatically launches these gem5 processes, forward simulated packets between them through real TCP connections, and performs quantum-based synchronization to ensure correct and deterministic simulation.
 
-Note: I should probably reach out to Mohammad Alian.
+More specifically, dist-gem5 consists of the following three main components:
+
+\textbf{Packet forwarding:} dist-gem5 establishes a TCP socket connection between each compute node and a corresponding port of the network node to (i) forward simulated packets between compte nodes
+through the simulated network topology and (ii) exchange synchronization messages.
+Within each gem5 process, dist-gem5 launches a receiver thread that runs in parallel with the main simulation thread to free the main simulation thread from polling on the TCP connections.
+
+\textbf{Synchronization:} In addition to network topology simulation, the network node implements a
+synchronization barrier for performing quantum-based synchronization.
+dist-gem5 schedules a global
+sync event every quantum in each gem5 process.
+The process() method of the global sync event in
+compute nodes sends out a ``sync request'' message through the TCP connection to the network node
+and waits for the reception of a ``sync ack'' to start the next quantum simulation.
+On the other hand, the \verb|process()| method of the network node waits for the reception of ``sync requests'' from all compute nodes and then sends out ``sync acks'' to each compute node.
+
+\textbf{Distributed checkpointing:} dist-gem5 supports distributed checkpointing by capturing the external, inter gem5 process states, including the in-flight packets inside the network node.
+To ensure that no in-flight message exists between gem5 processes when the distributed checkpoint is taken, dist-gem5 only initiates checkpoints at a periodic global sync event.
 
 Cite ``dist-gem5: Distributed Simulation of Computer Clusters'' and ``pd-gem5: Simulation Infrastructure for Parallel/Distributed Computer Systems''
