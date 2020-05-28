@@ -1,0 +1,878 @@
+   199	Andreas Hansson <andreas.hanson@arm.com>
+   127	Nilay Vaish <nilay@cs.wisc.edu>
+   113	Gabe Black <gabeblack@google.com>
+    91	Ali Saidi <Ali.Saidi@arm.com>
+    22	Andreas Sandberg <Andreas.Sandberg@arm.com>
+    20	Brad Beckmann <brad.beckmann@amd.com>
+    19	Steve Reinhardt <stever@gmail.com>
+    13	Tony Gutierrez <anthony.gutierrez@amd.com>
+    11	Dam Sunwoo <dam.sunwoo@arm.com>
+     8	Chander Sudanthi <chander.sudanthi@arm.com>
+     8	Geoffrey Blake <geoffrey.blake@arm.com>
+     7	Joel Hestness <jthestness@gmail.com>
+     7	Marc Orr <marc.orr@gmail.com>
+     7	Nathanael Premillieu <nathanael.premillieu@arm.com>
+     6	Jason Lowe-Power <jason@lowepower.com>
+     5	Mrinmoy Ghosh <mrinmoy.ghosh@arm.com>
+     4	Deyaun Guo <guodeyuan@tsinghua.org.cn>
+     4	Jayneel Gandhi <jayneel@cs.wisc.edu>
+     4	Nathan Binkert <nate@binkert.org>
+     3	Brian Grayson <b.grayson@samsung.com>
+     3	Djordje Kovacevic <djordje.kovacevic@arm.com>
+     3	Koan-Sin Tan <koansin.tan@gmail.com>
+     3	Lena Olson <leolson@google.com>
+     3	Malek Musleh <malek.musleh@gmail.com>
+     3	Matt Evans <matt.evans@arm.com>
+     3	Uri Wiener <uri.wiener@arm.com>
+     3	William Wang <william.wang@arm.com>
+     2	Mitch Hayenga <mitch.hayenga@arm.com>
+     2	Nuwan Jayasena <Nuwan.Jayasena@amd.com>
+     2	Ron Dreslinski <rdreslin@umich.edu>
+     2	Sascha Bischoff <sascha.bischoff@arm.com>
+     2	Tushar Krishna <tushar@ece.gatech.edu>
+     2	Vince Weaver <vince@csl.cornell.edu>
+     1	Anders Handler <s052838@student.dtu.dk>
+     1	Andrew Lukefahr <lukefahr@umich.edu>
+     1	Erik Tomusk <E.Tomusk@sms.ed.ac.uk>
+     1	Giacomo Gabrielli <giacomo.gabrielli@arm.com>
+     1	Hamid Reza Khaleghzadeh <khaleghzadeh@gmail.com>
+     1	James Clarkson <james.clarkson@arm.com>
+     1	Krishnendra Nathella <Krishnendra.Nathella@arm.com>
+     1	Lisa Hsu <Lisa.Hsu@amd.com>
+     1	Lluc Alvarez <lluc.alvarez@bsc.es>
+     1	Lluís Vilanova <vilanova@ac.upc.edu>
+     1	Marco Elver <Marco.Elver@ARM.com>
+     1	Matt Horsnell <matt.horsnell@arm.com>
+     1	Maximilien Breughe <maximilien.breughe@elis.ugent.be>
+     1	Min Kyu Jeong <minkyu.jeong@arm.com>
+     1	Palle Lyckegaard <palle@lyckegaard.dk>
+     1	Prakash Ramrakhyani <prakash.ramrakhyani@arm.com>
+     1	Pritha Ghoshal <pritha9987@tamu.edu>
+Andreas Hansson <andreas.hanson@arm.com> (199):
+      MAC: Make gem5 compile and run on MacOSX 10.7.2
+      SWIG: Make gem5 compile and link with swig 2.0.4
+      MEM: Differentiate functional cache accesses from CPU and memory
+      MEM: Add the system port as a central access point
+      Ruby: Change the access permissions for MOESI hammer
+      Ruby: Change the access permissions for MOESI hammer
+      MEM: Add port proxies instead of non-structural ports
+      CPU: Moving towards a more general port across CPU models
+      MEM: Simplify ports by removing EventManager
+      MEM: Remove the notion of the default port
+      MEM: Remove Port removeConn and MemObject deletePortRefs
+      MEM: Separate queries for snooping and address ranges
+      MEM: Make the bus bridge unidirectional and fixed address range
+      MEM: Removing the default port peer from Python ports
+      MEM: Make the bus default port yet another port
+      MEM: Fix fs.py by specifying the range size rather than end
+      ns_gige: Fix a missing curly brace in if-statement
+      MEM: Clean-up of Functional/Virtual/TranslatingPort remnants
+      MEM: Make the RubyPort physMemPort a PioPort instead of M5Port
+      Ruby: Connect system port in Ruby network test
+      Thread: Use inherited baseCpu rather than cpu in SimpleThread
+      MEM: Remove the otherPort from the cache ports
+      Regression: Update the regress script after SE/FS merge
+      MEM: Remove onRetryList from BusPort and rely on retryList
+      MEM: Introduce the master/slave port roles in the Python classes
+      MEM: Pass the ports from Python to C++ using the Swig params
+      MEM: Explicit ports and Python binding on CopyEngine
+      MEM: Fix master/slave ports in Ruby and non-regression scripts
+      Script: Fix the scripts that use the num_cpus cache parameter
+      MEM: Fix residual bus ports and make them master/slave
+      MEM: Fatal when no port can be found for an address
+      CPU: Round-two unifying instr/data CPU ports across models
+      MEM: Move port creation to the memory object(s) construction
+      MEM: Make port proxies use references rather than pointers
+      MEM: Move all read/write blob functions from Port to PortProxy
+      Ruby: Simplify tester ports by not using SimpleTimingPort
+      MEM: Prepare mport for master/slave split
+      MEM: Simplify cache ports preparing for master/slave split
+      SWIG: Ensure ptrdiff_t is a known type in gcc >= 4.6.1
+      MEM: Make all the port proxy members const
+      Ruby: Rename RubyPort::sendTiming to avoid overriding base class
+      Stats: Fix the realview regression stats after nvmem move
+      CPU: Check that the interrupt controller is created when needed
+      Stats: Update stats for changeset 8868
+      scripts: Fix to ensure that port connection count is always set
+      clang: Fix recently introduced clang compilation errors
+      gcc: Clean-up of non-C++0x compliant code, first steps
+      Python: Fix a conditional expression that requires Python 2.5
+      Scons: Remove Werror=False in SConscript files
+      MEM: Split SimpleTimingPort into PacketQueue and ports
+      MEM: Unify bus access methods and prepare for master/slave split
+      Ruby: Fix Set::print for 32-bit hosts
+      Power: Change bitfield name to avoid conflicts with range_map
+      range_map: Enable const find and iteration
+      CPU: Unify initMemProxies across CPUs and simulation modes
+      Ruby: Remove the physMemPort and instead access memory directly
+      MEM: Remove legacy DRAM in preparation for memory updates
+      Atomic: Remove the physmem_port and access memory directly
+      Python: Make the All proxy traverse SimObject children as well
+      Ruby: Fix the example configurations option parsing
+      MEM: Enable multiple distributed generalized memories
+      Ruby: Ensure order-dependent iteration uses an ordered map
+      Stats: Update with use of std::map for ordered iteration in Ruby
+      clang/gcc: Fix compilation issues with clang 3.0 and gcc 4.6
+      Regression: Add ANSI colours to highlight test status
+      MEM: Separate snoops and normal memory requests/responses
+      MEM: Remove the Broadcast destination from the packet
+      Ruby: Use MasterPort base-class pointers where possible
+      clang/gcc: Use STL hash function for int64_t and uint64_t
+      MEM: Add the PortId type and a corresponding id field to Port
+      MEM: Use base class Master/SlavePort pointers in the bus
+      MEM: Separate requests and responses for timing accesses
+      Ruby: Ensure snoop requests are sent using sendTimingSnoopReq
+      MEM: Do not forward uncacheable to bus snoopers
+      MEM: Add the communication monitor
+      Config: Fix a typo in the se.py script for setting fastmem
+      Config: Exit with fatal if a port is already connected
+      MEM: Add a snooping DMA port subclass for table walker
+      DMA: Split the DMA device and IO device into seperate files
+      Config: Use the attribute naming and include ports in JSON
+      Packet: Cleaning up packet command and attribute
+      Cache: Remove dangling doWriteback declaration
+      Bridge: Split deferred request, response and sender state
+      Packet: Updated comments for src and dest fields
+      Packet: Unify the use of PortID in packet and port
+      Bus: Turn the PortId into a transport function parameter
+      Bus: Remove redundant packet parameter from isOccupied
+      gcc: Small fixes to compile with gcc 4.7
+      Stats: Fix stats to match output after changeset 8800b05e1cb3
+      Bus: Split the bus into a non-coherent and coherent bus
+      Power: Fix MaxMiscDestRegs which was set to zero
+      Timing CPU: Remove a redundant port pointer
+      Build: Point to the appropriate tcmalloc package
+      swig: Use SWIG from environment when determining version
+      gcc: Fix warnings for gcc 4.7 and clang 3.1
+      Fix: Address a few benign memory leaks
+      Port: Move retry from port base class to Master/SlavePort
+      Port: Add isSnooping to slave port (asking master port)
+      Port: Add getAddrRanges to master port (asking slave port)
+      Port: Make getAddrRanges const
+      Bus: Replace tickNextIdle and inRetry with a state variable
+      Bus: Add a notion of layers to the buses
+      Bus: Split the bus into separate request/response layers
+      Bus: Make the default bus width 8 bytes instead of 64
+      Port: Align port names in C++ and Python
+      Stats: Updates due to bus changes
+      Port: Hide the queue implementation in SimpleTimingPort
+      Mem: Make members relating to range and size constant
+      EventManager: Rename queue accessor and remove cast operator
+      scons: Add LIBRARY_PATH from the user environment to Scons
+      Mem: Make SimpleMemory single ported
+      Regression: Fix topologies path in failing pc-simple-timing-ruby
+      Bridge: Use EventWrapper instead of Event subclass for sendEvent
+      Config: Use clock option in se/fs script and pass to switch_cpus
+      Checkpoint: Fix broken checkpointing functionality
+      Clock: Move the clock and related functions to ClockedObject
+      Clock: Make Tick unsigned and remove UTick
+      EventManager: Remove test for NULL pointer in constructor
+      PacketQueue: Allow queuing in the same tick as desired send tick
+      CPU: Remove overloaded function_trace_start parameter
+      Device: Remove overloaded pio_latency parameter
+      Port: Extend the QueuedPort interface and use where appropriate
+      Bridge: Remove NACKs in the bridge and unify with packet queue
+      Packet: Remove NACKs from packet and its use in endpoints
+      DMA: Refactor the DMA device and align timing and atomic
+      swig: Disable unused value warning with llvm 3.1 compilers
+      Checker: Fix checker CPU ports
+      Checker: Bump the realview-o3-checker regression
+      Port: Stricter port bind/unbind semantics
+      Clock: Rework clocks to avoid tick-to-cycle transformations
+      Clock: Add a Cycles wrapper class and use where applicable
+      Param: Transition to Cycles for relevant parameters
+      Device: Bump PIO and PCI latencies to more reasonable values
+      Device: Update stats for PIO and PCI latency change
+      Inet: Remove the SackRange and its use
+      AddrRange: Remove the unused range_ops header
+      Ruby: Bump the stats after recent memory controller changes
+      Checkpoint: Pass maxtick to avoid undefined variable
+      clang: Fix issues identified by the clang static analyzer
+      Stats: Remove the reference stats that are no longer present
+      scons: Use c++0x with gcc >= 4.4 instead of 4.6
+      scons: Restructure ccflags and ldflags
+      scons: Add a target for google-perftools profiling
+      gcc: Enable Link-Time Optimization for gcc >= 4.6
+      Mem: Add a maximum bandwidth to SimpleMemory
+      Stats: Update stats to reflect SimpleMemory bandwidth
+      AddrRange: Simplify AddrRange params Python hierarchy
+      AddrRange: Remove unused range_multimap
+      AddrRange: Simplify Range by removing stream input/output
+      AddrRange: Transition from Range<T> to AddrRange
+      Mem: Remove the file parameter from AbstractMemory
+      Scons: Verbose messages when dependencies are not installed
+      Mem: Tidy up bus member variables types
+      TrafficGen: Add a basic traffic generator
+      TrafficGen: Add a basic traffic generator regression
+      DRAM: Introduce SimpleDRAM to capture a high-level controller
+      SimpleDRAM: A basic SimpleDRAM regression
+      Regression: Set the clock for twosys-tsunami CPUs
+      Stats: Update stats for twosys-tsunami after setting CPU clock
+      Configs: Fix memtest.py by moving the system port
+      Configs: Fix memtest cache latency to match new parameters
+      Doxygen: Update the version of the Doxyfile
+      Mem: Determine bus block size during initialisation
+      Mem: Use range operations in bus in preparation for striping
+      Param: Fix proxy traversal to support chained proxies
+      Clock: Inherit the clock from parent by default
+      Regression: Use addTwoLevelCacheHierarchy in configs
+      Stats: Update stats for use of two-level builder
+      Regression: Use CPU clock and 32-byte width for L1-L2 bus
+      Stats: Update stats for new default L1-to-L2 bus clock and width
+      Configs: Set the memtest clock to a reasonable value
+      Stats: Update memtest stats after setting clock
+      Mem: Use cycles to express cache-related latencies
+      Stats: Update stats for cache timings in cycles
+      Fix: Address a few minor issues identified by cppcheck
+      Mem: Use deque instead of list for bus retries
+      Checkpoint: Make system serialize call children
+      Mem: Separate the host and guest views of memory backing store
+      Port: Add protocol-agnostic ports in the port hierarchy
+      Mem: Fix incorrect logic in bus blocksize check
+      stats: Update t1000 stats to match recent changes
+      dev: Remove zero-time loop in DMA timing send
+      stats: Update stats for DMA port send
+      arm: Use table walker clock that is inherited from CPU
+      config: Use shared cache config for regressions
+      config: Use SimpleDRAM in full-system, and with o3 and inorder
+      stats: Update stats to reflect use of SimpleDRAM
+      dev: Make default clock more reasonable for system and devices
+      stats: Update the stats to reflect the 1GHz default system clock
+      config: Fix the cache class naming in regression scripts
+      config: Remove unused mem_size in fs.py
+      config: Add a check for fastmem only used with Atomic CPU
+      config: Unify caches used in regressions and adjust L2 MSHRs
+      stats: Update stats for unified cache configuration
+      config: Fix a typo in the simple-atomic-mp configuration
+      stats: Update stats for fixed simple-atomic-mp config
+      mem: Fix typo in port comments
+      mem: Fix DRAM draining to ensure write queue is empty
+      config: Fix description of checkpoint option from cycle to tick
+
+Nilay Vaish <nilay@cs.wisc.edu> (127):
+      MESI Coherence Protocol: Fix L2 miss statistics This patch removes calls to uu_ProfileMiss from transitions where the request is satisfied by the L2 cache controller.
+      eventq: add a function for replacing head of the queue This patch adds a function for replacing the event at the head of the queue with another event. This helps in running a different set of events. Events already scheduled can processed by replacing the original head event back. This function has been specifically added to support cache warmup and cooldown required for creating and restoring checkpoints.
+      Config: Add an option of type 'choice' for cpu type This patch adds a new option for cpu type. This option is of type 'choice' which is similar to a C++ enum, except that it takes string values as possible choices. Following options are being removed -- detailed, timing, inorder.
+      Ruby Set: Move NUMBER_WORDS_PER_SET to Set.hh This constant is currently in System.hh, but is only used in Set.hh. It is being moved to Set.hh to remove this artificial dependence of Set.hh on System.hh.
+      AbstractController: Remove some of the unused functions
+      Ruby Cache: Add param for marking caches as instruction only
+      Merged with Nate's commit
+      Config: Remove short option string for cpu type
+      X86: Add memory fence to I/O instructions
+      X86 Regressions: Update stats due to fence instruction
+      DPRINTF: Improve some dprintf messages.
+      Sparse Memory: Simplify the structure for an entry The SparseMemEntry structure includes just one void* pointer. It seems unnecessary that we have a structure for this. The patch removes the structure and makes use of a typedef on void* instead.
+      MOESI Hammer: Remove a couple of bugs A couple of bugs were observed while building checkpointing support in Ruby. This patch changes transitions to remove those errors.
+      MOESI Hammer: Update regression test output
+      Ruby: remove the files related to the tracer The Ruby Tracer is out of date with the changes that are being carried out to support checkpointing. Hence, it needs to be removed.
+      Ruby Memory Vector: Functions for collating and populating pages This patch adds functions to the memory vector class that can be used for collating memory pages to raw trace and for populating pages from a raw trace.
+      Ruby: Add infrastructure for recording cache contents This patch changes CacheRecorder, CacheMemory, CacheControllers so that the contents of a cache can be recorded for checkpointing purposes.
+      Ruby Sparse Memory: Add function for collating blocks This patch adds function to the Sparse Memory so that the blocks can be recorded in a cache trace. The blocks are added to the cache recorder which can later write them into a file.
+      Ruby EventQueue: Remove unused functions
+      Ruby Port: Add a list of cpu ports attached to this port
+      Ruby Debug Flags: Remove one, add another The flag RubyStoreBuffer is being removed, instead RubySystem is being added
+      Ruby: Resurrect Cache Warmup Capability This patch resurrects ruby's cache warmup capability. It essentially makes use of all the infrastructure that was added to the controllers, memories and the cache recorder.
+      Config: Add support for restoring using a timing CPU Currently there is an assumption that restoration from a checkpoint will happen by first restoring to an atomic CPU and then switching to a timing CPU. This patch adds support for directly restoring to a timing CPU. It adds a new option '--restore-with-cpu' which is used to specify the type of CPU to which the checkpoint should be restored to. It defaults to 'atomic' which was the case before.
+      Ruby: Use map option for selecting b/w sparse and memory vector
+      PerfectCacheMemory: Remove references to CacheMsg The definition for the class CacheMsg was removed long back. Some declaration had still survived, which was recently removed. Since the PerfectCacheMemory class relied on this particular declaration, its absence let to compilation breaking down. Hence this patch.
+      MemCmd: Add a command for invalidation requests to LSQ This command will be sent from the memory system (Ruby) to the LSQ of an O3 CPU so that the LSQ, if it needs to, invalidates the address in the request packet.
+      O3, Ruby: Forward invalidations from Ruby to O3 CPU This patch implements the functionality for forwarding invalidations and replacements from the L1 cache of the Ruby memory system to the O3 CPU. The implementation adds a list of ports to RubyPort. Whenever a replacement or an invalidation is performed, the L1 cache forwards this to all the ports, which is the LSQ in case of the O3 CPU.
+      Config: Enable using O3 CPU and Ruby in SE mode
+      O3 CPU LSQ: Implement TSO This patch makes O3's LSQ maintain total order between stores. Essentially only the store at the head of the store buffer is allowed to be in flight. Only after that store completes, the next store is issued to the memory system. By default, the x86 architecture will have TSO.
+      X86 Regressions: Update stats due to introduction of TSO
+      Config: Enable O3 CPU and Ruby in FS mode
+      O3 Fetch: Check if PC is pointing to Microcode ROM
+      O3 CPU: Provide the squashing instruction This patch adds a function to the ROB that will get the squashing instruction from the ROB's list of instructions. This squashing instruction is used for figuring out the macroop from which the fetch stage should fetch the microops. Further, a check has been added that if the instructions are to be fetched from the cache maintained by the fetch stage, then the data in the cache should be valid and the PC of the thread being fetched from is same as the address of the cache block.
+      O3 CPU: Strengthen condition for handling interrupts The condition for handling interrupts is to check whether or not the cpu's instruction list is empty. As observed, this can lead to cases in which even though the instruction list is empty, interrupts are handled when they should not be. The condition is being strengthened so that interrupts get handled only when the last committed microop did not had IsDelayedCommit set.
+      O3 CPU: Improve handling of delayed commit flag The delayed commit flag is used in conjunction with interrupt pending flag to figure out whether or not fetch stage should get more instructions. This patch clears this flag when instructions are squashed. Also, in case an interrupt is pending, currently it is not possible to access the instruction cache. This patch allows accessing the cache in case this flag is set.
+      Regressions: Update stats due to O3 CPU changes
+      sim/system: initialize the pagePtr variable
+      MESI: Add queues for stalled requests This patch adds support for stalling the requests queued up at different controllers for the MESI CMP directory protocol. Earlier the controllers would recycle the requests using some fixed latency. This results in younger requests getting serviced first at times, and can result in starvation. Instead all the requests that need a particular block to be in a stable state are moved to a separate queue, where they wait till that block returns to a stable state and then they are processed.
+      Ruby: Remove isTagPresent() calls from Sequencer.cc This patch removes the calls to isTagPresent() from Sequencer.cc. These calls are made just for setting the cache block to have been most recently used. The calls have been folded in to the function setMRU().
+      Regressions: Update stats due to change in MESI protocol
+      Config: make option ruby available always
+      x86: Fix switching of CPUs This patch prevents creation of interrupt controller for cpus that will be switched in later
+      x86: Fix x86 TLB and Walker This patch adds a function to X86 tlb that returns the walker port. This port is required for correctly connecting the walker ports for the cpu just switched in
+      se.py: Changes to ruby portion due to SE/FS merge With the SE/FS merge, interrupt controller is created irrespective of the mode. This patch creates the interrupt controller when Ruby is used and connects its ports.
+      FSConfig.py: fix a typo makeLinuxAlphaRubySystem
+      ruby_fs.py: Add call to createInterruptController()
+      Config: Move setWorkCountOptions() to Simulation.py The function is presently defined in FSConfig.py, which does not seem to be the correct place for it.
+      Config: Change the way options are added I am not too happy with the way options are added in files se.py and fs.py currently. This patch moves all the options to the file Options.py, functions from which are called when required.
+      Config: corrects the way Ruby attaches to the DMA ports With recent changes to the memory system, a port cannot be assigned a peer port twice. While making use of the Ruby memory system in FS mode, DMA ports were assigned peer twice, once for the classic memory system and once for the Ruby memory system. This patch removes this double assignment of peer ports.
+      Ruby: Remove extra statements from Sequencer
+      Regression: Add a test for x86 timing full system ruby simulation
+      util/regress: Add the missing comma in the list of builds
+      Garnet: Correct computation of link utilization The computation for link utilization was incorrect for the flexible network. The utilization was being divided twice by the total time.
+      Regression: Stats update for X86 Ruby FS test The kernel originally used to generate the stats is different from the one at use on zizzer. This patch updates the stats with the correct kernel in use.
+      Regression: Move x86 fs ruby simulation from quick to long
+      X86: Split Condition Code register This patch moves the ECF and EZF bits to individual registers (ecfBit and ezfBit) and the CF and OF bits to cfofFlag registers. This is being done so as to lower the read after write dependencies on the the condition code register. Ultimately we will have the following registers [ZAPS], [OF], [CF], [ECF], [EZF] and [DF]. Note that this is only one part of the solution for lowering the dependencies. The other part will check whether or not the condition code register needs to be actually read. This would be done through a separate patch.
+      Ruby Sequencer: Schedule deadlock check event at correct time The scheduling of the deadlock check event was being done incorrectly as the clock was not being multiplied, so as to convert the time into ticks. This patch removes that bug.
+      Ruby: Remove the unused src/mem/ruby/common/Driver.* files.
+      X86 Regression: update stats due to cc register split
+      Config: changes to a couple of error msgs
+      Config: Remove setMipsOptions As status matrix, MIPS fs does not work. Hence, these options are not required. Secondly, the function is setting param values for a CPU class. This seems strange, should probably be done in a different way.
+      Config: call to setWorkCountOptions() for all ISAs
+      X86 TLB: Add a missing = sign
+      Ruby: remove some unused stuff from SLICC files
+      Ruby: remove config information from ruby.stats This patch removes printConfig() functions from all structures in Ruby. Most of the information is already part of config.ini, and where ever it is not, it would become in due course.
+      Regression: update ruby.stats file
+      X86 CPUID: Return false if unknown processor family
+      Regression: Update stats due to changes to x86 cpuid instruction
+      Config: change how cpu class is set This changes the way in which the cpu class while restoring from a checkpoint is set. Earlier it was assumed if cpu type with which to restore is not same as the cpu type with the which to run the simulation, then the checkpoint should be restored with the atomic cpu. This assumption is being dropped. The checkpoint can now be restored with any cpu type, the default being atomic cpu.
+      Simulation.py: move code related to checkpointing to functions This patch moves the code related to checkpointing from the run() function to several different functions. The aim is to make the code more manageable. No functionality changes are expected, but since the code is kind of unruly, it is possible that some change might have creeped in.
+      System: set kernel to null, if unspecified.
+      Alpha System: override startup(), instead of loadState() Alpha System was overriding loadState() function to setup some functional event. The system tried to read/write to memory before the Ruby memory had unserialized the state. With this patch, Alpha System overrides the startup() function, and sets up functional events in this function. This works because startup() is called after Ruby memory system has unserialized the memory state.
+      Ruby Banked Array: add copyrights
+      MESI Coherence Protocol: Add copyright notice
+      MESI Protocol: Correct the virtual network in profile functions The virtual network in a couple of places was incorrectly mentioned as 3 in place of 1. This is being corrected.
+      Regression: updates ruby.stats due to change in virtual network
+      Ruby Memory Vector: Allow more than 4GB of memory The memory size variable was a 32-bit int. This meant that the size of the memory was limited to 4GB. This patch changes the type of the variable to 64-bit to support larger memory sizes. Thanks to Raghuraman Balasubramanian for bringing this to notice.
+      Ruby: Remove RubyEventQueue This patch removes RubyEventQueue. Consumer objects now rely on RubySystem or themselves for scheduling events.
+      System: Remove redundant call to startupCPU
+      Ruby: remove README.debugging and Decommissioning_note These files were relevant when Ruby was part of GEMS. They are not required any longer.
+      se.py: support specifying multiple programs via command line This patch allows for specifying multiple programs via command line. It also adds an option for specifying whether to use of SMT. But SMT does not work for the o3 cpu as of now.
+      Ruby Slicc: remove the call to cin.get() function If I understand correctly, this was put in place so that a debugger can be attached when the protocol aborts. While this sounds useful, it is a problem when the simulation is not being actively monitored. I think it is better to remove this.
+      Ruby System: Convert to Clocked Object This patch moves Ruby System from being a SimObject to recently introduced ClockedObject.
+      Regression: Updates due to changes to Ruby memory controller
+      Ruby: Use uint8_t instead of uint8 everywhere
+      Ruby: Use uint32_t instead of uint32 everywhere
+      ISA Parser: Allow predication of source and destination registers This patch is meant for allowing predicated reads and writes. Note that this predication is different from the ISA provided predication. They way we currently provide the ISA description for X86, we read/write registers that do not need to be actually read/written. This is likely to be true for other ISAs as well. This patch allows for read and write predicates to be associated with operands. It allows for the register indices for source and destination registers to be decided at the time when the microop is constructed. The run time indicies come in to play only when the at least one of the predicates has been provided. This patch will not affect any of the ISAs that do not provide these predicates. Also the patch assumes that the order in which operands appear in any function of the microop is same across all the functions of the microops. A subsequent patch will enable predication for the x86 ISA.
+      x86: Add a separate register for D flag bit The D flag bit is part of the cc flag bit register currently. But since it is not being used any where in the implementation, it creates an unnecessary dependency. Hence, it is being moved to a separate register.
+      X86: make use of register predication The patch introduces two predicates for condition code registers -- one tests if a register needs to be read, the other tests whether a register needs to be written to. These predicates are evaluated twice -- during construction of the microop and during its execution. Register reads and writes are elided depending on how the predicates evaluate.
+      x86 Regressions: Update stats due to register predication
+      se.py: removes error in passing options to a binary
+      ruby: avoid using g_system_ptr for event scheduling This patch removes the use of g_system_ptr for event scheduling. Each consumer object now needs to specify upfront an EventManager object it would use for scheduling events. This makes the ruby memory system more amenable for a multi-threaded simulation.
+      ruby: eliminate typedef integer_t
+      MI coherence protocol: add copyright notice
+      ruby: move functional access to ruby system This patch moves the code for functional accesses to ruby system. This is because the subsequent patches add support for making functional accesses to the messages in the interconnect. Making those accesses from the ruby port would be cumbersome.
+      ruby: remove some unused things in slicc This patch removes the parts of slicc that were required for multi-chip protocols. Going ahead, it seems multi-chip protocols would be implemented by playing with the network itself.
+      ruby: remove unused code in protocols
+      ruby: rename template_hack to template I don't like using the word hack. Hence, the patch.
+      ruby: changes to simple network This patch makes the Switch structure inherit from BasicRouter, as is done in two other networks.
+      ruby: makes some members non-static This patch makes some of the members (profiler, network, memory vector) of ruby system non-static.
+      Regression Tests: Update statistics
+      ruby: reset timing after cache warm up Ruby system was recently converted to a clocked object. Such objects maintain state related to the time that has passed so far. During the cache warmup, Ruby system changes its own time and the global time. Later on, the global time is restored. So Ruby system also needs to reset its own time.
+      ruby banked array: do away with event scheduling It seems unecessary that the BankedArray class needs to schedule an event to figure out when the access ends. Instead only the time for the end of access needs to be tracked.
+      ruby: allow function definition in slicc structs This patch adds support for function definitions to appear in slicc structs. This is required for supporting functional accesses for different types of messages. Subsequent patches will use this to development.
+      ruby: remove AbstractMemOrCache The only place where this abstract class is in use is the memory controller, which it self is an abstract class. Does not seem useful at all.
+      ruby: register multiple memory controllers Currently the Ruby System maintains pointer to only one of the memory controllers. But there can be multiple controllers in the system. This patch adds a vector of memory controllers.
+      memtest: move check on outstanding requests The Memtest tester allows for only one request to be outstanding for a particular physical address. The check has been written separately for reads and writes. This patch moves the check earlier than its current position so that it need not be written separately for reads and writes.
+      ruby: improved support for functional accesses This patch adds support to different entities in the ruby memory system for more reliable functional read/write accesses. Only the simple network has been augmented as of now. Later on Garnet will also support functional accesses. The patch adds functional access code to all the different types of messages that protocols can send around. These messages are functionally accessed by going through the buffers maintained by the network entities. The patch also rectifies some of the bugs found in coherence protocols while testing the patch.
+      regressions: update stats due to change to ruby memory system
+      regressions: update stats for eio tests
+      ruby: functional access updates to network test protocol I had forgotten to change the network test protocol while making changes to ruby for supporting functional accesses. This patch updates the protocol so that it can compile correctly.
+      regressions: update stats for ruby fs test
+      ruby: bug in functionalRead, revert recent changes Recent changes to functionalRead() in the memory system was not correct. The change allowed for returning data from the first message found in the buffers of the memory system. This is not correct since it is possible that a timing message has data from an older state of the block.
+      ruby: support functional accesses in garnet flexible network
+      regressions: stats update due to ruby functional access patch
+      sim: have a curTick per eventq This patch adds a _curTick variable to an eventq. This variable is updated whenever an event is serviced in function serviceOne(), or all events upto a particular time are processed in function serviceEvents(). This change helps when there are eventqs that do not make use of curTick for scheduling events.
+      regression test: update a couple of config.ini files
+      ruby: add functions for computing next stride/page address
+      ruby: add a prefetcher This patch adds a prefetcher for the ruby memory system. The prefetcher is based on a prefetcher implemented by others (well, I don't know who wrote the original). The prefetcher does stride-based prefetching, both unit and non-unit. It obseves the misses in the cache and trains on these. After the training period is over, the prefetcher starts issuing prefetch requests to the controller.
+      ruby: change slicc to allow for constructor args The patch adds support to slicc for recognizing arguments that should be passed to the constructor of a class. I did not like the fact that an explicit check was being carried on the type 'TBETable' to figure out the arguments to be passed to the constructor. The patch also moves some of the member variables that are declared for all the controllers to the base class AbstractController.
+      ruby: modify the directed tester to read/write streams The directed tester supports only generating only read or only write accesses. The patch modifies the tester to support streams that have both read and write accesses.
+      ruby: add support for prefetching to MESI protocol
+      regressions: stats update due to stats from ruby prefetcher
+      arm regressions: updates to config.ini, terminal files
+      x86: implement x87 fp instruction fsincos This patch implements the fsincos instruction. The code was originally written by Vince Weaver. Gabe had made some comments about the code, but those were never addressed. This patch addresses those comments.
+      x86: implement x87 fp instruction fnstsw This patch implements the fnstsw instruction. The code was originally written by Vince Weaver. Gabe had made some comments about the code, but those were never addressed. This patch addresses those comments.
+      x86 regressions: stats update due to new x87 instructions
+
+Gabe Black <gabeblack@google.com> (113):
+      SE/FS: Use the new FullSystem constant where possible.
+      SE/FS: Build the devices in SE mode.
+      X86: Remove FULL_SYSTEM from the x86 faults.
+      SE/FS: Remove System::platform and Platform::intrFrequency.
+      SE/FS: Put platform pointers in fewer objects.
+      Ports: Print the port name when a port is used but not attached to anything.
+      Configs: Use connectAllPorts to connect ports for simple-timing-ruby.
+      SE/FS: Build the Interrupt objects in SE mode.
+      Interrupts: Make the IO APIC go get the local APICs.
+      [mq]: sefssparcregfile.patch
+      SPARC: Turn on handleIprRead and handleIprWrite in SE in SPARC.
+      SPARC: Let the TLB have friends in FS mode.
+      SPARC: Narrow the scope of #if FULL_SYSTEM in SPARC's faults.
+      SPARC: Remove the last checks of FULL_SYSTEM.
+      X86: Turn on the page table walker in SE mode.
+      X86: Build vtophys in SE mode.
+      CPU: Make physPort and getPhysPort available in SE mode.
+      Alpha: Turn on vtophys in SE mode.
+      ARM: Turn on the page table walker on ARM in SE mode.
+      ARM: Build vtophys in SE mode.
+      MIPS: Build vtophys in SE mode.
+      Power: Add a stub implementation for vtophys in SE and FS.
+      SPARC: Build vtophys into SE mode.
+      SE/FS: Build/expose vport in SE mode.
+      SE/FS: Build in the tport in FS mode.
+      SE/FS: Turn on the page table class in FS.
+      SE/FS: Include getMemPort in FS.
+      SE/FS: Make some system funcs available in SE and FS.
+      SE/FS: Build the base process class in FS.
+      SE/FS: Make getProcessPtr available in both modes, and get rid of FULL_SYSTEMs.
+      X86: Get rid of more uses of FULL_SYSTEM.
+      SE/FS: Make the system object more consistent between SE and FS.
+      SE/FS: Build syscall_emul.cc in FS mode.
+      X86: Build the same files in SE and FS.
+      SE/FS: Remove the last references to FULL_SYSTEM from POWER.
+      System: Push boot_cpu_frequency down into the subclasses that actually use it.
+      SE/FS: Compile in system events in SE mode.
+      SE/FS: Get rid of FULL_SYSTEM in MIPS.
+      SE/FS: Build the solaris object in both SE and FS.
+      SE/FS: Make the functions available from the TC consistent between SE and FS.
+      SE/FS: Remove the last uses of FULL_SYSTEM from SPARC.
+      SE/FS: Expose the same methods on the CPUs in SE and FS modes.
+      SE/FS: Get rid of uses of FULL_SYSTEM in Alpha.
+      SE/FS: Get rid of the last use of FULL_SYSTEM in x86.
+      SE/FS: Get rid of FULL_SYSTEM in the ARM ISA.
+      SE/FS: Get FULL_SYSTEM out of base/remote_gdb.cc.
+      SE/FS: Get rid of FULL_SYSTEM in sim.
+      SE/FS: Remove FULL_SYSTEM from swig.
+      SE/FS: Get rid of FULL_SYSTEM in mem.
+      Power: Implement a stub for getArgument.
+      SE/FS: Get rid of FULL_SYSTEM in kern.
+      SE/FS: Get rid of FULL_SYSTEM in dev.
+      Power: Add a stub kernel_stats.hh.
+      POWER: Add a stub implementation of initCPU.
+      Power: Add a stubbed out stacktrace.cc
+      SE/FS: Get rid of FULL_SYSTEM in the CPU directory.
+      SE/FS: Get rid of includes of config/full_system.hh.
+      Merge with main repository.
+      Merge with the main repository again.
+      Another merge with the main repository.
+      Merge yet again with the main repository.
+      Merge with the main repo.
+      MIPS: Fix a compiler warning from the eret instruction.
+      SE/FS: Make SE vs. FS mode a runtime parameter.
+      SE/FS: Make both SE and FS tests available all the time.
+      SE/FS: Get rid of FULL_SYSTEM in the configs directory
+      SE/FS: Pull FULL_SYSTEM out of the build_opts files
+      SE/FS: Get rid of the FULL_SYSTEM config option.
+      Implement Ali's review feedback.
+      Yet another merge with the main repository.
+      Merge with main repository.
+      Merge with head, hopefully the last time for this batch.
+      System: Fix the check which detects running out of physical memory.
+      System: Forgot to qrefresh with my last change.
+      Regressions: Fix the regress script when "all" is used.
+      X86: Rename the bridge which allows commnication back to the local APICs.
+      m5=>gem5: Make the regression script build gem5.* instead of m5.*
+      Faults: Turn off arch/faults.hh
+      Checker: Access workload element 0 only if there is an element 0.
+      SE/FS: Record the system pointer all the time for the simple CPU.
+      SPARC: Make PSTATE and HPSTATE a BitUnion.
+      X86:  open flags: Another patch from Vince Weaver
+      X86: Use the M5PanicFault fault in execute methods instead of calling panic.
+      Make the IO bridge accept address headed to all the local APICs.
+      Fix the SPARC fs regression by adding a call to createInterruptController.
+      X86: Fix address size handling so real mode works properly.
+      tests: Fix building unit tests.
+      sim: A trie data structure specifically to speed up paging lookups.
+      sim: Update some comments in trie.hh that were meant to go in the last change.
+      X86: Use the AddrTrie class to implement the TLB.
+      X86: Fix a tiny typo in the load/store microop constructor.
+      CPU: Tidy up some formatting and a DPRINTF in the simple CPU base class.
+      X86: Report an error if there's no kernel object, don't blindly use it.
+      base: Include cassert in trie.hh.
+      ISA: Put parser generated files in a "generated" directory.
+      X86: Clear out duplicate TLB entries when adding a new one.
+      X86: Update stats for the slightly changed TLB behavior.
+      X86: Fix the IMUL_R_P_I macroop.
+      Syscalls: warn when the length argument to mmap is excessive.
+      Decode: Make the Decoder class defined per ISA.
+      CPU: Simplify the implementation of the decode cache.
+      ISA: Make the decode function part of the ISA's decoder.
+      CPU: Merge the predecoder and decoder.
+      ISA,CPU: Generalize and split out the components of the decode cache.
+      X86: Truncate addresses to 32 bits except in 64 bit mode, not long mode.
+      X86: Move the GDT down to where it can be accessed in 32 bit mode.
+      X86: Add a 32 bit hello world test binary.
+      X86: Use the HandyM5Reg to avoid a register read and some logic in the TLB.
+      X86: Ensure that the decoder's internal ExtMachInst is completely initialized.
+      X86: Ensure that the CPUID instruction always writes its outputs.
+      X86: Update stats for the CPUID change.
+      ISA: Turn the ExtMachInst NoopMachinst into the StaticInstPtr NoopStaticInst.
+      ARM: Keep a copy of the fpscr len and stride fields in the decoder. Avoid reading them every instruction, and also eliminate the last use of the thread context in the decoders.
+
+Ali Saidi <Ali.Saidi@arm.com> (91):
+      cpu2000: Add missing art benchmark to all
+      ARM: Add support for initparam m5 op
+      stats: Update stats for ARM init param changes.
+      ARM: Add support for running multiple systems
+      O3: Add support of function tracing with O3 CPU.
+      config: support outputing a pickle of the configuration tree
+      O3: Remove some asserts that no longer seem to be valid.
+      Config: Fix issue with JSON output
+      config: Fix json output for Python lt 2.6.
+      Automated merge with ssh://repo.gem5.org/gem5
+      Packet: Remove meaningless assert statement
+      Packet: Put back part of the assert
+      stats: undo parser change from initparam change
+      Mem: Add simple bandwidth stats to PhysicalMemory
+      sim: display final value of curTick in stats Different from sim_ticks in that this value is restored from checkpoints and is never reset. Useful for aligning with framebuffer output ticks
+      stats: Update stats for final tick and memory bandwidth patches
+      configs: More fixes for the memory system updates
+      mem: Add a master ID to each request object.
+      stats: update stats for insts/ops and master id changes
+      configs: fix minor config bugs posted on the mailing list
+      tests: fix diff-out script for op/inst stat changes.
+      bp: fix up stats for changes to branch predictor
+      Cache: Fix an issue with LRU when bonus block is used to complete transaction.
+      ARM: Add RTC device for ARM platforms.
+      ARM: Add support for Versatile Express extended  memory map
+      ARM: FIx missing cf controller connection.
+      ARM: FIx a bug preventing multiple cores booting a VExpress_EMM machine.
+      cache: Allow main memory to be at disjoint address ranges.
+      ARM: Fix valgrind reported error on O3 that was causing minor stats changes.
+      System: Move code in initState() back into constructor whenever possible.
+      ARM: Don't reset CPUs that are going to be switched in.
+      ARM: Update stats for valgrind fix and replace config.inis which are out of date.
+      ARM: Update stats for CBNZ fix.
+      ARM: Fix memory starting at non-zero address and exceeding max mem for a system.
+      ARM: Fix uninitialized value in ARM RTC model.
+      ARM: Clean up condCodes in IT blocks.
+      ARM: Update stats for IT and conditional branch changes
+      Cache: Panic if you attempt to create a checkpoint with a cache in the system
+      stats: track if the stats have been enabled and prevent requesting master id
+      ARM: Update m5op assembly for thumb compilation.
+      gem5: Fix a number of incorrect case statements
+      base: fix a invalid ?: operator
+      gem5: fix a number of use after free issues
+      gem5: fix some iterator use and erase bugs
+      gem5: assert before indexing intro arrays to verify bounds
+      ARM: Fix incorrect use of not operators in arm devices
+      dev: use correct delete operation in SimpleDisk
+      Cache: restructure code that actually isn't a loop
+      mem: fix bug with CopyStringOut and null string termination.
+      stats: fix bug in assert for 2d vector
+      stats: fix compilation of unit test.
+      ARM: update stats for clock frequency fix.
+      ARM: Fix compilation on ARM after Gabe's change.
+      ARM: Fix over-eager assert in gic.
+      sim: Remove FastAlloc
+      sim: Add support for tcmalloc if it's installed and available. This package is available in Ubuntu, Debian, and Redhat as google-perftools. With multiple tests on a single machine I've seen a little over 10% performance gain with tcmalloc.
+      O3: Clean up the O3 structures and try to pack them a bit better.
+      stats: Add stats unittest for total calculations.
+      sim: Provide a framework for detecting out of data checkpoints and migrating them.
+      all: Update stats for memory per master and total fix.
+      cpt: update some comments in the checkpoint migration script
+      ISA: Back-out NoopMachInst as a StaticInstPtr change.
+      mem: Delay deleting of incoming packets by one call.
+      scons: Make compiler version error more verbose and easier to debug.
+      ARM: Fix address range issue with VExpress EMM
+      ARM: Fix issue with predicted next pc being wrong because of advance() ordering.
+      ARM: Update version of linux we claim to be to 3.0.0.
+      Cache: Only invalidate a line in the cache when an uncacheable write is seen.
+      ARM: Fix identification of one RAS pop instruction.
+      Stats: Update stats for RAS and LRU fixes.
+      stats: update stats for icache change not allowing dirty data
+      stats: fix some miss-committed changes from the icache change
+      stats: revert pc-simple-timing-ruby-MESI_CMP_directory to before last update
+      sysemul: bump all linux versions of for syscal emulation to 3.0.
+      stats: Update stats for syscall emulation Linux kernel changes.
+      ARM: Fix one of the timers used in the VExpress EMM platform.
+      loader: initialize all memory in the ObjectFile objects.
+      Igbe: Newer kernels seem to allow TSO headers and packet data to be in one desc
+      ARM: fix m5 op binary to properly convert 64bit operands
+      ARM: Fix the compiler and platform identification for building on ARM.
+      dev: Fix bifield definition in timer_cpulocal.hh
+      O3: Get rid of incorrect assert in RAS.
+      gem5: Update the README file to be a bit less out-of-date.
+      ARM: Predict target of more instructions that modify PC.
+      ARM: Squash outstanding walks when instructions are squashed.
+      mem: Add a gasket that allows memory ranges to be re-mapped.
+      O3: Pack the comm structures a bit better to reduce their size.
+      ARM: update stats for bp and squash fixes.
+      sim: Fix as issue where exit events on instr queues are used after freed.
+      update stats for preceeding changes
+      mem: fix use after free issue in memories until 4-phase work complete.
+
+Andreas Sandberg <Andreas.Sandberg@arm.com> (22):
+      sim: Remove the unused SimObject::regFormulas method
+      sim: Update the SimObject documentation
+      build: Add missing dependencies when building param SWIG interfaces
+      sim: Remove SimObject::setMemoryMode
+      sim: Move CPU-specific methods from SimObject to the BaseCPU class
+      base: Check for static_assert support and provide fallback
+      arm: Use a static_assert to test that miscRegName[] is complete
+      Partly revert [4f54b0f229b5] and move draining to m5.changeToTiming
+      base: Add missing header file to addr_range.hh.
+      dev: Add missing inline declarations
+      mips: Remove unused Python file
+      pci: Make Python wrapper cast to the right type
+      sim: Include object header files in SWIG interfaces
+      dev: Fix ethernet device inheritance structure
+      cpu: Add header files for checker CPUs
+      cpu: O3 add a header declaring the DerivO3CPU
+      sim: Move the draining interface into a separate base class
+      sim: Reuse the code to change memory mode.
+      python: Rename doDrain()->drain() and make it do the right thing
+      sim: Add SWIG interface for Serializable
+      sim: Add drain methods to request additional cleanup operations
+      mem: Add support for writing back and flushing caches
+
+Brad Beckmann <brad.beckmann@amd.com> (20):
+      rubytest: seperated read and write ports.
+      MOESI_hammer: fixed bug with single cpu + flushes, then modified the regression tester to check this functionality
+      python: added __nonzero__ function to SimObject Bool params
+      MOESI_hammer: tbe allocation and dependent wakeup fixes
+      slicc: fixed error message when the type has no inheritance
+      sim-ruby: checkpointing fixes and dependent eventq improvements
+      ruby: set SimpleTiming as the default cpu
+      regress: ruby random tester and hammer stats updates
+      rubytest: remove spurious printf
+      ruby: changes how Topologies are created
+      cpu: added assertions to ensure the correct proxies are used
+      ruby: banked cache array resource model
+      imported patch jason/slicc-external-structure-fix
+      # User Brad Beckmann <Brad.Beckmann@amd.com> ruby: fixed msgptr print call
+      ruby: remove the cpu assumptions for the random tester
+      # User Brad Beckmann <Brad.Beckmann@amd.com> ruby: fixed fatal print statement
+      x86: logSize and lruSeq are now optional ckpt params
+      regress: ruby stat additions and config changes
+      ruby: improved DRAM reset comment
+      x86: added page size in bytes tlb entry function
+
+Steve Reinhardt <stever@gmail.com> (19):
+      debug: fix AllFlags::disable()
+      Alpha: warn_once about broken PAL breakpoints.
+      SimObject: make get_config_as_dict() tolerate undefined params
+      EIO: update stats (mostly order change, some renames)
+      DynInst: get rid of dead MyHash code.
+      SConstruct: update comments & doc strings
+      SConstruct: rename and document AddM5Option
+      SCons: restore Werror option in src/SConscript
+      scons: update minimum SWIG version to 1.3.34
+      scons: allow override of SWIG binary on command line
+      Add hook to call map() on Process from python. This enables configuration scripts to set up mappings from process virtual addresses to specific physical addresses in SE mode.  This feature is needed to support modeling of user-accessible memories or devices in SE mode, avoiding the complexities of FS mode and the need to write a device driver.
+      Added tag stable_2012_02_02 for changeset 549b72de8f72
+      Added tag stable_2012_06_28 for changeset f75ee4849c40
+      test: Restore eio ref files clobbered in rev 8800b05e1cb3.
+      test: Update eio ref outputs due to recent changes
+      str: add an overloaded startswith() utility method for various string types and use it in a few places.
+      syscall_emul: clean up open() code a bit.
+      process: add progName() virtual function
+      SETranslatingPortProxy: fix bug in tryReadString()
+
+Tony Gutierrez <anthony.gutierrez@amd.com> (13):
+      cpu: add separate stats for insts/ops both globally and per cpu model
+      cpu: Don't init simple and inorder CPUs if they are defered.
+      ARM: implement the ProcessInfo methods
+      configs: add run scripts for ics/gb versions of android and bbench
+      ARM: fix value of MISCREG_CTR returned by readMiscReg()
+      cache: don't allow dirty data in the i-cache
+      checker: make checker cpu id match its host's cpu id
+      dma: remove unused variable
+      configs: add option for repeatedly switching back-and-forth between cpu types.
+      O3,ARM: fix some problems with drain/switchout functionality and add Drain DPRINTFs
+      sim: fix overflow check in simulate because Tick is now unsigned
+      stats: remove duplicate instruction stats from the commit stage
+      bus: removed outdated warn regarding 64 B block sizes
+
+Dam Sunwoo <dam.sunwoo@arm.com> (11):
+      Base: Fixed shift amount in genrand() to work with large numbers
+      stats: fix Vector2d to display stats correctly when y_subname is not specified.
+      util: implements "writefile" gem5 op to export file from guest to host filesystem
+      mem: fix cache stats to use request ids correctly
+      ARM: move kernel func event to correct location.
+      ARM: guard masked symbol tables by default
+      Mem: add per-master stats to physmem
+      Mem: fix master id assertion in cache_impl.hh The assertion was applied to the wrong packet. This patch fixes the issue rerported by Xiang Jiang on the gem5-dev mailing list.
+      ARM: added support for flattened device tree blobs
+      ISA: generic Linux thread info support
+      ARM: dump stats and process info on context switches
+
+Chander Sudanthi <chander.sudanthi@arm.com> (8):
+      VNC: spacing
+      ARM: EMM board address range fix
+      ARM: pl011 raw interrupt fix
+      ARM: PS2 encoding fix
+      ARM: Fix MPIDR and MIDR register implementation.
+      ARM: removed extra white space
+      base: split out the VncServer into a VncInput and Server classes
+      base: Fix a few incorrectly handled print format cases
+
+Geoffrey Blake <geoffrey.blake@arm.com> (8):
+      Packet: Add derived class FunctionalPacket to enable partial functional reads
+      CheckerCPU: Re-factor CheckerCPU to be compatible with current gem5
+      CheckerCPU: Make CheckerCPU runtime selectable instead of compile selectable
+      CheckerCPU: Add function stubs to non-ARM ISA source to compile with CheckerCPU
+      CheckerCPU: Make some basic regression tests for CheckerCPU
+      O3/Ozone: Eliminate dead code counting software prefetch insts
+      ARM: IT doesn't need to be serializing.
+      ARM: Add PCIe support to VExpress_EMM model and remove deprecated ELT
+
+Joel Hestness <jthestness@gmail.com> (7):
+      ruby: tag and data cache access support
+      Ruby Memory Controller: Fix clocking
+      stats: Update Ruby regressions for memory controller fix
+      Base CPU: Initialize profileEvent to NULL The profileEvent pointer is tested against NULL in various places, but it is not initialized unless running in full-system mode. In SE mode, this can result in segmentation faults when profileEvent default intializes to something other than NULL.
+      Standard Switch: Drain the system before switching CPUs When switching from an atomic CPU to any of the timing CPUs, a drain is unnecessary since no events are scheduled in atomic mode. However, when trying to switch CPUs starting with a timing CPU, there may be events scheduled. This change ensures that all events are drained from the system by calling m5.drain before switching CPUs.
+      se.py Ruby: Connect TLB walker ports In order to ensure correct functionality of switch CPUs, the TLB walker ports must be connected to the Ruby system in x86 simulation.
+      RubyPort and Sequencer: Fix draining
+
+Marc Orr <marc.orr@gmail.com> (7):
+      build scripts: Made minor modifications to reduce build overhead time.
+      build: remove implicit-cache setting of scons from recent build faster patch
+      x86 ISA: Implement the sse3 haddps instruction.
+      Regression: Fix some bugs in simple-timing-mp-ruby.py.
+      syscall emulation: Add the futex system call.
+      syscall emulation: Clean up ioctl handling, and implement for x86.
+      syscall emulation: Enabled getrlimit and getrusage for x86. Added/moved rlimit constants to base linux header file.
+
+Nathanael Premillieu <nathanael.premillieu@arm.com> (7):
+      ARM: Fix case where cond/uncond control is mis-specified
+      O3: Track if the RAS has been pushed or not to pop the RAS if neccessary.
+      util: Fix issues with style checker.
+      ARM: Inst writing to cntrlReg registers not set as control inst
+      o3 cpu: remove some unused buggy functions in the lsq Committed by: Nilay Vaish <nilay@cs.wisc.edu>
+      arm: set movret_uop as conditional or unconditional control A flag was missing for the movret_uop microop instruction. This patch adds that flag when the instruction is used, not directly in the constructor of the instruction.
+      arm: set uopSet_uop as conditional or unconditional control uopSet_uop is microop instruction that has the IsControl flags set, but the IsCondControl or IsUncondControl flags seems not to be set, neither in the construction nor where the microop is used. This patch adds the the flags in the constructor of the instruction (MicroUopSetPCCPSR).
+
+Jason Lowe-Power <jason@lowepower.com> (6):
+      Ruby NetDest: add assert for bad element in netdest
+      Ruby: Clean up topology changes This patch moves instantiateTopology into Ruby.py and removes the mem/ruby/network/topologies directory. It also adds some extra inheritance to the topologies to clean up some issues in the existing topologies.
+      Ruby: Add RubySystem parameter to MemoryControl This guarantees that RubySystem object is created before the MemoryController object is created.
+      Ruby: Correct DataBlock =operator The =operator for the DataBlock class was incorrectly interpreting the class member m_alloc. This variable stands for whether the assigned memory for the data block needs to be freed or not by the class itself. It seems that the =operator interpreted the variable as whether the memory is assigned to the data block. This wrong interpretation was causing values not to propagate to RubySystem::m_mem_vec_ptr. This caused major issues with restoring from checkpoints when using a protocol which verified that the cache data was consistent with the backing store (i.e. MOESI-hammer).
+      Ruby: Modify Scons so that we can put .sm files in extras Also allows for header files which are required in slicc generated code to be in a directory other than src/mem/ruby/slicc_interface.
+      Ruby: Use block size in configuring directory bits in address This patch replaces hard coded values used in Ruby's configuration files for setting directory bits with values based on the block size in use.
+
+Mrinmoy Ghosh <mrinmoy.ghosh@arm.com> (5):
+      prefetcher: Make prefetcher a sim object instead of it being a parameter on cache
+      BP: Fix several Branch Predictor issues. 1. Updates the Branch Predictor correctly to the state    just after a mispredicted branch, if a squash occurs. 2. If a BTB does not find an entry, the branch is predicted not taken.    The global history is modified to correctly reflect this prediction. 3. Local history is now updated at the fetch stage instead of    execute stage. 4. In the Update stage of the branch predictor the local predictors are    now correctly updated according to the state of local history during    fetch stage.
+      BPred: Fix RAS to handle predicated call/return instructions.
+      Cache: add a response latency to the caches
+      o3: Fix a couple of issues with the local predictor.
+
+Deyaun Guo <guodeyuan@tsinghua.org.cn> (4):
+      mips: definition of MIPS64_QNAN in registers.hh
+      mips: Fix decoder of two float-convert instructions
+      mips: Fix bugs in faults.cc/hh and tlb.cc for MIPS_FS
+      mips: compatibility between MIPS_SE and cross compiler from CodeSorcery
+
+Jayneel Gandhi <jayneel@cs.wisc.edu> (4):
+      Config: Add command line options for disk image and memory size Added the options to Options.py for FS mode with backward compatibility. It is good to provide an option to specify the disk image and the memory size from command line since a lot of disk images are created to support different benchmark suites as well as per user needs. Change in program also leads to change in memory requirements. These options provide the interface to provide both disk image and memory size from the command line and gives more flexibility.
+      SE Config: Changed se.py to support multithreaded mode Multithreaded programs did not run by just specifying the binary once on the command line of SE mode.The default mode is multi-programmed mode. Added check in SE mode to run multi-threaded programs in case only one program is specified with multiple CPUS. Default mode is still multi-programmed mode.
+      Config: Fix help msg for option --mem-size
+      X86 TLB: Fix for gcc 4.4.3 Due to recent changes to X86 TLB, gem5 stopped compiling on gcc version 4.4.3. This patch provides the fix for that problem. The patch is tested on gcc 4.4.3. The change is not required for more recent versions of gcc (like on 4.6.3).
+
+Nathan Binkert <nate@binkert.org> (4):
+      hooks: Add a hook to limit the size of any individual file
+      hgfilesize: skip files that have been removed
+      stats: use nan instead of no_value
+      stats: update stats for no_value -> nan Lots of accumulated older changes too.
+
+Brian Grayson <b.grayson@samsung.com> (3):
+      ARM: Fix branch prediction issue with CB(N)Z instruction
+      O3: Add fatal when fetchWidth > Impl::MaxWidth.
+      O3: Fix size of skid buffer between fetch and decode when widths are different
+
+Djordje Kovacevic <djordje.kovacevic@arm.com> (3):
+      CPU: O3-PipeView.py doesn't display the end of timelines. Insts' timeline that stretches over multiple lines doesn't always get printed.
+      CPU: Add abandoned instructions to O3 Pipe Viewer
+      MEM: Put memory system document into doxygen
+
+Koan-Sin Tan <koansin.tan@gmail.com> (3):
+      clang: Enable compiling gem5 using clang 2.9 and 3.0
+      ARM: Add RTC to PBX System
+      ARM: fix the calculation of the values in the RV clocks
+
+Lena Olson <leolson@google.com> (3):
+      Mem: Fix size check when allocating physical memory
+      Cache: Fix the LRU policy for classic memory hierarchy
+      Cache: Split invalidateBlk up to seperate block vs. tags
+
+Malek Musleh <malek.musleh@gmail.com> (3):
+      Configs: SE script fix for Alpha and Ruby simulations
+      ruby: set the is_icache param for caches This patch sets the is_icache param for the L1 caches used in the MESI and the MOESI CMP directory protocols.
+      inorder cpu: add missing DPRINTF argument
+
+Matt Evans <matt.evans@arm.com> (3):
+      Mem: Fix a livelock resulting in  LLSC/locked memory access implementation.
+      Style: Make style.py's invalid warning print which file caused the infraction.
+      ARM: Fix issue with with way MPIDR is read to include affinity levels.
+
+Uri Wiener <uri.wiener@arm.com> (3):
+      DOT: fixed broken code for visualizing configuration using dot
+      DOT: improved dot-based system visualization Revised system visualization to reflect structure and memory hierarchy. Improved visualization: less congested and cluttered; more colorful. Nodes reflect components; directed edges reflect dirctional relation, from a master port to a slave port. Requires pydot.
+      Bus: enable non/coherent buses sub-classes This patch merely changes several methods to be virtual in order to enable non/coherent buses sub-classes.
+
+William Wang <william.wang@arm.com> (3):
+      MEM: Remove the functional ports from the memory system
+      MEM: Introduce the master/slave port sub-classes in C++
+      stats: when applying an operation to two vectors sum the components first.
+
+Mitch Hayenga <mitch.hayenga@arm.com> (2):
+      Fix memory corruption issue with CopyStringOut()
+      stats: Provide a mechanism to get a callback when stats are dumped.
+
+Nuwan Jayasena <Nuwan.Jayasena@amd.com> (2):
+      ruby: memory controllers now inherit from an abstract "MemoryControl" class
+      ruby: adds reset function to Ruby memory controllers
+
+Ron Dreslinski <rdreslin@umich.edu> (2):
+      configs: A more realistic configuration of an ARM-like processor
+      configs: actually add ARMv7a-like cpu/cache file
+
+Sascha Bischoff <sascha.bischoff@arm.com> (2):
+      Util: Added script to semantically diff two config.ini files
+      Statistics: Add a function to configure periodic stats dumping
+
+Tushar Krishna <tushar@ece.gatech.edu> (2):
+      Garnet: Stats at vnet granularity + code cleanup
+      NetworkTest: remove unnecessary memory allocation
+
+Vince Weaver <vince@csl.cornell.edu> (2):
+      X86: Make gem5 ignore a bunch of syscalls.
+      X86: Fix up the open system call's flags.
+
+Anders Handler <s052838@student.dtu.dk> (1):
+      CPU: Remove Alpha-specific PC alignment check.
+
+Andrew Lukefahr <lukefahr@umich.edu> (1):
+      O3: Fix sizing of decode to rename skid buffer.
+
+Erik Tomusk <E.Tomusk@sms.ed.ac.uk> (1):
+      TournamentBP: Fix some bugs with table sizes and counters globalHistoryBits, globalPredictorSize, and choicePredictorSize are decoupled. globalHistoryBits controls how much history is kept, global and choice predictor sizes control how much of that history is used when accessing predictor tables. This way, global and choice predictors can actually be different sizes, and it is no longer possible to walk off the predictor arrays and cause a seg fault.
+
+Giacomo Gabrielli <giacomo.gabrielli@arm.com> (1):
+      ARM: fix bits-to-fp conversion function declarations.
+
+Hamid Reza Khaleghzadeh <khaleghzadeh@gmail.com> (1):
+      ruby: reset and dump stats along with reset of the system This patch adds support to ruby so that the statistics maintained by ruby are reset/dumped when the statistics for the rest of the system are reset/dumped. For resetting the statistics, ruby now provides the resetStats() function that a sim object can provide. As a consequence, the clearStats() function has been removed from RubySystem. For dumping stats, Ruby now adds a callback event to the dumpStatsQueue. The exit callback that ruby used to add earlier is being removed.
+
+James Clarkson <james.clarkson@arm.com> (1):
+      m5: Expose m5 pseudo-instructions to C/C++ via a static library
+
+Krishnendra Nathella <Krishnendra.Nathella@arm.com> (1):
+      sim: add validation to make sure there is memory where we're loading the kernel
+
+Lisa Hsu <Lisa.Hsu@amd.com> (1):
+      slicc: Controllers attached to Sequencers no longer have to be named L1Cache.
+
+Lluc Alvarez <lluc.alvarez@bsc.es> (1):
+      SE: Ignore FUTEX_PRIVATE_FLAG of sys_futex
+
+Lluís Vilanova <vilanova@ac.upc.edu> (1):
+      x86, util: add m5_writefile to m5op_x86.S
+
+Marco Elver <Marco.Elver@ARM.com> (1):
+      Mem: Allow serializing of more than INT_MAX bytes
+
+Matt Horsnell <matt.horsnell@arm.com> (1):
+      ARM: Add limited CP14 support.
+
+Maximilien Breughe <maximilien.breughe@elis.ugent.be> (1):
+      inorder: MDU deadlock fix
+
+Min Kyu Jeong <minkyu.jeong@arm.com> (1):
+      mem: Change DPRINTF prints more useful destination port number. Old code prints 0 for destination since pkt->getDest() returns 0 for pkt->getDest() == Packet::Broadcast, which is always true.
+
+Palle Lyckegaard <palle@lyckegaard.dk> (1):
+      NetBSD: Build on NetBSD
+
+Prakash Ramrakhyani <prakash.ramrakhyani@arm.com> (1):
+      sim: Enable sampling of run-time for code-sections marked using pseudo insts.
+
+Pritha Ghoshal <pritha9987@tamu.edu> (1):
+      IGbE: Fix writeback conditions for i8254x GbE in updated data sheet.
+

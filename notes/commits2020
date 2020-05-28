@@ -1,0 +1,748 @@
+   288	Gabe Black <gabeblack@google.com>
+    85	Giacomo Travaglini <giacomo.travaglini@arm.com>
+    60	Bobby R. Bruce <bbruce@ucdavis.edu>
+    37	Adrian Herrera <adrian.herrera@arm.com>
+    31	Daniel Carvalho <odanrc@yahoo.com.br>
+    25	Nils Asmussen <nils.asmussen@barkhauseninstitut.org>
+    23	Nikos Nikoleris <nikos.nikoleris@arm.com>
+    14	Ciro Santilli <ciro.santilli@arm.com>
+    14	Timothy Hayes <timothy.hayes@arm.com>
+    13	Matthew Poremba <matthew.poremba@amd.com>
+     7	Jordi Vaquero <jordi.vaquero@metempsy.com>
+     6	Jason Lowe-Power <jason@lowepower.com>
+     4	Ayaz Akram <yazakram@ucdavis.edu>
+     4	Tiago Mück <tiago.muck@arm.com>
+     4	Yu-hsin Wang <yuhsingw@google.com>
+     3	Anouk Van Laer <anouk.vanlaer@arm.com>
+     3	Earl Ou <shunhsingou@google.com>
+     3	Gabor Dozsa <gabor.dozsa@arm.com>
+     3	Hsuan Hsu <hsuan.hsu@mediatek.com>
+     3	Tony Gutierrez <anthony.gutierrez@amd.com>
+     2	Boris Shingarov <shingarov@gmail.com>
+     2	Trivikram Reddy <tvreddy@ucdavis.edu>
+     1	Andreas Sandberg <Andreas.Sandberg@arm.com>
+     1	Andriani Mappoura <andriani.mappoura@arm.com>
+     1	Chun-Chen Hsu <chunchenhsu@google.com>
+     1	Giacomo Gabrielli <giacomo.gabrielli@arm.com>
+     1	Hussein Elnawawy <hussein.elnawawy@gmail.com>
+     1	Joe Gross <joe.gross@amd.com>
+     1	Mahyar Samani <msamani@ucdavis.edu>
+     1	Matt Poremba <matthew.poremba@amd.com>
+     1	Michiel Van Tol <michiel.vantol@arm.com>
+     1	Wendy Elsasser <wendy.elsasser@arm.com>
+     1	Yuan Yao <yuanyao@seas.harvard.edu>
+     1	jiegec <noc@jiegec.ac.cn>
+Gabe Black <gabeblack@google.com> (288):
+      arch,sim: Use the guest ABI mechanism with pseudo instructions.
+      arch,sim: Stop decoding the pseudo inst subfunc value.
+      fastmodel: Implement the vecPredReg accessor functions.
+      arch,sim: Promote the m5ops_base param to the System base class.
+      base: Include some required headers in amo.hh.
+      arch: Make the generic micropc enabled PCState set nupc to 1.
+      sim: Implement a varargs like mechanism for GuestABI system.
+      sim: Add a unit test for the GuestABI mechanism.
+      sim: Add a dumpSimcall mechanism to GuestABI.
+      configs: Remove check for kernel in fs.py.
+      x86: Move miscreg initialization to the ISA class.
+      x86: Move local APIC initialization out of initCPU.
+      x86: Stop clearing RAX for BIST in initCPU.
+      arm: A couple small fixes for the arm64 bootloader makefile.
+      arch: Get rid of the unused (and mostly undefined) zeroRegisters.
+      arm: Remove checkpointing from the ARM TLBs.
+      fastmodel: Implement CC reg accessors.
+      cpu: Consolidate and move the CPU's calls to TheISA::initCPU.
+      sim: Eliminate the breakAtKernelFunction function.
+      sim: Move findFreeContext to System.
+      cpu: Fix ExeTraceRecord::traceInst.
+      sim: Add a GuestABI mechanism to allocate space for a return value.
+      mem: Make slicc generate some default methods explicitly.
+      scons: Add a mechanism to append flags when building particular files.
+      scons: Disable spurious "array-bounds" warnings for protobuf cc files.
+      base: Delete an inet.hh accessor which is unused and makes gcc 9 upset.
+      arch,base,cpu: Add some default constructors/operators explicitly.
+      sim,cpu: Move the call to initCPU into System.
+      arch,sim: Merge initCPU and startupCPU.
+      arch,sim: Merge initCPU into the ISA System classes.
+      arm: Use static_cast to get access the ARM specific ISA functions.
+      arch: Introduce a base class for ISA classes.
+      cpu: Make getIsaPtr return a BaseISA pointer.
+      fastmodel: Implement flattened int reg reading and writing.
+      fastmodel: Ensure unset vec reg bits are zero/false.
+      sim: Make it possible for a GuestABI to init its Position based on a TC.
+      sim: Add a typetraits style mechanism to test for VarArgs.
+      arch,sim: Use _m5opRange in System::allocPhysPages.
+      x86: Use the m5 op range in the system.
+      sim: Add a function for decoding the field(s) of an m5op address.
+      x86: Handle m5 op accesses directly in the mmapped IPR handlers.
+      arch: Simplify the SyscallDesc tables.
+      sim: Add a transitional syscall ABI which defers to Process.
+      arch: Switch SyscallDescABI in for SyscallDesc.
+      sim: Use the Guest ABI mechanism in writeFunc.
+      sim: Convert most of the common syscalls to use the guest ABI.
+      arch,sim: Replace setuidFunc with ignoreFunc.
+      arch: Add a bunch of missing override specifiers.
+      arm: Fix how a bitfield is extracted in some SVE instructions.
+      riscv: Cast to float explicitly when comparing a float to an int.
+      base: Use a const auto & in a range based for loop.
+      scons: Fix an error about an unrecognized compiler.
+      arm: Call pseudoInst directly from the mmapped IPR handlers.
+      arch: Get rid of the generic mmapped IPR mechanism.
+      mem: Eliminate the now unused GENERIC_IPR request flag.
+      arch,cpu: Make the CPU's ISA parameter type BaseISA.
+      arm: "Correct" the spelling of flavor.
+      arm: Don't checkpoint the SystemCounter's "_period" value.
+      scons,arch: Remove simple scalar compatibility.
+      scons: Delete the ALPHA default build configuration.
+      system: Delete alpha files from system.
+      configs: Remove mentions of alpha from the configs.
+      cpu: Remove alpha specialized code.
+      sim: Remove mention of alpha.
+      dev: Delete alpha devices.
+      base: Delete alpha loader components.
+      alpha: Delete the alpha arch files.
+      tests: Delete authors lists from the unittest directory.
+      scons: Remove authors from the main SConsctruct/SConscript files.
+      kern: Delete authors lists from files in kern.
+      gpu-compute: Delete authors lists from gpu-compute files.
+      base: Delete authors lists from files in base.
+      config: Delete authors lists from config files.
+      misc: Delete authors lists from top level .md files.
+      misc: Delete authors lists from documentation related files.
+      learning-gem5: Delete authors lists from learning_gem5.
+      misc: Delete authors lists from proto.
+      python: Delete authors lists from the python directory.
+      mem: Delete authors lists from mem files.
+      cpu: Delete authors lists from the cpu directory.
+      dev: Delete the authors list from files in src/dev.
+      systemc: Delete authors lists from systemc files.
+      sim: Delete authors lists from files in sim.
+      dev,mips: Delete a large binary file from src/dev/mips.
+      arch: Delete authors lists from generic arch files.
+      arch: Delete authors lists from the null arch files.
+      arm: Delete authors lists from the arm files.
+      hsail: Delete the author list from gpu_isa.hh.
+      mips: Delete authors lists from mips files.
+      power: Delete the authors lists from the power ISA.
+      riscv: Delete authors lists from riscv files.
+      sparc: Delete authors lists from sparc files.
+      x86: Delete authors lists from x86 files.
+      tests: Delete authors lists from test files.
+      system: Delete authors lists from system source files.
+      misc: Delete authors lists from shared include files.
+      scons: Remove mention of ALPHA from the SConstruct.
+      misc: Remove arch-alpha from the MAINTAINERS file.
+      misc: Remove mention of ALPHA from the README.
+      tests: Delete some test files which are specific to Alpha.
+      util: Delete authors lists from files in util.
+      util: Delete some Alpha related files from the m5 utility.
+      util: Remove ALPHA from the regress script.
+      fastmodel: Set itstate when building a PCState from IRIS.
+      fastmodel: Ignore clearArchRegs for now.
+      fastmodel: Return nullptr from getCheckerCpuPtr on fast model CPUs.
+      fastmodel: Add in a missing include and namespace for itState.
+      fastmodel: Use a shared pointer to track PC events.
+      fastmodel: Use all possible address spaces when setting up a bp.
+      arch: Convert the static constexpr SIZE in vec_reg to a function.
+      mem: Use using to expose a print method that would otherwise be hidden.
+      sim,arch: Move code that waits for a GDB connection to startup().
+      arm: Use a const ThreadContext * and readMiscRegNoEffect in places.
+      arm: Expose the constants which select a semihosting operation.
+      ext: Disable the unused-value warning in clang for pybind.
+      arch,cpu,mem: Replace the mmmapped IPR mechanism with local accesses.
+      x86: Track message based interrupt cleanup functions in sender state.
+      mem: Remove the version of the FS translating port proxy with no tc.
+      cpu: Switch away from some fringe Request constructors.
+      mem: Get rid of an unused Request constructor.
+      base: Optimize and otherwise fix a couple of functions in intmath.hh.
+      base: Disable a warning in hdf5.cc which comes from an external header.
+      mem: Add default initializers to the fields in Request.
+      mem: Get rid of another unused Request constructor.
+      mem: Get rid of one more unused Request constructor.
+      mem: Merge the virtual Request constructors.
+      arch,cpu,gpu-compute,mem: Remove asid from Request objects.
+      sparc: Delete some commented out code in the TLB.
+      base: Clean up condcodes.hh slightly.
+      sparc: Implement translateFunctional in the TLB class.
+      arch,cpu: Get rid of unused/unimplemented vtophys variants.
+      base,cpu,sim: Stop including arch/vtophys.hh when not using vtophys.
+      arch: Remove the "process.hh" switching header file.
+      mem: Change some default values in the Request class.
+      config,arch,cpu,kern,sim: Extract kernel information from System.
+      mips: Implement translateFunctional.
+      power: Implement translateFunctional.
+      sim: Use variadic GuestABI arguments in a few additional syscalls.
+      arch,sim: Convert clone to GuestABI and define a cloneBackwardsFunc.
+      sim: Remove ISA specific KVM handling of the return from clone.
+      arm: Convert ARM specific syscalls to GuestABI.
+      x86: Convert x86 specific syscalls to GuestABI.
+      riscv: Convert RISCV specific syscalls to Guest ABI.
+      sparc: Convert SPARC specific syscalls to Guest ABI.
+      power: Convert POWER specific syscalls to Guest ABI.
+      mips: Convert MIPS specific syscalls to Guest ABI.
+      sim: Make SyscallReturn handle extra/"pseudo" return registers.
+      sim: Add GenericSyscallABI structs which can be used by the ISAs.
+      x86: In X86 linux, system calls simply return their result in a register.
+      x86: Define a local ABI for system calls.
+      sparc: Get rid of some commented out constants.
+      sparc: Introduce constants for pseudo integer registers.
+      sparc: Introduce a BitUnion for the CCR register.
+      sparc: Use a SPARC specific GuestABI for system calls.
+      arm: Use an ARM specific GuestABI for ARM system calls.
+      sim: Remove the get*PseudoFunc handlers.
+      mips: Use a mips specific GuestABI for mips system calls.
+      power: Use a power specific GuestABI for power system calls.
+      riscv: Use a riscv specific GuestABI for riscv system calls.
+      sim: Convert ftruncate64 to GuestABI.
+      sim: Clean up some constants used in some syscalls.
+      sim,gpu: Make ioctl unconditionally take an address parameter.
+      sim: Convert the various flavors of pipe to GuestABI.
+      sim: Get rid of the no longer needed DefaultSyscallABI.
+      sim: Rework the SyscallDesc to use the dumpSimcall mechanism.
+      sim: Get rid of the now unused getSyscallArg method.
+      sim: Add a returnInto function to the SyscallDesc class.
+      sim: Use the new returnInto method in cloneFunc.
+      arch,sim: Get rid of the now unused setSyscallReturn method.
+      arm: Delete the unused onKvmExitHypercall method.
+      kern: Stop using a pseudo instruction to quiesce the ThreadContext.
+      arm: Implement the AAPCS64 ABI.
+      sim: Generalize the GuestABI Result::allocate() mechanism.
+      sim: Split up the guest_abi.hh header.
+      sim: Optionally pass "position" to GuestABI::Result::store.
+      sim: Rename allocate in GuestABI to prepare.
+      sim: Rename GuestABI's Position to State.
+      arm: Implement the AAPCS32 ABI.
+      kern: Minor style cleanup in the base SkipFuncEvent class.
+      arm: Eliminate the MustBeOne ARM specific request flag.
+      sim: Provide an implementation for the pread64 system call.
+      x86: Hook up pread64 in 32/64 bit linux, and pwrite64 in 32 bit.
+      x86: Implement translateFunctional.
+      kern,arch: Refactor SkipFuncEvent to not use skipFunction.
+      arch,kern: Rename some function events to have better names.
+      riscv: Implement translateFunctional.
+      arm: Demote PCEvent subclass pointers to PCEvent pointers.
+      mem: Make the FSTranslatingPortProxy stop using vtophys.
+      arch: Eliminate vtophys and its switching header file.
+      sparc: Make translateFunctional ignore alignment and use the page tables.
+      arch,cpu,mem,sim: Reimplement the SE translating proxy using the FS one.
+      arch,base,cpu,dev,kern,mem,sim: Drop FS from FSTranslatingPortProxy.
+      mem: Add a Request::Flags parameter to the translating port proxies.
+      util: Add a script to help build cross compilers.
+      arm: Use a non-template indexed version of laneView in aapcs32.
+      arm,kern: Use GuestABI to call printk from the kernel.
+      base: Convert the annotation methods to take actual arguments.
+      util: Add the ability to build a cross GDB to build_cross_gcc.py.
+      sparc: Add the AT_RANDOM aux vector to the initial stack.
+      sim: Get rid of the Arguments class.
+      arch,sim: Create a common structure to hold syscall tables.
+      arch,sim: Drop the syscall number from the syscall func signature.
+      arch,sim: Merge Process::syscall and Process::getDesc.
+      util: Add some settings files for build_cross_gcc.
+      sparc: Hook up but not implement the get/set context traps.
+      sparc: Add a definition of tgt_stat64 for SPARC64.
+      sparc: Hook up fstat64 for SPARC64.
+      mips: Add the AT_RANDOM aux vector to the initial stack.
+      mem: Remove a check that the memory size is a multiple of the page size.
+      arm: Make the semihosting implementation use GuestABI.
+      power: Add the AT_RANDOM aux vector to the initial stack.
+      power: Hook up the readlink system call.
+      arm: Optionally enable gem5 extended semihosting calls.
+      arch,sim: Return whether or not a pseudo inst was recognized.
+      arm: Return whether a semihosting call was recognized/handled.
+      scons: Use the scons environment when marshalling.
+      util: Add a file to suppress spurious lsan leaks in the python lib.
+      misc: Add Gabe Black as the scons and util maintainer.
+      scons: Use the lsan-suppressions file when running internal commands.
+      scons: Replace find_first_prog() with the built in Detect().
+      scons: Get rid of a redundant "Warning:" in the SConstruct.
+      scons: Use the textwrap module to wrap warnings/errors neatly.
+      scons: Add a mechanism to accumulate warnings to reprint at the end.
+      riscv: Fix RISCV builds by updating its use of pseudoInst().
+      arm: Add a gem5 specific pseudo op semihosting call.
+      arm: Add a callSemihosting method that figures out the width.
+      scons: Call summarize_warnings() when scons finishes building.
+      scons: Enable LTO and partial linking with gcc >= 8.1.
+      arm: Make semihosting use virtual addresses.
+      mem: Get rid of the now unused SecurePortProxy class.
+      util: Remove the annotation pseudo ops symbols from the m5 utility.
+      misc: Remove the now unused M5OP_FOREACH_ANNOTATION macro.
+      util: Remove the subfunc arg from M5OP_FOREACH.
+      util: Undef M5OP at the end of assembly files that use M5OP_FOREACH.
+      util,sparc: Use M5OP_FOREACH to define the m5op entry points for sparc.
+      util,x86: Use M5OP_FOREACH to define the m5op entry points for x86.
+      util: Move source files into a src directory.
+      util: Update the m5 util Makefiles to not use javah.
+      util: Update jni_gem5Op.c so it will compile again.
+      scons: Fix an exception in the DictImporter on scons shutdown.
+      util: Implement PIC assembly for the aarch64.
+      util: Add SCons build files for the aarch64 verson of the m5 utility.
+      util,scons: Detect java and lua51 in the m5 utility scons files.
+      util: Delete the aarch64 Makefile for the m5 utility.
+      util: Move m5op_arm_A64.S into an aarch64 subdirectory.
+      util: In build_cross_gcc, set LIMITS_H_TEST=true.
+      util,scons: Generalize the aarch64 scons for the m5 util.
+      util: Add config files for crosstool-ng toolchains.
+      mem: Support initializing a memory with an image file.
+      sparc,configs: Initialize ROMs directly, not with the workload.
+      fastmodel: Enable semihosting, including pseudo insts.
+      scons: Import "sys" which is used in an exception handler.
+      scons: Use six.input instead of raw_input.
+      mem: Rename the ruby Prefetcher class RubyPrefetcher.
+      dev,cpu: Make two very generic enums ScopedEnums.
+      arch,sim,kern,dev,cpu: Create a Workload SimObject.
+      configs,arch,sim: Move fixFuncEventAddr into the Workload class.
+      base,arch,sim,cpu: Move object file loader components into a namespace.
+      util: Add some additional flags for files in the m5 util.
+      util: Convert the other architecture's m5 utility builds to scons.
+      misc: Remove m5a_ (critical path annotation) prototypes from m5ops.h.
+      misc: Get rid of the m5op_flags.h header.
+      misc: Get rid of constants used for critical path annotation.
+      util: Update the java wrapper names for m5 ops.
+      misc: Use a const char * in the m5op m5_add_symbol.
+      util: Add missing functions to the java wrapper for m5 ops.
+      util: Remove the "pin" command from the m5 utility.
+      util: Correct some help text for the initparam m5 utility command.
+      sim: Simplify collecting the key value in initParam.
+      util: Refactor the string->register packing function in the m5 utility.
+      misc: Replace a deprecated method in protoio.cc.
+      util: Further simplify the initParam implementation.
+      util: Improve the usage text of the m5 utility.
+      util: Eliminate the sw99param m5 utility command.
+      util: Delete the execfile m5 utility command.
+      misc: Tidy up M5OP_FOREACH and the constants in m5ops.h.
+      sim,misc: Rename M5OP_ANNOTATE to M5OP_RESERVED1.
+      misc: Add the SE mode m5 ops to m5ops.h.
+      misc,util: Remove explicit ';'s from M5OP_FOREACH.
+      util: Use a dispatch table to call ops in the m5 utility.
+      util: Add a helpful macro for merging two tokens to m5ops.h.
+      util: Add an abstraction layer for call types in the m5 utility.
+      arm: Fix some bugs in the aapcs64 implementation.
+      arm: Add a unit test for some aspects of the aapcs64 ABI.
+      misc: Use the protobuf version to choose between ByteSize(Long).
+      sim: Add an option to suppress the return value in invokeSimcall.
+      python: Fix compareVersions for python 3.
+      util: Add support for multiple call types in the m5 utility.
+
+Giacomo Travaglini <giacomo.travaglini@arm.com> (85):
+      dev-arm: Fix SMMUv3 16KB next-level table address masking
+      system-arm: Rename ARM bootloader directories
+      system-arm: Rename ARM bootloader source
+      system-arm: GICv2/GICv3 have different Distributor addresses
+      base: Move AtomicOpFunctors to a dedicated header
+      arch, base: Move arm AtomicOpFunctor into the generic header
+      base, gpu-compute: Move gpu AMOs into the generic header
+      tests: fs/linux/arm passing M5_PATH via commandline
+      tests: Adding --bin-path option to select tests bin directory
+      tests: Add a timeout to getremotetime
+      tests: Fix python line break in m5_exit test
+      arch-arm: Split translateFs to distinguish when MMU is on/off
+      tests: Move old quick regressions back into their original set
+      arch-arm: LDTRSW was not marked as unpriviledged
+      configs: Using VExpress_GEM5_V1 as a default for Options.py
+      tests: Add --host tag
+      tests: hello_se using host tag
+      tests,misc: update TESTING.md documentation
+      ext: Add failure node to JUnit xml file
+      cpu: Mark ExecContext::tcBase() as const
+      arch-arm: Fix ArmKVM build
+      base: Use a int to store fgetc return value
+      arch-arm: Be more verbose on load/store construction
+      arch, arch-arm: Use BaseISA in RenameMode interface
+      cpu: Fix vector renaming bug
+      dev-arm: Fix setupBootloader for VExpress_GEM5_V2
+      learning-gem5: Use zero initialization in hello_goodbye test
+      tests: simple_ruby_test's valid_host is X86 only
+      arch-arm: Remove unused getArmSystem helper
+      python: The new module has been removed in python3
+      misc: string.join has been removed in python3
+      misc: Replace __metaclass__ with six.add_metaclass
+      misc: Replace basestring with six.string_types
+      arch-arm: python3 "/" will always produce a float
+      arch-arm: Speedup ARM execution by avoiding expensive RTTI check
+      arch-arm: Hint the compiler to inline getArmSystem
+      arch-arm: Remove unnecessary RegIndex set for VSTR VFP inst
+      arch-arm: Fix Arch detection in FS if there is not bootloader
+      misc: Views and Iterators instead of Lists in python3
+      scons: file removed from python3
+      misc: Text vs Byte string in python3
+      misc: Make exception handling python3 compliant
+      arch: Bring closure out of p_global_let
+      arch: Convert exec keyword to exec() function
+      dev-arm: Fix VExpressFastmodel.py indentation
+      arch: list.sort() sorting by key only in python3
+      tests: Use relative path for python3 compliance
+      arch-x86: Fix imports for Python 3 compatibility
+      arch-x86: Add Python 3 workarounds for long
+      power: Fix regStats for PowerModel and PowerModelState
+      arch-arm: Fix ArmSystem::_resetAddr evalutation
+      tests: Add --bin-path option to insttest regressions
+      dev-arm: Add flash1 memory to VExpress_GEM5 platform
+      arch-arm: Fix aapcs32/aapcs64 compilation issues
+      arch-arm: Make load_addr_mask=0 for ArmFsLinux only
+      configs: Make --disk-image optional in baremetal.py
+      configs: Enable Semihosting for baremetal.py
+      configs: Initialize atags_addr in baremetal.py
+      configs: Use ArmFsWorkload for Arm baremetal
+      dev-arm: Don't use args and kwargs on attachIO
+      dev-arm: Fix pci_mem_base setting in VExpress_GEM5_Base
+      configs: Enabling SimObj CLI for baremetal platform
+      arch-arm: CNTHCTL trap to EL2 only if ARMv8.6-ECV implemented
+      arch-arm: Handle empty object_file scenario in ArmFsWorkload
+      dev-arm: Fix checkpointing for the GenericTimer
+      tests: Reduce checkpoint interval used by realview regressions
+      tests: Fail checkpoint regressions if no cpt has been taken
+      arch-arm: Remove unnecessary haveGICv3CPUInterface
+      arch, cpu: Add a takeOverFrom method for switching ISAs
+      arch-arm: Override ISA::takeOverFrom for the Arm ISA
+      tests: Run realview(64) tests with VExpress_GEM5_Foundation
+      arch-sparc: MAP_32BIT does not exist on solaris
+      configs: Add --semi-path option to baremetal.py
+      configs: Add --machine-type option to baremetal.py
+      configs: Add an example workloads module
+      configs: Produce list of workload types in workloads.py
+      configs: Use workloads.py in baremetal.py
+      arch-arm: Do not increment exponent if FPSCR.FZ in fplib
+      arch-arm: SVE instructions do not use AHP format
+      sim, arch-arm: Restore capability of running without a kernel
+      configs: Do not require args.kernel to be set in baremetal.py
+      util: Port git hooks to python3
+      util: Make cpt_upgraders python3 compatible
+      python: Manually convert float to int when using %x
+      scons: Add readCommandWithReturn helper
+
+Bobby R. Bruce <bbruce@ucdavis.edu> (60):
+      misc: Added 'fastmodel' to MAINTAINERS
+      tests: Added functionality to allow the ignoring of test suites
+      tests: Updated gtest/logging.cc to print log rather than fail.
+      tests,base: Added GTest for base/socket.cc
+      tests: Migrated old quick/se/00.hello tests
+      tests: Renaming tests to include dash between words
+      tests: Updated tests to download from http://dist.gem5.org
+      misc: Updated CONTRIBUTING.md to discuss branches
+      tests: Removing 10.mcf tests
+      tests: Removed 20.parser tests
+      tests: Removed 40.perlbmk tests
+      tests: Removed 30.eon tests
+      tests: Removed 60.bzip2 tests
+      tests: Removed 50.vortex tests
+      tests: Removed the old ALPHA tests
+      tests: Removed old quick/se/00.hello test resources
+      tests: Removed 70.twolf tests
+      misc: Updated old gem5 website URLs with new gem5 website URLs
+      misc: Removed old contribution guidelines regarding branches
+      misc: Updated CONTRIBUTING.md for master-as-stable setup
+      misc: Updated CONTRIBUTING.md to discuss WIP changes
+      misc: Updated CONTRIBUTING.md to discuss releases and hotfixes
+      misc: Updated git-commit-msg.py to print rejected commit
+      misc: Updated Doxygen to state version as v19.0.0.0
+      misc: Updated CONTRIBUTING.md to reflect altered release policy
+      misc: Merged release-staging-v19.0.0.0 into develop
+      tests: Migrated insttest tests to be run via  `./main.py run`
+      misc: merge branch 'release-staging-v19.0.0.0' into develop
+      tests: Removed unneeded 02.insttest data
+      Merge "misc: merge branch 'release-staging-v19.0.0.0' into develop" into develop
+      tests,misc: Updated tests/.gitignore to ignore test resources
+      tests: Fixed .testignore from 'arch64' to 'aarch64'
+      tests: Migrated 51.memcheck scons-based tests to testlib
+      tests: Updated 'hello_se' to include other CPU types
+      tests: Added MIPS ISA test to learning_gem5/part1_tests.py
+      tests,misc: Created presubmit.yaml Google Cloud Build files
+      tests: Migrated 80.dram scons-based tests to testlib framework
+      tests,arch-alpha: Removing ALPHA ISA from testlib config
+      tests: Migrated 40.m5threads-test-atomic scons tests to testlib
+      tests: Removed old scon-based 40.m5threads-test-atomic tests
+      tests: Increased Kokoro's timeout to 5 hours
+      misc: Added Dockerfile for Python3
+      misc: Added Dockerfile for minimum gem5 dependencies
+      misc: Added Dockerfile for GCC of different versions
+      misc: Added Dockerfile for clang
+      tests,learning-gem5: Moved MIPS ISA test from part 1 to long
+      tests: Migrated 10.linux-boot scons-based test to testlib
+      tests,misc: Updated presubmit YAML to use main.py '-t' flag
+      base,misc: Added version to code
+      tests: Removed "tests/long"
+      tests: Removed "tests/quick"
+      misc: Removed unneeded Doxygen pages
+      misc,tests: Updated and generalized the resource url for tests
+      misc: Added RELEASE-NOTES.md
+      misc: Updated version to 20.0.0.0
+      misc: Updated resources bucket url to version 20
+      misc: Added Dockerfile for Ubuntu 20.04
+      misc: Removed python3 Dockerfile
+      misc: Added python-six as a dependency in 18.04 docker
+      misc: Added missing optional dependencies to 18.04 Docker
+
+Adrian Herrera <adrian.herrera@arm.com> (37):
+      configs-arm: enable PMU instantiation in CpuCluster
+      dev-arm: GICv3, handle GICR_ICFGR0 WI behaviour
+      arch-arm: Semihosting, specify files root dir
+      misc: Reflect changes of arm bootloader name
+      dev-arm: VExpress_GEM5_Base, fix daughterboard reference
+      system-arm: bigLITTLE with VExpress_GEM5_V2 in dtb
+      arch-arm: Virtualization Host Extensions checking
+      arch-arm: ELIsInHost, check VHE and SecEL2
+      dev-arm: add FixedClock SimObject
+      dev-arm: VExpress_GEM5_Base, add refclock 32KHz
+      dev-arm: add Watchdog Module SP805 model
+      dev-arm: SP805 peripherals in VExpress_GEM5_Base
+      system-arm: AArch64 boot, init CNTFRQ_EL0
+      arch-arm: reg access permissions highest EL helper
+      arch-arm: AArch64 reg access HCR_EL2.E2H filter
+      arch-arm: Fix CNTFRQ_EL0 permission bits
+      misc: pass ThreadContext on ISA clear
+      arch-arm: ArmISA::clear, inval TLB cached miscregs
+      dev-arm: default _on_chip_memory on RealView
+      dev-arm: RealView, add support for off-chip memory
+      dev-arm: PL031, fix AMBA ID and clock names
+      dev-arm: Add flash0 memory to VExpress_GEM5 platform
+      dev-arm: Add trusted SRAM memory to VExpress_GEM5 platform
+      dev-arm: Add trusted SP805 to VExpress_GEM5 platform
+      dev-arm: Add missing UARTs (PL011) to VExpress_GEM5 platform
+      dev-arm: Refactor GenericTimer
+      arch-arm: GenericTimer arch regs, perms/trapping
+      arch-arm: Rewrite getMPIDR
+      dev-arm: add FVP Base Power Controller model
+      dev-arm: SMMUv3, single interconnect attachment
+      dev-arm: Instantiate FVPBasePwrCtrl in VExpress_GEM5
+      cpu: IntrControl, clear all and check helpers
+      dev-arm: Adjust idreg value in RealViewCtrl
+      arch-arm, dev-arm: WakeRequest implementation
+      arch-arm, dev-arm: Autogen PSCI node in DTB
+      configs: add option for memory channel intlv.
+      dev-arm: Add VExpress_GEM5_Foundation platform
+
+Daniel Carvalho <odanrc@yahoo.com.br> (31):
+      mem-garnet: Use smart pointers for CrossbarSwitch's members
+      mem-cache: Factor out multiple block eviction
+      mem-cache: Add more compression stats
+      mem-cache: Make findVictim non-const
+      mem-cache: Add multiple eviction stats
+      mem-cache: Add getter for the number of valid sub-blks
+      mem-cache: Add print function to ReplaceableEntry
+      mem-cache: Fix invalidation of prefetchers
+      mem-cache,mem-ruby: Move WeightedLRU RP
+      base: Fix squares of stats
+      configs: Fix relative import in non-package in configs
+      base: Add static assert to trie
+      mem-garnet: Remove delete of param pointers of GarnetNetwork
+      mem-garnet: Remove delete of param pointers of SimpleNetwork
+      mem-garnet: Use static allocation in VirtualChannel
+      mem-garnet: Use static allocation in OutputUnit
+      mem-garnet: Use static allocation in InputUnit
+      mem-garnet: Use static allocation in NetworkInterface
+      mem-garnet: Use static allocation in NetworkLink
+      mem-garnet: Use static allocation in Switch
+      mem-garnet: Use smart pointers in Router's members
+      mem-garnet: Use static allocation in CrossbarSwitch
+      base: Fix undefined behavior in mask generation
+      mem-cache: Create Prefetcher namespace
+      mem-cache: Fix priority of multi compressor
+      mem-cache: Fix DCPT with CircularQueue
+      mem-cache: Use CircularQueue for the STeMS's RMOB
+      mem-cache: Use CircularQueue in PIF prefetcher
+      mem-cache: Cleanup of SBOOE prefetcher
+      mem-cache: Use SatCounter in Stride prefetcher
+      mem-cache: Use AssociativeSet in Stride prefetcher
+
+Nils Asmussen <nils.asmussen@barkhauseninstitut.org> (25):
+      arch-arm: make MicroUopSetPCCPSR SerializeAfter
+      arch-riscv: added support for pseudo instructions.
+      arch-riscv: print information about faults.
+      arch-riscv: added TLB and page table walker.
+      arch-riscv: make sure only supported modes can be set in SATP.
+      arch-riscv: implement sfence.vma to flush TLBs.
+      arch-riscv: implement RemoteGDB::acc for FS mode.
+      arch-riscv: fixed formatting.
+      cpu,configs: let RISC-V use the PT walker cache.
+      configs: added bare metal FS support for RISC-V.
+      arch-riscv: fixed read of {M,S,U}TVEC.
+      arch-riscv: show names of MiscRegs on accesses.
+      arch-riscv: added (un)serialization of miscRegFile.
+      arch-riscv: ignore writes to SXL/UXL fields in status register.
+      arch-riscv: fault on mstatus accesses from lower privilege modes.
+      arch-riscv: added dummy implementation of wfi instruction.
+      arch-riscv: fault according to status.{TVM,TSK,TW}.
+      arch-riscv: make accesses to CSRs SerializeAfter.
+      arch-riscv: make uret,sret,mret SerializeAfter,NonSpeculative.
+      arch-riscv: let FPU instructions fault if status.FS = off.
+      arch-riscv: respect IALIGN, influenced by toggling 'c' extension.
+      arch-riscv: report that we don't have debugging support.
+      arch-riscv: be prepared for CSR changes during PT walk.
+      misc: added news on RISC-V to RELEASE-NOTES.md.
+      base,sim: allow m5writeFile with stdout/stderr.
+
+Nikos Nikoleris <nikos.nikoleris@arm.com> (23):
+      mem-cache: Avoid write merging if there are reads in between
+      mem-cache: Ensure that responses get data from the right source
+      mem-cache: Forward snoops when the cache is not responding
+      scons: Cleanup code that enables asan and ubsan
+      python: Remove unnecessary exports from pybind enums
+      configs: Fix argument handling sweep.py
+      arch-arm: Add missing include in QARMA implementation
+      sim: Add function that returns all variables in a MathExpr
+      base: Add support for resolving stats within groups by name
+      base, python, sim: Add support for resoving a stat using its name
+      sim-power: Fix the way the power model accesses stats
+      configs: Change fs_power.py to use absolute paths for stats
+      arch-arm: Downgrade constexpr causing build errors to const
+      arch-arm, mem-ruby, sim: Add missing overrides
+      sim: Fix mismatch between #ifndef and #define in varargs.hh
+      arch-arm: Fix function signature inconsistencies in semihosting
+      mem-ruby: Removed the unused parameter m_id from VirtualChannel
+      arch-arm: Fix inconsistency in variable name
+      scons: Disable unsupported -Wl,--as-needed in MacOS
+      arch-arm: Fix access modifier in Arm*ProcessBits class
+      mem-ruby: Avoid const from member due to &Message::operator=(...)
+      sim: Inheritance fixes in varargs
+      scons: Build the marshal binary in a bare minimum environment
+
+Ciro Santilli <ciro.santilli@arm.com> (14):
+      scons: fix --gold-linker build after --as-needed
+      dev-arm: add boot_loader param to RealView setupBootLoader
+      config: add --bootloader to fs.py and fs_bigLITTLE.py
+      configs: fs.py can take multiple disk images on most ISAs
+      configs: allow fs.py and fs_bigLITTLE.py to work without M5_PATH
+      scons,systemc: disable systemc tests scons by default
+      sim: print --debug-flag Event execution and instance ID
+      configs: fix forwarding of --bootloader to fs.py
+      configs: make --disk-images optional in fs.py
+      sim-se: add missing path redirection to mmap createObjectFile
+      configs: remove exec of Options.py from ruby_mem_test.py
+      mem: make MemTest panic on a packet error
+      tests: fix the memcheck test
+      tests: create tests for various traffic generators on NULL
+
+Timothy Hayes <timothy.hayes@arm.com> (14):
+      misc: add Arm build_opts for MESI_Three_Level and MOESI_hammer
+      configs: MESI_Three_level python parameters
+      mem-ruby: Minor Ruby Prefetcher fixes
+      mem-ruby: MESI_Three_level HTML reference generation fix
+      mem-ruby: MESI_Three_Level fix L1 in_port ranks
+      mem-ruby: MESI_Three_Level fix L1 MRU absence
+      mem-ruby: MESI_Three_Level discriminate L0 invalidation reason
+      mem-ruby: fix MESI_Three_Level erroneous transition
+      mem-ruby: LL/SC fixes
+      mem-ruby: MESI_Three_Level LL/SC improvements
+      mem-ruby: MESI_Three_level prefetcher support
+      mem-ruby: MESI_Three_level prefetcher page crossing
+      mem-ruby: MOESI_CMP_directory sync fix
+      mem-ruby: MESI_Two_Level missing function compilation fix
+
+Matthew Poremba <matthew.poremba@amd.com> (13):
+      arch-arm: Add used attribute to pauth_helpers asserts
+      sim-se: Implement Virtual Memory Area API
+      sim-se: Extend MemState API to use VMAs
+      sim-se: Switch to new MemState API
+      sim-se: Update mmap, munmap, mremap to use MemState
+      sim-se: Add special paths for MPI, libnuma, ROCm support
+      base,arch-hsail: Fix GPU build
+      arch-x86: Do not fixup faults in TLB
+      arch-x86: Change insertBits in TLB translateFunctional
+      sim: Use off_t for mmap offset arguments
+      configs: Add missing requestToMemory MessageBuffers
+      mem: Token port implementation
+      mem: Defer deletion of respQueue.front() in DRAMCtrl
+
+Jordi Vaquero <jordi.vaquero@metempsy.com> (7):
+      arch-arm: Fix EL2 target exception level for SP alignment fault.
+      arch-arm: This commit adds Pointer Authentication feature.
+      arch-arm: Implement ARMv8.3-JSConv
+      arch-arm: ARMv8.3 CompNum, SIMD complex number support
+      arch: Fix VecReg container alignement to 128bits view
+      arch-arm: Fix Sve Fcmla indexed instruction
+      arch-arm: Fix clasta/b and lasta/b simd&fp instructions
+
+Jason Lowe-Power <jason@lowepower.com> (6):
+      sim: Fix pseudo instruction parameter loading
+      arch-x86: Change guest ABI for x86 pseudo insts
+      ext: Fix tmpfiles in testlib
+      tests: Update tests to save output on failure
+      configs: Remove old boot files
+      scons: Update python-config flags for python3.8
+
+Ayaz Akram <yazakram@ucdavis.edu> (4):
+      cpu: move initCPU calls from initState to init
+      tests: update linux boot tests
+      mem-ruby: Deep renaming of Prefetcher to RubyPrefetcher
+      arch-riscv,tests: small update to make gem5.fast compile
+
+Tiago Mück <tiago.muck@arm.com> (4):
+      mem-ruby: Allow MessageBuffer functional reads
+      mem-ruby: Add functionalReadBuffers to AbstractController
+      mem-ruby: SimpleNetwork implementation of functional reads
+      mem-ruby: Fix Ruby handling of functional requests
+
+Yu-hsin Wang <yuhsingw@google.com> (4):
+      sim: Move destructor of Port to public
+      scons: Add '-Wl,--as-needed' to default LINKFLAGS
+      python: Add a warning if pydot is not available.
+      dev-arm: Fix setupBootloader for VExpressFastmodel
+
+Anouk Van Laer <anouk.vanlaer@arm.com> (3):
+      sim-power: Creation of PowerState class
+      sim-power: Specify the states a PowerState object can be in
+      sim-power: Addition of PowerDomains
+
+Earl Ou <shunhsingou@google.com> (3):
+      systemc: fix gem5_to_tlm bridge
+      systemc: keep SC_CONCAT* macro
+      systemc: gem5_to_tlm: treat non-rw as ignorable command
+
+Gabor Dozsa <gabor.dozsa@arm.com> (3):
+      cpu: Disable MinorCPU value forwarding with write strobes
+      cpu: Use enums for O3CPU store value forwarding
+      cpu: Disable O3CPU value forwarding with write strobes
+
+Hsuan Hsu <hsuan.hsu@mediatek.com> (3):
+      cpu-o3: Fix corrupted rename map in vector mode switching
+      cpu-o3: Fix unset scoreboard in vector mode switching
+      cpu: Don't assert on branch target addresses
+
+Tony Gutierrez <anthony.gutierrez@amd.com> (3):
+      arch-gcn3: Add files for arch gcn3 (GPU machine ISA)
+      dev-hsa: Add HSA device and HSA packet processor
+      misc: Add build opts for GCN3 GPU ISA
+
+Boris Shingarov <shingarov@gmail.com> (2):
+      base: Do not treat addresses < 10 specially
+      configs: Add --wait-gdb as option to se.py
+
+Trivikram Reddy <tvreddy@ucdavis.edu> (2):
+      cpu: change the location of BTBlookup
+      cpu: update info related direction into BP if mispredicted.
+
+Andreas Sandberg <Andreas.Sandberg@arm.com> (1):
+      python: Make meta class declarations Python 3 safe
+
+Andriani Mappoura <andriani.mappoura@arm.com> (1):
+      arch-arm: Correct the Ids and names of the PMU events
+
+Chun-Chen Hsu <chunchenhsu@google.com> (1):
+      util: Add fastmodel in valid tag list
+
+Giacomo Gabrielli <giacomo.gabrielli@arm.com> (1):
+      cpu: Fix issue with MinorCPU predicated-false mem. accesses
+
+Hussein Elnawawy <hussein.elnawawy@gmail.com> (1):
+      mem-ruby: Checkpoint from MOESI_hammer Ruby hangs
+
+Joe Gross <joe.gross@amd.com> (1):
+      configs: add option to set the timeouts for the TCPs and SQCs
+
+Mahyar Samani <msamani@ucdavis.edu> (1):
+      arch-x86: Add hsub instructions to x86
+
+Matt Poremba <matthew.poremba@amd.com> (1):
+      mem-ruby: Replace SLICC queueMemory calls with enqueue
+
+Michiel Van Tol <michiel.vantol@arm.com> (1):
+      dev-arm: Fix SMMUv3 walkMasks in page table ops
+
+Wendy Elsasser <wendy.elsasser@arm.com> (1):
+      mem: Modify DRAM controller for flexibility and new memories
+
+Yuan Yao <yuanyao@seas.harvard.edu> (1):
+      mem-ruby: Fix fast-forward when using the backing store.
+
+jiegec <noc@jiegec.ac.cn> (1):
+      tests: Use relative path for python3 compliance
+

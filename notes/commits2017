@@ -1,0 +1,782 @@
+   171	Gabe Black <gabeblack@google.com>
+    97	Andreas Sandberg <Andreas.Sandberg@arm.com>
+    53	Nikos Nikoleris <nikos.nikoleris@arm.com>
+    36	Brandon Potter <brandon.potter@amd.com>
+    32	Alec Roelke <alec.roelke@gmail.com>
+    25	Giacomo Travaglini <giacomo.travaglini@arm.com>
+    24	Sean Wilson <spwilson2@wisc.edu>
+    19	Curtis Dunham <Curtis.Dunham@arm.com>
+    16	Christian Menard <christian.menard@tu-dresden.de>
+    16	Jason Lowe-Power <jason@lowepower.com>
+    13	Jose Marinho <jose.marinho@arm.com>
+     9	Bjoern A. Zeeb <baz21@cam.ac.uk>
+     7	Peter Enns <Peter.Enns@arm.com>
+     7	Rekai Gonzalez-Alberquilla <rekai.gonzalezalberquilla@arm.com>
+     6	Gabor Dozsa <gabor.dozsa@arm.com>
+     6	Gedare Bloom <gedare@rtems.org>
+     6	Matthias Jung <jungma@eit.uni-kl.de>
+     6	Radhika Jagtap <radhika.jagtap@arm.com>
+     4	Andreas Hansson <andreas.hanson@arm.com>
+     4	Anouk Van Laer <anouk.vanlaer@arm.com>
+     4	Pau Cabre <pau.cabre@metempsy.com>
+     4	Paul Rosenfeld <prosenfeld@micron.com>
+     4	Rahul Thakur <rjthakur@google.com>
+     4	Sudhanshu Jha <sudhanshu.jha@arm.com>
+     3	Lena Olson <leolson@google.com>
+     3	Matthew Poremba <matthew.poremba@amd.com>
+     3	Sascha Bischoff <sascha.bischoff@arm.com>
+     3	Éder F. Zulian <zulian@eit.uni-kl.de>
+     2	Austin Harris <austinharris@utexas.edu>
+     2	David Guillen-Fandos <david.guillen@arm.com>
+     2	Javier Cano-Cano <javier.cano555@gmail.com>
+     2	Matthias Hille <matthiashille8@gmail.com>
+     2	Nathanael Premillieu <nathanael.premillieu@arm.com>
+     2	Rico Amslinger <rico.amslinger@informatik.uni-augsburg.de>
+     2	Riken Gohil <Riken.Gohil@arm.com>
+     2	Stephan Diestelhorst <stephan.diestelhorst@arm.com>
+     2	Swapnil Haria <swapnilster@gmail.com>
+     2	Tiago Mück <tiago.muck@arm.com>
+     2	Tony Gutierrez <anthony.gutierrez@amd.com>
+     2	Weiping Liao <weipingliao@google.com>
+     2	Wendy Elsasser <wendy.elsasser@arm.com>
+     1	Alexandru Dutu <alexandru.dutu@amd.com>
+     1	Ashkan Tousi <ashkan.tousimojarad@arm.com>
+     1	Boris Shingarov <shingarov@gmail.com>
+     1	Geoffrey Blake <geoffrey.blake@arm.com>
+     1	Hanhwi Jang <jang.hanhwi@gmail.com>
+     1	Matt Sinclair <mattdsinclair@gmail.com>
+     1	Matteo Andreozzi <matteo.andreozzi@arm.com>
+     1	Rohit Kurup <rohit.kurup@arm.com>
+     1	Santi Galan <santi.galan@metempsy.com>
+     1	Sean McGoogan <Sean.McGoogan@arm.com>
+     1	Tushar Krishna <tushar@ece.gatech.edu>
+     1	Zhang Zheng <perise@gmail.com>
+Gabe Black <gabeblack@google.com> (171):
+      scons: Stop generating an a.out checking the "as" version.
+      scons: Detect and remove broken git hook symlinks.
+      scons: Use a relative symlink for git hooks more selectively.
+      scons: Collapse symlinks when installing git hooks.
+      stats: Un-empty the SPARC FS stats.txt file.
+      stats: Add a boat load of stats to the SPARC solaris boot regression.
+      stats: Remove stats from the SPARC solaris boot which were silenced.
+      stats: Update SPARC solaris boot stats.
+      config: Add a default system disk image for SPARC FS.
+      stats: Update the solaris boot stats for new snoopTraffic stat.
+      stats: Update the solaris boot stats for the default snoop_filter.
+      stats: Update the solaris boot stats for the new op classes.
+      stats: Update the stats for 04.gpu for x86/linux/gpu-ruby-GPU_Rf0.
+      stats: Update 01.hello-2T-smt and 40.perlbmks stats on ARM/Alpha o3-timing.
+      stats: Rename num_syscalls to numSyscalls in the reference stats.
+      stats: Update the 40.m5threads stats.
+      stats: Update ARM FS stats.
+      stats: Update 04.gpu stats.
+      stats: Update the stats for 70.twolf for x86 o3-timing mode.
+      stats: Update some stats after simulated program exit behavior was changed.
+      scons: When spawning the linker process, don't involve the shell.
+      scons: Find ext build directories automatically.
+      scons: Add a Transform() for when linking shared libraries.
+      scons: Add builders for partially linked object files.
+      scons: Put Source objects in groups and partially link them.
+      scons: Group Source-s based on what SConscript included them.
+      scons: Remove the SPAWN hack added earlier.
+      scons: Fix the compiler flag used for partial linking.
+      scons: Merge reading test SConscripts into makeEnv.
+      config: Remove support for CPU aliases.
+      scons: Make env['USE_PYTHON'] a source for createEnumStrings.
+      scons: Replace str(foo.get_contents()) with foo.get_text_contents().
+      scons: Get rid of the PHONY_BASE construction variable.
+      base: Teach the socket listeners how to bind to the loopback.
+      misc: Expose the listener loopbackOnly function to python.
+      misc: Add the --listener-loopback-only command line option.
+      scons: Get rid of the all_isa_deps variable.
+      config: Fix up some configs to not use CPU aliases.
+      scons: arch: Generalize the switching header code.
+      scons: Use the generalized switching headers on the GPU ISA.
+      misc: Make the remote GDB stub more resilient to bad connections.
+      base: Make the VNC server more resilient.
+      x86: Fix the multiplication microops.
+      base: Refactor the GDB code.
+      scons: Enable explicitly building something with no variant.
+      x86: sim: Make 32 bit x86 processes work again.
+      x86: Rework how VEX prefixes are decoded.
+      ext: Revamp the systemc SConscripts.
+      dev: Add a missing parameter to the EtherTap device.
+      misc: Fix building the m5tap utility.
+      dev: Rename EtherTap to be EtherTapStub.
+      dev: Refactor the EtherTapStub to make room for using tap.
+      dev: Add a version of EtherTap which uses the tap driver.
+      misc: Add git ignore patterns for build products in src/util/tap
+      misc: Ignore build products in src/util/term.
+      base: misc: Include cstdlib in base/misc.hh.
+      scons: Try to handle problems with gcc, lto and partial linking.
+      dev: Avoid arbitrarily deep stack depth in the i8254xGBe model.
+      riscv: Disambiguate between the C and C++ versions of isnan and isinf.
+      base: Give more information when setting up asynchronous IO fails.
+      dev: Fix an IDE error check.
+      x86: Add a "CondInst" format for conditionally decoded instructions.
+      x86: Use the new CondInst format for moves to/from control registers.
+      stats: Get rid of some kernel stats related cruft.
+      stats: Move the swpipl function into the Alpha kernel stats.
+      kvm: arm: Get rid of functions which just wrap the subclasses version.
+      sim: Stop using loadState in the Root SimObject.
+      alpha: Move some initialization logic from loadState into unserialize.
+      mem: Record the request master ID in the PacketInfo structure.
+      mem: Trace the request master ID in the MemTraceProbe.
+      mem: Add a "map" of packet IDs to strings in probe traces.
+      mem: Fill the new packet ID fields with master IDs when tracing packets.
+      sim: Add a set_parent to NullSimObject which does nothing.
+      sim: Only consider non-NULL elements in SimObjectVector.has_parent.
+      sim: Check the SimObjectVector.has_parent function to use the "any" function.
+      sim: Add a clear_parent function to NullSimObject.
+      sim: Add a NullSimObject.descendants function.
+      sim: Give the NullSimObject singleton a _name.
+      misc: Make the m5 utilities writefile command accept a host path.
+      sim: Don't add the NULL SimObject as a child of other SimObjects.
+      sim: Add a get_config_as_dict to the NullSimObject class.
+      dev: Make the IDE controller handle NULL simobject pointers.
+      util: Make dot_writer ignore NULL simobjects.
+      misc: Fix the indentation in DecodeVarint in util/protolib.py.
+      misc: Rename the (De|En)codeVarint function _(De|En)codeVarint32.
+      misc: Small style fix in _EncodeVarint32.
+      misc: Make decode_packet_trace.py print the new master ID fields.
+      misc: When building packet_pb2.py, don't assume a particular CWD.
+      misc: Use a Makefile to ensure util/packet_pb2.py is up to date.
+      misc: Add util/packet_pb2.py to .gitignore.
+      scons: Stop generating inc.d in the isa parser.
+      scons: Fix the regression tests.
+      base: Fix forcing loopback only binding for listeners.
+      x86: Fix VEX instruction decoding.
+      config: Rework the SysPaths functions into functors.
+      alpha,arm,mips,power,riscv,sparc,x86,isa: De-specialize ExecContexts.
+      alpha,arm,mips,power,riscv,sparc,x86: Merge exec decl templates.
+      scons: Move scons and python version checking into site_init.py.
+      scons: Override the "default" tool to set up the default env.
+      scons: Pull style hook management out of the main SConstruct.
+      scons: Move python path management out of the SConstruct.
+      scons: Move Transform and termcap functionality into their own files.
+      util: Simplify/consolidate the python conversion module.
+      config: Simplify the definitions of the Voltage and Current params.
+      util: Add a "toEnergy" function to the convert module.
+      config: Export the "Current" param type from m5.params.
+      config: Add an Energy param type.
+      config: Fix the "script" SysPath functor.
+      tests: Fix compilation of cprinftest.
+      dev: Fix the SPARC and X86 platform devices.
+      sparc: Pull StaticInst base classes out of the ISA description.
+      sparc: Pull flat static instruction classes out of the ISA.
+      sparc: Pull more StaticInst base classes out of the ISA desc.
+      sparc: Pull most of the Nop format out of the ISA description.
+      sparc: Pull the "Uknown" StaticInst class out of the ISA description.
+      sparc: Pull the unimplemented formats out of the ISA description.
+      sparc: Return debug faults from unimplemented instructions.
+      sparc: Move the microop/macroop base classes out of the ISA desc.
+      sparc: Move the mem base classes out of the ISA description.
+      sparc: Move integer StaticInst base classes out of the ISA desc.
+      tests: Fix the stats unit test.
+      tests: Resurrect initest input file(s).
+      scons: Switch from "guards" to "tags" on source files.
+      scons: Get rid of SourceFile's done function.
+      scons: Move some compiler flag setting code to the SConstruct.
+      scons: Get rid of a flag which makes Werror optional.
+      scons: Remove the extra_deps option from the helper function make_obj.
+      scons: Break make_obj into make_static and make_shared functions.
+      tests: Build the input file into the initest unit test.
+      scons: Minor cleanup of how partial linking is handled in makeEnv.
+      tests: Import the googletest library, release version 1.8.0.
+      tests: scons: Integrate the googletest library into the build.
+      scons: Add in a new type of unit test called GTest.
+      tests: Reimplement the bituniontest as a googletest.
+      scons: Build GTests in the directory they're declared.
+      tests: Move the bituniontest to be alongside the bitunion header.
+      tests: Get rid of the bitvectest unit test.
+      tests: Add a ptr helper function trietest.
+      tests: Remove trietest's dependence on cprintf.
+      misc: Move the ExitLogger class definition into misc.cc
+      misc: Rename misc.(hh|cc) to logging.(hh|cc)
+      base: Rework the trie dump function to accept a different ostream.
+      x86: LOOP's operand size defaults to 64 bits in 64 bit mode.
+      scons: Track and reuse object nodes for a given source file.
+      scons: Several fixes having to do with tags and sets.
+      tests: Fix the source file for the cprintftime test.
+      base: Handle zero fill in cprintf when printing floats.
+      base: Split out the pixel class in framebuffer.(cc|hh).
+      x86: Split apart x87's FSW and TOP, and add a missing break.
+      tests: Add a pseudo target to run all the unit tests for build/variant.
+      tests: Accept SourceFilters as sources for GTest.
+      misc: Rework the logging functions.
+      tests: Add an implementation of the Logger interface for use gtests.
+      tests: Convert the trie unit test into a gtest.
+      tests: Plumb dumps of the test trie into the gtest macros.
+      tests: Move the trietest unit test into base.
+      tests: Convert the cprintf unit test into a gtest.
+      tests: Move the cprintftest unit test into src/base.
+      tests: Turn fbtest into a gtest and move it to src/base.
+      base: Add endianness conversion functions for std::array types.
+      x86: Rework how "split" loads/stores are handled.
+      cpu,alpha,mips,power,riscv,sparc: Get rid of eaComp and memAccInst.
+      arm,sparc,x86,base,cpu,sim: Replace the Twin(32|64)_t types with.
+      x86: Use operand size 4 when it would be 2 for cmpxchg8b.
+      cpu: Fix exit_gen.cc which used misc.hh instead of logging.hh.
+      cpu: Add a pointer to a generic Nop StaticInst.
+      cpu: Use the generic nop static inst instead of decoding the arch version.
+      arch,cpu: "virtualize" the TLB interface.
+      riscv,x86: Stop using the arch Nop machine instruction unnecessarily.
+      alpha,arm,mips,power,riscv,sparc,x86: Get rid of TheISA::NoopMachInst.
+      config: Add a --checkpoint-dir argument to read_config.py.
+
+Andreas Sandberg <Andreas.Sandberg@arm.com> (97):
+      sim: Remove redundant export_method_cxx_predecls
+      python: Don't use Swig to cast stats
+      sim: Remove declaration of unused CountedDrainEvent
+      python: Move native wrappers to the _m5 namespace
+      style: Force Python.h to be included before main header
+      arm, kvm: Automatically use the MuxingKvmGic
+      python: Add a generalized mechanism to configure stats
+      tests: Disable descriptions in stat files
+      base: Refactor logging to make log level selection cleaner
+      arch: Include generated decoder header after normal headers
+      scons: Automatically add a git commit message hook
+      power: Avoid forward declarations that confuse wrappers
+      gpu-compute: Fix Python/C++ object hierarchy discrepancies
+      arm: Clean up the GIC implementation
+      dev, arm: Add draining to the GIC model
+      arm, dev: Add missing override in the Pl390 GIC model
+      util: Add a tool to list outgoing/incoming changes
+      python: Automatically disable listeners in batch setups
+      dev: Rename VirtIO PCI debug flag
+      dev: Add a dummy VirtIO device
+      dev, arm: Fix multi-core KVM race in the generic timer
+      arm, kvm: Override the kernel's default MPIDR value
+      config, arm: Unify checkpoint path handling in bL configs
+      config, arm: Add multi-core KVM support to bL config
+      sim: Handle cases where Drainable::resume() creates objects
+      scons: Fix hook installation error caused by stale cache
+      power: Add error checking to MathExprPowerModel
+      power: Add a voltage variable to power expressions
+      config, arm: Add an example power model
+      tests: Remove unused options from tests.py
+      ext: Add pybind rev f4b81b3
+      ext: Fix undefined macro in pybind
+      python: Use PyBind11 instead of SWIG for Python wrappers
+      scons: Remove SWIG support
+      base, sim, dev: Remove SWIG
+      python: Remove SWIG
+      util: Fix incorrect return type in m5 writefile
+      util: Fix incorrect use of m5_loadsymbol
+      util: Add the m5_loadsymbol pseudo op to the m5 tool
+      util: Correctly handle short writes in m5 (read|exec)file
+      kvm, arm: Fix incorrect PSTATE sync
+      arm: Add support for memory-mapped m5ops
+      arm: Enable m5ops by default for VExpress_GEM5_V1
+      util, arm: Support mmapped m5ops on aarch64
+      python: Fix debug flag listing regression
+      style: Treat PyBind headers as Python headers
+      arm: Remove unused DumpStatsPCEventF class in FreeBSD system
+      syscall_emul: Fix undefined macro behavior
+      python: Add a helper function to create Python events
+      base, sim, arch: Fix clang 5.0 warnings
+      python: Remove unused readline import
+      python: Fix weird memory issue in wrapped AddrRange vectors
+      python: Prevent Python wrappers from deleting SimObjects
+      ext: Upgrade PyBind11 to version 2.1.1
+      sim: Add hooks to implement event reference counting
+      python: Fix PyEvent reference counting bug
+      arm: Fix incorrect handling of PMEVTYPERx_EL0 in PMU
+      mem-cache: Add missing overrides to BaseCache
+      config: Make some MemConfig options optional
+      config: Add missing import of 'fatal' in CpuConfig
+      config: Make ex5_*.py independent of old configs
+      config: Move core timing models to config/common/cores
+      config: Clean up core timing model discovery
+      config, arm: Don't import timing models for missing CPUs
+      kvm, arm: Don't forward IRQ/FIQ when using the kernel's GIC
+      tests: Don't treat new stats as a cause for failures
+      config: Discover CPU timing models based on target ISA
+      arch-arm: Switch to DTOnly as the default machine type
+      cpu, kvm: Fix deadlock issue when resuming a drained system
+      kvm: Add a helper method to access device event queues
+      kvm, arm: Switch to the device EQ when accessing ISA devices
+      util: Move the m5ops.h file to a shared directory
+      sim: Use named constants for pseudo ops
+      arch-arm: Use named constants for m5op instructions
+      util, m5: Use consistent naming for m5op C symbols
+      util: Move m5op.h to the shared include directory
+      style: Add shared gem5 headers to the style checker
+      arm, config: Fix CPU names in ARM example configs
+      configs, arm: Fix incorrect use of mem_range in bL example
+      python: Make GlobalExitEvent.getCode() return an int
+      arch-alpha: Add missing overrides
+      arch-sparc: Add a FaultVals instantiation for VecDisabled
+      arch-x86: Add missing override in the X86 TLB
+      arch-arm: Add missing override keywords in fault.hh
+      util: Filter out the For-Upstream commit message tag
+      dev: Refactor UART->Terminal interface
+      dev: Add a dummy serial device
+      dev: Move generic serial devices to src/dev/serial
+      util: Optionally search entire history when listing changes
+      util: Remove support for hg patches in patch creation script
+      sim: Add an option to load additional kernel objects
+      arch-arm: Add support for the brk instruction
+      cpu-o3: Add missing vector stat initializers
+      cpu: Don't override ISA if provided by user
+      scons: Make sure GTests have the right environment variables
+      scons, tests: Add support for GTest XML generation
+      scons, tests: Fix occasional linking error
+
+Nikos Nikoleris <nikos.nikoleris@arm.com> (53):
+      proto: Fix warnings for protoc v3
+      arm: Blame the right instruction address on a Prefetch Abort
+      arm: Fix DPRINTFs with arguments in the instruction declarations
+      mem: Remove stale argument from a panic statement
+      misc: Add dtb files to the ignore list for git and mercurial
+      mem: Populate the secure flag in the writeback visitor
+      mem: Always use the helper function to invalidate a block
+      mem: Remove unused functions from the tag classes
+      mem: Remove unused type BlkList from the cache and the tags
+      mem: Remove unused arguments (asid/contex_id) from accessBlock
+      mem: Remove the unused asid field from the CacheBlk class
+      mem: Remove unused size field from the CacheBlk class
+      mem: Use pkt::getBlockAddr instead of BaseCace::blockAlign
+      mem: Make blkAlign a common function between all tag classes
+      tests: Warn not fail when reading invalid pickle status files
+      arm: Treat Write-Through Normal memory as Non-Cacheable
+      arm: Don't panic when checking coprocessor read/write permissions
+      arch-sparc: Fix wrong indentation causing warnings for gcc 6
+      python: Fix unproxing of VectorParams
+      ruby: Don't set the block data when a store conditional fails
+      ruby: Add support for address ranges in the directory
+      ruby, arm: Forward invalidations to the local exclusive monitor
+      config: Warn not fail for ARM systems configured with ruby
+      scons: Make MOESI_CMP_directory the default ARM ruby protocol
+      arm: Refactor the VExpress_EMM system creation
+      tests: Add ARM MOESI_CMP_directory regressions
+      tests: Fix path for module imports in ARM system configs
+      cpu-o3: Avoid early checker verification for store conditionals
+      cpu-o3: Check predication before the SQ size for a debug print
+      mem: Signal the local monitor when clearing the global monitor
+      arch-arm: Signal an event when executing store exclusives
+      arch-arm: Allow dc ivac from EL0 when SCTLR_EL1.UCI=1
+      mem: Align the snoop behavior in the XBar for atomic and timing
+      cpu-o3: Prevent cpu from suspending if it is already draining
+      mem: Add the notion of point of unification in the coherent xbar
+      mem: Add function to check if the slave can receive a timing req
+      mem-cache: Add support for checking whether a cache is busy
+      mem: Add a WriteClean command to the packet class
+      mem: Add support for WriteClean packets in the memory system
+      mem: Support for specifying the destination of a WriteClean
+      mem: Add support for cache maintenance operation requests
+      mem: Promote deferred targets only when the block is valid
+      mem: Add support for CMOs in the cache
+      mem: Add support for handling CMOs in the MSHRs
+      mem: Co-ordination of CMOs in the xbar
+      mem: Allow CMOs as snooping requests in the snoop filter
+      mem: Handle CMO responses in the snoop filter
+      mem: Ignore clean requests in the abstract memory
+      cpu: Add support for CMOs in the cpu models
+      arm: Add CMO support for Non-Cacheable memory
+      mem-ruby: Prevent ruby from crashing on CMOs
+      arm: Add support for the mcr dc{ic,i,c}mvac, dccmvau instructions
+      arm: Add support for the dc {civac, cvac, cvau, ivac} instr
+
+Brandon Potter <brandon.potter@amd.com> (36):
+      style: [patch 1/22] use /r/3648/ to reorganize includes
+      syscall_emul: [patch 2/22] move SyscallDesc into its own .hh and .cc
+      syscall_emul: #ifdef new system calls to allow builds on OSX and BSD
+      style: [patch 3/22] reduce include dependencies in some headers
+      syscall_emul: [patch 4/22] remove redundant M5_pid field from process
+      sim: fix out-of-bounds error in syscall_desc
+      sparc: fix bugs caused by cd7f3a1dbf55
+      syscall_emul: [patch 5/22] remove LiveProcess class and use Process instead
+      syscall_emul: [patch 6/22] remove unused fields from Process class
+      syscall_emul: [patch 7/22] remove numCpus method
+      syscall_emul: [patch 8/22] refactor process class
+      syscall_emul: [patch 9/22] remove unused global variable (num_processes)
+      syscall_emul: [patch 10/22] refactor fdentry and add fdarray class
+      base: fix small memory leak in the ELF loader
+      x86: remove redundant condition check in tlb code
+      syscall_emul: [patch 11/22] extend functionality of fcntl
+      style: [patch 12/22] fix preliminary style issues for subsequent fault patch
+      syscall_emul: [patch 13/22] add system call retry capability
+      gpu-compute: mark functions with override if replacing virtual
+      x86: remove unnecessary parameter from functions
+      syscall_emul: [patch 14/22] adds identifier system calls
+      syscall_emul: [PATCH 15/22] add clone/execve for threading and multiprocess simulations
+      syscall-emul: Remove unused class and member
+      syscall-emul: Move memState into its own file
+      style: Correct some style issues
+      syscall-emul: Add functionality to open syscalls
+      syscall-emul: Add or extend dup, dup2, and pipe
+      syscall-emul: Adds SE mode signal feature
+      syscall-emul: Add the tgkill system call
+      syscall-emul: Rewrite system call exit code
+      syscall-emul: Ignore unimplemented system calls
+      style: change NULL to nullptr in syscall files
+      syscall-emul: change NULL to nullptr in Process files
+      syscall-emul: Hotfix for FreeBSD/Mac builds
+      style: fix line lengths and include ordering
+      syscall_emul, riscv: add override keyword to RISCV Process class
+
+Alec Roelke <alec.roelke@gmail.com> (32):
+      riscv: Fix crash when syscall argument reg index is too high
+      riscv: Remove ECALL tests from insttest
+      riscv: enable unaligned memory accesses
+      riscv: fix error on memory op address overflow
+      riscv: add remote gdb support
+      riscv: fix compatibility with Linux toolchain
+      riscv: fix Linux problems with LR and SC ops
+      riscv: Fix crashes with large or frequent mmaps
+      cpu: fix problem with forwarding and locked load
+      arch-riscv: Fix bad stack initialization
+      tests: Update RISC-V hello test and stats
+      arch-riscv: Restructure ISA description
+      arch-riscv: Add support for compressed extension RV64C
+      arch-riscv,tests: Add insttests for RV64C
+      riscv: Add unused attribute to some registers.hh constants
+      riscv: Fix bugs with RISC-V decoder and detailed CPUs
+      tests: Upate RISC-V binaries and results
+      riscv: Define register index constants using literals
+      sim-se: Add prlimit system call
+      sim-se: Add default to SyscallDesc constructor
+      arch-riscv: Add missing system calls
+      arch-riscv: Move static_inst into a directory
+      arch-riscv: Move standard ops out of ISA
+      arch-riscv: Move unknown out of ISA description
+      arch-riscv: Move parts of mem insts out of ISA
+      arch-riscv: Remove static parts of AMOs out of ISA
+      arch-riscv: Add missing license paragraphs
+      arch-riscv: Remove spaces around ea_code
+      arch-riscv: use sext rather than manual masks
+      arch-riscv: Move compressed ops out of ISA
+      arch-riscv: Increase maximum stack size
+      arch-riscv: Define AT_RANDOM properly
+
+Giacomo Travaglini <giacomo.travaglini@arm.com> (25):
+      base: Defining make_unique for C++11
+      base: Function for mirroring bits in variable length word
+      arch-arm: RBIT instruction using mirroring func
+      base: Introducing utility for writing raw data in png format
+      vnc: Default image writer type set to Auto
+      dev: Using Configurable image writer in HDLcd
+      arch-arm: Corrected encoding for T32 HVC instruction
+      arch-arm: Interface for the ArmStaticInst intWidth field
+      arm: Add support for armv8 CRC32 instructions
+      arch-arm: Removing FlushPipe fault, using SquashAfter
+      arch-arm: Writes to DCCMVAC shouldn't flush pipeline
+      arch-arm: Dsb instruction shouldn't flush the pipeline
+      arch-arm: Fix MSR/MRS disassemble
+      arch-arm: Fix MCR/MRC disassemble
+      scons: Build error introduced by site_tools/default.py
+      arch-arm: HVC instruction undefined in secure EL1
+      arch-arm: Add assertions when extracting an ArmSystem from a TC
+      arch-arm: Add haveEL pseudocode function
+      arm: Enable ns registers access in secure mode
+      arm: Change access permission in TPIDRURO and TPIDRURW
+      arch-arm: Change casting type from reinterpret to static
+      arch-arm: Instruction size methods in StaticInst class
+      arch-arm: Fix StaticInst encoding() method
+      arch-arm: Hyp routed undef fault need to change its syndrome
+      arch-arm: Fixed WFE/WFI trapping behaviour
+
+Sean Wilson <spwilson2@wisc.edu> (24):
+      x86: Add consistent overrides to process.hh
+      tests: Fix a typo for the default MI_example protocol
+      sim: Remove DelayFunction
+      mem: Move the Rank construction logic to the Rank constructor
+      sim: Add generic EventFunctionWrapper
+      mem: Replace EventWrapper in PacketQueue with EventFunctionWrapper
+      mem: Replace EventWrapper use with EventFunctionWrapper
+      cpu, gpu-compute: Replace EventWrapper use with EventFunctionWrapper
+      arm: Replace EventWrapper use with EventFunctionWrapper
+      dev: Replace EventWrapper use with EventFunctionWrapper
+      sim, x86: Replace EventWrapper use with EventFunctionWrapper
+      arm: Fix memleak in VGic by adding destructor
+      arm: Fix memleak in Pl390 by adding destructor
+      mips, x86: Refactor some Event subclasses into lambdas
+      sim, gdb: Refactor some Event subclasses into lambdas
+      gpu-compute: Refactor some Event subclasses to lambdas
+      cpu: Refactor some Event subclasses to lambdas
+      kvm, mem: Refactor some Event subclasses into lambdas
+      testers: Refactor some Event subclasses to lambdas
+      net: Refactor some Event subclasses to lambdas
+      dev: Refactor some Event subclasses to lambdas
+      arm: Refactor some Event subclasses to lambdas
+      ruby: Refactor some Event subclasses to lambdas
+      sim, x86: Make clone a virtual function
+
+Curtis Dunham <Curtis.Dunham@arm.com> (19):
+      sim: add support for checkpoint downgrading
+      sim: allow forward dependencies in checkpoint upgraders
+      tests: check for gem5 binary before tests
+      sim,kvm,arm: fix typos
+      sim, kvm: make KvmVM a System parameter
+      arm, kvm: implement MuxingKvmGic
+      arm, kvm: remove KvmGic
+      arm: correct register read bug in Pl390 GIC
+      arm: refactor packet processing in Pl390 GIC
+      arm, dev: refactor GIC Pl390 GICD_ITARGETSRn handling
+      arm, dev: add basic support for GICC_BPR register
+      arm, kvm: implement GIC state transfer
+      arm, dev: stub out GIC distributor interrupt groups
+      kvm: move Kvm check from ARM Kvm GIC to System
+      dev,arm: remove and recreate timer events around drains
+      dev,arm: add Kvm mode of operation for CP15 timer
+      arm,kvm: update CP15 timer model when exiting Kvm
+      kvm, arm: don't create interrupt events while saving GIC state
+      tests: Fix path for module imports in ARM system configs again
+
+Christian Menard <christian.menard@tu-dresden.de> (16):
+      misc: Implement the Base SystemC Module as an sc_channel.
+      misc: Fix order of object construction in the CxxConfigManager
+      misc: fix includes in util/systemc
+      misc: add a MasterId to the ExternalPort
+      misc: Clean up and complete the gem5<->SystemC-TLM bridge [1/10]
+      misc: Clean up and complete the gem5<->SystemC-TLM bridge [2/10]
+      misc: Clean up and complete the gem5<->SystemC-TLM bridge [3/10]
+      misc: Clean up and complete the gem5<->SystemC-TLM bridge [4/10]
+      misc: Clean up and complete the gem5<->SystemC-TLM bridge [5/10]
+      misc: Clean up and complete the gem5<->SystemC-TLM bridge [7/10]
+      misc: Clean up and complete the gem5<->SystemC-TLM bridge [8/10]
+      misc: Clean up and complete the gem5<->SystemC-TLM bridge [9/10]
+      misc: Clean up and complete the gem5<->SystemC-TLM bridge [10/10]
+      misc: Clean up and complete the gem5<->SystemC-TLM bridge [6/10]
+      misc: Reorder sources in util/tlm and rewrite build scripts
+      misc: check address range in the SystemC example
+
+Jason Lowe-Power <jason@lowepower.com> (16):
+      misc: Add Python.h header to pyevents.hh
+      misc: Update #!env calls for python to explicit version
+      x86: Fix implicit stack addressing in 64-bit mode
+      misc: Add a CONTRIBUTING document
+      misc: Add MAINTAINERS file
+      dev: Add ATA command used in recent Linux kernels
+      scons: Add use_tuntap to export list
+      sim: Updated ClockedObject power state warning
+      cpu-o3: Add M5_VAR_USED to variable
+      learning_gem5: Add code for simple SimObject
+      learning_gem5: Add code for hello-goodbye example
+      learning_gem5: Adds the simple MemObject code
+      learning_gem5: Adding code for SimpleCache
+      misc: Update MAINTAINERS with learning-gem5 tag
+      ext: Upgrade PyBind11 to version 2.2.1
+      misc: Updates for gcc7.2 for x86
+
+Jose Marinho <jose.marinho@arm.com> (13):
+      sim: Fix clashing stat names in TickedObject and Ticked
+      dev-arm: Don't unconditionally overwrite bootloader params
+      arch-arm: Support PMU evens in the 0x4000-0x4040 range
+      dev-arm: Add ID registers to the GIC model
+      cpu, sim: Add param to force CPUs to wait for GDB
+      sim: Prevent segfault in the wakeCpu m5op if id is invalid
+      arch-arm: Only increment SW PMU counters on writes to PMSWINC
+      system-arm: change system/arm/aarch64_bootloader/boot.S copyright
+      cpu: Make automatic transition to OFF optional
+      arch-arm: Ensure counters keep events on checkpoint resume
+      cpu, cpu, sim: move Cycle probe update
+      arch-arm: Do not increment PMU cycle event in WFI/WFE
+      arch-arm: ArmPMU refactor
+
+Bjoern A. Zeeb <baz21@cam.ac.uk> (9):
+      arm: AArch64 report cache size correctly when reading CTR_EL0
+      dev: net/i8254xGBe add two more wakeup registers to ignore
+      scons: make build better on FreeBSD
+      sim: Patch to fix the statfs build
+      sim: fix build breakage in process.cc after brandon@11801
+      mem: fix printing of 1st cache tags line
+      sim: make compile on FreeBSD prior to 11
+      arch: change panic for Vector traceData to warn_once
+      arch-x86: fix CondInst decoding for MOV to Control Registers
+
+Peter Enns <Peter.Enns@arm.com> (7):
+      mem, misc: fix building issue with CommMonitor (unused variables)
+      mem, stats: fix typos in CommMonitor and Stats
+      config: exit with fatal() if error
+      misc: add missing copyright/author information in previous commit
+      misc: add copyright/name information for contribution
+      arm, config: added support for ex5 model of big.LITTLE
+      configs: fix cpu names in big.LITTLE example
+
+Rekai Gonzalez-Alberquilla <rekai.gonzalezalberquilla@arm.com> (7):
+      arch-arm: Fix some poorly done type max and min in NEON
+      cpu: Simplify the rename interface and use RegId
+      cpu: Result refactoring
+      arch: added generic vector register
+      cpu: Added interface for vector reg file
+      arch: ISA parser additions of vector registers
+      cpu: Add missing rename of vector registers in the O3 CPU
+
+Gabor Dozsa <gabor.dozsa@arm.com> (6):
+      arm,config: Refactor the example big.LITTLE(tm) configuration
+      config: Refactor the network switch configuration file
+      arm,config: Add dist-gem5 support to the big.LITTLE(tm) config
+      config: Change mem_range attribute naming in ARM SimpleSystem
+      config, arm: FS configuration for the ARM starter kit
+      config, arm: SE configuration for the ARM starter kit
+
+Gedare Bloom <gedare@rtems.org> (6):
+      util: generate fully qualified paths for cscope
+      dev, arm: ignore writes to the SCU
+      dev, arm: add a9mpcore global timer device
+      arm: ignore writes to the reset_ctl register
+      configs, arm: add option to enable security extensions
+      arch-arm: fix ldm of pc interswitching branch
+
+Matthias Jung <jungma@eit.uni-kl.de> (6):
+      config: Fix missing include in fs.py
+      misc: Documentation Update
+      misc: fixes deprecated sc_time function for SystemC 2.3.1
+      ext: Include SystemC 2.3.1 into gem5
+      tlm: Don't set SystemC time resolution
+      tlm: Elastic Trace Example with L2 Cache Added
+
+Radhika Jagtap <radhika.jagtap@arm.com> (6):
+      cpu: Print progress messages in Trace CPU
+      cpu, probe: Fix elastic trace register dependency
+      ext, mem: Pull DRAMPower SHA 90d6290 and rebase
+      config: Add low power sweep for DRAM
+      tests: Add tests for DRAM low power modes
+      util: Add script to plot DRAM low power sweep
+
+Andreas Hansson <andreas.hanson@arm.com> (4):
+      mem: Fix memory footprint includes
+      mem: Ensure deferred snoops are cache-line aligned
+      sim: Ensure draining is deterministic
+      stats: Get all stats updated to reflect current behaviour
+
+Anouk Van Laer <anouk.vanlaer@arm.com> (4):
+      dev, virtio: Use of Unix socket for virtIO 9P device
+      cpu,o3: Fixed checkpointing bug occuring in the o3 CPU
+      dev, virtio: Improvements to diod process handling
+      pwr: Adds logic to enter power gating for the cpu model
+
+Pau Cabre <pau.cabre@metempsy.com> (4):
+      util,arch-arm: Added python script to generate ARM FS binaries
+      configs,sim-se: fix se.py multi-cpu multi-cmd issue
+      mem-cache: Delete squashed HWPrefetches
+      cpu-minor: Fix for addr range coverage calculation
+
+Paul Rosenfeld <prosenfeld@micron.com> (4):
+      misc: Add support for switching multiple cores in SystemC
+      misc: fix build failure in cxx_config example
+      arm,sim: fix context switch stats dumps for ARM64/Linux
+      scons: bump required python version to 2.7 to support pybind11
+
+Rahul Thakur <rjthakur@google.com> (4):
+      mem: Add memory footprint probe
+      mem: Refactor CommMonitor stats, add basic atomic mode stats
+      arm, kvm: fix saving/restoring conditional flags in ARM KVM64
+      arm, kvm: enable running 32-bit Guest under ARM KVM64
+
+Sudhanshu Jha <sudhanshu.jha@arm.com> (4):
+      arm, kmi: Clear interrupts in KMI devices
+      dev, kvm: Add a fast KVM-aware mode in DmaReadFifo
+      dev: Add support for single-pass scan out in the PixelPump
+      dev, arm: Render HDLCD frames at a fixed rate in KVM
+
+Lena Olson <leolson@google.com> (3):
+      ruby: fix and/or precedence in slicc
+      ruby: fix and/or precedence in slicc
+      ruby: fix MOESI_hammer directory to work with > 3GB memory
+
+Matthew Poremba <matthew.poremba@amd.com> (3):
+      ruby: Check all VNETs for injection in garnet NetworkInterface
+      ruby: Add occupancy stats to MessageBuffers
+      ruby: Check MessageBuffer space in garnet NetworkInterface
+
+Sascha Bischoff <sascha.bischoff@arm.com> (3):
+      mem: Fix MSHR assert triggering for invalidated prefetches
+      dev: Align BAR0 size to power of 2 for VirtIO devices
+      dev: Fix address type promotion issues in VirtIO devices
+
+Éder F. Zulian <zulian@eit.uni-kl.de> (3):
+      misc: minor fix for the gem5-SystemC/TLM coupling.
+      misc: git ignore file udpated
+      config, mem, hmc: fix HMC test script
+
+Austin Harris <austinharris@utexas.edu> (2):
+      sim: Fix need to save address space info during serialization.
+      config: Fix need to set ISA of switch cpus.
+
+David Guillen-Fandos <david.guillen@arm.com> (2):
+      pwr: Enable multiple power models per component
+      cpu-minor: Add missing instruction stats
+
+Javier Cano-Cano <javier.cano555@gmail.com> (2):
+      ruby: Fix MOESI_CMP_directory for new DMA status changes.
+      mem-garnet: Fix garnet stats
+
+Matthias Hille <matthiashille8@gmail.com> (2):
+      x86: Fixed remote debugging of simulated code
+      cpu-o3: fix data pkt initialization for split load
+
+Nathanael Premillieu <nathanael.premillieu@arm.com> (2):
+      arch, cpu: Architectural Register structural indexing
+      cpu: Physical register structural + flat indexing
+
+Rico Amslinger <rico.amslinger@informatik.uni-augsburg.de> (2):
+      cpu: Fix bi-mode branch predictor thresholds
+      sim-se: Fix mremap for downward growing mmap regions
+
+Riken Gohil <Riken.Gohil@arm.com> (2):
+      cpu-tester: Refactoring traffic generators into separate files.
+      cpu-tester: Added ExitGen to TrafficGen
+
+Stephan Diestelhorst <stephan.diestelhorst@arm.com> (2):
+      power: Clarify the unit used for the power equations (W)
+      power: Allow global stats in power equations
+
+Swapnil Haria <swapnilster@gmail.com> (2):
+      x86: Add stats to X86 TLB
+      mem-ruby: Support atomic_noncaching acceses in ruby
+
+Tiago Mück <tiago.muck@arm.com> (2):
+      sim: Clocked object debug message updated for clarity
+      sim: ScopedMigration does nothing if both eqs are the same
+
+Tony Gutierrez <anthony.gutierrez@amd.com> (2):
+      ruby: guard usage of GPUCoalescer code in Profiler
+      gpu-compute: remove unnecessary member from class
+
+Weiping Liao <weipingliao@google.com> (2):
+      config: Changes to boot Android N
+      config: Adjust load_addr_mask in VExpress_GEM5_V1
+
+Wendy Elsasser <wendy.elsasser@arm.com> (2):
+      mem: Update DRAM configuration names
+      mem: fix assertion in respondEvent
+
+Alexandru Dutu <alexandru.dutu@amd.com> (1):
+      syscall_emul: Argument retrieval bug fix
+
+Ashkan Tousi <ashkan.tousimojarad@arm.com> (1):
+      config, arm: Add a high-performance in order timing model
+
+Boris Shingarov <shingarov@gmail.com> (1):
+      arch-arm: Fix inverted 32/64-bit check in GDB
+
+Geoffrey Blake <geoffrey.blake@arm.com> (1):
+      sim: Implement load_addr_mask auto-calculation
+
+Hanhwi Jang <jang.hanhwi@gmail.com> (1):
+      learning-gem5: Fix missing misc.hh in hello_object.cc
+
+Matt Sinclair <mattdsinclair@gmail.com> (1):
+      x86,misc: add additional info on faulting X86 instruction, fetched PC
+
+Matteo Andreozzi <matteo.andreozzi@arm.com> (1):
+      arm: fix template instantiation warning in clang
+
+Rohit Kurup <rohit.kurup@arm.com> (1):
+      dev: Fix OnIdle test in DmaReadFifo
+
+Santi Galan <santi.galan@metempsy.com> (1):
+      x86: fixed branching() computation for branch uops
+
+Sean McGoogan <Sean.McGoogan@arm.com> (1):
+      arch, arm: Print value being ignored on DummyISA write
+
+Tushar Krishna <tushar@ece.gatech.edu> (1):
+      ruby: fix round robin arbiter in garnet2.0 The rr arbiter pointer in garnet was getting updated on every request, even if there is no grant. This was leading to a huge variance in wait time at a router at high injection rates. This patch corrects it to update upon a grant.
+
+Zhang Zheng <perise@gmail.com> (1):
+      configs: fixed SimpleOpts missing error by adding library path
+

@@ -1,0 +1,387 @@
+    93	Gabe Black <gabeblack@google.com>
+    84	Korey Sewell <ksewell@umich.edu>
+    37	Ali Saidi <Ali.Saidi@arm.com>
+    37	Nilay Vaish <nilay@cs.wisc.edu>
+    11	Steve Reinhardt <stever@gmail.com>
+     8	Brad Beckmann <brad.beckmann@amd.com>
+     6	Nathan Binkert <nate@binkert.org>
+     4	Daniel Johnson <daniel.johnson@arm.com>
+     3	Chander Sudanthi <chander.sudanthi@arm.com>
+     3	Geoffrey Blake <geoffrey.blake@arm.com>
+     3	Lisa Hsu <Lisa.Hsu@amd.com>
+     3	Mrinmoy Ghosh <mrinmoy.ghosh@arm.com>
+     3	Tushar Krishna <tushar@ece.gatech.edu>
+     2	Chris Emmons <chris.emmons@arm.com>
+     2	Deyaun Guo <guodeyuan@tsinghua.org.cn>
+     2	Giacomo Gabrielli <giacomo.gabrielli@arm.com>
+     2	Prakash Ramrakhyani <prakash.ramrakhyani@arm.com>
+     2	Wade Walker <wade.walker@arm.com>
+     1	Andreas Hansson <andreas.hanson@arm.com>
+     1	Gabe Loh gabriel.loh@amd.com gloh <none@none>
+     1	Gedare Bloom <gedare@rtems.org>
+     1	Joel Hestness <jthestness@gmail.com>
+     1	Mitch Hayenga <mitch.hayenga@arm.com>
+     1	Thomas Grass <Thomas.Grass@ARM.com>
+     1	Tony Gutierrez <anthony.gutierrez@amd.com>
+Gabe Black <gabeblack@google.com> (93):
+      gcc 4.0: Add some virtual destructors to make gcc 4.0 happy.
+      ISA parser: Loosen the regular expressions matching filenames.
+      Mem: Use sysconf to get the page size instead of the PAGE_SIZE macro.
+      LibElf: Build the error management code in libelf.
+      Loader: Handle bad section names when loading an ELF file.
+      InOder: Fix a compile error.
+      X86: Eliminate an unused argument for building store microops.
+      X86: Fix store microops so they don't drop faults in timing mode.
+      Stats: Update stats for the x86 store fault fix.
+      ISA: Use readBytes/writeBytes for all instruction level memory operations.
+      ExecContext: Get rid of the now unused read/write templated functions.
+      ExecContext: Rename the readBytes/writeBytes functions to readMem and writeMem.
+      tracediff: Check for --debug-flags now instead of --trace-flags.
+      ISA parser: Simplify operand type handling.
+      ISA parser: Define operand types with a ctype directly.
+      ISAs: Streamline some spots where Mem is used in the ISA descriptions.
+      X86: Add a config for an FS regression on O3.
+      ISA: Get rid of the unused mem_acc_type template parameter.
+      SCons: Only print all the SConsopts being read if verbose is turned on.
+      O3: Fix corner case squashing into the microcode ROM.
+      Stats: Update stats for the recent fix to fetch.
+      O3: Implement memory mapped IPRs for O3.
+      Scons: Make some Action objects fit the abreviated output format.
+      O3: Get rid of the raw ExtMachInst constructor on DynInsts.
+      Translation: Use a pointer type as the template argument.
+      Stats: Update the stats after the uninitialized branch predictor variable fix.
+      O3: Let squashed and deferred instructions issue.
+      Stats: Update stats for the previous change.
+      O3: Get rid of the unused addToRemoveList function.
+      O3: When waiting to handle an interrupt, let everything drain out.
+      Stats: Update stats for the recent O3 interrupt change.
+      O3: Stop using the current macroop no matter why you're leaving it.
+      Stats: Update stats for the end of macroop O3 fix.
+      X86: Build O3 by default in X86_FS.
+      SCons,tests: Tell scons about pc-o3-timing regressions.
+      O3: At the end of an instruction, force fetchAddr to something sensible.
+      X86: Use IsSquashAfter if an instruction could affect fetch translation.
+      Stats: Small update to stats for change to x86 inst flags.
+      O3: Add a pointer to the macroop for a microop in the dyninst.
+      O3: When squashing, restore the macroop that should be used for fetching.
+      X86: Add an X86_FS o3 regression.
+      O3: Make lsq_unit.hh include arch/isa_traits.hh directly, not transitively.
+      InOrder: Make cache_unit.hh include hashmap.hh explicitly, not transitively.
+      X86,TLB: Make sure the "delayedResponse" variable is always set.
+      X86: Make sure instruction flags are set properly even on 32 bit machines.
+      ISA parser: Match /* */ and // style comments.
+      ISA parser: Don't look for operands in strings.
+      Stack: Tidy up some comments, a warning, and make stack extension consistent.
+      MIPS: Update MIPS stats for cleaned up operand checks.
+      Decode: Pull instruction decoding out of the StaticInst class into its own.
+      StaticInst: Merge StaticInst and StaticInstBase.
+      PseudoInst: Add compiler guards to pseudo_inst.hh.
+      Pseudoinst: Add an initParam pseudo inst function.
+      PseudoInst: Remove the now unnecessary #if FULL_SYSTEMs around pseudoinsts.
+      Syscall: Make the syscall function available in both SE and FS modes.
+      X86: Don't use "#if FULL_SYSTEM" in the X86 ISA description.
+      PseudoInst: Make all the pseudo insts available in SE and FS.
+      Alpha: Get rid of some #if FULL_SYSTEMs in the Alpha ISA description.
+      Endianness: Make it easier to check the compiled in guest endianness.
+      MIPS: Get rid of the unused (and partially defined) CacheError fault.
+      MIPS: Guard SystemCallFault::invoke consistently.
+      MIPS: Get rid of #if style config checks in the ISA description.
+      SPARC: Remove #if FULL_SYSTEMs from the ISA description.
+      MIPS: Use the CRTP to streamline the Fault class definitions.
+      MIPS: Add constructors to the fault classes.
+      MIPS: Get rid of cruft in the fault classes.
+      Faults: Get rid of the unused isAlignmentFault and isMachineCheckFault.
+      MIPS: Consolidate the two AddressErrorFault variants.
+      MIPS: Move the genMachineCheckFault function near MachineCheckFault.
+      MIPS: Get rid of the unused "count" field in FaultVals.
+      MIPS: Consolidate TLB related faults.
+      MIPS: Always compile in setExceptionState, including in SE mode.
+      MIPS: Use inheritance to consolidate class definitions.
+      MIPS: Get rid of skipFaultInstruction and setRestartAddress.
+      MIPS, faults: Update how the PC is set.
+      MIPS: Final overhaul of MIPS faults to kill #if FULL_SYSTEM
+      X86: Move the MSR lookup table out of the TLB and into its own file.
+      SCons: Make the ISA parser a source for its output files like the comments say.
+      SCons: Add a comment I forgot to add in earlier.
+      SE/FS: Define a const bool FullSystem which will equal FULL_SYSTEM.
+      ISA parser: Use '_' instead of '.' to delimit type modifiers on operands.
+      Faults: Make the generic faults more consistent between SE and FS.
+      Faults: Add in generic faults that work like panics, warns, etc.
+      Faults: Replace calls to genMachineCheckFault with M5PanicFault.
+      O3: Tidy up some DPRINTFs in the LSQ.
+      GCC: Get everything working with gcc 4.6.1.
+      GCC: Guard some gcc flags so they're used when available and needed.
+      X86: Fix the constant detecting three byte opcodes in the predecoder.
+      Compiler: Add an M5_NO_INLINE define.
+      SPARC: Isolate FP operations enough to prevent code/rounding mode reordering.
+      SPARC: Update the FS stats for the recent FP fix.
+      SPARC: Minor style fix.
+      X86: Fix a bad segmentation check for the stack segment.
+
+Korey Sewell <ksewell@umich.edu> (84):
+      sparc: compilation fixes for inorder Add a few constants and functions that the InOrder model wants for SPARC. * * * sparc: add eaComp function InOrder separates the address generation from the actual access so give Sparc that functionality * * * sparc: add control flags for branches branch predictors and other cpu model functions need to know specific information about branches, so add the necessary flags here
+      sparc: update simple cpu regressions use stats file generated by zizzer
+      sparc: merge regr. updates w/last update
+      sparc: don't use directcntrl branch flag this flag is only used for early branch resolution in the O3 model (of pc-relative branches) but this isnt cleanly working even when the branch target code is added for sparc. For now, we'll ignore this optimization and add a todo in the SPARC ISA for future developers
+      o3:  missing newlines on some dprintfs
+      sparc: update o3 regressions
+      sparc: update long regressions
+      inorder: use m5_hash_map for skedCache since we dont care about if the cache of instruction schedules is sorted or not, then the hash map should be faster
+      simple-thread: give a name() function for debugging w/the SimpleThread object
+      inorder: use flattenIdx for reg indexing - also use "threadId()" instead of readTid() everywhere - this will help support more complex ISA indexing
+      inorder: add types for dependency checks
+      inorder: update bpred code clean up control flow to make it easier to understand
+      cpus/isa: add a != operator for pcstate
+      inorder: inst. iterator cleanup get rid of accessing iterators (for instructions) by reference
+      inorder: update support for branch delay slots
+      inorder: ISA-zero reg handling ignore writes to the ISA zero register
+      inorder: handle faults at writeback stage call trap function when a fault is received
+      inorder: assert on macro-ops provide a sanity check for someone coding a new architecture
+      inorder: find register dependencies "lazily" Architectures like SPARC need to read the window pointer in order to figure out it's register dependence. However, this may not get updated until after an instruction gets executed, so now we lazily detect the register dependence in the EXE stage (execution unit or use_def). This makes sure we get the mapping after the most current change.
+      inorder: scheduling for nonspec insts make handling of speculative and nonspeculative insts more explicit
+      inorder: register file stats keep stats for int/float reg file usage instead of aggregating across reg file types
+      inorder: addtl functionaly for inst. skeds add find and end functions for inst. schedules that can search by stage number
+      inorder: simplify handling of split accesses
+      inorder: make marking of dest. regs an explicit request formerly, this was implicit when you accessed the execution unit or the use-def unit but it's better that this just be something that a user can specify.
+      inorder: DynInst handling of stores for big-endian ISAs The DynInst was not performing the host-to-guest translation which ended up breaking stores for SPARC
+      sparc: init. cache state in TLB valgrind complains and its a potential source of instability, so go ahead and set it to 0 to start
+      inorder: use setupSquash for misspeculation implement a clean interface to handle branch misprediction and eventually all pipeline flushing
+      inorder: cleanup intercomm. structs/squash info
+      inorder: implement trap handling
+      inorder: update event priorities dont use offset to calculate this but rather an enum that can be updated
+      inorder: add flatDestReg member to dyninst use it in reg. dep. tracking
+      imported patch squash_from_next_stage
+      imported patch recoverPCfromTrap
+      inorder: no dep. tracking for zero reg this causes forwarding a bad value register value
+      inorder: remove stalls on trap squash
+      inorder: priority for grad/squash events define separate priority resource pool squash and graduate events
+      inorder: branch predictor update only update BTB on a taken branch and update branch predictor w/pcstate from instruction --- only pay attention to branch predictor updates if the the inst. is in fact a branch
+      inorder: support for compare and swap insts dont treat read() and write() fields as mut. exclusive
+      inorder: remove decode squash also, cleanup comments for gem5.fast compilation
+      inorder: don't stall after stores once a ST is sent off, it's OK to keep processing, however it's a little more complicated to handle the packet acknowledging the store is completed
+      inorder: don't stall after stores once a ST is sent off, it's OK to keep processing, however it's a little more complicated to handle the packet acknowledging the store is completed
+      inorder: cleanup events in resource pool remove events in the resource pool that can be called from the CPU event, since the CPU event is scheduled at the same time at the resource pool event. ---- Also, match the resPool event function names to the cpu event function names ----
+      inorder: optionally track faulting instructions
+      inorder: bug in mdu segfault was caused by squashed multiply thats in the process of an event. use isProcessing flag to handle this and cleanup the MDU code
+      inorder: treat SE mode syscalls as a trapping instruction define a syscallContext to schedule the syscall and then use syscall() to actually perform the action
+      inorder: redefine DynInst FP result type Sharing the FP value w/the integer values was giving inconsistent results esp. when their is a 32-bit integer register matched w/a 64-bit float value
+      inorder: fetchBuffer tracking calculate blocks in use for the fetch buffer to figure out how many total blocks are pending
+      inorder: remove memdep tracking for default pipeline speculative load/store pipelines can reenable this
+      inorder: make InOrder CPU FS compilable/visible make syscall a SE mode only functionality copy over basic FS functions (hwrei) to make FS compile
+      alpha: make hwrei a control inst this always changes the PC and is basically an impromptu branch instruction. why not speculate on this instead of always be forced to mispredict/squash after the hwrei gets resolved?
+      inorder: stall stores on store conditionals & compare/swaps
+      inorder: squash and trap behind a tlb fault
+      inorder: explicit fault check Before graduating an instruction, explicitly check fault by making the fault check it's own separate command that can be put on an instruction schedule.
+      inorder: check for interrupts each tick use a dummy instruction to facilitate the squash after the interrupts trap
+      inorder: register ports for FS mode handle "snoop" port registration as well as functional port setup for FS mode
+      inorder: dont handle multiple faults on same cycle if a faulting instruction reaches an execution unit, then ignore it and pass it through the pipeline.
+      alpha: naming for dtb faults Just "dfault" gets confusing while debugging. Why not differentiate whether it's an access violation or page fault
+      alpha: fix warn_once for prefetches
+      inorder: handle serializing instructions including IPR accesses and store-conditionals. These class of instructions will not execute correctly in a superscalar machine
+      inorder/dtb: make sure DTB translate correct address The DTB expects the correct PC in the ThreadContext but how if the memory accesses are speculative? Shouldn't we send along the requestor's PC to the translate functions?
+      inorder: use trapPending flag to manage traps
+      inorder: use separate float-reg bits function in dyninst this will make sure we get the correct view of a FP register
+      inorder: clear fetchbuffer on traps implement clearfetchbufferfunction extend predecoder to use multiple threads and clear those on trap
+      mips: mark unaligned access flag as true
+      inorder: add necessary debug flag header files
+      inorder: se compile fixes
+      inorder:tracing: fix fault tracing bug
+      inorder: SE mode TLB faults handle them like we do in FS mode, by blocking the TLB until the fault is handled by the fault->invoke()
+      inorder: cleanup dprintfs in cache unit
+      inorder: se: squash after syscalls
+      inorder: clear reg. dep entry after removing from list this will safeguard future code from trying to remove from the list twice. That code wouldnt break but would waste time.
+      inorder: update SE regressions
+      inorder: add eon regression
+      inorder: add 10.linux-boot regression
+      inorder: update eon regr w/eon info previous commit copied over O3 stats, this one puts the inorder ones in the right place
+      inorder: gem5.opt compile variable name typo.
+      inorder: merge gabes compile fix
+      inorder: alpha-hello regression update
+      alpha:o3:simple: update simout/err files A few prior changesets have changed the gem5 output in a way that wont cause errors but may be confusing for someone trying to debug the regressions. Ones that I caught were: - no more "warn: <hash address" - typo in the ALPHA Prefetch unimplemented warning
+      merge regression updates
+      inorder: sparc: add hello world regression - add InOrderCPU compile option to SPARC - add hello regression for SPARC
+      inorder: sparc: add 02.insttest regression
+      alpha:hwrei:rollback for o3 change hwrei back to being a non-control instruction so O3-FS mode will work add squash in inorder that will catch a hwrei (or any other genric instruction) that isnt a control inst but changes the PC. Additional testing still needs to be done for inorder-FS mode but this change will free O3 development back up in the interim
+      inorder-fs: temp. regression removal remove this regression till the fix for the hwrei instruction is put in
+
+Ali Saidi <Ali.Saidi@arm.com> (37):
+      ARM: Handle case where new TLB size is different from previous TLB size.
+      ARM: Cleanup m5ops usage of r0 and r1 a bit.
+      Config: Add support for a Self.all proxy object
+      O3: Make sure fetch doesn't go off into the weeds during speculation.
+      IO: Handle case where ISA Fake device is being used as a fake memory.
+      O3: Update stats for fetch and bp changes.
+      ARM: Update stats for better miscreg support for MP configurations.
+      Mem: Fix issue with prefetches originating at non-L1 caches getting stale data
+      O3: Fix uninitialized variable in the tournament branch predictor.
+      ARM: quiet what can be a very noise CLCD controller.
+      Prefetcher: Fix some memory leaks with the prefetcher.
+      ARM: Fix a memory leak with the table walker.
+      O3: Update stats for LSQ changes.
+      LSQ: Set store predictor to periodically clear itself as recommended in the storesets paper.
+      ARM: Add support for DIV/SDIV instructions.
+      StoreSet: Update stats for store-set clearing
+      IDE: Fix issues with new PIIX kernel driver and our model.
+      ARM: Make GIC function that should only be called by GIC protected.
+      ARM: Add support for Versatile Express boards
+      ARM: Add VExpress_E support with PCIe to gem5
+      Mem: Put prefetcher notify call before packet is deleted.
+      ARM: Mark some variables uncacheable until boot all CPUs are enabled.
+      ARM: Add some MP regressions and clean up the disk images and kernels a bit
+      LSQ: Only trigger a memory  violation with a load/load if the value changes.
+      O3: Update stats for new ordering fix.
+      Prefetch: Don't prefetch if address is in the write queue.
+      IGbE: Clean up debug printing and proprly account for copied bytes.
+      MIPS: Fix regressions tests
+      ARM: Fix small bug in config script that prevents android from booting
+      SPARC: update SE stats for FP fix
+      O3: Add stat that counts how many cycles the O3 cpu was quiesced.
+      ARM: Add IsSerializeAfter and IsNonSpeculative flag to the syscall instruction .
+      ARM: Add support for having a TLB cache.
+      imported patch ext/stats_updates.patch
+      SE: Don't warn when not extending stack as it's too noisy with O3.
+      Trace: FIx issue with creation of trace file with output dir overhaul.
+      IO: Fix bug in DMA Device where receiving a snoop on DMA port would cause a panic.
+
+Nilay Vaish <nilay@cs.wisc.edu> (37):
+      SLICC: Remove machine name as prefix to functions Currently, the machine name is appended before any of the functions defined with in the sm files. This is not necessary and it also means that these functions cannot be used outside the sm files. This patch does away with the prefixes. Note that the generated C++ files in which the code for these functions is present are still named such that the machine name is the prefix.
+      Ruby: Correctly set access permissions for directory entries The access permissions for the directory entries are not being set correctly. This is because pointers are not used for handling directory entries. function. get and set functions for access permissions have been added to the Controller state machine. The changePermission() function provided by the AbstractEntry and AbstractCacheEntry classes has been exposed to SLICC code once again. The set_permission() functionality has been removed.
+      Ruby: Correct set LONG_BITS and INDEX_SHIFT in class Set. The code for Set class was written under the assumption that std::numeric_limits<long>::digits returns the number of bits used for data type long, which was presumed to be either 32 or 64. But return value is actually one less, that is, it is either 31 or 63. The value is now being incremented by 1 so as to correctly set it.
+      arch: print next upc correctly The patch corrects the print statement which prints the current and the next pc. Instead of the next upc, the next pc was being printed.
+      Ruby: Commit files missing from previous commit The previous commit on functional access support in Ruby did not have some of the files required. This patch adds those files to the repository.
+      Network_test: Conform it with functional access changes in Ruby Addition of functional access support to Ruby necessitated some changes to the way coherence protocols are written. I had forgotten to update the Network_test protocol. This patch makes those updates.
+      Merged with Gabe's recent changes.
+      X86: implements copyRegs() function This patch implements the copyRegs() function for the x86 architecture. The patch assumes that no side effects other than TLB invalidation need to be considered while copying the registers. This may not hold true in future.
+      se.py: Fixes the way ruby's options are added
+      Ruby: Fix dma controller configs/ruby/MI_example.py The dma controller in configs/ruby/MI_example.py was not being set correctly. This patch fixes it.
+      Merged with Gabe's changeset.
+      Ruby: Fix instantiations of DMA controller and sequencer The patch on Ruby functional accesses made changes to the process of instantiating controllers and sequencers. The DMA controller and sequencer was not updated, hence this patch.
+      SLICC: Put functions of a controller in its .cc file Currently, functions associated with a controller go into separate files. This patch puts all the functions in the controller's .cc file. This should hopefully take away some time from compilation.
+      Scons: Drop RUBY as compile time option. This patch drops RUBY as a compile time option. Instead the PROTOCOL option is used to figure out whether or not to build Ruby. If the specified protocol is 'None', then Ruby is not compiled.
+      Ruby: Remove files and includes not in use
+      BuildEnv: Eliminate RUBY as build environment variable This patch replaces RUBY with PROTOCOL in all the SConscript files as the environment variable that decides whether or not certain components of the simulator are compiled.
+      Ruby: Initialize some variables.
+      Ruby: Eliminate modulo op for computing set size.
+      Ruby: Remove some unused code
+      SLICC: Pass arguments by reference Arguments to functions were being passed by value. This patch changes SLICC so that arguments are passed by reference.
+      LSQ: Moved a couple of lines to enable O3 + Ruby This patch makes O3 CPU work along with the Ruby memory model. Ruby overwrites the senderState pointer with another pointer. The pointer is restored only when Ruby gets done with the packet. LSQ makes use of senderState just after sendTiming() returns. But the dynamic_cast returns a NULL pointer since Ruby's senderState pointer is from a different class. Storing the senderState pointer before calling sendTiming() does away with the problem.
+      mc146818: Correctly serialize tickEvent 'tickEvent' was not being serialized as in its place 'event' was being used. This patch rectifies this error.
+      Ruby: Reorganize mapping of components In RubySlicc_ComponentMapping.hh, certain '#define's have been used for mapping MachineType to GenericMachineType. These '#define's are being eliminated and the code will now be generated by SLICC instead. Also are being eliminated some of the unused functions from RubySlicc_ComponentMapping.sm.
+      Merged with recent changes.
+      Ruby FS: Add the options for kernel and simulation script These options were missing from the script ruby_fs.py. This patch adds these options to the script.
+      Python: Remove import for random
+      Commit due to merge.
+      Ruby: Remove some unused typedefs This patch removes some of the unused typedefs. It also moves some of the typedefs from Global.hh to TypeDefines.hh. The patch also eliminates the file NodeID.hh.
+      Protocol: Remove standard one and two level files
+      x86: Add microop for fence This patch adds a new microop for memory barrier. The microop itself does nothing, but since it is marked as a memory barrier, the O3 CPU should flush all the pending loads and stores before the fence to the memory system.
+      MESI Protocol: Add functions for profiling misses
+      Tests: Update stats due to addition of fence microop
+      Ruby: Process packet instead of RubyRequest in Sequencer This patch changes the implementation of Ruby's recvTiming() function so that it pushes a packet in to the Sequencer instead of a RubyRequest. This requires changes in the Sequencer's makeRequest() and issueRequest() functions, as they also need to operate on a Packet instead of RubyRequest.
+      Regression: Update statistics for x86 long regression tests This patch updates reference statistics for the regression tests. This update was necessitated by a recent change in behavior of some instructions in the x86 architecture.
+      SLICC: Use pointers for directory entries SLICC uses pointers for cache and TBE entries but not for directory entries. This patch changes the protocols, SLICC and Ruby memory system so that even directory entries are referenced using pointers.
+      Ruby: Shuffle some of the included files This patch adds and removes included files from some of the files so as to organize remove some false dependencies and include some files directly instead of transitively.
+      X86 TLB: Move a DPRINTF to its correct place The DPRINTF for doing protection checks appears after the checks have been carried out. It is possible that the function returns while the checks are being carried, in which case the printf is missed out. This patch moves the DPRINTF before the checks.
+
+Steve Reinhardt <stever@gmail.com> (11):
+      SConstruct: automatically update .hg/hgrc with style hooks. Seems easier than pestering people about it. Note also that path is now absolute, so you don't get errors when invoking hg from subdirectories. Also whacked unused mercurial_bin_not_found message (the code that used this was deleted a couple months ago in rev 5138d1e453f1).
+      params.py: enhance IpAddress param handling
+      pseudo_inst: clean up workbegin/workend functions Use exitSimLoop() function instead of explicitly scheduling on mainEventQueue (which won't work once we go to multiple event queues).  Also introduced a local params variable to shorten a lot of expressions.
+      event: minor cleanup Initialize flags via the Event constructor instead of calling setFlags() in the body of the derived class's constructor.  I forget exactly why, but this made life easier when implementing multi-queue support.
+      style.py: don't die on empty files
+      scons/swig: refactor some of the scons/SWIG code
+      SimObject: add export_method* hooks to export C++ methods to Python
+      dev: clean up PioDevice and DmaDevive getPort() methods.
+      tests: fix spurious scons "Error 1" messages
+      syscall_emul: implement MAP_FIXED option to mmap()
+      SE: move page allocation from PageTable to Process
+
+Brad Beckmann <brad.beckmann@amd.com> (8):
+      Ruby: Add support for functional accesses This patch rpovides functional access support in Ruby. Currently only the M5Port of RubyPort supports functional accesses. The support for functional through the PioPort will be added as a separate patch.
+      config: removed unnecessary slashes This patch removes unnecessary slashes from a couple of python scripts.
+      Regression: Updates regression outputs for Ruby memtest This patch updates the regression outputs for Ruby memtest. This was required because of the changes carried out by the addition of functional access support to Ruby.
+      MOESI_hammer: Fixed uniprocessor DMA bug
+      ruby: added generic dma machine
+      physmem: Improved fatal message for size mismatch
+      MOESI_hammer: fixed L2 to L1 infinite stalls and deadlock
+      regress: updated hammer memtest and rubytest outputs
+
+Nathan Binkert <nate@binkert.org> (6):
+      scons: rename TraceFlags to DebugFlags
+      grammar: better encapsulation of a grammar and parsing This makes it possible to use the grammar multiple times and use the multiple instances concurrently.  This makes implementing an include statement as part of a grammar possible.
+      slicc: cleanup slicc code and make it less verbose
+      slicc: add a protocol statement and an include statement All protocols must specify their name The include statement allows any file to include another file.
+      scons: fix building of shared objects
+      gcc: fix unused variable warnings from GCC 4.6.1
+
+Daniel Johnson <daniel.johnson@arm.com> (4):
+      ARM: Fix mp interrupt bug in GIC.
+      ARM: Implement numcpus bits in L2CTLR register.
+      Mem: Allow ASID to be set after request is created.
+      ARM: update TLB to set request packet ASID field
+
+Chander Sudanthi <chander.sudanthi@arm.com> (3):
+      ARM: Fix memset on TLB flush and initialization
+      CP15 c15: enable execution with accesses to c15 registers
+      O3: Remove hardcoded tgts_per_mshr in O3CPU.py.
+
+Geoffrey Blake <geoffrey.blake@arm.com> (3):
+      O3: Fix up pipelining icache accesses in fetch stage to function properly
+      ARM: Add per-cpu local timers for ARM.
+      Fix bugs due to interaction between SEV instructions and O3 pipeline
+
+Lisa Hsu <Lisa.Hsu@amd.com> (3):
+      Functional Accesses: Update states to support Broadcast/Snooping protocols.
+      Fix build for gcc-4.2 opt/fast
+      TLB: comments and a helpful warning.
+
+Mrinmoy Ghosh <mrinmoy.ghosh@arm.com> (3):
+      Branch predictor: Fixes the tournament branch predictor.
+      LSQ: Fix a few issues with the storeset predictor.
+      LSQ: Add some better dprintfs for storeset predictor.
+
+Tushar Krishna <tushar@ece.gatech.edu> (3):
+      GARNET: adding a fault model for resilient on-chip network research.
+      Remove standard_1level_CMP-protocol.sm include statement from Network
+      Topology: bug fix in external link initialization
+
+Chris Emmons <chris.emmons@arm.com> (2):
+      Output: Add hierarchical output support and cleanup existing codebase.
+      VNC: Add support for capturing frame buffer to file each time it is changed.
+
+Deyaun Guo <guodeyuan@tsinghua.org.cn> (2):
+      mips: fix nmsub and nmadd definitions the -/+ signs were flipped for nmsub_s, nmsub_d, and nmadd_d
+      MIPS: Implement gem5/src/arch/mips/remote_gdb.cc. So a mips-cross-gdb can connect with gem5(MIPS_SE), and do some remote debugging.
+
+Giacomo Gabrielli <giacomo.gabrielli@arm.com> (2):
+      O3: Create a pipeline activity viewer for the O3 CPU model.
+      O3: Squash the violator and younger instructions instead not all insts.
+
+Prakash Ramrakhyani <prakash.ramrakhyani@arm.com> (2):
+      ARM: Add per-processor interrupt support to GIC.
+      gem5ops: Implement Java JNI for gem5Ops
+
+Wade Walker <wade.walker@arm.com> (2):
+      ARM: Add two unimplemented miscellaneous registers.
+      ARM: Fix SWP/SWPB undefined instruction behavior
+
+Andreas Hansson <andreas.hanson@arm.com> (1):
+      SPARC: Fixing a minor copy-paste bug using the wrong variable
+
+Gabe Loh gabriel.loh@amd.com gloh <none@none> (1):
+      config: command line option to specify ruby output file
+
+Gedare Bloom <gedare@rtems.org> (1):
+      ARM: Add m5ops and related support for workbegin() and workend() to ARM ISA.
+
+Joel Hestness <jthestness@gmail.com> (1):
+      Ruby: remove unused functions in CacheMemory: get/setMemoryValue
+
+Mitch Hayenga <mitch.hayenga@arm.com> (1):
+      Device: Make changes necessary to support a coherent page walker cache.
+
+Thomas Grass <Thomas.Grass@ARM.com> (1):
+      Stats: Add a sparse histogram stat object.
+
+Tony Gutierrez <anthony.gutierrez@amd.com> (1):
+      ARM: Update config files for Android/BBench images available on website.
+

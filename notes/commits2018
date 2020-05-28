@@ -1,0 +1,1273 @@
+   531	Gabe Black <gabeblack@google.com>
+   117	Giacomo Travaglini <giacomo.travaglini@arm.com>
+    82	Daniel Carvalho <odanrc@yahoo.com.br>
+    72	Nikos Nikoleris <nikos.nikoleris@arm.com>
+    58	Andreas Sandberg <Andreas.Sandberg@arm.com>
+    26	Jason Lowe-Power <jason@lowepower.com>
+    21	Ciro Santilli <ciro.santilli@arm.com>
+    15	Brandon Potter <brandon.potter@amd.com>
+    12	Chuan Zhu <chuan.zhu@arm.com>
+    12	Pau Cabre <pau.cabre@metempsy.com>
+    12	Tuan Ta <qtt2@cornell.edu>
+    11	Alec Roelke <alec.roelke@gmail.com>
+    11	Tony Gutierrez <anthony.gutierrez@amd.com>
+     8	Glenn Bergmans <glenn.bergmans@arm.com>
+     7	Matteo Andreozzi <matteo.andreozzi@arm.com>
+     6	Anouk Van Laer <anouk.vanlaer@arm.com>
+     6	Hanhwi Jang <jang.hanhwi@gmail.com>
+     6	Rekai Gonzalez-Alberquilla <rekai.gonzalezalberquilla@arm.com>
+     6	Siddhesh Poyarekar <siddhesh.poyarekar@gmail.com>
+     5	Curtis Dunham <Curtis.Dunham@arm.com>
+     5	Robert Kovacsics <rmk35@cl.cam.ac.uk>
+     4	Sean Wilson <spwilson2@wisc.edu>
+     3	Adrien Pesle <adrien.pesle@arm.com>
+     3	Bradley Wang <radwang@ucdavis.edu>
+     3	Chun-Chen Hsu <chunchenhsu@google.com>
+     3	Javier Bueno Hedo <javier.bueno@metempsy.com>
+     3	Matt Sinclair <mattdsinclair@gmail.com>
+     3	Wendy Elsasser <wendy.elsasser@arm.com>
+     2	Earl Ou <shunhsingou@google.com>
+     2	Edmund Grimley Evans <Edmund.Grimley-Evans@arm.com>
+     2	Giacomo Gabrielli <giacomo.gabrielli@arm.com>
+     2	Matt Horsnell <matt.horsnell@arm.com>
+     2	Maurice Becker <madnaurice@googlemail.com>
+     2	Pin-Yen Lin <treapking@google.com>
+     2	Rico Amslinger <rico.amslinger@informatik.uni-augsburg.de>
+     2	Sherif Elhabbal <elhabbalsherif@gmail.com>
+     2	Xiaoyu Ma <xiaoyuma@google.com>
+     2	Yuetsu Kodama <yuetsu.kodama@riken.jp>
+     1	Alexandru Dutu <alexandru.dutu@amd.com>
+     1	Austin Harris <austinharris@utexas.edu>
+     1	Brad Beckmann <brad.beckmann@amd.com>
+     1	Chen Zou <chenzou@uchicago.edu>
+     1	Christian Menard <christian.menard@tu-dresden.de>
+     1	Gabor Dozsa <gabor.dozsa@arm.com>
+     1	John Alsop <johnathan.alsop@amd.com>
+     1	Kevin Brodsky <kevin.brodsky@arm.com>
+     1	Khalique <khalique913@gmail.com>
+     1	Matteo M. Fusi <matteo.fusi@bsc.es>
+     1	Maximilian Stein <maximilian.stein@tu-dresden.de>
+     1	Michael LeBeane <michael.lebeane@amd.com>
+     1	Michiel Van Tol <michiel.vantol@arm.com>
+     1	Nayan Deshmukh <nayan26deshmukh@gmail.com>
+     1	Robert Scheffel <robert.scheffel1@tu-dresden.de>
+     1	Rohit Kurup <rohit.kurup@arm.com>
+     1	Srikant Bharadwaj <srikant.bharadwaj@amd.com>
+     1	Stanislaw Czerniawski <stacze01@arm.com>
+     1	Steve Reinhardt <stever@gmail.com>
+     1	Sujay Phadke <electronicsguy123@gmail.com>
+     1	Swapnil Haria <swapnilster@gmail.com>
+     1	Xianwei Zhang <xianwei.zhang@amd.com>
+Gabe Black <gabeblack@google.com> (531):
+      config: Add a --checkpoint-dir argument to read_config.py.
+      config: Fix parsing AddrRange parameters in read_config.py.
+      config: Handle NULL simobject parameters in read_config.py.
+      arm: Make translateFunctional override the base implementation.
+      cpu, power: Get rid of the remnants of the EA computation insts.
+      cpu: Add a NotAnInst flag to the BaseDynInst class.
+      cpu: Use the NotAnInst flag to avoid passing an inst to fetch faults.
+      alpha,arm,mips,power,riscv,sparc,x86,cpu: Get rid of ISA_HAS_DELAY_SLOT.
+      arch,mem: Move page table construction into the arch classes.
+      arch,mem: Remove the default value for page size.
+      arm, power: Make the python TLB simobjects inherit from BaseTLB.
+      cpu: Make the CPU's TLB parameter a BaseTLB.
+      arch: Fix a fatal_if in most of the arch's process classes.
+      mem: Track TLB entries in the lookup cache as pointers.
+      sim: Simplify registerThreadContext a little bit.
+      mem: Change the multilevel page table to inherit from FuncPageTable.
+      arch, mem, sim: Consolidate and rename the SE mode page table classes.
+      sim, arch, base: Refactor the base remote GDB class.
+      base: Rework bitunions so they can be more flexible.
+      base: Enable specializing templates on BitUnion types.
+      sim: Use the new BitUnion templates in serialize.hh.
+      arm, base: Generalize and move the BitUnion hash struct.
+      base: Hide the BitUnion::__StorageType type.
+      arch, mem: Make the page table lookup function return a pointer.
+      x86, mem: Pass the multi level page table layout in as a parameter.
+      x86, mem: Get rid of PageTableOps::getBasePtr.
+      x86, mem: Don't try to force physical addresses on the system.
+      x86, mem: Rewrite the multilevel page table class.
+      tarch, mem: Abstract the data stored in the SE page tables.
+      arch: Remove the "arch/tlb.hh" switching header.
+      base: Get bitunions to compile on clang 3.8.
+      base: Add an "override" to name() in the HardBreakpoint class.
+      base: Delete commented out versions of the format_integer function.
+      base: Remove the ability to cprintf stringstreams directly.
+      riscv: Add overrides to various StaticInst methods.
+      base: Update #includes for bitunion.hh.
+      scons: Switch from the print statement to the print function.
+      config: Switch from the print statement to the print function.
+      sparc: Passify a new g++ warning.
+      x86: Replace the .serializing directive with .serialize_(before|after).
+      x86: Mark the RDTSC instruction as .serialize_before.
+      x86: Implement the RDTSCP instruction.
+      x86: Simplify the implementations of RDTSC and RDTSCP slightly.
+      x86: Add bitfields which can gather/scatter bases and limits.
+      cpu: Make the protobuf inst tracer accept variable sized instructions.
+      hsail: Get rid of an inert private member of StorageSpace.
+      arch: Add a virtual asBytes function to the StaticInst class.
+      cpu: Use the new asBytes function in the protobuf inst tracer.
+      arch: Fix all override related warnings.
+      scons: Re-enable override based warnings on gcc.
+      cpu: Proposed fix for backwards compatibility in proto/inst.proto.
+      cpu: Stop extracting inst_flags from the machInst.
+      sparc: Add some missing M5_FALLTHROUGHs and breaks.
+      arch: cpu: Make the ExtMachInst type a template argument in InstMap.
+      cpu: Remove ExtMachInst typedefs from the O3 CPU model.
+      dev: Remove a bunch of Alpha code from MIPS, and unnecessary TheISAs.
+      dev: sparc: Get rid of the TheISA namespace in the SPARC devices.
+      base: Add a default output function for bitunion types.
+      base: Make bitunion output functions static/inline.
+      dev: Make sure the EtherTap device uses the right event queue.
+      arch: alpha: Fix an 8 year old bug from the transition to pc objects.
+      dev: arm: SetScaling commands don't send parameter bytes.
+      x86: Add a ld/st microop flag for marking an access uncacheable.
+      x86: Add op classes to the MediaOps.
+      sim: Rename the SimObject cxx_bases field to cxx_extra_bases.
+      tests: Make "UnitTest"s more like GTest so they can be in other dirs.
+      sim: Add a SimObject python field which overrides the default c++ base.
+      base: Build caching into the AddrRangeMap class
+      mem: Use the caching built into AddrRangeMap in the xbar
+      mem: Use the caching in the AddrRangeMap class in PhysicalMemory
+      base: Add a class which encapsulates Fibers.
+      scons: Generalize building binaries.
+      systemc: Add a stubbed out sc_object class.
+      systemc: Add a stub kernel SimObject.
+      systemc: Partially implement the sc_module_name class.
+      systemc: Hook up sc_main.
+      systemc: Add a stub version of the sc_interface class.
+      systemc: Add the sc_nbdefs.hh header from Accellera.
+      systemc: Add stubbed out versions of the sc_time functions.
+      systemc: Add stubbed out versions of sc_event and related classes.
+      systemc: Add stubbed out versions of sc_port and sc_export.
+      systemc: Implement a stub version of the sc_prim class.
+      systemc: Add a stubbed out sc_event_finder class.
+      systemc: Add a stub implementation for sc_attr related classes.
+      systemc: Add a stubbed out implementation of the sc_sensitive class.
+      systemc: Stub out the sc_module class and related functions.
+      systemc: Seperate the "external" header interface.
+      systemc: Stub out the sc_process_handle class.
+      systemc: Stub out the sc_spawn related classes and functions.
+      systemc: Add systemc and systemc.h header files.
+      systemc: Stub out the predefined channels.
+      systemc: Flesh out the sc_port implementation slightly.
+      systemc: Stub out all the standard utilility classes and functions.
+      Systemc: Port over all of the systemc "datatype" headers.
+      systemc: Add the Accellera implementation for the data type classes.
+      systemc: Import tests from the Accellera systemc distribution.
+      systemc: Add some missing functions which interact with the scheduler.
+      systemc: Implement some simple accessor functions in sc_main.cc.
+      systemc: Make sc_main run in its own fiber.
+      systemc: Construct and manage a module name stack.
+      systemc: Add the deprecated sc_module::end_module function.
+      systemc: Add the deprecated sc_signal_out_if typedef.
+      systemc, scons: Add a mechanism to hook in the systemc tests.
+      systemc: Add a non-standard default writer policy on sc_buffer.
+      systemc: Add in the deprecated binding port constructors.
+      systemc, scons: Link systemc tests against the shared gem5 library.
+      systemc: Add a script which automates building and running tests.
+      systemc: Make a test stop including an internal path for sc_vector.
+      systemc: Fill out some of the sc_vector.hh classes.
+      systemc: Include boost/bind.hpp in the systemc header.
+      systemc: Remove more Accellera source specific include paths in tests.
+      systemc: Turn some macros into enums to fix regression test building.
+      systemc: Remove references to internal constants from the tests.
+      systemc: Add some non-standard sc_trace variants.
+      systemc: Add some deprecated features to sc_clock.*.
+      systemc: Partially implement SC_FORK and SC_JOIN.
+      systemc: Fix a small bug in verify.py.
+      systemc: Add some "implementation defined" stuff to sc_attr_cltn.
+      systemc: Add the nonstandard variable sc_allow_process_control_corners.
+      systemc: Add the nonstandard triggered function sc_event.
+      systemc: Add the nonstandard macro SC_NEW.
+      systemc: Add support for deprecated integer report handler ids.
+      systemc: Add a filter-file option.
+      systemc: Add a filter file for the tests which are expected to work.
+      systemc: Add nonstandard sc_trace-s for sc_event and sc_time.
+      systemc: Exclude a test which probably could never compile?
+      systemc: Add some nonstandard SC_WAIT* macros.
+      systemc: Define the nonstandard sc_event_queue_port typedef.
+      systemc: Add the nonstandard, undocumented halt function.
+      systemc: Exclude another test which exercises sc_string.
+      systemc: Add some nonstandard (get|set)_catch_actions functions.
+      systemc: Add a nonstandard sc_signal constructor.
+      systemc: Add the deprecated sc_trace_delta_cycles function.
+      systemc: Add some nonstandard cthread related sc_module functions.
+      systemc: Add deprecated notify_delayed functions.
+      systemc: Add deprecated default time unit management functions.
+      base: If valgrind is available, tell it about Fiber stacks.
+      systemc: Add some nonstandard, undocumented sc_report_* functions.
+      systemc: Add some common test include files.
+      systemc: Add some deprecated sc_time factory methods.
+      systemc: Add an sc_event_finder::find_event method.
+      systemc: Add deprecated sc_time constructors.
+      systemc: Add non-standard sc_status constants.
+      systemc: Add the non-standard sc_time_tuple class.
+      systemc: Add some deprecated sc_module constructors.
+      systemc: Add the nonstandard timed_out function.
+      systemc: Add the nonstandard sc_hierarchical_name_exists function.
+      systemc: Add the nonstandard time_stamp function.
+      systemc: Make some functions static in conflict with the spec.
+      systemc: Add the nonstandard sc_trace_params and sc_trace_params_vec.
+      systemc: Add the nonstandard sc_user exception type.
+      systemc: Disable the phase_callbacks set of tests.
+      systemc: Disable a few more tests that aren't going to work.
+      systemc: Make the verify.py --list option print a total count.
+      systemc: Add bind() to sc_port_base.
+      systemc: Add a minimal version of the deprecated sc_process_b.
+      systemc: Minimally implemented the deprecated sc_simcontext.
+      systemc: Add the nonstandard sc_join class and sc_thread_handle type.
+      systemc: Add the "implementation defined" vport function.
+      systemc: Add m_cur_val and m_new_val to sc_signal.
+      systemc: Enable some more sc_simcontext related tests.
+      systemc: Disable tests which use sensitive_(pos|neg).
+      systemc: Implement the sc_attr classes.
+      systemc: Get sc_main to work even when dynamically linked.
+      systemc: Implement most of sc_object.
+      systemc: Implement some basic plumbing in sc_module.hh.
+      systemc: Fill out sc_process_handle and create Process classes.
+      systemc: Partially implement the scheduler.
+      systemc: Implement channel updates and rework the scheduler.
+      systemc: Implement much of events, event lists and event exprs.
+      systemc: Hook up sc_time_stamp sc_delta_count.
+      systemc: Implement the sensitivity mechanism.
+      systemc: Implement next_trigger and wait.
+      systemc: Handle suspended processes and handle sensitivity overload.
+      systemc: Implement sc_get_current_process_handle's other personality.
+      systemc: Implement sc_pause, sc_stop, and re-sc_start-ing.
+      systemc: Implement pending activity related functions
+      base: Save and restore the width setting of streams used with cprintf.
+      base: Correct a small typo in sim/core.(hh|cc).
+      base: Avoid dividing by zero in Time::[gs]etTick.
+      systemc: Implement the various sc_module stage callbacks.
+      systemc: Implement some of the basics of sc_time.
+      systemc: Make orphans top level objects instead of panic-ing.
+      systemc: Handle event notifications scheduled before sc_start.
+      systemc: Fix the time resolution when constructing an sc_time.
+      systemc: Implement the SC_EXIT_ON_STARVATION exit mode.
+      systemc: Fix a couple memory errors.
+      systemc: Implement + and - for sc_time, and sc_max_time.
+      systemc: Make some functions of the kernel static.
+      systemc: Add a sensitivity type for exports.
+      systemc: Promote some functions to sc_export_base.
+      systemc: Implement much of sc_spawn.
+      systemc: Fix a "problem" with kill/reset exceptions.
+      systemc: Fill out process handle kill and reset mechanisms.
+      systemc: Ignore direct requests to mark a process as ready.
+      systemc: Implement most of the sc_report_handler mechanism.
+      systemc: Adjust process status tracking to improve kill/reset support.
+      systemc: Detect a process control corner case and report an error.
+      systemc: Extend the execute phase of verify.py.
+      systemc: Record the test's return code in the output directory.
+      systemc: Add return code verification to verify.py.
+      systemc: Teach verify.py to diff files when checking test results.
+      systemc: Make verify.py ignore a warning.
+      systemc: Make verify.py delete obsolete diff files.
+      systemc: Ensure the terminated event is notified in all cases.
+      systemc: Remove some junk test reference files.
+      systemc: Delete empty/misnamed test reference file.
+      systemc: Make verify.py compare non output log reference files.
+      systemc: Make verify.py ignore another warning.
+      systemc: Adjust some whitespace in a print out.
+      systemc: Adjust a warning to match Accellera.
+      systemc: Make verify.py ignore an Info: message.
+      systemc: Always set USE_SYSTEMC=1 when compiling with verify.py.
+      systemc: Implement sc_gen_unique_name.
+      systemc: Fix the seed used with sc_gen_unique_name for sc_port.
+      systemc: Ignore a warning in the reference test outputs.
+      systemc: Generalize working with the systemc python module from C++.
+      systemc: Use the new python interface to delay fixing the timescale.
+      systemc: Implement a few more member functions for sc_time.
+      systemc: "Implement" sc_interface's methods.
+      systemc: Set the scheduler's event queue earlier.
+      systemc: Add a nonstandard sc_status pretty printer operator.
+      systemc: Partially implement the sc_signal class template.
+      systemc: Track the module in the end_of_elaboration callback.
+      systemc: Use an std::list to track all modules.
+      systemc: Don't schedule the update phase if the event queue is null.
+      systemc: Implement sc_export.
+      systemc: Ensure delta notifications happen at the right time after sc_pause.
+      systemc: Exclude two more tests which have undefined functions.
+      systemc: Implement sc_event_finder.
+      systemc: Make BindInfo track ports or interfaces.
+      systemc: Implement port binding except positional binding.
+      systemc: Implement the sc_in class.
+      systemc: Generalize ignoring info messages in the reference output.
+      systemc: Teach verify.py to ignore another deprecation warning.
+      systemc: Implement a little more of sc_time.
+      systemc: Fix the priority of the maximum time event.
+      systemc: Track exports and prim channels, and call their callbacks.
+      systemc: Don't run clocked thread processes during the init phase.
+      systemc: When sc_start is told to run zero time, do one delta cycle.
+      systemc: Rework how delta and timed notifications/timeouts are tracked.
+      systemc: Don't run the ready event inline when unpausing.
+      systemc: Implement a significant portion of sc_clock.
+      systemc: Make a test use cout for all its messages.
+      systemc: Rework the init phase for the new way delta notes are handled.
+      systemc: Make sure sc_start waits for simulation even when starving.
+      systemc: Generalize gem5 style event scheduling.
+      systemc: Make sc_out delegate to its base class sc_inout.
+      systemc: Implement most of sc_inout.
+      systemc: Improve scheduler cleanup.
+      systemc: Make sure an immediate notification overrides a delayed one.
+      systemc: Make sure no delta cycles are scheduled when stopping.
+      systemc: Override notifyWork for timeout/event_and_list sensitivities.
+      systemc: Clear out the scheduler more agressively and with common code.
+      systemc: If sc_main returns, don't do any more systemc stuff.
+      systemc: If an event is a delta notification, checked if it's timed.
+      systemc: If no sc_module_name was used, throw an error.
+      systemc: Make the report handler handle null messages.
+      systemc: Keep track of how sc_main completes and expose that to python.
+      systemc: Make the test config retrieve sc_main results.
+      systemc: Handle sc_time_stamp before any sc_time is constructed.
+      systemc: Check for time overflow in sc_start.
+      systemc: Handle null sc_object names.
+      systemc: Handle null and omitted event names.
+      systemc: Make sc_process_b less hokey, and make WAIT* work.
+      systemc: Use the eq pointer directly less often in the scheduler.
+      systemc: Get rid of the unused warning function in sc_event_finder_t.
+      systemc: Use sc_assert to check the number of interfaces.
+      systemc: Implement positional binding.
+      systemc: When a thread completes, yield to the scheduler.
+      systemc: Make sure methods aren't restarted by yield.
+      systemc: Fix where we checked if sc_stop was called durig elaboration.
+      systemc: When sc_start-ing with zero time, ensure the ready event runs.
+      systemc: Fix some issues with starvation checks.
+      systemc: Handle sc_stop called from sc_main correctly.
+      systemc: Change the test binaries to use rpath.
+      systemc: Add a --working-dir option to the test config.py.
+      systemc: Make verify.py run the tests from the directory they expect.
+      systemc: Abort verify.py if no tests were selected.
+      systemc: Report errors when proc ctrl funcs are called during elab.
+      systemc: Implement most of sc_fifo and its interfaces.
+      systemc: Implement support for the default time unit.
+      systemc: Clamp the time of events to the present.
+      systemc: Make sure children of processes are recorded as such.
+      systemc: Ensure all objects and events have unique names.
+      systemc: Improve handling of empty process handles.
+      systemc: sc_spawn can create static or dynamic processes.
+      systemc: Track the module who's end_of_elaboration callback we're in.
+      systemc: Make Process track whether it's dynamic on its own.
+      systemc: When sensitive to an event finder, find on all interfaces.
+      systemc: Keep track of more cases when we should be ready after resume.
+      systemc: Teach verify.py how to expect failing error codes.
+      systemc: Raise an error when SC_METHOD, etc. is used after starting.
+      systemc: Tell verify.py to expect two tests to fail.
+      systemc: Make verify.py filter out some error messages.
+      systemc: Adjust some error messages to match Accellera.
+      systemc: Teach verify.py to ignore "In file: *" in test output.
+      systemc: Add a "changeStamp" value to the scheduler.
+      systemc: Implement the "event()" style sc_signal methods.
+      systemc: Implement the << operator for sc_signal.
+      systemc: Implement sc_fifo::dump and improve sc_fifo::print.
+      systemc: Store timed notifications in a list instead of a set.
+      systemc: Toggle off clumping methods together in the ready list.
+      systemc: Report an error if n <= 0 in wait(int n).
+      systemc: Record that one of the tests will report an error.
+      systemc: Teach verify.py to ignore a new error.
+      systemc: Implement sc_(g|s)et_time_resolution.
+      systemc: Mark some tests as expected to fail.
+      systemc: Add some error checks to sc_set_default_time_unit.
+      systemc: Mark a test as expected to fail/report an error.
+      systemc: Teach verify.py to ignore two types of errors.
+      systemc: When stopping immediately, block new processes/updates.
+      systemc: Implement the nonstandard at_negedge and at_posedge.
+      systemc: Ensure sc_stop during callbacks actually stops.
+      systemc: Copy the msgType and msg parameters of sc_report.
+      systemc: Make some tests use cout instead of cerr to report completion.
+      systemc: Fix a typo/bug in sc_int_base.hh.
+      systemc: "Fix" some error message formatting.
+      systemc: Change the default naming scheme to use sc_gen_unique_name.
+      systemc: Implement the nonstandard halt function.
+      systemc: Match how Accellera schedules processes even more closely.
+      systemc: Implement sc_time::to_string.
+      systemc: Teach verify.py to filter messages which start within a line.
+      systemc: Report a warning if an event or object needs to be renamed.
+      systemc: Warn if a process is dont_initialize with no static sensitivieis.
+      systemc: Merge stderr and stdout when running tests.
+      systemc: Fortify how exceptions are caught and passed around.
+      systemc: Update some defaults in verify.py.
+      systemc: Mark a few tests as expected to raise an error.
+      systemc: Remove a redundant call to update() from the kernel object.
+      systemc: Track the scheduler status using an enum instead of bools.
+      systemc: Report an error if notifying during the update phase.
+      systemc: Catch exceptions during updates, notifications, and callbacks.
+      systemc: Implement the deprecated "timed_out" function.
+      systemc: Change how sc_clock creates processes to match the tests.
+      systemc: Centralize module callbacks and report new warnings.
+      systemc: Mostly implememt sc_simcontext.
+      systemc: Track event sensitivities with a list instead of a set.
+      systemc: Keep all pre-init processes on a single list.
+      systemc: Stop assuming picoseconds as the time resolution.
+      systemc: Implement SC_FORK, SC_JOIN, and SC_CJOIN.
+      systemc: Ensure SC_LONG_64 is defined and available.
+      systemc: Implement sc_semaphore.
+      systemc: Implement sc_mutex.
+      systemc: Implement the sc_clock::time_stamp function.
+      systemc: Implement the sc_*_resolved classes.
+      systemc: Add a "kind()" overload to sc_port_base.
+      systemc: Add some error checks to some classes.
+      systemc: Mark a few more tests as expected to return non-zero.
+      systemc: Implement sc_buffer.
+      systemc: Refactor sensitivities.
+      systemc: Rework how delayed sensitivities are handled.
+      systemc: Differentiate between notifying methods and threads.
+      systemc: Change how the scheduler orders processes.
+      systemc: Handle nonstandard cthread sensitivities.
+      systemc: Check whether the simulation is running when creating sensitivities.
+      systemc: Warn if sc_stop is called more than once.
+      systemc: Ignore a gem5 warning about setting the stack size in verify.py.
+      systemc: Implement the sc_signal_rv channel and ports.
+      dev: Include the platform base class even in NULL_ISA builds.
+      mem: Expose the raw packet accessor functions.
+      x86: Use little endian packet accessors.
+      arm: Use little endian packet accessors.
+      sparc: Use big endian packet accessors.
+      alpha: Use little endian packet accessors.
+      mips: Use little endian packet accessors.
+      arch: Explicitly specify the endianness in the generic mem helpers.
+      mem: Get rid of some stray lines which ended up in packet.hh.
+      systemc: Change an error message to match the reference outputs.
+      systemc: Add some additional error checks.
+      systemc: Add an error check whether an interface is alread bound to a port.
+      systemc: Fix a typo in verify.py.
+      systemc: Fix the default width values for the various sc_trace-s.
+      systemc: Teach verify.py how to verify vcd files.
+      systemc: Fix the implementation of sc_event::triggered.
+      systemc: Don't schedule the ready event unnecessarily.
+      systemc: Implement general and VCD trace support.
+      systemc: Add some error checks to sc_export.
+      systemc: Add an error check to sc_time.
+      systemc: Make sure the right type process is running when calling wait.
+      systemc: Check the process type when using sc_join.
+      systemc: Filter out an Info about delta cycles and pseudo timesteps.
+      systemc: Add a warning to sc_interface::default_event.
+      systemc: Move some constants out of sc_time.cc for other files to use.
+      systemc: Print an Info when setting a tracefile's time unit.
+      systemc: Implement sc_get_curr_process_handle().
+      systemc: Simplify sc_time_stamp().
+      systemc: Change how the default timescale is set.
+      systemc: Remove a hack which scaled sc_time into ps unnecessarily.
+      systemc: Implement sc_event_queue.
+      systemc: Implement the synchronous reset state.
+      systemc: Implement signal based resets.
+      systemc: Ensure the reset event is notified before reseting the target.
+      systemc: Merge notify and notifyWork and ignore disabled for resets.
+      systemc: Implement the sc_time_tuple class.
+      systemc: Modify reportifyException to keep sc_reports in scope.
+      systemc: Add a non-standard sc_time constructor and from_string.
+      systemc: Filter out a test which breaks rules gem5 won't let it break.
+      systemc: Use c++11 partial functions instead of boosts.
+      systemc: Centralize how object parents are chosen.
+      systemc: Use the stage of simulation and not port size in add_trace.
+      systemc: Change how the timing of binding ports works.
+      systemc: Implement sc_vector.
+      systemc: Remove some old warn includes from ext/channel.
+      systemc: Add missing sc_interface::register_port, and add calls to it.
+      systemc: Implement register_port in all the predefined channels.
+      systemc: Clear the current process when done with the eval phase.
+      systemc: Don't use write() in sc_clock to set the clock value.
+      systemc: Implement writer policies.
+      systemc: Fix a typo in one of the error messages.
+      systemc: Make sure otherwise unnamed events get autogenerated ones.
+      systemc: Implement sc_hierarchical_name_exists.
+      systemc: Change the point where elaboration is considered over.
+      systemc: Add an sc_gem5::Port destructor.
+      systemc: Change how errors are handled in some constructors slightly.
+      systemc: Add some error checks to the sc_module constructor.
+      systemc: Add an sc_gen_unique_name namespace to processes as well.
+      systemc: Add a simple implementation for sc_mempool.
+      systemc: Increment the change stamp value before the timing phase.
+      systemc: Change how signal based resets work.
+      systemc: Run delta notifications in reverse insertion order.
+      systemc: Fill out some error reporting in sc_port.
+      systemc: Keep track of progress when positionally binding.
+      systemc: Add some deprecated positional binding operators.
+      systemc: Implement port binding policies.
+      systemc: Report an error if an sc_event_finder is used on an unbound port.
+      systemc: Detach child events in the Object destructor.
+      systemc: Add an error check to sc_gen_unique_name.
+      systemc: Add some error checks to sc_clock.
+      systemc: Add a range check to the intial value of sc_semaphore.
+      systemc: Add an error check to the deprecated notify_delayed.
+      systemc: Change the default "catch action" to SC_DISPLAY.
+      systemc: Use the "catch action" and the handler func outside sc_main.
+      systemc: Mark a test as expected to fail.
+      systemc: Distinguish internal events from normal sc_events.
+      systemc: Ignore immediate self notifications.
+      systemc: Get rid of the unused Process::_procKind.
+      systemc: Remove a redundant injectException for Thread's throw_it.
+      systemc: Ignore attempts to throw a signal to a method.
+      systemc: If a process hasn't started, still signal its reset event.
+      systemc: Manually correct the golden output for a test.
+      systemc: When resetting a process, clear suspended ready.
+      systemc: Stop passing arguments to sc_main.
+      systemc: Refactor reporting to prep for int based messages.
+      systemc: Handle integer based IDs like Accellera does.
+      systemc: Make suppress_id work like the test expects.
+      systemc: Add a warning about dont_initialize and cthreads.
+      systemc: Add a mechanism for pre-registering message type ids.
+      systemc: Switch to using predefined messages for core.
+      systemc: Mark a test as expected to fail.
+      systemc: Fix how the maximum size is computed for sc_ports.
+      systemc: Check the maximum port size when finializing bindings.
+      systemc: Remove a redundant error check.
+      systemc: Switch to using predefined messages for utils.
+      systemc: Don't depend on the order of static initializers.
+      systemc: Switch to using predefined messages for channels.
+      systemc: Switch to using predefined messages for datatypes.
+      systemc: Exclude a test which tests a feature we're not implementing.
+      systemc: Fix accounting in the sc_fifo class.
+      systemc: Don't re-schedule a process which is already scheduled.
+      systemc: Add an accessor for getting the current process.
+      systemc: Don't include the scheduler in an external header file.
+      systemc: Add a python config class for sc_modules.
+      systemc: Warn about using deprecated sc_port constructors.
+      systemc: Stop filtering out warnings about unimplemented features.
+      systemc: Implement Object::simcontext().
+      systemc: Get rid of leftovers from unimplemented warnings past.
+      arch: Get rid of the unused type AnyReg.
+      dev: Build the PCI device models even in NULL_ISA builds.
+      dev: Build most of the networking devices in the NULL_ISA build.
+      python: Stop conditionally excluding code from pyobject.cc
+      dev: Explicitly specify the endianness for packet accessors.
+      dev: Remove using namespace TheISA in uart8250.cc.
+      arch: Include some additional headers in arch/generic/mmapped_ipr.cc.
+      gpu-compute: Explicitly use little endian packet accessors.
+      mem: Explicitly specify the endianness in the abstract memory.
+      null: Stop specifying an endianness in isa_traits.hh.
+      mem: Mark the guest endianness packet accessors as deprecated.
+      util: Move the existing systemc example into a subdirectory.
+      util: Add some examples for using systemc code within gem5.
+      mem-cache: Rename the tag class init function to tagsInit.
+      systemc: Get rid of an unused private member in sc_clock.
+      systemc: Move a function after the class it uses internally.
+      systemc: Get rid of implementations for some disabled sc_vector methods.
+      systemc: Change how SC_BIND_PROXY_NIL is initialized.
+      systemc: Explicitly keep the sc_port bind alongside sc_in's version.
+      systemc: Enable systemc support by default.
+      base: Add standard types for floating and nonfloating point register values.
+      sparc: Switch the FloatReg and FloatRegBits types to be 64 bit.
+      null: Claim to use 64 bit floating point registers.
+      mips: Explicitly truncate the syscall return value down to 32 bits.
+      mips: Clean up type overrides for operands.
+      mips: Change the integer and fp register widths to be 64 bits.
+      systemc: Fix some paths in the tlm SCons(script|struct).
+      systemc: Wrap some report maps in functions.
+      systemc: Stop using python init to set up predefined message ids.
+      systemc: Seperate out the sc_main fiber and its bookkeeping.
+      systemc: Separate and conditionalize exposing sc_main to python.
+      systemc: Only build python utility code if python is enabled.
+      systemc: Add a missing "const" on one of the sc_event operators.
+      systemc: Get rid of a duplicated base class initializer for sc_fifo.
+      sim: Push the global frequency management code into C++.
+      systemc: Stop using python to set/manage the global time resolution.
+      base: Set up a guard page for fiber stacks.
+      systemc: Increase the stack size for the sc_main fiber to 8MB.
+      systemc: Put systemc headers in the include path when supported.
+      systemc: Stop explicitly adding the systemc ext dir to CPPPATH.
+      base: Don't let exceptions leak from the to_number utility function.
+      sim: Deschedule existing events when destructing an event queue.
+      x86: Get rid of a problematic DPRINTF in PremFp.
+      base: Add some functions to convert floats to bits and vice versa.
+      arch, base, cpu, gpu, mem: Replace assert(0 or false with panic.
+      hsail: Fix a warning/build failure for HSAIL_X86.
+      systemc: Make verify.py recognize a DEPS file in test dirs.
+      systemc: Add DEPS files for some tests with non-source file dependencies.
+      systemc: Run the systemc tests with the CWD in the build directory.
+      systemc: Run the systemc tests directly from their build directories.
+      base: Fix include order in the inifile unit test.
+      systemc: Update the gem5-within-systemc README to mention USE_SYSTEMC.
+      util: Add the scons configuration cache to .gitignore for util/tlm.
+      base: Rename unit test cc files to be *.test.cc.
+      base: Change the unit test binary names to use .test, and to be consistent.
+      systemc: Disable systemc when using gcc versions older than 5.0.
+      systemc: Update signals before initing processes.
+      systemc: Ignore process control functions on terminated processes.
+      systemc: Update the ordering in the reference output for some tests.
+      systemc: Update test output for longer lived processes.
+      systemc: Ensure resets and edges are notified when signaling a change.
+      arch: Make the ISA parser always use binary floating point accessors.
+      arch, cpu: Remove float type accessors.
+      cpu: Stop using unions to store FP registers.
+
+Giacomo Travaglini <giacomo.travaglini@arm.com> (117):
+      arch-arm: Removing Serializing flag from ISB
+      cpu: MinorCPU handling IsSquashAfter flag
+      arch-arm: isSecureBelow from armarm pseudocode
+      arch-arm: ELUsingAArch32K from armarm pseudocode
+      arch-arm: Correct Illegal Exception Return detection
+      arch-arm: Fix AArch32 SETEND Instruction
+      arch-arm: Change function name for banked miscregs
+      arch-arm: Don't change PSTATE in Illegal Exception return
+      arch-arm: Correct SecureMonitorTrap vals for aarch32
+      sim: Remove _numContexts member in System class
+      arch-arm: Change ArmFault cast from reinterpret to static
+      arch-arm: Arch regs and pseudo regs distinction
+      arch-arm: IMPLEMENTATION DEFINED register
+      arch-arm: Semihosting not available in syscall emulation
+      arch-arm: Fix Hlt64,Svc64,Hvc64,Smc64,Brk64 disassembly
+      arch-arm: HLT using immediate when checking for semihosting
+      arch-arm: Adding isa templates for semihosting ops
+      arch-arm: Add AArch32 SVC Semihosting interface
+      arch-arm: Add AArch32 HLT Semihosting interface
+      arch-arm: Make hlt64 a mem barrier with semihosting
+      arch-arm: Fix PCAlignmentFault routing to Hypervisor
+      arch-arm: Introduce update method in ArmFault class
+      arch-arm: Fix FSC generation in AbortFault
+      arch-arm: Enable Debug IFSC when faulting to aarch64 mode
+      tests: Python regression scripts using new print function
+      arch-arm: Implement missing aarch32 TLBI registers
+      arch-arm: Adding IPA-Based Invalidating instructions
+      arch-arm: ERET from AArch64 to AArch32 ignore MSBs
+      tests: Add missing print replacements in tests subdir
+      arch-arm: Created function for TLB ASID Invalidation
+      arch-arm: Distinguish IS TLBI from non-IS
+      arch-arm: Correct mcrr,mrrc disassemble
+      arch-arm: Fix secure write of SCTLR when EL3 is AArch64
+      arch-arm: Fix AArch32 branch instructions disassemble
+      arch-arm: Add support for Tarmac trace-based simulation
+      arch-arm: Add support for Tarmac trace generation
+      arch-arm: Fix mrc,mcr to cop14 disassemble
+      arch-arm: Fix secure MiscReg access when EL3 is not AArch32
+      arch-arm: Using explicit invalidation in TLB
+      arch-arm: Adding MiscReg Priv (EL1) global flag
+      arch-arm: Change disassemble when MSR to UNKNOWN register
+      arch-arm: Fix Unknown Instruction disassemble
+      arch-arm: Add ARMv8.1 TTBR1_EL2 register
+      sim,cpu,mem,arch: Introduced MasterInfo data structure
+      scons: Fix --with-ubsan/asan compilation flags
+      arch-arm: Map ID_x_EL1 registers to AArch32 version
+      sim: Remove trailing dot when assigning a master's name
+      arch-arm: Add E2H bit to HCR_EL2 System register
+      arch-arm: Implement ARMv8.1 TTBR1_EL2 register
+      cpu: Avoid unnecessary dynamic_pointer_cast in atomic model
+      arch-arm: S3_<op1>_<Cn>_<Cm>_<op2> are Implementation defined
+      arch-arm: MPIDR.MT = 1 in a multithreaded system
+      arch-arm: Remove unusued MISCREG_A64_UNIMPL
+      arch-arm: ISA param for treating MISCREG_IMPDEF_UNIMPL as NOP
+      misc: Substitute pointer to Request with aliased RequestPtr
+      misc: Using smart pointers for memory Requests
+      arch-arm: Fix missing Request allocation
+      arch-arm: Read APSR in User Mode
+      arch-arm: Add Illegal Execution flag to PCState
+      arch-arm: Adapting IllegalExecution fault for AArch32
+      cpu: Fix bug introduced by RequestPtr type change
+      arch-arm: BadMode checking if corresponding EL is implemented
+      arch-arm: AArch32 execution triggering AArch64 SW Break
+      base: Add an asymmetrical Coroutine class
+      arch-arm: Introduce RAS System Registers
+      arch-arm: Introduce ARMv8.1 Virtual Timer System Registers
+      cpu: Allow creation of traffic gen from generic SimObjects
+      cpu: Warn when (un)serializing a traffic generator
+      base: Fix ucontext compilation error for macOS
+      cpu: Stream/SubstreamID support in TrafficGen
+      sim: Add System method for MasterID lookup
+      mem: Implement base QoS Policies.
+      dev-arm: Create a getter for ArmInterruptPin ID number
+      dev-arm: Factory SimObject for generating ArmInterruptPin
+      dev-arm: Make GenericTimer use standard ArmInterruptPin
+      mem: Implement QoS Proportional Fair policy
+      arch-arm: raise/clear IRQ when writing to PMOVSCLR/SET
+      dev-arm: Take into account PPI enable bit
+      dev-arm: Make CpuLocalTimer use standard ArmInterruptPin
+      sim: Extend (UN)SERIALIZE_ARRAY to BitUnions
+      dev-arm: Fix GICv2 cpu interrupt enable flag
+      dev-arm: Implement GICv2 GICD_IGROUPR register
+      dev-arm: Create postFiq events for GICv2
+      dev-arm: Enable FIQ signaling for Group0 interrupts in GICv2
+      cpu: Fix typo in header guard for Noncaching cpu
+      arch-arm: Init AArch64 ID registers in SE mode
+      arch-arm: Move MiscReg BitUnions into a separate header file
+      arch-arm: Implement AArch64 ID_AA64MMFR2_EL1 register
+      arch-arm: Implement AArch64 ID regs as bitunions
+      sim-se: Different HWCAP for ArmProcess32/64
+      sim-se: Set ArmProcess64 hwcaps depending on ID regs
+      arch-arm: AArch64 Crypto SHA
+      arch-arm: AArch64 Crypto AES
+      cpu: Fix MinorCPU executing Crypto Instructions
+      arch-arm: Add have_crypto System parameter
+      arch-arm: CPTR_EL3.TCPAC traps EL2 accesses to CPACR_EL1
+      arch-arm: Fix HVC trapping beahviour
+      arch-arm: Trap to EL2 only if not in Secure State
+      arch-arm: Refactor AArch64 MSR/MRS trapping
+      arch-arm: AArch64 Instruction for MISCREG_IMPDEF_UNIMPL
+      arch-arm: IMPDEF for SYS instruction with CRn = {11, 15}
+      arch-arm: Remove MISCREG commented numbers
+      arch-arm: Refactor ISA::clear by adding a ISA::clear32 method
+      arch-arm: Remove SCTLR.VE bit
+      arch-arm: Implement AArch32 RVBAR
+      arch-arm: ArmSystem::resetAddr64 renamed to be used in AArch32
+      arch-arm: Deprecate usage of legacy bootloader patching
+      systemc: Push python headers on top of sources
+      sim: Move paramIn/Out definition to header file
+      sim: Move BitUnion overloading to show/parseParams
+      arch-arm: Print register name when warning on AT instructions
+      tests: Convert IniFile unit test to a GTest
+      ext: Import googlemock, release version 1.8.0
+      ext: Build googlemock with googletest
+      mem: Compile tracePacket only when TRACING_ON is defined
+      base, systemc: Fix clang compilation
+      arch-arm: Add Crypto in SE mode
+
+Daniel Carvalho <odanrc@yahoo.com.br> (82):
+      mem: Standardize mem folder header guards
+      mem-cache: Remove extra numSets zero check.
+      mem-cache: Make cache warmup percentage a parameter.
+      mem-cache: Fix CacheSet memory leak
+      mem-cache: Vectorize C arrays in BaseSetAssoc.
+      mem-cache: Remove extra block init in BaseSetAssoc
+      mem-cache: Use findBlock() in accessBlock()
+      mem-cache: Fix bug generated by 8282
+      mem-cache: Use CacheBlk parameter on address regeneration
+      mem-cache: Split array indexing and replacement policies.
+      mem-cache: Create MRU replacement policy
+      mem-cache: Fix MRU rebase
+      mem-cache: Create FIFO replacement policy
+      mem-cache: Create BRRIP replacement policy
+      mem-cache: Create RRIP Replacement Policy
+      mem-cache: Create LFU replacement policy
+      mem-cache: Fix FALRU data block seg fault
+      mem-cache: Use Packet functions to write data blocks
+      mem-cache: Create BIP Replacement Policy
+      mem-cache: Create LIP Replacement Policy
+      mem-cache: Move insertBlock functionality in FALRU
+      mem: Remove unused 'using namespace'
+      mem-cache: Add MoveToTail to FALRU
+      mem-cache: Create NRU Replacement Policy
+      mem-cache: Use secure flag in FALRU's findBlock
+      mem-cache: Use findBlock in FALRU's block access
+      mem-cache: Use block iteration in BaseSetAssoc
+      mem-cache: ReplacementPolicy specific replacement data
+      mem-cache: Create Second-Chance replacement policy
+      mem-cache: Create block insertion function
+      mem-cache: Fix RandomReplData
+      mem-cache: Fix secure bit modification
+      mem-cache: Create an address aware TempCacheBlk
+      mem-cache: Privatize extractSet
+      mem-cache: Use ReplaceableEntry in findBlockBySetAndWay
+      mem-cache: Return evictions along with victims
+      mem-cache: Move tagsInUse to children
+      mem-cache: Use secure bit in findVictim
+      mem-cache: Change Cache block tag check
+      ruby: Fix initial weight in weighted LRU
+      mem-cache: Create Sector Cache
+      mem-cache: Make packet const in insertBlock
+      mem-cache: Insert on block allocation
+      mem-cache: Forward declare ReplaceableEntry
+      mem-cache: Initialize CacheBlk data pointer
+      mem-cache: Create Skewed Assoc placement policy
+      mem-cache: Fix non-bijective function in Skewed caches
+      mem-cache: Fix FALRU inCachesMask initialization
+      mem-cache: Make boundaries in FALRU an STL container
+      mem-cache: Make checking function const in FALRU
+      mem-cache: Fix FALRU hash invalidation
+      configs: Fix CPUClass typo in se.py
+      mem-cache: Remove Packet dependency in Tags
+      mem-cache: Create tags initialization function
+      mem-cache: Use possible locations to find block
+      mem-cache: Use set and way for ReplaceableEntry
+      mem-cache: Split Tags for indexing policies
+      mem-cache: Remove CacheSet.hh
+      mem-cache: Create Tree-PLRU replacement policy
+      mem-cache: Virtualize block print
+      mem-cache: Rename blk.cc/hh to cache_blk.cc/hh
+      mem-cache: Move sector_blks to tags folder
+      mem-cache: Factor ReplaceableEntry out
+      mem-cache: Add missing includes in TreePLRU
+      mem-cache: Move evictBlock(CacheBlk*, PacketList&) to base
+      mem-cache: Fix double block invalidation
+      mem: Use Packet writing functions instead of memcpy
+      mem-ruby: Use Packet writing functions instead of memcpy
+      configs: Add missing path to ruby imports
+      mem-cache: Move access latency calculation to Cache
+      mem-cache: Remove Cache dependency from Tags
+      mem-cache: Cleanup prefetchers
+      mem-cache: Return entry in StridePrefetcher::pcTableHit()
+      mem-cache: Vectorize StridePrefetcher's entries.
+      mem-cache: Make PCTable context independent
+      mem-cache: Add invalidation function to StrideEntry
+      mem-cache: Make StridePrefetcher use Replacement Policies
+      mem-cache: Add setters to validate and secure block
+      mem-cache: Optimize sector valid and secure check
+      mem-cache: Add getter and setter to CacheBlk::whenReady
+      mem-cache: Remove writebacks parameter from serviceMSHRTargets
+      mem-cache: Workaround for setWhenReady assertion
+
+Nikos Nikoleris <nikos.nikoleris@arm.com> (72):
+      mem-cache: Prune unnecessary writebacks in exclusive caches
+      mem-ruby: Add support for multiple DMA engines in MESI_Two_Level
+      mem-ruby: Remove function that maps responses to a DMA engine
+      mem-ruby: Fix wakeup timeouts for the MOESI_CMP_token protocol
+      base: Fix unused function warning
+      mem-cache: Cleaned blocks should be marked as not writable
+      mem-cache: Only pendingModified MSHRs can satisfy CMO snoops
+      arch-arm: Fault when dc ivac is executed from EL0
+      arch-arm: Fix cache line size for cache maintenace inst
+      arch-arm: Fix printing of the data cache maintenance instructions
+      arch-arm: Turn dc ivac to dc civac when some conditions are met
+      arch-arm: Check cache maintenance insts for permission faults
+      arch-arm: Unify permission checks for dc * instructions
+      arch-arm: Change the type of fault for dc ivac instructions
+      configs: Fix L3Cache instantiation in lat_mem_rd.py
+      mem-cache: Remove unnecessary block initialization on writeback
+      mem-cache: Populate the secure bit when the temp block is filled
+      mem-cache: Remove mumBlock redundant initialiation from FALRU
+      mem-cache: Remove redundant block initialization on allocation
+      mem-cache: Populate whenReady for blocks filled from writebacks
+      mem-cache: Make invalidate a common function between tag classes
+      mem-cache: Make the block invalidate functions virtual
+      arch-arm: Fix unused variable warning in faults.cc
+      arch-arm, configs: Treat the bootloader rom as cacheable memory
+      mem-cache: Allow clean operations when block allocation fails
+      mem-cache: Remove unused return value from the recvTimingReq func
+      mem-cache: Revamp multiple size tracking for FALRU caches
+      mem-cache: Simplify writeback for the tempBlock in recvTimingResp
+      base: Add M5 flag for [[nodiscard]] attribute
+      mem-cache: Move replacements stat to the base cache class
+      mem-cache: Remove isTouched field from the CacheBlk
+      mem-cache: Move reference count stats update to blk invalidation
+      mem-cache: Determine if an MSHR has requests from another cache
+      mem-cache: Refactor the cache recvTimingResp function
+      mem-cache: Refactor the cache recvTimingReq function
+      mem-cache: Refactor the recvAtomic function
+      mem-cache: Delegate block invalidation to block allocation
+      mem-cache: Add helper function to perform evictions
+      mem-cache: Adopt a more sensible cache class hierarchy
+      mem-cache: Move cache bypass mechanism to the ports
+      mem-cache: Add a non-coherent cache
+      mem-cache: Fix include directives in the cache related classes
+      mem-cache: Replace block visitor with std::function
+      mem-cache: Remove unnecessary cast in SectorTags::findVictim
+      dev-arm: Fix the address range for some I/O devices
+      mem-cache: Fix support for secure blocks in the FALRU cache
+      base, mem: Disambiguate if an addr range is contained or overlaps
+      mem: Use address range to find the destination port in the xbar
+      mem: Use address range to find the right physical address
+      base: Fix includes in AddrRangeMap header file
+      mem-cache: Selectively clear downstream pending
+      mem-cache: Fix promoting of targets that need writable
+      mem-cache: Promote targets that don't require writable
+      mem-cache: Promote deferred targets on cache clean responses
+      python: Add support for multiplying proxies to compatible Param
+      configs: Use the same address ranges for dir and mem_ctrls
+      base: Fix isSubset() for addr ranges with interleaving
+      mem-cache: Fix bug in handleAtomicReqMiss
+      mem: Determine if an MSHR does a whole-line write
+      mem: Restructure whole-line writes to simplify write merging
+      mem: Delay servicing an MSHR after its allocation
+      mem: Add write coalescing and write-no-allocate to the caches
+      mem-cache: Fix unused variable warning in FALRU:invalidate()
+      mem-ruby: Fix MOESI_CMP_directory in ports order
+      configs: Revamp ruby mem test to align with MemTest
+      mem-cache: Align how we handle requests in atomic with timing
+      arch-arm: Add missing template declaration
+      base: Add missing overrides in statistics header
+      base, sim: Add missing destructors
+      base: Fix fiber compilation issue for Mac OS
+      scons: Disable systemc on Mac OS
+      systemc: Allow specific functions to shadow the base class method
+
+Andreas Sandberg <Andreas.Sandberg@arm.com> (58):
+      util: Add an option to specify paths in list_changes.py
+      dev: Remove unused interrupt controller in Terminal
+      mem: Add PortProxy read/write helper with explicit endianness
+      arch-arm: Decode Brk64 instructions
+      arch-arm: Add support for automatic reset addr selection
+      arch-arm: Add aarch64 semihosting support
+      mem: Refactor port proxies to support secure accesses
+      arch-arm: Add support for secure state in semihosting
+      cpu-o3: Don't add non-speculative mem barriers to the IQ twice
+      mem: Add a helper function to get a word of variable length
+      ps2: Factor out PS/2 devices into their own subsystem
+      ps2: Add VNC support to the keyboard model
+      ps2: Add a simple touchscreen model
+      ps2: Unify device data buffering
+      ps2: Implement the keyboard reset command
+      ps2: Add proper touchscreen command handling
+      dev, arm: Use the PS/2 framework in the Pl050 model
+      ps2: Unify constant names
+      dev, arm: Cleanup Pl050 interrupt handling
+      dev: Add support for a simple debug UART
+      base, dev: Fix port message for vnc and terminal
+      arch-arm: Add support for semihosting STDIO redirection
+      arch-arm: Fix semihosting arg count for SYS_GET_CMDLINE
+      arch-arm: Adjust breakpoint EC depending on source state
+      dev, arm: Add support for HYP & secure timers
+      arch-arm: Fix page size handling when merging stage 1 and 2
+      arch-arm: Respect EL from translation type
+      arch-arm: Perform stage 2 lookups using the EL2 state
+      system-arm: Update gem5 timer interrupt specification
+      arch-arm: Remove dead doingStage2 variable in PT walker
+      dev-arm: Add a GIC interrupt adaptor
+      dev-arm: Add a MMIO transport interface for VirtIO
+      dev-arm: Add a VirtIO MMIO device to VExpress_GEM5_V1
+      dev-arm: Remove deprecated GIC test interfaces
+      cpu-minor: Remove redundant thread startup call
+      system-arm: Split the VExpress_GEM5_V1 base dts
+      dev-arm: Use recurseDeviceTree instead of custom in platform
+      sim: Use the canonical way of iterating over a dictionary
+      arch-arm: Fix incorrect t{0,1}sz field in TTBCR
+      mem: Add a memory delay simulator
+      python: Fixup incorrect syntax in PyBind argument handler
+      cpu: Remove reduntant protobuf includes
+      python: Fix call bug in @cxxMethod when override is True
+      base: Add a M5_PUBLIC and M5_LOCAL attribute macro
+      cpu: Split the traffic generator into two classes
+      cpu: Unify error handling for address generators
+      cpu: Support trace termination in BaseTrafficGen
+      cpu: Add a Python-enabled traffic generator
+      configs: Update the DRAM sweep script to use PyTrafficGen
+      arch-arm: Don't fail to initialise PMU if BP is missing
+      dev, arm: Fix incorrect GIC address range sizes
+      config: Move KVM CPU checking to CpuConfig helper module
+      dev, arm: Add misc reg tracing to the generic timer
+      arm: Add support for tracking TCs in ISA devices
+      arm: Use the interrupt adaptor in the PMU
+      cpu: Replace the fastmem with a new CPU model
+      tests: Convert CircleBuf unit test to a GTest
+      tests: Convert AddrRangeMap unit test to a GTest
+
+Jason Lowe-Power <jason@lowepower.com> (26):
+      dev: Fix i8042 device errors
+      mem-cache: Fix missing overrides
+      learning_gem5: Update README for Learning gem5
+      tests: Add test program for C++ threads
+      sim-se: Add /sys/devices/system/cpu/online file
+      arch-x86,sim-se: Bump kernel version to 3.2
+      sim-se: Fix fallthrough in prlimit
+      arch-x86,sim-se: Enable prlimit syscall
+      learning_gem5: Add a simple Ruby protocol
+      learning_gem5: Add config files for MSI protocol
+      learning_gem5: Ruby random tester files for MSI
+      learning_gem5: Add a simple config for MI_example
+      ruby: Make sure addresses print in hex
+      mem-cache: fix missing overrides in repl policies
+      docs: Fix power model doxygen
+      ruby: Revamp standalone SLICC script
+      mem-cache: Fix TempCacheBlock insert
+      misc: Fix BaseCPU doxygen
+      misc: Update CONTRIBUTING with gerrit changes
+      configs: Always exit with code 0
+      tests: Fix hello.c test program
+      tests: Add documentation for new testing code
+      tests: Add Makefiles for hello
+      tests: Add explicit build test
+      ext: Cherry-pick pybind change to support GCC 8
+      misc: Appease GCC 8
+
+Ciro Santilli <ciro.santilli@arm.com> (21):
+      dev, arm: accept and ignore writes to GIC APRn registers
+      dev-arm: improve Pl390 parameters
+      dev-arm: rename Pl390 to GicV2
+      config, dev-arm: Fix UART handling baremetal mode
+      dev-arm: fix build to missing Pl390 to Gicv2 rename
+      scons: remove as version check
+      dev, arm: remove the RealViewEB platform
+      syscall_emul: update arm uname release to 3.7.0+
+      arm: update hint instruction decoding to match ARMv8.5
+      arm: treat aarch64 hints as NOPs instead of panic
+      python: Add utility function to override config parameters
+      config: add --param to fs.py, se.py and fs_bigLITTLE.py
+      syscall_emul: implement arm openat
+      syscall_emul: fix openat when directory does not end in "/"
+      scons: add --gold-linker to link with the gold linker
+      systemc: set endianess to fix build for ARM host
+      sim-se: only implement getdentsFunc on supported hosts
+      arch-arm: fix the aarch64 GDB stub
+      arch-arm: only change the pc address when GDB registers are set
+      base: increase the GDB buffer size dynamically
+      arch-arm: correctly set floats from GDB on aarch64
+
+Brandon Potter <brandon.potter@amd.com> (15):
+      style: change C/C++ source permissions to noexec
+      mem: fix page_table bug for .fast build
+      ruby: bugfix for MESI_Three_Level protocol
+      ruby,gpu-compute: bugfix for GPU_VIPER* protocols
+      gpu-compute: use X86ISA::TlbEntry over GpuTlbEntry
+      hsail-x86: fix addr_range_map error
+      hsail-x86: fix gpu dynamic instruction error
+      ruby: remove unused code inside '#if 0 ... #endif'
+      tests: add a stack printer test
+      scons,ruby: do not generate unnecessary files
+      util: add util/maint/show_changes_by_file.py tool
+      syscall_emul: expand AuxVector class
+      syscall_emul: style changes and FDArray refactor
+      syscall_emul: refactor FDEntry and children classes
+      syscall_emul: implement dir-related syscalls
+
+Chuan Zhu <chuan.zhu@arm.com> (12):
+      arch-arm: Fix incorrect assumptions in ELIs64
+      arch-arm: Handle route to EL2 in Supervisor Trap
+      arch-arm: Fixed error in choosing vector offset
+      arch-arm: Fix Secure state check in checkFPAdvSIMDTrap64
+      sim: Add gtoh/htog helpers that take an explicit endianness
+      arch-arm: Fix big endian support in do{Long,L1,L2}Descriptor
+      arch-arm: Fix big endian support in {Load,Store}Double64
+      arch-arm: Fix syntax error in TLB::getResultTe
+      arch-arm: Correct masking of cp10 and cp11 in CPACR
+      arch-arm: Fix FPEXC32_EL2 to FPEXC mapping
+      arch-arm: Mask out unsupported trapped exception handling bits
+      arch-arm: Fix masking in CPACR_EL1
+
+Pau Cabre <pau.cabre@metempsy.com> (12):
+      util,arch-arm: Update gen_arm_fs_files.py to use new kernel repos
+      cpu: Fixed PC shifting on LTAGE branch predictor
+      cpu: Fixed ratio of pred to hyst bits for LTAGE Bimodal
+      configs: Added an option for choosing branch predictor type
+      cpu: Fix LTAGE max number of allocations on update
+      cpu: Fixes on the loop predictor part of LTAGE
+      cpu: Fixed useful counter handling in LTAGE
+      cpu: Made LTAGE parameters configurable
+      cpu: split LTAGE implementation into a base TAGE and a derived LTAGE
+      cpu: Added new stats to TAGE and LTAGE branch predictors
+      cpu: Added parameters to enable/disable features in LTAGE
+      cpu: Fixed typos in parameter/stats descriptions
+
+Tuan Ta <qtt2@cornell.edu> (12):
+      arch-riscv: Add an implementation of set_tid_address syscall in RISCV
+      arch-riscv: Ignore set_robust_list and get_robust_list syscalls
+      sim: Fix a bug in prlimit syscall in SE mode
+      arch-riscv: Ignore sched_yield syscall in SE mode
+      arch-riscv,sim: Support clone syscall in RISC-V
+      riscv: throw IllegalInstFault when decoding invalid instructions
+      tests: add some pthread and std::thread unit tests
+      base,mem: Support AtomicOpFunctor in the classic memory system
+      arch: support issuing Atomic Mem Operation (AMO) requests
+      cpu: add a new instruction type 'Atomic'
+      cpu: Prevent suspended TimingSimple CPUs from fetching next instructions
+      tests,style: add RISC-V assembly tests
+
+Alec Roelke <alec.roelke@gmail.com> (11):
+      arch-riscv: Remove "magic" syscall number constant
+      arch-riscv: Correct syscall argument reg count
+      arch-riscv: Make use of ImmOp's polymorphism
+      arch-riscv: Don't crash when printing unknown CSRs
+      arch-riscv: Fix floating-point conversion bugs
+      arch-riscv: Fix floating-poing op classes
+      arch-riscv: Fix compressed branch op offset
+      arch-riscv: Update CSR implementations
+      arch-riscv: Add support for fault handling
+      arch-riscv: Add support for trap value register
+      arch-riscv: Add xret instructions
+
+Tony Gutierrez <anthony.gutierrez@amd.com> (11):
+      gpu-compute: call createThreads() on cpu objs in apu_se.py
+      configs, mem-ruby: fix issues with style in AMD license
+      mem-ruby: fix more style issues in AMD licenses
+      gpu-compute: fix bad asserts in gpu tlb and cu tlb port
+      arch-x86: Enable the umask system call
+      arch-x86: Enable fstatfs for x86_64
+      gpu-compute: Cleanup the scheduler a bit
+      style: fix amd license and style issues
+      misc: Update workflow requirements in CONTRIBUTING.md
+      arch-x86: Add sys/syscall.h to x86 process.cc/syscall_emul.cc
+      cpu-o3: Fix bug in LSQUnit(uint32_t, uint32_t) ctor
+
+Glenn Bergmans <glenn.bergmans@arm.com> (8):
+      ext: DT autogeneration - Add PyFtd to m5 space
+      arm: DT autogeneration - Device Tree generation methods
+      arm: DT autogeneration - Generate cpus node
+      arm: DT autogeneration - Generate memory node
+      arm: DT autogeneration - autogenerate RealView Platform devices
+      arm: DT autogeneration - Generate energy controller node
+      arm: DT autogeneration - generate PCI node
+      config: Embed Device Tree generation in fs.py config
+
+Matteo Andreozzi <matteo.andreozzi@arm.com> (7):
+      mem: Add a QoS-aware Memory Controller type
+      mem: Add a simple QoS-aware Memory Controller
+      mem: Make DRAMCtrl a QoS-aware Memory Controller
+      arch-arm: Mark ArmProcess method as override
+      mem: avoid calling regStat twice on a QoSPolicy
+      arch-arm: clang compilation fixes
+      ext: Remove unused bankwiseMode variable
+
+Anouk Van Laer <anouk.vanlaer@arm.com> (6):
+      sim: Added model type to power model
+      sim, power: Temperature used for power calculations
+      arch-arm: Correction to address size in EL2/EL3
+      arch-arm: Correction for address size in EL1&0 translation
+      arch, arm: Effect of AT instructions on descriptor handling
+      arch, arm: Return s1Req upon fault in s2Lookup
+
+Hanhwi Jang <jang.hanhwi@gmail.com> (6):
+      util: resolve m5op name mismatching in m5op headers.
+      util: Add the missing wakecpu m5op in X86.
+      util: Implement PIC version of m5ops for X86.
+      util: Implement Lua module for m5ops.
+      scons: Resolve backtrace implementation existence testing failure
+      cpu-o3: Missing freeing the heads of DepGraph in IQ squashing
+
+Rekai Gonzalez-Alberquilla <rekai.gonzalezalberquilla@arm.com> (6):
+      sim: Make Stats truly non-copy-constructible
+      cpu: Fix the usage of const DynInstPtr
+      cpu,arch-arm: Initialise data members
+      cpu: Change raw pointers to STL Containers
+      base: Iterable CircularQueue implementation
+      base: Ported circlebuf to CircularQueue
+
+Siddhesh Poyarekar <siddhesh.poyarekar@gmail.com> (6):
+      scons: Import print_function from future
+      dev: Leave last byte in strncpy for NULL
+      arm: Remove ignored const qualifier
+      dev: Don't fall through into BRAR after RFDR case
+      misc: Use the code format for commands and messages
+      arm: Fix implicit-fallthrough warnings when building with gcc-7+
+
+Curtis Dunham <Curtis.Dunham@arm.com> (5):
+      arm: make Arm GenericTimer a ClockedObject
+      config, arm: enable device tree autogeneration for bigLITTLE
+      arch-arm: understandably initialize register mappings
+      arm: extend MiscReg metadata structures
+      arch-arm: understandably initialize register permissions
+
+Robert Kovacsics <rmk35@cl.cam.ac.uk> (5):
+      mem-cache: Typo in comment: 'proceed' -> 'precede'
+      mem: Fix off-by-one error in checkFunctional, and simplify it
+      mem: Removed "using namespace std;" from src/mem/packet.cc
+      mem: Rename Packet::checkFunctional to trySatisfyFunctional
+      mem-cache: TempCacheBlk allocates and destroys its own data
+
+Sean Wilson <spwilson2@wisc.edu> (4):
+      tests,ext: Add a new testing library proposal
+      tests: Add a simple example test
+      tests: Add test for the m5-exit instruction.
+      testlib: No catch of custom exceptions in sandbox
+
+Adrien Pesle <adrien.pesle@arm.com> (3):
+      dev-arm: Add basic support for level sensitive SPIs in GICv2
+      dev-arm: Fix Gicv2 distributor group register
+      dev-arm: Don't panic when EOIR a non active PPI
+
+Bradley Wang <radwang@ucdavis.edu> (3):
+      cpu: Removed unnecessary file reg_class_impl.hh
+      cpu: Add hash functionality for RegId class
+      base: Replace cppversion == version with >= version
+
+Chun-Chen Hsu <chunchenhsu@google.com> (3):
+      base: Fix loop range in pngwriter
+      arm: Fix maybe-uninitialized GCC warnings
+      arch, arm: Fix implicit-fallthrough GCC warnings
+
+Javier Bueno Hedo <javier.bueno@metempsy.com> (3):
+      mem-cache: implement a probe-based interface
+      mem-cache: fix invalid iterator access
+      mem-cache: a missing cast was truncating addresses
+
+Matt Sinclair <mattdsinclair@gmail.com> (3):
+      arch-x86, arch-power: fix calls to bits and insertBits
+      syscall_emul: adding link system call
+      syscall_emul: adding symlink system call
+
+Wendy Elsasser <wendy.elsasser@arm.com> (3):
+      Fix DDR4_2400_8x8 DRAMCTRL configuration
+      mem: Optimize self-refresh entry
+      mem: Add support for more flexible DRAM timing and topologies
+
+Earl Ou <shunhsingou@google.com> (2):
+      util/m5: add Android.mk
+      Fix SConstruct for asan build
+
+Edmund Grimley Evans <Edmund.Grimley-Evans@arm.com> (2):
+      arch-arm: Add FP16 support and other primitives to fplib
+      arch-arm: Add FP16 support introduced by Armv8.2-A
+
+Giacomo Gabrielli <giacomo.gabrielli@arm.com> (2):
+      arm: Add support for RCpc load-acquire instructions (ARMv8.3)
+      base: Add type alias for raw pointer in RefCountingPtr
+
+Matt Horsnell <matt.horsnell@arm.com> (2):
+      arch-arm: AArch32 Crypto SHA
+      arch-arm: AArch32 Crypto AES
+
+Maurice Becker <madnaurice@googlemail.com> (2):
+      Pl011: Added registers UART_RSR/UART_ECR
+      dev, arm: fix error class-memaccess with GCC >= 8.1
+
+Pin-Yen Lin <treapking@google.com> (2):
+      net: Fix a bug when handling IPv6 packets
+      net: Fix a bug when receiving fragamented packets
+
+Rico Amslinger <rico.amslinger@informatik.uni-augsburg.de> (2):
+      mem, sim-se: Fixed seg-fault in EmulationPageTable::remap
+      mem-ruby: Fix RubyPrefetcher support in MESI_Two_Level
+
+Sherif Elhabbal <elhabbalsherif@gmail.com> (2):
+      power: Add a clock_period variable to power expressions
+      config, arm, power: Example to report the power for the L2 Cache
+
+Xiaoyu Ma <xiaoyuma@google.com> (2):
+      sim: Allow passing a user-defined L2XBar to addTwoLevelCacheHierarchy().
+      mem-cache: Allow prefetchers to override setCache.
+
+Yuetsu Kodama <yuetsu.kodama@riken.jp> (2):
+      arch-arm: We add PRFM PST instruction for arm
+      arch-arm: FIXUP for the add PRFM PST instruction commit
+
+Alexandru Dutu <alexandru.dutu@amd.com> (1):
+      gpu-compute: Remove unneeded Request::setVirt call
+
+Austin Harris <austinharris@utexas.edu> (1):
+      arch-riscv: Fix the srlw and srliw instructions.
+
+Brad Beckmann <brad.beckmann@amd.com> (1):
+      mem-ruby: Consistent dprintf formats for issue outcomes
+
+Chen Zou <chenzou@uchicago.edu> (1):
+      configs: Fill in the cpu.isa field in etrace_replay.py since no default are provided now
+
+Christian Menard <christian.menard@tu-dresden.de> (1):
+      arch-x86: consistent style of comments in system files
+
+Gabor Dozsa <gabor.dozsa@arm.com> (1):
+      arch: Fix unserialization of VectorReg value
+
+John Alsop <johnathan.alsop@amd.com> (1):
+      mem-ruby: enable DPRINTFN calls in slicc for temporary debug printing
+
+Kevin Brodsky <kevin.brodsky@arm.com> (1):
+      util: Do not use $(PWD) in Makefiles
+
+Khalique <khalique913@gmail.com> (1):
+      sparc: Fix FS Checkpoint loading
+
+Matteo M. Fusi <matteo.fusi@bsc.es> (1):
+      SConstruct: additional message for the error checking of the python 2.7 headers
+
+Maximilian Stein <maximilian.stein@tu-dresden.de> (1):
+      arch-x86: Granularity bit and segment limit
+
+Michael LeBeane <michael.lebeane@amd.com> (1):
+      dev: Exit correctly in dist-gem5 for SE mode
+
+Michiel Van Tol <michiel.vantol@arm.com> (1):
+      cpu: Turn BaseTrafficGen numSuppressed into a stat
+
+Nayan Deshmukh <nayan26deshmukh@gmail.com> (1):
+      config: remove dead code in fs.py
+
+Robert Scheffel <robert.scheffel1@tu-dresden.de> (1):
+      arch-riscv: enable rudimentary fs simulation
+
+Rohit Kurup <rohit.kurup@arm.com> (1):
+      dev-arm: Add new VExpress_GEM5_V1_Base Platform
+
+Srikant Bharadwaj <srikant.bharadwaj@amd.com> (1):
+      sim: Fix data type of ticks per second before passing it to C++
+
+Stanislaw Czerniawski <stacze01@arm.com> (1):
+      mem: Add StreamID and SubstreamID
+
+Steve Reinhardt <stever@gmail.com> (1):
+      arch-x86: implement movntps/movntpd SSE insts
+
+Sujay Phadke <electronicsguy123@gmail.com> (1):
+      alpha: fix for no 'break' in the case statement
+
+Swapnil Haria <swapnilster@gmail.com> (1):
+      arch-x86: Adding clflush, clflushopt, clwb instructions
+
+Xianwei Zhang <xianwei.zhang@amd.com> (1):
+      mem-ruby: Fix a bug in MessageBuffer randomization
+

@@ -1,0 +1,845 @@
+   159	Andreas Hansson <andreas.hanson@arm.com>
+   115	Andreas Sandberg <Andreas.Sandberg@arm.com>
+   114	Nilay Vaish <nilay@cs.wisc.edu>
+    28	David Hashe <david.hashe@amd.com>
+    24	Steve Reinhardt <stever@gmail.com>
+    19	Curtis Dunham <Curtis.Dunham@arm.com>
+    15	Brandon Potter <brandon.potter@amd.com>
+    14	Brad Beckmann <brad.beckmann@amd.com>
+    14	Joel Hestness <jthestness@gmail.com>
+    11	Ali Jafri <ali.jafri@arm.com>
+    10	Tony Gutierrez <anthony.gutierrez@amd.com>
+     8	Radhika Jagtap <radhika.jagtap@arm.com>
+     7	Mitch Hayenga <mitch.hayenga@arm.com>
+     6	Ali Saidi <Ali.Saidi@arm.com>
+     5	Gabe Black <gabeblack@google.com>
+     5	Jason Lowe-Power <jason@lowepower.com>
+     5	Nikos Nikoleris <nikos.nikoleris@arm.com>
+     5	Stephan Diestelhorst <stephan.diestelhorst@arm.com>
+     4	Erfan Azarkhish <erfan.azarkhish@unibo.it>
+     4	Marco Balboni <Marco.Balboni@ARM.com>
+     4	Nathanael Premillieu <nathanael.premillieu@arm.com>
+     4	Ruslan Bukin <br@bsdpad.com>
+     4	Sascha Bischoff <sascha.bischoff@arm.com>
+     4	Wendy Elsasser <wendy.elsasser@arm.com>
+     3	Abdul Mutaal Ahmad <abdul.mutaal@gmail.com>
+     3	Andrew Bardsley <Andrew.Bardsley@arm.com>
+     3	Bjoern A. Zeeb <baz21@cam.ac.uk>
+     3	Geoffrey Blake <geoffrey.blake@arm.com>
+     3	Giacomo Gabrielli <giacomo.gabrielli@arm.com>
+     3	Joe Gross <joe.gross@amd.com>
+     3	Lena Olson <leolson@google.com>
+     3	Malek Musleh <malek.musleh@gmail.com>
+     3	Palle Lyckegaard <palle@lyckegaard.dk>
+     2	Andrew Lukefahr <lukefahr@umich.edu>
+     2	Boris Shingarov <shingarov@gmail.com>
+     2	Cagdas Dirik <cdirik@micron.com>
+     2	David Guillen-Fandos <david.guillen@arm.com>
+     2	Dylan Johnson <Dylan.Johnson@ARM.com>
+     2	Emilio Castillo <castilloe@unican.es>
+     2	Gabor Dozsa <gabor.dozsa@arm.com>
+     2	Karthik Sangaiah <karthik.sangaiah@arm.com>
+     2	Matt Evans <matt.evans@arm.com>
+     2	Matthias Jung <jungma@eit.uni-kl.de>
+     2	Rekai Gonzalez-Alberquilla <rekai.gonzalezalberquilla@arm.com>
+     2	Rene de Jong <rene.dejong@arm.com>
+     2	Rizwana Begum <rb639@drexel.edu>
+     2	Rune Holm <rune.holm@arm.com>
+     2	Timothy M. Jones <timothy.jones@arm.com>
+     1	Alexandru Dutu <alexandru.dutu@amd.com>
+     1	Chris Emmons <chris.emmons@arm.com>
+     1	Christoph Pfister <pfistchr@student.ethz.ch>
+     1	Dibakar Gope <gope@wisc.edu>
+     1	Dongxue Zhang <elta.era@gmail.com>
+     1	Hongil Yoon <ongal@cs.wisc.edu>
+     1	Marco Elver <Marco.Elver@ARM.com>
+     1	Maxime Martinasso <maxime.cscs@gmail.com>
+     1	Mike Upton <michaelupton@gmail.com>
+     1	Monir Mozumder <monir.mozumder@amd.com>
+     1	Pau Cabre <pau.cabre@metempsy.com>
+     1	Peter Enns <Peter.Enns@arm.com>
+     1	Swapnil Haria <swapnilster@gmail.com>
+     1	Victor Garcia <victor.garcia@arm.com>
+Andreas Hansson <andreas.hanson@arm.com> (159):
+      mem: Move DRAM interleaving check to init
+      cpu: Fix retry bug in MinorCPU LSQ
+      mem: Fix bug in cache request retry mechanism
+      tests: Remove deprecated InOrderCPU tests
+      scons: Do not build the InOrderCPU
+      mem: Clean up Request initialisation
+      x86: Delay X86 table walk on receiving walker response
+      stats: Update stats to reflect x86 table walker changes
+      mem: Make the XBar responsible for tracking response routing
+      mem: Always use SenderState for response routing in RubyPort
+      mem: Remove unused RequestState in the bridge
+      mem: Remove Packet source from ForwardResponseRecord
+      mem: Remove unused Packet src and dest fields
+      cpu: Ensure timing CPU sinks response before sending new request
+      scons: Avoid implicit command dependencies
+      config: Adjust DRAM channel interleaving defaults
+      base: Add XOR-based hashed address interleaving
+      config: Add XOR hashing to the DRAM channel interleaving
+      mem: Clarify cache behaviour for pending dirty responses
+      mem: Clarify express snoop behaviour
+      base: Do not dereference NULL in CompoundFlag creation
+      cpu: Tidy up the MemTest and make false sharing more obvious
+      stats: Bump the MemTest regression stats
+      config: Revamp memtest to allow testers on any level
+      arch: Make readMiscRegNoEffect const throughout
+      mem: Use the range cache for lookup as well as access
+      mem: mmap the backing store with MAP_NORESERVE
+      dev: Fix undefined behaviuor in i8254xGBe
+      cpu: TrafficGen sinks snoops without complaining
+      config: Add memcheck stress test
+      tests: Run regression timeout as foreground
+      mem: Split port retry for all different packet classes
+      mem: Tidy up the cache debug messages
+      arm: Share a port for the two table walker objects
+      mem: Move crossbar default latencies to subclasses
+      mem: Add byte mask to Packet::checkFunctional
+      mem: Fix cache MSHR conflict determination
+      mem: Unify all cache DPRINTF address formatting
+      stats: Update stats to reflect cache and interconnect changes
+      tests: Bump timeout to 5 hours
+      config: Fix DRAM rank option in sweep script
+      mem: Use emplace front/back for deferred packets
+      config: Add soak test for memtest.py
+      tests: Recategorise regressions based on run time
+      tests: Final reclassification of quick regressions
+      mem: Tidy up Request
+      cpu: Fix InstPBTrace inheritance
+      mem: Align all MSHR entries to block boundaries
+      tests: Update stats for cache block alignment
+      mem: Modernise MSHR iterators to C++11
+      mem: Remove redundant allocateUncachedReadBuffer in cache
+      mem: Ignore uncacheable MSHRs when finding matches
+      mem: Cleanup flow for uncacheable accesses
+      mem: Allocate cache writebacks before new MSHRs
+      arm, configs: Do not forward snoops from I cache
+      config: Remove memory aliases and rely on class name
+      cpu: Remove the InOrderCPU from the tree
+      misc: Appease gcc 5.1
+      misc: Appease gcc 5.1 without moving GDB_REG_BYTES
+      stats: Bring regression stats in line with actual behaviour
+      cpu: Work around gcc 4.9 issues with Num_OpClasses
+      mem: Tidy up BaseCache parameters
+      mem: Add missing stats update for uncacheable MSHRs
+      mem: Pass shared downstream through caches
+      arch, cpu: Do not forward snoops to table walker
+      mem: Snoop into caches on uncacheable accesses
+      arm: Remove unnecessary boot uncachability
+      stats: Update stats to reflect cache changes
+      arm: Add missing FPEXC.EN check
+      stats, arm: Update stats for missing FPEXC.EN check
+      config: Use null memory for DRAM sweep script
+      misc: Appease gcc 5.1
+      arm: Identify table-walker requests
+      ruby: Deprecation warning for RubyMemoryControl
+      stats: Update MinorCPU regressions after accounting fix
+      base: Allow multiple interleaved ranges
+      arm, stats: Update stats to reflect reduction in misc reg reads
+      scons: Allow GNU assembler version strings with hyphen
+      mem: Fix snoop packet data allocation bug
+      scons: Bump compiler requirement to gcc >= 4.7 and clang >= 3.1
+      util: Remove DRAMPower trace script
+      mem: Convert Request static const flags to enums
+      mem: Allow read-only caches and check compliance
+      mem: Add ReadCleanReq and ReadSharedReq packets
+      mem: Split WriteInvalidateReq into write and invalidate
+      mem: Remove redundant is_top_level cache parameter
+      mem: Delay responses in the crossbar before forwarding
+      mem: Avoid DRAM write queue iteration for merging and read lookup
+      mem: Increase the default buffer sizes for the DDR4 controller
+      stats: Update stats for cache, crossbar and DRAM changes
+      mem: Updated DRAMSim2 wrapper to new drain API
+      mem: Fix (ab)use of emplace to avoid temporary object creation
+      cpu: Fix issue identified by UBSan
+      stats: Bump stats to match current behaviour
+      mem: Tidy up packet
+      mem: Tidy up CacheBlk class
+      mem: Transition away from isSupplyExclusive for writebacks
+      mem: Remove unused RequestCause in cache
+      mem: Add missing clean eviction on uncacheable access
+      stats: Update stats for clean eviction addition
+      stats: Reflect current behaviour
+      util: Enable DRAM sweep to print power and efficiency
+      mem: Remove extraneous acquire/release flags and attributes
+      cpu: Move invldPid constant from Request to BaseCPU
+      mem: Move cache_impl.hh to cache.cc
+      ruby: Move Rubys cache class from Cache.py to RubyCache.py
+      mem: Add explicit Cache subclass and make BaseCache abstract
+      mem: Remove unused cache squash functionality
+      arm, mem: Remove unused CLEAR_LL request flag
+      mem: Reflect that packet address and size are always valid
+      mem: Revert requirement on packet addr/size always valid
+      sim: Fix time unit in abort message
+      mem: Tidy up the snoop state-transition logic
+      mem: Tidy up CacheSet
+      mem: Avoid setting markPending if not needed
+      util: Fix minor issues in DRAM sweep scripts
+      mem: Do not include snoop-filter latency in crossbar occupancy
+      mem: Make the coherent crossbar account for timing snoops
+      mem: Store snoop filter lookup result to avoid second lookup
+      mem: Only track snooping ports in the snoop filter
+      mem: Avoid adding and then removing empty snoop-filter items
+      mem: Comment clean-up for the snoop filter
+      mem: Fix WriteLineReq fill behaviour
+      mem: Add check for block status on WriteLineReq fill
+      stats: Update stats to reflect snoop-filter changes
+      mem: Add PacketInfo to be used for packet probe points
+      config: Fix 'learning gem5' configs after SMT push
+      misc: Remove redundant compiler-specific defines
+      misc: Add explicit overrides and fix other clang >= 3.5 issues
+      mem: Pass snoop retries through the CommMonitor
+      arm: Add missing explicit overrides for ARM devices
+      x86: Add missing explicit overrides for X86 devices
+      mem: Clarify cache MSHR handling on fill
+      misc: Appease clang static analyzer
+      mem: Unify delayed packet deletion
+      mem: Do not treat CleanEvict as a write operation
+      mem: Align rules for sinking inhibited packets at the slave
+      mem: Use the packet delays and do not just zero them out
+      mem: Order packet queue only on matching addresses
+      mem: Add cache clusivity
+      config: Update memtest to stress test cache clusivity
+      mem: Add an option to perform clean writebacks from caches
+      config: Update memtest to stress test clean writebacks
+      stats: Update stats to match cache changes
+      cpu: Fix memory leak in traffic generator
+      config: Minor fixes to the DRAM utilisation sweep
+      mem: Fix search-replace issues in DRAMPower wrapper license
+      stats: Bump stats to match current behaviour
+      mem: Fix memory allocation bug in deferred snoop handling
+      configs: Make the default memtest behaviour more complex
+      mem: Fix cache sender state handling and add clarification
+      mem: Do not use sender state to track forwarded snoops in cache
+      mem: Avoid unecessary checks when creating HardPFReq in cache
+      mem: Remove unused cache squash functionality
+      mem: Explicitly check MSHR snoops for cases not dealt with
+      mem: Make cache terminology easier to understand
+      mem: Do not alter cache block state on uncacheable snoops
+      mem: Do not allocate space for packet data if not needed
+      mem: Do not rely on the NeedsWritable flag for responses
+
+Andreas Sandberg <Andreas.Sandberg@arm.com> (115):
+      dev: Correctly clear interrupts in VirtIO PCI
+      sim: Remove test for non-NULL this in Event
+      style: Update the style checker to handle new include order
+      dev: Remove unused system pointer in the Platform base class
+      base: Add compiler macros to add deprecation warnings
+      sim: Move the BaseTLB to src/arch/generic/
+      style: Fix incorrect style checker option name
+      style: Fix broken m5format command
+      arm: Merge ISA files with pseudo instructions
+      arm: Wire up the GIC with the platform in the base class
+      arm: Fix broken page table permissions checks in remote GDB
+      arm: Correctly access the stack pointer in GDB
+      arm: Don't truncate 16-bit ASIDs to 8 bits
+      dev, arm: Clean up PL011 and rewrite interrupt handling
+      test, arm: Add scripts to test checkpoints
+      mem, alpha: Move Alpha-specific request flags
+      mem, cpu: Add a separate flag for strictly ordered memory
+      arm: Relax ordering for some uncacheable accesses
+      sim: Don't clear the active CPU vector in System::initState
+      base: Clean up bitmap generation code
+      base: Redesign internal frame buffer handling
+      arm: Workaround incorrect HDLCD register order in kernel
+      build: Don't test for KVM xsave support on ARM
+      kvm, x86: Guard x86-specific APIs in KvmVM
+      kvm: Fix dumping code for large registers
+      dev, arm: Refactor and clean up the generic timer model
+      dev, arm: Add virtual timers to the generic timer model
+      arm: Get rid of pointless have_generic_timer param
+      arm, dev: Add support for a memory mapped generic timer
+      arm, stats: Update stats to reflect changes to generic timer
+      kvm, arm: Move ARM-specific files to arch/arm/kvm/
+      kvm: Handle inst events at the current instruction count
+      kvm, arm, dev: Add an in-kernel GIC implementation
+      kvm, arm: Add support for aarch64
+      dev, arm: Include PIO size in AmbaDmaDevice constructor
+      base: Reset CircleBuf size on flush()
+      arm: Cleanup arch headers to remove dma_device.hh dependency
+      base: Add a warn_if macro
+      mem: Cleanup CommMonitor in preparation for probe support
+      sim: Add serialization macros for std containers
+      tests: Skip SPARC tests if the required binaries are missing
+      sim: Refactor the serialization base class
+      sim: Fix broken event unserialization
+      base: Add serialization support to Pixels and FrameBuffer
+      sim: Add macros to serialize objects into a section
+      python: Remove redundant drain when changing memory modes
+      sim: Make the drain state a global typed enum
+      sim: Move mem(Writeback|Invalidate) to SimObject
+      sim: Decouple draining from the SimObject hierarchy
+      sim: Refactor and simplify the drain API
+      stats: Update pc-switcheroo stats
+      ext: Add the NoMali GPU no-simulation library
+      dev, arm: Add a device model that uses the NoMali model
+      cpu: Fix drain issues in the Minor CPU
+      cpu: Only activate thread 0 in Minor if the CPU is active
+      tests: Add Minor to the ARM full switcheroo tests
+      stats: Bump stats after Minor switcheroo inclusion
+      cpu: Fix Minor drain issues when switched out
+      cpu: Update debug message from Fetch1 isDrained() in Minor
+      stats: Update switcheroo reference stats
+      mem: Add probe support to the CommMonitor
+      mem: Redesign the stack distance calculator as a probe
+      mem: Move trace functionality from the CommMonitor to a probe
+      stats: Update stats for tgen to reflect CommMonitor changes
+      sim: Initialize Drainable::_drainState to the system's state
+      mem: Fixup incorrect include guards
+      sim: Fixup comments and constness in draining infrastructure
+      base: Use constexpr in Cycles
+      base: Declare a type for context IDs
+      dev: Make serialization in Sinic constant
+      dev, x86: Fix serialization bug in the i8042 device
+      base: Rewrite the CircleBuf to fix bugs and add serialization
+      sim: Split ClockedObject to make it usable to non-SimObjects
+      dev: Add a simple DMA engine that can be used by devices
+      arm: Add support for programmable oscillators
+      dev: Implement a simple display timing generator
+      mem: Cleanup packet accessor methods
+      stats: Update ARM stats to include programmable oscillators
+      sim: Flag EventQueue::getCurTick() as const
+      ruby: Use the const serialize interface in RubySystem
+      sim: Move SimObject resolver to sim_object.hh
+      sim: Replace fromInt/fromSimObject with decltype
+      sim: Remove unused SerializeBuilder interface
+      sim: Remove autoserialize support for exit events
+      dev: Remove auto-serialization dependency in EtherLink
+      sim: Remove broken AutoSerialize support from the event queue
+      dev, arm: Rewrite the HDLCD controller
+      dev: Add an underrun statistic to the HDLCD controller
+      tests: Update SMT tests to correctly configure CPUs
+      mem: Check the XBar's port queues on functional snoops
+      dev: Don't access the platform directly in PCI devices
+      dev: Remove unused header includes
+      dev, arm: Initialized the iccrpr register in the GIC
+      arm: Add missing explicit overrides for classic caches
+      cpu: Enforce 1 interrupt controller per thread
+      dev: Remove unnecessary header include
+      config: Fix broken SimObject listing
+      dev, mips: Remove the unused MaltaPChip class
+      arm: Add support for automatic boot loader selection
+      sim: Add support for generating back traces on errors
+      dev, arm: Split MCC and DCC subsystems
+      dev, arm: Disable R/B swap in HDLCD by default
+      arm, config: Automatically discover available platforms
+      stats: Update to reflect changes to RealView platform code
+      sim: Get rid of the non-const serialize() method
+      dev: Rewrite PCI host functionality
+      stats: Update to reflect changes to PCI handling
+      dev: Move existing PCI device functionality to src/dev/pci
+      dev: Move the CopyEngine class to src/dev/pci
+      dev: Move i2c functionality to src/dev/i2c/
+      dev: Move network devices to src/dev/net/
+      dev: Move storage devices to src/dev/storage/
+      dev: Add missing SConscript in src/dev/i2c
+      sim: Add an option to forward work items to Python
+      sim: Use the old work item behavior by default
+
+Nilay Vaish <nilay@cs.wisc.edu> (114):
+      stats: changes due to recent changesets.
+      stats: changes due to recent changesets.
+      cpu: o3: remove unused function annotateMemoryUnits()
+      cpu: o3: remove member variable squashCounter The variable is used in only one place and a whole new function setNextStatus() has been defined just to compute the value of the variable.  Instead of calling the function, the value is now computed in the loop that preceded the function call.
+      cpu: o3: combine if with same condition
+      cpu: o3: remove unused stat variables.
+      cpu: o3: commit: mark pipeline delay variable as consts
+      cpu: o3: Remove unused code in iew, add assert instead.
+      cpu: o3: another assert instead of check
+      stats: changes to due to recent set of patches
+      tests: remove not maintained 20.eio-short detailed test
+      stats: updates due to recent changesets.
+      sim: fix function for emulating dup() The function was using the host fd to obtain the fd object from the simulated process.
+      sim: Use NULL instead of None for testing filenames. The filenames are initialized with NULL.  So the test should be checking for them to be == NULL instead == None.
+      x86: implements x87 mult/div instructions
+      stats: x86: changes due to recent patches
+      Added tag stable_2015_04_15 for changeset e17949745150
+      x86: change divide-by-zero fault to divide-error Same exception is raised whether division with zero is performed or the quotient is greater than the maximum value that the provided space can hold. Divide-by-Zero is the AMD terminology, while Divide-Error is Intel's.
+      cpu: o3: single cycle default div microop latency on x86
+      cpu: o3: replace issueLatency with bool pipelined
+      ruby: set: replace long by unsigned long UBSan complains about negative value being shifted
+      stats: x86: updates due to change in div latency
+      stats: arm: updates
+      ruby: message: remove a data member added by mistake
+      ruby: slicc: remove README
+      ruby: remove message buffer node
+      ruby: mesi three level: name change to avoid clash The accessor function getDestination() for Destination variable in the coherence message clashes with the getDestination() that is part of the Message class.  Hence the name change.
+      ruby: drop NetworkMessage class
+      mem: packet: Add const to constructor argument
+      o3: correct the number of cc registers in rename map
+      stats: update stale config.ini files, eio and few other stats.
+      stats: x86: update stats missed out on in preivous changeset
+      x86: decode instructions with vex prefix
+      stats: x86: updates due to patch on vex
+      configs: network test: remove redundant physical memory
+      ruby: network: NetworkLink inherits from Consumer now.
+      cpu: o3: slight correction to identation in rename_impl.hh
+      cpu: implements vector registers
+      revert 5af8f40d8f2c
+      ruby: correctly number the sequencer in MESI_Three_Level.py
+      ruby: mesi two,three level: copy data only when dirty
+      ruby: mesi three level: multiple corrections to the protocol
+      ruby: slicc: allow mathematical operations on Ticks
+      ruby: drop some redundant includes
+      sim: clocked object: function for converting cycles to ticks.
+      ruby: rename variables Addr to addr
+      ruby: replace Address by Addr This patch eliminates the type Address defined by the ruby memory system. This memory system would now use the type Addr that is in use by the rest of the system.
+      stats: updates to ruby fs regression test
+      ruby: handle llsc accesses through CacheEntry, not CacheMemory
+      ruby: drop the [] notation for lookup function.
+      ruby: slicc: avoid duplicate code for function argument check Both FuncCallExprAST and MethodCallExprAST had code for checking the arguments with which a function is being called.  The patch does away with this duplication.  Now the code for checking function call arguments resides in the Func class.
+      ruby: slicc: use default argument value Before this patch, while one could declare / define a function with default argument values, but the actual function call would require one to specify all the arguments.  This patch changes the check for  function arguments. Now a function call needs to specify arguments that are at least as much as those with default values and at most the total number of arguments taken as input by the function.
+      ruby: eliminate type uint64 and int64
+      ruby: adds set and way indices to AbstractCacheEntry
+      ruby: call setMRU from L1 controllers, not from sequencer Currently the sequencer calls the function setMRU that updates the replacement policy structures with the first level caches.  While functionally this is correct, the problem is that this requires calling findTagInSet() which is an expensive function.  This patch removes the calls to setMRU from the sequencer. All controllers should now update the replacement policy on their own.
+      ruby: cache memory: drop {try,test}CacheAccess functions
+      ruby: perfect switch: refactor code
+      ruby: remove unused functionalRead() function.
+      ruby: simple network: store Switch* in PerfectSwitch and Throttle
+      ruby: abstract controller: mark some variables as const
+      ruby: cache recorder: move check on block size to RubySystem.
+      ruby: SubBlock: refactor code
+      ruby: remove random seed
+      ruby: DataBlock: adds a comment
+      ruby: garnet: flexible: refactor flit
+      ruby: slicc: remove a stray line in StateMachine.py
+      ruby: directory memory: drop unused variable.
+      ruby: profiler: provide the number of vnets through ruby system
+      ruby: simple network: refactor code
+      ruby: add accessor functions to SLICC def of MachineID
+      ruby: reverts to changeset: bf82f1f7b040
+      ruby: handle llsc accesses through CacheEntry, not CacheMemory
+      ruby: eliminate type uint64 and int64 These types are being replaced with uint64_t and int64_t.
+      ruby: slicc: avoid duplicate code for function argument check Both FuncCallExprAST and MethodCallExprAST had code for checking the arguments with which a function is being called.  The patch does away with this duplication.  Now the code for checking function call arguments resides in the Func class.
+      ruby: garnet: mark few functions const in BaseGarnetNetwork.hh
+      ruby: network: drop member m_in_use
+      ruby: specify number of vnets for each protocol The default value for number of virtual networks is being removed.  Each protocol should now specify the value it needs.
+      stats: updates due to recent changes.
+      ruby: directory memory: drop unused variable.
+      ruby: remove random seed We no longer use the C library based random number generator: random(). Instead we use the C++ library provided rng.  So setting the random seed for the RubySystem class has no effect.  Hence the variable and the corresponding option are being dropped.
+      Added tag stable_2015_09_03 for changeset 60eb3fef9c2d
+      merged with recent commits.
+      ruby: declare all protocol message buffers as parameters
+      ruby: set: reimplement using std::bitset The current Set data structure is slow and therefore is being reimplemented using std::bitset. A maximum limit of 64 is being set on the number of controllers of each type.  This means that for simulating a system with more controllers of a given type, one would need to change the value of the variable NUMBER_BITS_PER_SET
+      ruby: adds set and way indices to AbstractCacheEntry
+      ruby: call setMRU from L1 controllers, not from sequencer Currently the sequencer calls the function setMRU that updates the replacement policy structures with the first level caches.  While functionally this is correct, the problem is that this requires calling findTagInSet() which is an expensive function.  This patch removes the calls to setMRU from the sequencer. All controllers should now update the replacement policy on their own.
+      config: allow ruby to be used with Minor CPU
+      ruby: slicc: remove nextLineHack from Type.py
+      ruby: simple network: store Switch* in PerfectSwitch and Throttle There are two reasons for doing so:
+      ruby: perfect switch: refactor code Refactored the code in operateVnet(), moved partly to a new function operateMessageBuffer().  This is required since a later patch moves to having a wakeup event per MessageBuffer instead of one event for the entire Switch.
+      merged with 62e1504b9c64
+      ruby: slicc: remove member buffer_expr from Var class This was added by changeset 51f40b101a56.  Instead, buffer_expr would now be associated with the InPort class.
+      ruby: topology: refactor code.
+      stats: updates due to recent changesets including d0934b57735a
+      ruby: sequencer: remove commented out function printProgress()
+      ruby: remove unused function removeRequest()
+      ruby: message buffer, timer table: significant changes
+      stats: slight changes to MOESI_CMP_token.
+      stats: updates due to changes to MOESI_hammer
+      ruby: slicc: derive DataMember class from Var instead of PairContainer
+      ruby: print addresses in hex Changeset 4872dbdea907 replaced Address by Addr, but did not make changes to print statements.  So the addresses which were being printed in hex earlier along with their line address, were now being printed in decimals.  This patch adds a function printAddress(Addr) that can be used to print the address in hex along with the lines address.  This function has been put to use in some of the places.  At other places, change has been made to print just the address in hex.
+      ruby: garnet: mark some variables as const
+      ruby: abstract controller: mark some variables as const
+      ruby: bloom filters:  refactor code
+      ruby: garnet: refactor code in network links
+      ruby: simple network: refactor code
+      ruby: garnet: flexible: refactor flit
+      ruby: remove unused functionalRead() function.
+      ruby: profiler: provide the number of vnets through ruby system
+      configs: fix bug introduced due to 276ad9121192
+      o3: drop unused statistic wbPenalized and wbPenalizedRate
+      stats: remove wb_penalized and wb_penalized_rate
+      stats: updates due to recent chagnesets
+      Merged changesets: 47e2adf7fb1a and b65d4e878ed2
+
+David Hashe <david.hashe@amd.com> (28):
+      config: Update location of ruby topologies in help
+      slicc: isinstance bugfix
+      syscall: Add readlink to x86 with special case /proc/self/exe
+      x86: x86 instruction-implementation bug fixes
+      cpu: Fixed a bug on where to fetch the next instruction from
+      mem: Hit callback delay fix
+      slicc: support for multiple message types on the same buffer
+      slicc: support for transitions with a wildcard next state
+      slicc: improve support for prefix operations
+      slicc: fix missing inline function in LocalVariableAST
+      slicc: Fix bug in enqueue and peek statements.
+      slicc: support for multiple cache entry types in the same state machine
+      ruby: give access to cache tag/data latencies from SLICC
+      ruby: initialize replacement policies with their own simobjs
+      slicc: support for local variable declarations in action blocks
+      slicc: support for arbitrary DPRINTF flags (not just RubySlicc)
+      ruby: speed up function used for cache walks
+      ruby: allocate a block in CacheMemory without updating LRU state
+      mem: add request types for acquire and release
+      config: add base class for ruby controllers
+      ruby: Fix for stallAndWait bug
+      ruby: fix deadlock bug in banked array resource checks
+      ruby: adds size and empty apis to the msg buffer stallmap
+      ruby: expose access permission to replacement policies
+      ruby: change advance_stage for flit_d
+      ruby: change router pipeline stages to 2
+      ruby: rename System.{hh,cc} to RubySystem.{hh,cc}
+      mem: add request types for acquire and release
+
+Steve Reinhardt <stever@gmail.com> (24):
+      config: make M5_PATH a real search path
+      config: rename 'file' var
+      stats: update eio stats
+      mem: clean up write buffer check in Cache::handleSnoop()
+      mem: restructure Packet cmd initialization a bit more
+      mem: add local var in Cache::recvTimingResp()
+      mem: remove redundant test in in Cache::recvTimingResp()
+      stats: update Minor stats due to PF bug fix
+      misc: quote args in echoed command line
+      config: expand '~' and '~user' in paths
+      mem: rename Locked/LOCKED to LockedRMW/LOCKED_RMW
+      stats: update a few stats from long O3 runs
+      stats: update for previous changeset
+      syscall_emul: fix warn_once behavior
+      stats: update EIO stats for snoop filter changes
+      x86: implement fild, fucomi, and fucomip x87 insts
+      x86: implement rcpps and rcpss SSE insts
+      sim: print pid in output header
+      sim: add ExecMacro to Exec* compound debug flags
+      arch: clean up isa_parser error handling
+      syscall_emul: don't check host fd when allocating target fd
+      tests: update EIO reference outputs
+      stats: more updates due to PCI changes
+      mem: add CacheVerbose debug flag, filter noisy DPRINTFs
+
+Curtis Dunham <Curtis.Dunham@arm.com> (19):
+      sim: fix reference counting of PythonEvent
+      sim: prioritize async events; prevent starvation
+      base: add an accessor and operators ==,!= to address ranges
+      config: add --root-device machine parameter
+      sim: Reuse the same limit_event in simulate()
+      config: Add ability to exit simulation after initialization
+      sim: Update limit_event reuse to final version
+      ext: Add SST connector
+      config: Support full-system with SST's memory system
+      arm: implement the CONTEXTIDR_EL2 system reg.
+      sim, arm: add checkpoint upgrader for d02b45a5
+      base: remove fd from object loaders
+      scons: remove dead leading underscore check
+      sim: make warning for absent optional parameters optional
+      sim: support checkpointing std::set<std::string>'s
+      sim: tag-based checkpoint versioning
+      base: remove Trace::enabled flag
+      ext: fix SST connector
+      ext: fix SST connector
+
+Brandon Potter <brandon.potter@amd.com> (15):
+      base: add new ChunkGenerator method to identify last chunk
+      syscall_emul: fix warning with wrong syscall name Also nix extra whitespace.
+      syscall_emul: update getrlimit to use warn Don't use std::cerr directly, and just return EINVAL instead of aborting.
+      syscall_emul: implement clock_gettime system call
+      cpu: remove conditional check (count > 0) on o3 IQ squashes
+      config: enable setting SE-mode environment variables from file
+      ruby: remove extra whitespace and correct misspelled words
+      ruby: replace g_ruby_start with per-RubySystem m_start_cycle
+      ruby: replace global g_system_ptr with per-object pointers
+      ruby: replace global g_abs_controls with per-RubySystem var
+      ruby: dma sequencer: removes redundant code
+      syscall_emul: file descriptor interface changes
+      base: refactor process class (specifically FdMap and friends)
+      syscall_emul: standardized file descriptor name and add return checks.
+      style: change Process function calls to use camelCase
+
+Brad Beckmann <brad.beckmann@amd.com> (14):
+      ruby: add useful dprints to sequencer
+      ruby: re-added the addressToInt slicc interface function
+      util: added .mk makefile extension to file_types.py
+      util: added .cl OpenCL extension to file_type.py
+      slicc: fatal->panic on invalid transitions
+      slicc: improved stalling support in protocols
+      slicc: enable overloading in functions not in classes
+      slicc: fix error in conflicing symbol declaration
+      ruby: improved stall and wait debugging
+      ruby: removed invalid assert in message comparitor
+      mem: add boolean to disable PacketQueue's size sanity check
+      ruby: added stl vector of ints to be used by SLICC
+      ruby: more flexible ruby tester support
+      regress: updates required for the compute-gpu patches
+
+Joel Hestness <jthestness@gmail.com> (14):
+      ruby: Fix RubySystem warm-up and cool-down scope
+      ruby: Remove the RubyCache/CacheMemory latency
+      ruby: Change PerfectCacheMemory::lookup to return pointer
+      ruby: Expose MessageBuffers as SimObjects
+      ruby: Protocol changes for SimObject MessageBuffers
+      stats: Bump for MessageBuffer, cache latency changes
+      syscall_emul: Bandage readlink /proc/self/exe
+      ruby: RubyMemoryControl delete requests
+      ruby: Fix memory leak in AbstractController
+      ruby: RubyPort delete snoop requests
+      arch, x86: Delete packet in IntDevice::recvResponse
+      ruby: Fix CacheMemory allocate leak
+      sim: Don't quiesce UDelayEvents with 0 latency
+      stats: Update for UDelayEvent quiesce change
+
+Ali Jafri <ali.jafri@arm.com> (11):
+      mem: Fix prefetchSquash + memInhibitAsserted bug
+      mem: Rename PREFETCH_SNOOP_SQUASH flag to BLOCK_CACHED
+      mem: Add forward snoop check for HardPFReqs
+      mem: Add check for express snoop in packet destructor
+      mem: Add clean evicts to improve snoop filter tracking
+      mem: Add check for snooping ports in the snoop filter
+      mem: Add CleanEvict and Writeback support to snoop filters
+      mem: Add snoops for CleanEvicts and Writebacks in atomic mode
+      mem: Add snoop filters to L2 crossbars, and check size
+      mem: Enforce insertion order on the cache response path
+      mem: Avoid unnecessary snoops on writebacks and clean evictions
+
+Tony Gutierrez <anthony.gutierrez@amd.com> (10):
+      arm: fix build_drive_system when not using default options
+      util: add a vimrc that matches gem5 style guide
+      slicc: export uint64_t instead of uint64
+      ruby: update WireBuffer API to match that of MessageBuffer
+      misc: ignore object files and static libs in util/m5
+      slicc: fixes for the Address to Addr changeset (11025)
+      mem: remove acq/rel cmds from packet and add mem fence req
+      stats: bump stats to reflect ruby tester changes
+      ruby: slicc: remove support for single machine, multiple types
+      ruby: slicc: have a static MachineType
+
+Radhika Jagtap <radhika.jagtap@arm.com> (8):
+      probe: Add probe in Fetch, IEW, Rename and Commit
+      proto, probe: Add elastic trace probe to o3 cpu
+      mem: Add instruction sequence number to request
+      cpu: Add TraceCPU to playback elastic traces
+      util: Add decode and encode scripts for elastic traces
+      config: Enable elastic trace capture and replay in se/fs
+      cpu: Create record type enum for elastic traces
+      cpu: Support virtual addr in elastic traces
+
+Mitch Hayenga <mitch.hayenga@arm.com> (7):
+      cpu: Change thread assignments for heterogenous SMT
+      config,cpu: Add SMT support to Atomic and Timing CPUs
+      cpu: Add per-thread monitors
+      arm: SMT MPIDR Setting
+      isa,cpu: Add support for FS SMT Interrupts
+      cpu,isa,mem: Add per-thread wakeup logic
+      arm: Change TLB Software Caching
+
+Ali Saidi <Ali.Saidi@arm.com> (6):
+      cpu: remove legion tracer
+      cpu: Put all CPU instruction tracers in a single file
+      cpu: Remove all notion that we know when the cpu is misspeculating.
+      sim: Clean up InstRecord
+      arm: always set the IsFirstMicroop flag
+      cpu: add support for outputing a protobuf formatted CPU trace
+
+Gabe Black <gabeblack@google.com> (5):
+      cpuid, x86: Revert "Enabling more features in CPUid"
+      x86: Enable three bits in the FamilyModelStepping ECX CPUID bitfield.
+      stats: x86: Update stats for the CPUID change.
+      base: Fix assigning between identical bitfields.
+      test: Add a unittest for the BitUnion types.
+
+Jason Lowe-Power <jason@lowepower.com> (5):
+      Ruby: Update backing store option to propagate through to all RubyPorts
+      Ruby: Remove assert in RubyPort retry list logic
+      config: Add configs scripts used in Learning gem5
+      tests: Add tests for the Learning gem5 scripts
+      stats: files for regression tests for Learning gem5 scripts
+
+Nikos Nikoleris <nikos.nikoleris@arm.com> (5):
+      cpu: fix RetiredStores probe point
+      cpu: commit probe notification on every microop or macroop The ppCommit should notify the attached listener every time the cpu commits a microop or non microcoded insturction. The listener can then decide whether it will process only the last microop (eg. SimPoint probe).
+      cpu: fix system total instructions accounting
+      dev: (un)serialize fix for the RTC and RTC Timer Interrupt events
+      x86: Adjust the size of the values written to the x87 misc registers All x87 misc registers are implemented in an array of 64 bit values but in real hardware the size of some of these registers is smaller. Previsouly all 64 bits where incorrectly set and then later read.  To ensure correctness we mask the value in setMiscRegNoEffect to write only the valid bits.
+
+Stephan Diestelhorst <stephan.diestelhorst@arm.com> (5):
+      mem: Fix initial value problem with MemChecker
+      cpu: Add a PC-value to the traffic generator requests
+      mem: Add option to force in-order insertion in PacketQueue
+      mem: Support any number of master-IDs in stride prefetcher
+      mem: Create a request copy for deferred snoops
+
+Erfan Azarkhish <erfan.azarkhish@unibo.it> (4):
+      mem: hmc: top level design
+      mem: hmc: adds controller
+      mem: hmc: serial link model
+      mem: hmc: minor fixes
+
+Marco Balboni <Marco.Balboni@ARM.com> (4):
+      mem: Clarify usage of latency in the cache
+      mem: Clarification of packet crossbar timings
+      mem: Add crossbar latencies
+      mem: Downstream components consumes new crossbar delays
+
+Nathanael Premillieu <nathanael.premillieu@arm.com> (4):
+      arm: Make address translation faster with better caching
+      arm: Add secure flag to TableWalker request when needed
+      arm: Fix fplib 128-bit shift operators
+      cpu: Fix base FP and CC register index in o3 insertThread()
+
+Ruslan Bukin <br@bsdpad.com> (4):
+      dev: Extend access width for IDE control registers
+      sim: correct check for endianess
+      arch, base, dev, kern, sym: FreeBSD support
+      arch: fix build under MacOSX put O_DIRECT under ifdefs -- this fixes build for MacOSX. Also use correct class for arm64 openFlagTable.
+
+Sascha Bischoff <sascha.bischoff@arm.com> (4):
+      dev: Fix draining for UFSHostDevice and FlashDevice
+      dev: Fix segfault in flash device
+      dev: Add basic checkpoint support to VirtIO9PProxy device
+      sim: Disable gzip compression for writefile pseudo instruction
+
+Wendy Elsasser <wendy.elsasser@arm.com> (4):
+      cpu: Fix TrafficGen message format
+      config: Add new MemConfig options to DRAM sweep script
+      mem: Update DRAM command scheduler for bank groups
+      mem: Add initial HBM configurations
+
+Abdul Mutaal Ahmad <abdul.mutaal@gmail.com> (3):
+      misc: Bugfix in TLM integration regarding CleanEvict Command The CleanEvict command was not considered in /util/tlm/sc_port.cc this could lead to a simulator crash. This issue is solved by ignoring this special command type.
+      misc: Bugfix for Freezing Terminal in SystemC Simulation
+      util: DrainManager/Checkpoint changes in SystemC coupling
+
+Andrew Bardsley <Andrew.Bardsley@arm.com> (3):
+      cpu: Fix a bug in counting issued instructions in MinorCPU
+      sim: Update C++ config example to match SystemC example
+      config: Added missing types to JSON/INI Python reader
+
+Bjoern A. Zeeb <baz21@cam.ac.uk> (3):
+      x86: pagetable walker: fix typo in comment
+      x86: cpuid: add family to warn() message
+      util: term: drop CC from Makefile
+
+Geoffrey Blake <geoffrey.blake@arm.com> (3):
+      config: Fix typo in Float param
+      mem: Enable CommMonitor to output traces in atomic mode
+      arm, dev: Fix flash model serialization code typos
+
+Giacomo Gabrielli <giacomo.gabrielli@arm.com> (3):
+      arm: Remove unnecessary dependencies between AArch64 FP instructions
+      arm: enable DCZVA by default in SE mode
+      arm: Implement some missing syscalls (SE mode)
+
+Joe Gross <joe.gross@amd.com> (3):
+      ruby: fix message buffer init order
+      ruby: add BoolVec
+      sim: support for distcc pump server settings
+
+Lena Olson <leolson@google.com> (3):
+      x86: fix debug trace output for mwait
+      ruby: allow restoring from checkpoint when using DRAMCtrl
+      ruby: Add missing block deallocations in MOESI_hammer
+
+Malek Musleh <malek.musleh@gmail.com> (3):
+      config, ruby: connect dma to network DMA Controller was not being connected to the network for the MESI_Three_Level protocol as was being done in the other protocol config files. Without this patch, this protocol segfaults during startup.
+      config: arm: fix os_flags Fix the makeArmSystem routine to reflect recent changes that support kernel commandline option when running android. Without this fix, trying to run android encounters a 'reference before assignment' error.
+      config, cpu: fix progress interval for switched CPUs This patch ensures that the CPU progress Event is triggered for the new set of switched_cpus that get scheduled (e.g. during fast-forwarding). it also avoids printing the interval state if the cpu is currently switched out.
+
+Palle Lyckegaard <palle@lyckegaard.dk> (3):
+      sparc: writing to tick_cmpr should not cause a panic
+      sparc: add missing parameter to makeSparcSystem()
+      sparc: Make remote debugging with gdb work Remove sparc V8 TBR register from list of registers since it is not part of sparc V9. This brings the number of registers in sync with what gdb expects
+
+Andrew Lukefahr <lukefahr@umich.edu> (2):
+      minor: fixed LSQ MasterPortID
+      cpu: pred: Local Predictor Reset in Tournament Predictor
+
+Boris Shingarov <shingarov@gmail.com> (2):
+      power: Implement Remote GDB
+      arm: remote GDB: rationalize structure of register offsets
+
+Cagdas Dirik <cdirik@micron.com> (2):
+      dev: prevent RTC events firing before startup
+      dev: prevent intel 8254 timer counter events firing before startup
+
+David Guillen-Fandos <david.guillen@arm.com> (2):
+      mem: Remove templates in cache model
+      mem: Make caches way aware
+
+Dylan Johnson <Dylan.Johnson@ARM.com> (2):
+      sim: Add ability to break at specific kernel function
+      sim: Add relative break scheduling
+
+Emilio Castillo <castilloe@unican.es> (2):
+      x86 : fxsave and fxrestore missing template code
+      cpu: quiesce pseudoinsts: Always do full quiesce
+
+Gabor Dozsa <gabor.dozsa@arm.com> (2):
+      dev: add support for multi gem5 runs
+      pseudo inst,util: Add optional key to initparam pseudo instruction
+
+Karthik Sangaiah <karthik.sangaiah@arm.com> (2):
+      dev, arm: Add gem5 extensions to support more than 8 cores
+      arm: Bootloader fix for v8 over 16 cores
+
+Matt Evans <matt.evans@arm.com> (2):
+      arm: Remove the 'magic MSI register' in the GIC (PL390)
+      arm: Add a GICv2m device
+
+Matthias Jung <jungma@eit.uni-kl.de> (2):
+      mem: Add HMC Timing Parameters A single HMC-2500 x32 model based on:
+      misc: Coupling gem5 with SystemC TLM2.0 Transaction Level Modeling (TLM2.0) is widely used in industry for creating virtual platforms (IEEE 1666 SystemC). This patch contains a standard compliant implementation of an external gem5 port, that enables the usage of gem5 as a TLM initiator component in SystemC based virtual platforms. Both TLM coding paradigms loosely timed (b_transport) and aproximately timed (nb_transport) are supported.
+
+Rekai Gonzalez-Alberquilla <rekai.gonzalezalberquilla@arm.com> (2):
+      cpu: o3 register renaming request handling improved
+      isa: Add parameter to pick different decoder inside ISA
+
+Rene de Jong <rene.dejong@arm.com> (2):
+      arm, dev: Add a NAND flash timing model
+      arm, dev: Add a UFS device
+
+Rizwana Begum <rb639@drexel.edu> (2):
+      config: Fix for 'android' lookup in disk name This patch modifies FSConfig.py to look for 'android' only in disk image name. Before this patch, 'android' was searched in full disk path.
+      mem: Simplify page close checks for adaptive policies
+
+Rune Holm <rune.holm@arm.com> (2):
+      arm: Fix typo in ldrsh instruction name
+      arm: Delete debug print in initialization of hardware thread
+
+Timothy M. Jones <timothy.jones@arm.com> (2):
+      uby: Fix checkpointing and restore
+      sim: function for testing for auto deletion
+
+Alexandru Dutu <alexandru.dutu@amd.com> (1):
+      cpu: Idle CPU status logic revised
+
+Chris Emmons <chris.emmons@arm.com> (1):
+      config: Specify OS type and release on command line
+
+Christoph Pfister <pfistchr@student.ethz.ch> (1):
+      mem: addr_mapper: restore old address if request not sent
+
+Dibakar Gope <gope@wisc.edu> (1):
+      cpu: re-organizes the branch predictor structure.
+
+Dongxue Zhang <elta.era@gmail.com> (1):
+      dev: IDE Disk: Handle bad IDE image size
+
+Hongil Yoon <ongal@cs.wisc.edu> (1):
+      cpu, o3: consider split requests for LSQ checksnoop operations
+
+Marco Elver <Marco.Elver@ARM.com> (1):
+      ruby: Fix MESI consistency bug
+
+Maxime Martinasso <maxime.cscs@gmail.com> (1):
+      x86: implements the simd128 ADDSUBPD instruction
+
+Mike Upton <michaelupton@gmail.com> (1):
+      arm: Add unlinkat syscall implementation
+
+Monir Mozumder <monir.mozumder@amd.com> (1):
+      syscall_emul: update x86 syscall table Update table with additional definitions through Linux 3.13.
+
+Pau Cabre <pau.cabre@metempsy.com> (1):
+      cpu: fix unitialized variable which may cause assertion failure
+
+Peter Enns <Peter.Enns@arm.com> (1):
+      dev: Add support for i2c devices
+
+Swapnil Haria <swapnilster@gmail.com> (1):
+      x86: Invalidating TLB entry on page fault
+
+Victor Garcia <victor.garcia@arm.com> (1):
+      kvm, arm: Fix compilation errors due to API changes
+

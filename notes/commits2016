@@ -1,0 +1,668 @@
+    97	Andreas Sandberg <Andreas.Sandberg@arm.com>
+    59	Andreas Hansson <andreas.hanson@arm.com>
+    35	Curtis Dunham <Curtis.Dunham@arm.com>
+    34	Tony Gutierrez <anthony.gutierrez@amd.com>
+    33	Steve Reinhardt <stever@gmail.com>
+    23	Nikos Nikoleris <nikos.nikoleris@arm.com>
+    20	Brandon Potter <brandon.potter@amd.com>
+    16	Michael LeBeane <michael.lebeane@amd.com>
+    15	Dylan Johnson <Dylan.Johnson@ARM.com>
+    13	Alexandru Dutu <alexandru.dutu@amd.com>
+    13	Mitch Hayenga <mitch.hayenga@arm.com>
+    11	David Guillen-Fandos <david.guillen@arm.com>
+    10	Gabor Dozsa <gabor.dozsa@arm.com>
+     9	Tushar Krishna <tushar@ece.gatech.edu>
+     8	Alec Roelke <alec.roelke@gmail.com>
+     7	Bjoern A. Zeeb <baz21@cam.ac.uk>
+     6	Jason Lowe-Power <jason@lowepower.com>
+     6	Rekai Gonzalez-Alberquilla <rekai.gonzalezalberquilla@arm.com>
+     5	Arthur Perais <arthur.perais@inria.fr>
+     4	Abdul Mutaal Ahmad <abdul.mutaal@gmail.com>
+     4	Brad Beckmann <brad.beckmann@amd.com>
+     4	David Hashe <david.hashe@amd.com>
+     4	Mohammad Alian <m.alian1369@gmail.com>
+     4	Omar Naji <Omar.Naji@arm.com>
+     4	Sascha Bischoff <sascha.bischoff@arm.com>
+     4	Wendy Elsasser <wendy.elsasser@arm.com>
+     3	Akash Bagdia <akash.bagdia@ARM.com>
+     3	Joel Hestness <jthestness@gmail.com>
+     3	John Kalamatianos <john.kalamatianos@amd.com>
+     3	Matteo Andreozzi <matteo.andreozzi@arm.com>
+     3	Matthew Poremba <matthew.poremba@amd.com>
+     3	Radhika Jagtap <radhika.jagtap@arm.com>
+     3	Stephan Diestelhorst <stephan.diestelhorst@arm.com>
+     2	Jieming Yin <jieming.yin@amd.com>
+     2	Matthias Jung <jungma@eit.uni-kl.de>
+     2	Reiley Jeapaul <Reiley.Jeyapaul@arm.com>
+     2	Tuan Ta <qtt2@cornell.edu>
+     1	Blake Hechtman <bah13@duke.edu>
+     1	Christian Menard <christian.menard@tu-dresden.de>
+     1	Fernando Endo <fernando.endo2@gmail.com>
+     1	Geoffrey Blake <geoffrey.blake@arm.com>
+     1	Ilias Vougioukas <Ilias.Vougioukas@ARM.com>
+     1	Jakub Jermar <jakub@jermar.eu>
+     1	Joe Gross <joe.gross@amd.com>
+     1	Krishnendra Nathella <Krishnendra.Nathella@arm.com>
+     1	Marco Elver <Marco.Elver@ARM.com>
+     1	Matt Poremba <matthew.poremba@amd.com>
+     1	Nathan Binkert <nate@binkert.org>
+     1	Nathanael Premillieu <nathanael.premillieu@arm.com>
+     1	Nicolas Derumigny <nderumigny@gmail.com>
+     1	Prakash Ramrakhyani <prakash.ramrakhyani@arm.com>
+     1	Ricardo Alves <ricardo.alves@arm.com>
+     1	Sergei Trofimov <sergei.trofimov@arm.com>
+     1	Shawn Rosti <shawn.rosti@gmail.com>
+     1	Sooraj Puthoor <puthoorsooraj@gmail.com>
+     1	Sophiane Senni <sophiane.senni@gmail.com>
+     1	Victor Garcia <victor.garcia@arm.com>
+Andreas Sandberg <Andreas.Sandberg@arm.com> (97):
+      dev, arm: Add support for automatic PCI interrupt routing
+      dev, arm: Add a platform with support for both aarch32 and aarch64
+      ext: Update NoMali to external rev f08e0a5
+      arm: Ship Linux device trees with gem5
+      dev, arm: Refactor the NoMali GPU
+      dev, arm: Implement the NoMali reset callback
+      base: Add support for changing output directories
+      sim: Add support for notifying Drainable objects of a fork
+      dev: Add post-fork handling for disk images
+      sim: Add support for forking
+      kvm: Shutdown KVM and disconnect performance counters on fork
+      misc: Add a gitignore file based on the current hgignore
+      arm: Refactor the TLB test interface
+      style: Strip newline when checking lines
+      copyright: Update copyright in sort_includes.py
+      kvm: Add an option to force context sync on kvm entry/exit
+      style: Remove unsupported style.py commands
+      scons, style: Rename style.py to hgstyle.py
+      style: Change include sorter to yield one line at a time
+      style: Refactor the style checker as a Python package
+      style: Add a control character checker
+      style: Remove style validators
+      style: Add repository helper functions
+      style: Add a git pre-commit hook
+      scons: Automatically install the git style hook
+      style: Add a style checker that doesn't depend on Mercurial
+      style: Change maximum line length to 79 characters
+      arm: Clean up m5ops assembly library
+      misc: Don't build region.py as a PySource
+      Revert power patch sets with unexpected interactions
+      Revert to 74c1e6513bd0 (sim: Thermal support for Linux)
+      style: Fix Python 2.6 compatibility
+      scons: Fix Python 2.6 compatibility
+      dev: Fix incorrect terminal backlog handling
+      kvm, arm: Refactor KVM GIC device
+      kvm, arm: Make GIC interrupt lines configurable
+      arm: Remove BreakPCEvent on guest kernel panic
+      tests: Remove stale reference output files
+      style: Don't include diff context in git style hook
+      arm: Update dts to work with the new HDLCD driver
+      dev, arm: Update GIC to use GICv2 register naming
+      tests: Enable test running outside of gem5's source tree
+      scons: Rewrite git style hook installer
+      tests: Add test infrastructure as a Python module
+      dev, arm: Add a flag to enable/disable gem5 GIC extensions
+      arm: Make EL checks available in SE mode
+      arm: Fix incorrect TLB permission check in aarch32
+      arm: Use the target EL state when determining fault format
+      tests: Fix incorrect stat.txt ignore when updating refs
+      scons: Use the new test framework from scons
+      arm: Correctly check translation mode (aarch64/aarch32)
+      arm: Enable LPAE support by default
+      style: Move the last bits of file_types.py to the style package
+      tests: Only run Ruby tests when testing Ruby targets
+      arm: Correctly check FP/SIMD access permission in aarch32
+      arm: Rewrite ERET to behave according to the ARMv8 ARM
+      stats: Update to match ARM ISA changes
+      tests: Remove working dir assumption in tgen tests
+      stats: Update ref stats to match ARM TLB changes
+      stats: Silence unused power stats
+      sim: Only print the power state transition warning once
+      stats: Add power stats to test references
+      base: Fix multiple names to one address bug in SymbolTable
+      kern, arm: Dump dmesg on kernel panic/oops
+      mem: Resolve TrafficGen trace relative to the config
+      tests: Split test results into running and verification
+      tests: Add a test command to get test status as an exit code
+      stats: Update stats to reflect ARM changes
+      style: Fix incorrect references style verifiers
+      base: Convert ELF .text size check assertion to a warning
+      arm: Don't consult the TLB test iface for functional translations
+      base: Fix inverted check in ELF .text size warning
+      tests: Add regex-based ignore rules for ref files
+      arm: Don't report the boot ROM as a memory in config tables
+      ruby: Implement support for functional accesses to PIO ranges
+      arm, dev: Add support for listing DMA ports in new platforms
+      arm, config: Add initial support for Ruby
+      arm, config: Exit with fatal error if using Ruby
+      stats: Update to match classic memory changes
+      cpu: Add missing override in Minor's exec context
+      dev: Revert 0a316996de76 [dev, sim: Added missing override...]
+      dev, arm: Add a customizable NoMali GPU model
+      tests: Add support for functional only tests
+      tests, arm: Make switcheroo and checkpoint tests functional
+      tests: Make remaining switcheroo tests functional only
+      test: Make the memtest and memcheck tests functional only
+      tests, arm: Reinstate accidentally removed switcheroo tests
+      sim: Add a checkpoint function to test for entries
+      dev, arm: Make GenericTimer param handling more robust
+      ext: Update fputils to rev 13589cd
+      style: Add options to select checkers and apply fixes
+      sim: Remove redundant buildEnv import
+      python: Fix incorrect header in the DmaDevice wrapper
+      dev: Include DmaDevice in NULL builds
+      python: Export periodicStatDump
+      mem: Make the BaseXBar public to not confuse Python wrappers
+      util: Add maintainer tools to create upstream patches
+
+Andreas Hansson <andreas.hanson@arm.com> (59):
+      configs: Fix inheritance of HMCSystem and cleanup spacing
+      ext: Replace gzstream with iostream3 from zlib to avoid LGPL
+      scons: Enable -Wextra by default
+      mem: Deduce if cache should forward snoops
+      mem: Align how snoops are handled when hitting writebacks
+      mem: Align cache behaviour in atomic when upstream is responding
+      mem: Move the point of coherency to the coherent crossbar
+      mem: Be less conservative in clearing load locks in the cache
+      stats: Update stats to reflect changes to cache and crossbar
+      mem: Avoid using invalid iterator in cache lock list traversal
+      misc: Add missing overrides to appease clang
+      scons: Enable building with the gcc/clang Address Sanitizer
+      scons: Add missing override to appease clang
+      mem: Ensure that InvalidateReq is not forwarded as ReadExReq
+      stats: Update stats to reflect forwarding of InvalidateReq
+      base: Fix gpu-compute output stream creation
+      syscall_emul: Fix erroneous use of delete
+      configs: Add a lat_mem_rd style test script
+      mem: Create a separate class for the cache write buffer
+      stats: Bump stats to match cache changes
+      mem: Adjust cache queue reserve to more conservative values
+      cpu: warn if TrafficGen is suppressing a large numer of packets
+      stats: Match current behaviour
+      misc: Appease clang...again
+      misc: Fix issues flagged by gcc 6
+      config: Add missing point of coherency to memcheck script
+      mem: Align downstream cache packet creation in atomic and timing
+      mem: Deallocate all write-queue entries when sent
+      mem: Remove unused cache stats
+      mem: Include WriteLineReq in cache demand stats
+      stats: Update stats to reflect cache changes
+      tests: Add a basic memcheck regression
+      arm, dev: Remove superfluous loop increment in flash device
+      arm: Fix heap overflow issue in Neon64Load operation
+      mem: Fix MemChecker unique_ptr type mismatch
+      mem: Do not set cacheResponding on MSHR snoop if not responding
+      cpu: Add a basic progress check to the TrafficGen
+      mem: Fix memory leak in handling of deferred snoops
+      scons: Bump minimum gcc version to 4.8
+      sim: Make clang happy
+      config: Fix omission of walker cache in config scripts
+      scons: Track swig packages when loading embedded swig code
+      mem: Add a FromCache packet attribute
+      mem: Update mostly exclusive cache policy to cover more cases
+      mem: Update mostly exclusive policy even further
+      mem: Use FromCache attribute in snoop filter allocation
+      mem: Add snoop filter to SystemXBar by default
+      config: Fix lat_mem_rd example script
+      ruby: Fix regressions and make Ruby configs Python packages
+      config: Make configs/common a Python package
+      stats: Update stats to reflect recent changes to floats
+      config: Break out base options for usage with NULL ISA
+      alpha: Remove ALPHA tru64 support and associated tests
+      tests, ruby: Move rubytests from ALPHA (linux) to NULL (none)
+      stats, alpha: Update ALPHA stats
+      tests: Check for TrafficGen as part of memcheck regression
+      mem: Ensure InvalidateReq is considered isForward by MSHRs
+      stats: Update stats to reflect cache changes
+      ruby: Remove RubyMemoryControl and associated files
+
+Curtis Dunham <Curtis.Dunham@arm.com> (35):
+      ext: remove redundant parameter in example SST+gem5 test
+      ext: fix SST connector
+      scons: always generate sim/tags.cc
+      base: support gzip-compressed object files
+      cpu: Implement per-thread GHRs
+      stats: update stats for thermals, indirect BP
+      style: improve compatibility with old git versions
+      style: respect ignores for git commit
+      style: ignore test data in style checks
+      scons: emit correct message before installing git hook
+      stats: update for snoop filter tweak
+      stats: update and fix e273e86a873d
+      tests: add 'CHANGED' output to pickle viewer
+      arm: refactor page table format determination
+      stats: update references
+      arm: enable EL2 support
+      arm: refactor page table walking
+      stats: update references
+      arm: bank GIC registers per CPU
+      arm: s/ctx_id/ctx/ the GIC
+      commit 15c633eea52f21dae8cb3a195823b3cdec7be491 Author: Curtis Dunham <Curtis.Dunham@arm.com>     ext: update SST connector for SST 6.0
+      ext: eliminate warnings in SST connector
+      base: eliminate ipython warning
+      ext: update SST test config
+      arm: disable GIC extensions
+      stats: update references
+      arm: update AArch{64,32} register mappings
+      arm: remove SCTLR.FI
+      arm: audit SCTLR
+      arm: miscreg refactoring
+      arm: compute ID_PFR{0,1} registers
+      arm: compute ID_AA64PFR{0,1}_EL1 registers
+      arm: provide correct timer availability in ID_PFR1 register
+      stats: update references
+      dist, dev: fix etherswitch upgrade script
+
+Tony Gutierrez <anthony.gutierrez@amd.com> (34):
+      * * * mem: support for gpu-style RMWs in ruby
+      mem: write combining for ruby protocols
+      gpu-compute: AMD's baseline GPU model
+      stats: update stats to after GPU checkin
+      ruby: send address ranges from RubyPort
+      gpu-compute: remove brig_object.hh from hsa_object.cc
+      ruby: move range change send from RubyPort to derived classes.
+      gpu-compute: fix uninitialized member bug in GPUDynInst
+      gpu-compute: fix spacing in GPUDynInst ctor
+      gpu-compute: fix bug in GPUDynInst::isScalarRegister()
+      x86, sim: add some syscalls to X86
+      sim: fix issues with pwrite(); don't enable fstatfs
+      gpu-compute: fix typo in GPUDispatcher
+      ruby: make a RequestDesc class instead of std::pair
+      gpu-compute, arch: add some methods to the base inst classes for ISA support
+      gpu-compute: move disassemle() implementation to GPUStaticInst
+      gpu-compute: remove inst enums and use bit flag for attributes
+      hsail, gpu-compute: remove doGm/SmReturn add completeAcc
+      gpu-compute, hsail: call discardFetch() from the WF
+      gpu-compute: add instruction mix stats for the gpu
+      gpu-compute: add gpu_isa.hh to switch hdrs, add GPUISA to WF
+      gpu-compute, hsail: make the PC a byte address, not an instruction index
+      gpu-compute: use System cache line size in the GPU
+      gpu-compute, hsail: pass GPUDynInstPtr to getRegisterIndex()
+      gpu-compute: support in-order data delivery in GM pipe
+      hsail,gpu-compute: fixes to appease clang++
+      x86: fix loading/storing of Float80 types
+      x86: fix issue with casting in Cvtf2i
+      ruby: add default ctor for MachineID type
+      gpu-compute: init valid field of GpuTlbEntry in default ctor
+      gpu-compute: fix segfault when constructing GPUExecContext
+      hsail: fix unsigned offset bug in address calculation
+      ruby: fix issue with unused var in DMASequencer
+      ruby: fix typo in DMASequencer::ackCallback()
+
+Steve Reinhardt <stever@gmail.com> (33):
+      mem: fix bug in packet access endianness changes
+      stats: update SPARC FS stats
+      sim: don't ignore SIG_TRAP
+      arch: get rid of unused LargestRead typedef
+      arch: don't call *Timing functions from *Atomic versions
+      cpu: remove unnecessary data ptr from O3 internal read() funcs
+      cpu. arch: add initiateMemRead() to ExecContext interface
+      sim: fix redundant --debug-start help string
+      stats: update EIO stats for recent changes
+      util: delete old unused style-checking scripts
+      util: clean up and extend style checker
+      style: remove trailing whitespace
+      style: fix missing spaces in control statements
+      util: added line length and boolean comparison style checkers
+      util: fix apparent statetrace bug
+      x86: create function to check miscreg validity
+      style: eliminate explicit boolean comparisons
+      syscall_emul: fix bug in aux vector initialization
+      arch: get rid of dummy var init
+      arch, x86: add support for arrays as memory operands
+      stats: update gpu-ruby-GPU_RfO stats
+      scons: fix building in non-standard locations
+      stats: overdue updates to long regressions
+      stats: update stats for mmap() change.
+      syscall_emul: move mmapGrowsDown() to LiveProcess
+      stats: update stats for mmap changes
+      stats: update stats for ld.so support
+      syscall_emul: factor out flag tables into common file
+      syscall_emul: remove mmapFlagTable
+      tests: update EIO ref stats for removed cache stats
+      stats: update EIO stats
+      stats: update EIO stats
+      tests: remove EIO tests
+
+Nikos Nikoleris <nikos.nikoleris@arm.com> (23):
+      mem: fix the line length in the cache related classes
+      mem: change NULL to nullptr in the cache related classes
+      mem: remove redudant check whether the cache forwards snoops
+      mem: fix headers include order in the cache related classes
+      mem: Fix the snoop filter when there is a downstream addr mapper
+      arm: Mark uninitialized new TLB entries as not valid
+      mem: Remove stale argument from a DPRINTF in the cache code
+      mem: Add support for secure packets in the snoop filter
+      cpu, arch: fix the type used for the request flags
+      mem: Print an MSHR without triggering any assertions
+      mem: Add support for repopulating the flags of an MSHR TargetList
+      mem: Keep track of allocOnFill in the TargetList
+      mem: Service only the 1st FromCPU MSHR target on ReadRespWithInv
+      cpu: Change traffic generators to use different values for writes
+      mem: Make packet debug printing more uniform
+      mem: Assert that the responderHadWritable is set only once
+      mem: Always use InvalidateReq to service WriteLineReq misses
+      mem: Don't use hasSharers in the snoopFilter for memory responses
+      mem: Allow non invalidating snoops on an InvalidateReq MSHR
+      mem: Invalidate a blk when servicing the 1st invalidating target
+      mem: Respond to InvalidateReq when the block is (pending) dirty
+      config: Add whole line accesses to improve memchecker's coverage
+      config: Add an option to generate a random topology in memcheck
+
+Brandon Potter <brandon.potter@amd.com> (20):
+      syscall_emul, style: fix newline issue inside assert
+      syscall_emul, style: refactor lseek
+      syscall_emul: rename OpenFlagTransTable struct
+      syscall_emul: add many Linux kernel flags
+      syscall_emul: extend mmap system call to support file backed mmaps
+      syscall_emul: fix bugs for mmap2 system call and x86-32 syscalls
+      syscall_emul: update x86 mmap base address
+      base: support dynamic loading of Linux ELF objects in SE mode
+      base: style cleanup for ObjectFile and ElfObject
+      base: add symbol support for dynamic libraries
+      hsail: remove the panic guarding function directives
+      hsail: generate mov instructions for more arith_types and bit_types
+      hsail: add a wavesize case statement to register operand code
+      hsail: add popcount type and generate popcount instructions
+      hsail: add stub type and stub out several instructions
+      hsail: disable asserts to allow immediate operands i.e. 0 with loads
+      syscall_emul: extend sysinfo system call to include mem_unit
+      syscall_emul: add support for x86 statfs system calls
+      syscall_emul: implement fallocate
+      base: remove header file to prevent a macro name collision
+
+Michael LeBeane <michael.lebeane@amd.com> (16):
+      syscall_emul: Implement clock_getres() system call
+      configs: add command-line option to stop debug output
+      ruby: make DMASequencer inherit from RubyPort
+      misc: Remove FullSystem check for networking components Ethernet devices are currently only hooked up if running in FS mode.  Much of the Ethernet networking code is generic and can be used to build non-Ethernet device models.  Some of these device models do not require a complex driver stack and can be built to use an EmulatedDriver in SE mode. This patch enables etherent interfaces to properly connect regardless of whether the simulation is in FS or SE mode.
+      dev: Exit correctly in dist-gem5 The receiver thread in dist_iface is allowed to directly exit the simulation. This can cause exit to be called twice if the main thread simultaneously wants to exit the simulation.  Therefore, have the receiver thread enqueue a request to exit on the primary event queue for the main simulation thread to handle.
+      gpu-compute: Fix bug with return in cfg Connecting basic blocks would stop too early in kernels where ret was not the last instruction.  This patch allows basic blocks after the ret instruction to be properly connected.
+      sim, syscall_emul: Add mmap to EmulatedDriver Add support for calling mmap on an EmulatedDriver file descriptor.
+      dev: Add a DmaCallback class to DmaDevice This patch introduces the DmaCallback helper class, which registers a callback to fire after a sequence of (potentially non-contiguous) DMA transfers on a DmaPort completes.
+      config: move dist-gem5 options to common config dist-gem5 should not be restricted to FullSystem mode.
+      sim: Refactor quiesce and remove FS asserts The quiesce family of magic ops can be simplified by the inclusion of quiesceTick() and quiesce() functions on ThreadContext.  This patch also gets rid of the FS guards, since suspending a CPU is also a valid operation for SE mode.
+      x86: Force strict ordering for memory mapped m5ops Normal MMAPPED_IPR requests are allowed to execute speculatively under the assumption that they have no side effects.  The special case of m5ops that are treated like MMAPPED_IPR should not be allowed to execute speculatively, since they can have side-effects.  Adding the STRICT_ORDER flag to these requests blocks execution until the associated instruction hits the ROB head.
+      kvm: Support timing accesses for KVM cpu This patch enables timing accesses for KVM cpu.  A new state, RunningMMIOPending, is added to indicate that there are outstanding timing requests generated by KVM in the system.  KVM's tick() is disabled and the simulation does not enter into KVM until all outstanding timing requests have completed.  The main motivation for this is to allow KVM CPU to perform MMIO in Ruby, since Ruby does not support atomic accesses.
+      dev: Add 'simLength' parameter in EthPacketData Currently, all the network devices create a 16K buffer for the 'data' field in EthPacketData, and use 'length' to keep track of the size of the packet in the buffer.  This patch introduces the 'simLength' parameter to EthPacketData, which is used to hold the effective length of the packet used for all timing calulations in the simulator.  Serialization is performed using only the useful data in the packet ('length') and not necessarily the entire original buffer.
+      ruby: Allow multiple outstanding DMA requests DMA sequencers and protocols can currently only issue one DMA access at a time. This patch implements the necessary functionality to support multiple outstanding DMA requests in Ruby.
+      dev: Add m5 op to toggle synchronization for dist-gem5. This patch adds the ability for an application to request dist-gem5 to begin/ end synchronization using an m5 op. When toggling on sync, all nodes agree on the next sync point based on the maximum of all nodes' ticks. CPUs are suspended until the sync point to avoid sending network messages until sync has been enabled. Toggling off sync acts like a global execution barrier, where all CPUs are disabled until every node reaches the toggle off point. This avoids tricky situations such as one node hitting a toggle off followed by a toggle on before the other nodes hit the first toggle off.
+      dev: Fix buffer length when unserializing an eth pkt
+
+Dylan Johnson <Dylan.Johnson@ARM.com> (15):
+      arm: change instruction classes to catch hyp traps
+      arm: invalidate TLB miscreg cache on modification of HSCTLR
+      arm: add stage2 translation support
+      arm: Add AArch64 hypervisor call instruction 'hvc'
+      arm: Fix EL perceived at TLB for address translation instructions
+      arm: Add check to fault routing for hypervisor/virtualization
+      arm: Refactor aarch64 table walk logic to remove redundancy
+      arm: Fix stage 2 determination in table walker
+      arm: Fix secure state checking in various places
+      arm: Fix trapping to Hypervisor during MSR/MRS read/write
+      arm: Fix stage 2 memory attribute checking in AArch64
+      arm: Add TLBI instruction for stage 2 IPA's
+      arm: correctly assign faulting IPA's to HPFAR_EL2
+      arm: Check TLB stage 2 permissions in AArch64
+      arm: warn not fail on use of missing miscreg CNTHCTL_EL2
+
+Alexandru Dutu <alexandru.dutu@amd.com> (13):
+      x86: revamp cmpxchg8b/cmpxchg16b implementation
+      syscall_emul: add extra debug support for syscalls
+      gpu-compute: Remove WFContext WFContext struct is currently unused and it has been rendered not useful in saving and restoring the context of a Wavefront. Wavefront class should be sufficient for that purpose and the runtime can figure out the memory size it will need to allocate for a Wavefront through an IOCTL.
+      gpu-compute: Wavefront refactoring Renaming members of the Wavefront class in accordance with the style guide.
+      gpu-compute: Adding ioctl for HW context size Adding runtime support for determining the memory required by a SIMD engine when executing a particular wavefront.
+      gpu-compute: Changing reconvergenceStack type std::stack has no iterators, therefore the reconvergence stack can't be iterated without poping elements off. We will be using std::list instead to be able to iterate for saving and restoring purposes.
+      gpu-compute: Adding vector register file debug messages This patch introduces DPRINTFs for reading and writing to and from the vector register file.
+      gpu-compute: Refactoring Wavefront::dynWaveId
+      gpu-compute: Adding context serialization methods to Wavefront This patch adds methods to serialize the context of a particular wavefront to the simulated system memory. Context serialization is used when a wavefront is preempeted (i.e. context switch).
+      hsail: Fix disassembly of load instruction with 3 destination operands
+      gpu-compute: Added method to compute the actual workgroup size This patch adds a method to the Wavefront class to compute the actual workgroup size. This can be different from the maximum workgroup size specified when launching the kernel through the NDRange object. Current solution is still not optimal, as we are computing these for each wavefront and the dispatcher also needs to have this information and can't actually call Wavefront::computeActuallWgSz before the wavefronts are being created. A long term solution would be to have a Workgroup class that deals with all these details.
+      misc: Adds a warning in case gdb is attached multiple times Instead of scheduling another event, this patch adds a warning in case gdb is attached multiple times and the first attachement event has not been processed yet.
+      kvm: Adding details to kvm page fault in x86 Adding details, e.g. rip, rsp etc. to the kvm pagefault exit when in SE mode.
+
+Mitch Hayenga <mitch.hayenga@arm.com> (13):
+      arm: Squash after returning from exceptions in v7
+      cpu: Add instruction opclass histogram to minor
+      cpu: Fix BTB threading oversight
+      cpu: Add an indirect branch target predictor
+      mem: Remove threadId from memory request class
+      cpu: Fix BTB threading oversight
+      cpu: Add an indirect branch target predictor
+      cpu: Implement per-thread GHRs
+      mem: Remove threadId from memory request class
+      isa: Modify get/check interrupt routines
+      cpu: Add SMT support to MinorCPU
+      cpu: Fix Minor SMT WFI/drain interaction issues
+      isa,arm: Add missing AArch32 FP instructions
+
+David Guillen-Fandos <david.guillen@arm.com> (11):
+      sim: Add voltage() function to clocked_object
+      sim: Adding thermal model support
+      sim: Thermal support for Linux
+      power: Add support for power models
+      stats: Fixing regStats function for some SimObjects
+      pwr: Add power states to ClockedObject
+      pwr: Low-power idle power state for idle CPUs
+      sim: Adding support for power models
+      pwr: Closing power and thermal feedback loop
+      mem: Add snoop traffic statistic
+      base: Add total() to Vector2D stat
+
+Gabor Dozsa <gabor.dozsa@arm.com> (10):
+      dev: Distributed Ethernet link for distributed gem5 simulations
+      config: Updates for distributed gem5 simulations
+      misc: Fix argument handling for m5 initparam util
+      style: respect per verifier ignores for git commit
+      style: remove extra newline from white space verifier fix method
+      style: catch trailing white spaces in make and dts files
+      arm, config: Add an example ARM big.LITTLE(tm) configuration script
+      arm, config: Fixups for the example big.LITTLE(tm) configuration
+      arm, config: Add missing IOCache in bL config
+      dev: Fix race conditions at terminating dist-gem5 simulations
+
+Tushar Krishna <tushar@ece.gatech.edu> (9):
+      ruby: rename ALPHA_Network_test protocol to Garnet_standalone. Over the past 6 years, we realized that the protocol is essentially used to run the garnet network in a standalone manner, and feed standard synthetic traffic patterns through it.
+      ruby: rename networktest to garnet_synthetic_traffic. networktest is essentially a collection of synthetic traffic patterns for the network. The protocol name and the tester having the same name led to multiple python configuration files with the same name, adding confusion. This patch renames networktest to garnet_synthetic_traffic, and also adds more synthetic traffic patterns.
+      config: add a separate config file for the network. This patch adds a new file configs/network/Network.py to setup the network, instead of doing that within Ruby.py.
+      config: make internal links in network topology unidirectional. This patch makes the internal links within the network topology unidirectional, thus allowing any deadlock-free routing algorithms to be specified from the topology itself using weights. This patch also renames Mesh.py and MeshDirCorners.py to Mesh_XY.py and MeshDirCorners_XY.py (Mesh with XY routing). It also adds a Mesh_westfirst.py and CrossbarGarnet.py topologies.
+      config: add port directions and per-router delay in topology. This patch adds port direction names to the links during topology creation, which can be used for better printed names for the links or for users to code up their own adaptive routing algorithms. It also adds support for every router to have an independent latency value to support heterogeneous topologies with the subsequent garnet2.0 patch.
+      ruby: remove the original garnet code. Only garnet2.0 will be supported henceforth.
+      ruby: garnet2.0 Revamped version of garnet with more optimized single-cycle routers, more configurability, and cleaner code.
+      ruby: Add M5_VAR_USED before variables used only inside assert in garnet2.0. This removes errors when building gem5.fast
+      config: fix typo in cluster topology.
+
+Alec Roelke <alec.roelke@gmail.com> (8):
+      arch: [Patch 1/5] Added RISC-V base instruction set RV64I
+      riscv: [Patch 2/5] Added RISC-V multiply extension RV64M
+      riscv: [Patch 3/5] Added RISCV floating point extensions RV64FD
+      riscv: [Patch 4/5] Added RISC-V atomic memory extension RV64A
+      riscv: [Patch 5/5] Added missing support for timing CPU models
+      riscv: [Patch 6/5] Improve Linux emulation for RISC-V
+      riscv: [Patch 7/5] Corrected LRSC semantics
+      riscv: [Patch 8/5] Added some regression tests to RISC-V
+
+Bjoern A. Zeeb <baz21@cam.ac.uk> (7):
+      mem: FreeBSD does not provide MAP_NORESERVE either
+      arm,dev: remove PMU assertion hit on reset
+      dev, virtio: properly set PCI address space to use IOREG
+      x86, dev: properly space the APIC registers
+      arm,dev: PL011 UART_FR read status enhancement
+      config, x86: Properly space pad the X86IntelMPBus Entry descriptions
+      arm, dev: pl011 console interactivity
+
+Jason Lowe-Power <jason@lowepower.com> (6):
+      tests: Update learning gem5 tests scripts with copyright
+      misc: merge with sytle checker fix
+      style: Make the style fixers safe
+      stats: Add more information to uninitialized error
+      cpu: Remove branch predictor function predictInOrder
+      tests: Regression stats updated for recent patches
+
+Rekai Gonzalez-Alberquilla <rekai.gonzalezalberquilla@arm.com> (6):
+      cpu: Change literal integer constants to meaningful labels
+      mem: Add unused prefetch counter in caches
+      mem: Handful extra features for BasePrefetcher
+      mem: Add priority to QueuedPrefetcher
+      cpu: Fix the O3 CPU Drain
+      util: git pre-commit hook to check staged files
+
+Arthur Perais <arthur.perais@inria.fr> (5):
+      cpu: Clarify meaning of cachePorts variable in lsq_unit.hh of O3
+      cpu: Resolve targets of predicted 'taken' decode for O3
+      cpu: correct comments in tournament branch predictor
+      cpu: disallow speculative update of branch predictor tables (o3)
+      cpu: implement an L-TAGE branch predictor
+
+Abdul Mutaal Ahmad <abdul.mutaal@gmail.com> (4):
+      misc: Bugfix in TLM memInhibit Command
+      misc: Separate stats file for SystemC-gem5 co-simulation
+      mem: different HMC configuration
+      mem: tester for new HMC configuration
+
+Brad Beckmann <brad.beckmann@amd.com> (4):
+      ruby: changed all references to numCPs to num-cp
+      ruby: removed Write_Only AccessPermission
+      mem: minor dprintf fix to abstract mem
+      ruby: correct size for partial memory writes
+
+David Hashe <david.hashe@amd.com> (4):
+      ruby: split CPU and GPU latency stats
+      cpu, mem, sim: Change how KVM maps memory
+      tests: Add example of using KVM acceleration with an app
+      config: KVM acceleration for apu_se.py
+
+Mohammad Alian <m.alian1369@gmail.com> (4):
+      dist, dev: add an ethernet switch model
+      dist: config file for distributed switch
+      dist, dev: Fixed the packet ordering in etherswitch
+      dev, dist: Fixed a scheduling bug in the etherswitch
+
+Omar Naji <Omar.Naji@arm.com> (4):
+      mem: make DDR4 x16
+      mem: add DRAM powerdown timing
+      mem: update DDR3 die revision
+      mem: add DRAM powerdown current
+
+Sascha Bischoff <sascha.bischoff@arm.com> (4):
+      sim: Fix clock_domain unserialization
+      sim: Add additional debug information when draining
+      misc: Add secondary dot output for DVFS domains
+      misc: Bail out of DVFS dot if we cannot resolve the domains
+
+Wendy Elsasser <wendy.elsasser@arm.com> (4):
+      mem: Sort memory commands and update DRAMPower
+      mem: Modify drain to ensure banks and power are idled
+      mem: Add callback to compute stats prior to dump event
+      mem: Add DRAM low-power functionality
+
+Akash Bagdia <akash.bagdia@ARM.com> (3):
+      power: Add power states to ClockedObject
+      power: Low-power idle power state for idle CPUs
+      power: Allow voltage to be configured via cmd line
+
+Joel Hestness <jthestness@gmail.com> (3):
+      ruby: Fix block_on behavior
+      ruby: Make MessageBuffers actually finite sized
+      sim: Fix SE mode checkpoint restore file handling
+
+John Kalamatianos <john.kalamatianos@amd.com> (3):
+      gpu: fix bugs with MemFence, Flat Instrs and Resource utilization
+      gpu-compute: remove unused variable from scoreboard check stage
+      gpu-compute: parametrize Wavefront size
+
+Matteo Andreozzi <matteo.andreozzi@arm.com> (3):
+      cpu: TraceGen fix for tick frequency check
+      scons: Enable override suggestions on gcc 5.0+
+      dev, sim: Added missing override keywords to fix CLANG compilation (OSX)
+
+Matthew Poremba <matthew.poremba@amd.com> (3):
+      ruby: Rename pkt to m_pkt so it may be accessed via SLICC
+      ruby: Fix double statistic registration in garnet
+      ruby: Fix overflow reported by ASAN in MessageBuffer.
+
+Radhika Jagtap <radhika.jagtap@arm.com> (3):
+      cpu: Add frequency scaling to the Trace CPU
+      cpu: Adjust for trace offset and fix stats
+      cpu: Support exit when any one Trace CPU completes replay
+
+Stephan Diestelhorst <stephan.diestelhorst@arm.com> (3):
+      mem, cpu: Add assertions to snoop invalidation logic
+      mem, config: Selective use of snoop filter
+      sim: Call regStats of base-class as well
+
+Jieming Yin <jieming.yin@amd.com> (2):
+      ruby: Fix potential bugs in garnet2.0
+      ruby: Detect garnet network-level deadlock.
+
+Matthias Jung <jungma@eit.uni-kl.de> (2):
+      misc: SystemC Elastic Trace Player Example.
+      ext: Update DRAMPower
+
+Reiley Jeapaul <Reiley.Jeyapaul@arm.com> (2):
+      sim: Added library include to fix build errors on clang-703.0.31
+      cpu: Fixed clang errors. Added 'override' keyword for virtual functions.
+
+Tuan Ta <qtt2@cornell.edu> (2):
+      gpu-compute: Fixed a bug in global memory pipeline
+      gpu-compute: Fixed a bug in decoding Atomic ST
+
+Blake Hechtman <bah13@duke.edu> (1):
+      mem: misc flags for AMD gpu model
+
+Christian Menard <christian.menard@tu-dresden.de> (1):
+      misc: fix a compile error due to incompability with SystemC 2.3.1
+
+Fernando Endo <fernando.endo2@gmail.com> (1):
+      cpu, arm: Distinguish Float* and SimdFloat*, create FloatMem* opClass
+
+Geoffrey Blake <geoffrey.blake@arm.com> (1):
+      cpu: Query CPU for inst executed from Python
+
+Ilias Vougioukas <Ilias.Vougioukas@ARM.com> (1):
+      cpu: fix lastStopped unserialisation
+
+Jakub Jermar <jakub@jermar.eu> (1):
+      config: Allow SPARC FS image to be specified on the command line
+
+Joe Gross <joe.gross@amd.com> (1):
+      scons: fix sanitizer flags with multiple sanitizers
+
+Krishnendra Nathella <Krishnendra.Nathella@arm.com> (1):
+      cpu: Fix LLSC atomic CPU wakeup
+
+Marco Elver <Marco.Elver@ARM.com> (1):
+      ruby: Implement SwapReq support
+
+Matt Poremba <matthew.poremba@amd.com> (1):
+      base: Output all AddrRange parameters to config.ini
+
+Nathan Binkert <nate@binkert.org> (1):
+      copyright: add copyright missing from files I created
+
+Nathanael Premillieu <nathanael.premillieu@arm.com> (1):
+      arm: Fix disasm printing
+
+Nicolas Derumigny <nderumigny@gmail.com> (1):
+      syscall: read() should not write anything if reading EOF.
+
+Prakash Ramrakhyani <prakash.ramrakhyani@arm.com> (1):
+      util: update Java JNI interface to m5ops
+
+Ricardo Alves <ricardo.alves@arm.com> (1):
+      arm: Add m5_fail support for aarch64
+
+Sergei Trofimov <sergei.trofimov@arm.com> (1):
+      sim: added missing include to mathexpr.hh
+
+Shawn Rosti <shawn.rosti@gmail.com> (1):
+      arm: Fix for ARM's Streamline conversion script
+
+Sooraj Puthoor <puthoorsooraj@gmail.com> (1):
+      ruby: init MessageSizeType of SequencerMsg to Request_Control
+
+Sophiane Senni <sophiane.senni@gmail.com> (1):
+      mem: Split the hit_latency into tag_latency and data_latency
+
+Victor Garcia <victor.garcia@arm.com> (1):
+      mem: Add Program Counter to MemTraceProbe
+
