@@ -93,46 +93,35 @@ Although there are many computer architecture simulators, and many of these are 
 \subsection{The past nine years}
 
 The gem5 simulator has been wildly successful in the past nine years since the initial release of gem5.
+In this time, the use of gem5 has exploded.
+Although not a perfect metric, the gem5 paper has received over 3600 citations according to Google Scholar.
 
-\begin{itemize}
-    \item Talk about the citations to gem5. Lots of use.
-    \item Very active development community
-    \item Lots of commits
-    \item Lots of committers
-\end{itemize}
+At the same time, the contributor community has also grown.
+Figures~\ref{fig:commits} shows the number of commits per year and Figure~\ref{fig:contributors} shows the number of unique contributors per year.
+These figures show that since the initial release of gem5 in 2011, development has been significantly accelerating.
 
-Show a figure with the number of commits per year.
-
-Show a figure with the number of unique contributors per year.
-
-Unfortunately, this success brought growing pains.
-Cite "gem5 Horrors"~\cite{Power-gem5horrors-2015}.
+With this acceleration in use and development of gem5 came growing pains~\cite{Power-gem5horrors-2015}.
+The gem5 community was going through a shift from a small project with most contributors from one or two academic labs to a project with worldwide-distributed contributors.
+Additionally, given the growing user base, we could no longer assume that all gem5 users were also going to be main developers.
 
 \subsection{gem5 now}
+\label{sec:current-gem5}
+
+To solve these problems the gem5 community has made major changes in the past nine years.
+We now have a formal governance structure, we have improved our documentation, we have moved to a better distributed development platform, and improved our community outreach.
+There are still many ways we can improve (see~\ref{sec:future}), but we have already come a long way!
 
 To solve these problems we
 \begin{itemize}
     \item Instituted a governance structure
     \item Improved documentation (cite Learning gem5)
-    \item Worked to fund raise (CCRI)
+    \item Worked to fund raise to get a developer to focus on things like testing
     \item Moved development model to modern tools (git, gerrit)
     \item Created a contributing document to help people get started
 \end{itemize}
 
-\subsubsection{Changes in gem5}
-
-In addition to these systematic changes there has also been lots of improvements to the codebase.
-Section~\ref{sec:changes} contains all of the details.
-
-These include... (a long list).
-
-\subsubsection{Using gem5 in research and education}
-
-This talks about how to use gem5 in your research and your education.
-
-Start with \url{gem5.org}.
-
 \subsection{The future of gem5}
+\label{sec:future}
 
 The future of gem5 is bright.
 
