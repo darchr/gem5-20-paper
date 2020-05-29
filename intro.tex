@@ -28,12 +28,57 @@ Specific user needs important to the community are enumerated below:
 \end{itemize}
 
 In this paper, we discuss the current state of gem5.
-We first give an overview of gem5's main features available today, and then quickly discuss the past, present, and future of gem5.
-Then, we include a significant section which describes the major changes in gem5 in the past nine years since the initial gem5 release.
+We first discuss the past, present and future of gem5.
+Then, we give an overview of gem5's main features available today and describe how to become a member of the gem5 community for researchers, students, and teachers.
+Finally, we include a significant section which describes the major changes in gem5 in the past nine years since the initial gem5 release.
+Each subsection was contributed by at least one of the people who developed that part of the simulator as noted in the footnotes.
 
 It has taken a huge number of people to make gem5 what it is today.
 One of the goals of this paper is to recognize the hard work on this community infrastructure which is often overlooked.
 We have tried to include everyone who has contributed and documented all of the major changes.
+
+\subsection{The past, present, and future of gem5}
+
+The gem5 simulator has been wildly successful in the past nine years since the initial release of gem5.
+In this time, the use of gem5 has exploded.
+Although not a perfect metric, the gem5 paper has received over 3600 citations according to Google Scholar.
+
+At the same time, the contributor community has also grown.
+Figures~\ref{fig:commits} shows the number of commits per year and Figure~\ref{fig:contributors} shows the number of unique contributors per year.
+These figures show that since the initial release of gem5 in 2011, development has been significantly accelerating.
+
+With this acceleration in use and development of gem5 came growing pains~\cite{Power-gem5horrors-2015}.
+The gem5 community was going through a shift from a small project with most contributors from one or two academic labs to a project with worldwide-distributed contributors.
+Additionally, given the growing user base, we could no longer assume that all gem5 users were also going to be main developers.
+
+To solve these problems the gem5 community has made major changes in the past nine years.
+We now have a formal governance structure, we have improved our documentation (see Section~\ref{sec:learning}), we have moved to a better distributed development platform, and improved our community outreach.
+
+To institute a formal governance model, we followed the best practices from other successful open source projects.
+We chose to institute a meritocratic governance model where anyone with an interest in the project can join the community, contribute to the project design and participate in the decision-making process.
+The governance structure also defines the roles and responsibilities of members of the community including users, contributors, and maintainers.
+We also formed a project management committee to help ensure smooth running of the project.
+Importantly, members of the PMC do not have significant authority over other members of the community or of the direction of the project.
+
+To simplify the contribution process, we have instituted many industry-standard development methodologies including providing a \verb|CONTRIBUTING| document in the gem5 source.
+In the past, gem5 code contributions were managed with a number of esoteric software packages.
+Now, all gem5 code is stored in a git repository\footnote{\url{googlesource}}, code review is managed on gerrit\footnote{url{gem5-review}}, we have continuous integration support (see Section~\ref{sec:testing}), our website is implemented with jekyll and markdown\footnote{\url{gem5-website-repo}}, and we have a Jira-based issue tracker\footnote{\url{https://gem5.atlassian.net/}}.
+After transitioning to these more well known tools, we have seen a rise in the number of community contributors.
+
+The future of gem5 is bright.
+We will be continuing to work with the community to define the roadmap for gem5 development for gem5 version 20.1 and beyond.
+In the short term, we are excited to to be improving the underlying infrastructure of gem5 with better testing, refactoring aging code (some of gem5's code is from 20 years ago!), and adding well-defined stable APIs.
+We are also working on improving the interconnect model~\ref{sec:garnet} and adding support for non-volatile memory controllers~\ref{sec:nvm}.
+
+One of the most exciting features coming to gem5 is that we will provide the community with a set of \emph{publicly validated} models which will model current architectural system components including CPU cores, GPU compute units (CUs), caches, main memory systems, and devices.
+We will strive for accuracy compared to real systems; however, since most systems are proprietary and complex, accuracy for all workloads will be difficult.
+Thus, we will broadly advertise the relative performance, power, and other metrics when providing these models so users can make an informed decision when choosing their baseline configurations.
+This will reduce the researcher's time spent on configuring baselines and allow them to concentrate more effort on analyzing and developing their novel research ideas.
+The first step towards this goal of validated baselines is the gem5 resources repository described in Section~\ref{sec:resources}.
+
+Finally, we are planning to publish an online ``Learning gem5'' course based on a largely expanded version of the Learning gem5 material~\ref{sec:learning}.
+This course will cover how to get started using gem5, how to develop new models to be used in gem5, and the details of gem5's software architecture.
+In addition to the online version of the course, we will continue to conduct tutorials and workshops at computer architecture and computer systems conferences.
 
 \subsection{gem5's main features}
 
@@ -90,41 +135,11 @@ Although there are many computer architecture simulators, and many of these are 
     \item gem5 is a \emph{community-driven} and \emph{frequently updated} project. The gem5 community is thriving. Since its original release nine years ago, there have been over 250 unique contributors and over 7500 commits. Even in the last six months, gem5 has had over 850 commits and 50 unique contributors.
 \end{itemize}
 
-\subsection{The past, present, and future of gem5}
-
-The gem5 simulator has been wildly successful in the past nine years since the initial release of gem5.
-In this time, the use of gem5 has exploded.
-Although not a perfect metric, the gem5 paper has received over 3600 citations according to Google Scholar.
-
-At the same time, the contributor community has also grown.
-Figures~\ref{fig:commits} shows the number of commits per year and Figure~\ref{fig:contributors} shows the number of unique contributors per year.
-These figures show that since the initial release of gem5 in 2011, development has been significantly accelerating.
-
-With this acceleration in use and development of gem5 came growing pains~\cite{Power-gem5horrors-2015}.
-The gem5 community was going through a shift from a small project with most contributors from one or two academic labs to a project with worldwide-distributed contributors.
-Additionally, given the growing user base, we could no longer assume that all gem5 users were also going to be main developers.
-
-To solve these problems the gem5 community has made major changes in the past nine years.
-We now have a formal governance structure, we have improved our documentation (see Section~\ref{sec:learning}), we have moved to a better distributed development platform, and improved our community outreach.
-
-To institute a formal governance model, we followed the best practices from other successful open source projects.
-We chose to institute a meritocratic governance model where anyone with an interest in the project can join the community, contribute to the project design and participate in the decision-making process.
-The governance structure also defines the roles and responsibilities of members of the community including users, contributors, and maintainers.
-We also formed a project management committee to help ensure smooth running of the project.
-Importantly, members of the PMC do not have significant authority over other members of the community or of the direction of the project.
-
-To simplify the contribution process, we have instituted many industry-standard development methodologies including providing a \verb|CONTRIBUTING| document in the gem5 source.
-In the past, gem5 code contributions were managed with a number of esoteric software packages.
-Now, all gem5 code is stored in a git repository\footnote{\url{googlesource}}, code review is managed on gerrit\footnote{url{gem5-review}}, we have continuous integration support (see Section~\ref{sec:testing}), our website is implemented with jekyll and markdown\footnote{\url{gem5-website-repo}}, and we have a Jira-based issue tracker\footnote{\url{https://gem5.atlassian.net/}}.
-After transitioning to these more well known tools, we have seen a rise in the number of community contributors.
-
-The future of gem5 is bright.
-We will be continuing to work with the community to define the roadmap for gem5 development for gem5 version 20.1 and beyond.
-
-
 \subsection{How to become part of the gem5 community}
 
 As a reader of this paper, you are already becoming part of the gem5 community!
+Anyone who uses gem5 or contributes in any way is part of the gem5 community.
+Contributing can be as simple as
 
 \subsubsection{For researchers}
 
@@ -132,18 +147,4 @@ As a reader of this paper, you are already becoming part of the gem5 community!
 
 \subsubsection{For teachers}
 
-\begin{itemize}
-    \item Lots of new stuff coming in a new roadmap that's coming soon!
-    \begin{itemize}
-        \item Improved python interface
-        \item New RAM models (including NVM)
-        \item Garnet 3.0
-        \item Models for ML accelerators
-        \item Known-good configurations
-        \item Many more.
-    \end{itemize}
-    \item Here, we talk about how to contribute to gem5.
-    \item We will do a better job recognizing contributions. The gem5 project is only successful with the community is vibrant. We have taken positive steps towards making it easier to contribute (like a governance document and contributing documentation), but we need to do more. We will encourage everyone to contribute.
-    \item More educational material coming!
-    \item More workshops, tutorials, etc.
-\end{itemize}
+The new Learning gem5 material created for the online course will include a set of example exercises that we hope can be used in both undergraduate and graduate computer architecture courses.
