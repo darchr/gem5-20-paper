@@ -102,12 +102,18 @@ These figures show that since the initial release of gem5 in 2011, development h
 
 \begin{figure}
     \centering
-    \subcaptionbox{Number of commits\label{fig:commits}}{
-      \includegraphics[height=4cm]{fig/gem5_commits.pdf}
-    }
-    \subcaptionbox{Number of contributors\label{fig:contributors}}{
-      \includegraphics[height=4cm]{fig/gem5_contributors.pdf}
-    }
+    \begin{subfigure}{0.4\linewidth}
+      \centering
+      \includegraphics[height=4cm]{fig/gem5_commits}
+      \caption{Number of commits}
+      \label{fig:commits}
+    \end{subfigure}
+    \begin{subfigure}{0.4\linewidth}
+      \centering
+      \includegraphics[height=4cm]{fig/gem5_contributors}
+      \caption{Number of contributors}
+      \label{fig:contributors}
+    \end{subfigure}
     \caption{Number of gem5 commits and contributors from 2011 to 2020.}
     \label{fig:gem5_commits_contributors}
 \end{figure}
