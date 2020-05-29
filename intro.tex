@@ -153,16 +153,31 @@ Although there are many computer architecture simulators, and many of these are 
     \item gem5 is a \emph{community-driven} and \emph{frequently updated} project. The gem5 community is thriving. Since its original release nine years ago, there have been over 250 unique contributors and over 7500 commits. Even in the last six months, gem5 has had over 850 commits and 50 unique contributors.
 \end{itemize}
 
-\subsection{How to become part of the gem5 community}
+\subsection{Becoming part of the gem5 community}
 
 As a reader of this paper, you are already becoming part of the gem5 community!
 Anyone who uses gem5 or contributes in any way is part of the gem5 community.
-Contributing can be as simple as
+Contributing can be as simple as sending a question on the gem5 mailing list\footnote{\url{http://www.gem5.org/mailing_lists/}} or as complex as adding a new model to the upstream codebase.
+Below, we discuss some of the common ways to use gem5 and become part of the community.
 
 \subsubsection{For researchers}
 
-\subsubsection{For students}
+Currently, the most common use case for gem5 is in computer architecture research.
+In this case, researchers download the gem5 source, build the simulator, and then add their own devices models on top of the models included in upstream gem5.
+This use case requires deep knowledge of the core simulation frameworks of gem5.
+However, we are working to make it easier to get started developing and researching with gem5 through efforts like the Learning gem5 materials and online course~\ref{sec:learning}.
 
-\subsubsection{For teachers}
+After using gem5 in their research, we encourage these users to contribute their improvements and fixes to the gem5 back to the mainline codebase.
+Not only does this improve gem5 for others, but it also makes reproducing research results easier.
+Rather than managing many local changes and trying to keep up with new releases of gem5, when code is contributed upstream it is the responsibility of \emph{others in the community} to ensure that the code stays up to date.
+Additionally the gem5 project employs a permissive BSD license to lower the barrier of contribution for both academics and industry researchers.
 
-The new Learning gem5 material created for the online course will include a set of example exercises that we hope can be used in both undergraduate and graduate computer architecture courses.
+\subsubsection{For students and teachers}
+
+The gem5 simulator can be used as a tool for teaching computer architecture as well.
+Historically, there has been a very steep learning curve for using gem5 even for simple experiments.
+However, with the improved documentation, this learning curve is coming down.
+
+We will be continuing to improve gem5 with the goal of making it easier for both students and teachers to use to learn and teach computer architectures concepts.
+For example, the new Learning gem5 material created for the online course will include a set of example exercises that we hope can be used in both undergraduate and graduate computer architecture courses.
+Additionally, we are working to develop a new GUI-based frontend for gem5 and to develop known-good models that do not required deep knowledge of simulator internals to configure and use.
