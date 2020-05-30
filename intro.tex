@@ -120,7 +120,7 @@ Finally, gem5 contains a detailed in-order CPU model (the ``minor'' CPU) and an 
 Underlying the memory system model in gem5 is a modular port interface which allows any component that implements the port API to be connected to any other component implementing that API.
 This allows models designed for one system to be easily used in other system designs.
 
-There are two different cache systems in gem5, Ruby which models cache coherence protocols with high fidelity, and the ``classic'' caches.
+There are two different cache systems in gem5: Ruby, which models cache coherence protocols with high fidelity, and the ``classic'' caches.
 Ruby enables user-defined cache coherence protocols, though gem5 includes many protocols out of the box.
 There are now 12 unique protocols including GPU-specific protocols~\cite{viper}, research protocols like token coherence~\cite{token-coherence} and region-coherence protocols~\cite{Power2012hsc}, and teaching protocols~\cite{coherence-primer}.
 Users can also choose to use the detailed Garnet network mode~\cite{garnet-2} when using Ruby caches which offers cycle-level detail for the on-chip network.
