@@ -1,12 +1,11 @@
-\subsection[Elastic Traces]{Elastic Traces\footnote{by Radhika Jagtap}}
-
+\subsection[Elastic Traces]{Elastic Traces\footnote{by Radhika Jagtap, Matthias Jung, Stephan Diestelhorst, Andreas Hansson, Thomas Grass, and Norbert Wehn}}
+%
 Detailed execution-driven CPU models, like gem5, offer high accuracy, but at the cost of simulation speed.
 Therefore, trace-driven simulations are widely adopted to alleviate this problem, especially for studies focusing on memory-system exploration.
 However, traces with fixed time stamps always include the implicit behavior of the simulated memory system with which they were recorded.
 If the memory system is changed during exploration this will lead to wrong simulation results, since an out-of-order core would react differently on the new memory system.
-
 Ideally, trace-driven core models will mimic out-of-order processors executing full-system workloads to enable computer architects to evaluate modern systems.
-Therefore, we proposed the concept of elastic traces in which we accurately capture data and load/store order dependencies by instrumenting a detailed out-of-order processor model (cite: 4.	Exploring System Performance using Elastic Traces: Fast, Accurate and Portable R. Jagtap, S. Diestelhorst, A. Hansson, M. Jung and N. Wehn. IEEE International Conference on Embedded Computer Systems Architectures Modeling and Simulation (SAMOS), July, 2016, Samos Island, Greece).
+Therefore, we proposed the concept of elastic traces in which we accurately capture data and load/store order dependencies by instrumenting a detailed out-of-order processor model~\cite{jagdie_16}.
 In contrast to existing work, we do not rely on offline analysis of timestamps, and instead use accurate dependency information tracked inside the processor pipeline.
 We thereby account for the effects of speculation and branch misprediction resulting in a more accurate trace playback compared to fixed time traces.
 We integrated a trace player in gem5 that honors the dependencies and thus adapts its execution time to memory-system changes, as would the actual CPU. Compared to the detailed CPU model, our trace player achieves a speed-up of 6-8 times while maintaining a high simulation accuracy (83-93\%), achieving fast and accurate system performance exploration.
