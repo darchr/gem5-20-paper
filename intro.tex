@@ -8,7 +8,7 @@ The gem5 simulator~\cite{Binkert-gem5-2011} is currently one of the most popular
 Since its publication in 2011, the gem5 paper has been cited over 3600 times\footnote{\url{https://scholar.google.com/scholar?q=gem5}}, and every year many papers published in the top computer architecture venues use gem5 as their main evaluation technique.
 
 The gem5 simulator~\cite{Binkert-gem5-2011} is an open source community-supported computer architecture simulator system.
-It consists of a simulator core and models for everything from out of order processors, to DRAM, to network devices.
+It consists of a simulator core and models for everything from out-of-order processors, to DRAM, to network devices.
 The gem5 project consists of the gem5 simulator\footnote{\url{https://gem5.googlesource.com/public/gem5}}, documentation\footnote{\url{https://www.gem5.org/}}, and common resources\footnote{\url{https://gem5.googlesource.com/public/gem5-resources}} that enable computer architecture research.
 
 The gem5 project is governed by a meritocratic, consensus-based community governance document\footnote{\url{https://www.gem5.org/governance/}} with a goal to provide a tool to further the state of the art in computer architecture.
@@ -103,7 +103,7 @@ In addition to the online version of the course, we will continue to conduct tut
 The gem5 simulator is a cycle-level computer system simulation environment.
 At its core, gem5 contains an event-driven simulation engine.
 On top of this simulation engine, gem5 implements a large number of models for system components from CPUs (out-of-order designs, in-order designs, and others), memories (such as DDR3/4, GDDR5, HBM, and HMC), on-chip interconnects, coherent caches, I/O devices, and many others.
-The gem5 project also contains tests to help find bugs, a complex and feature rich statistics database, and a Python scripting interface to describe systems under test and run simulations.
+The gem5 project also contains tests to help find bugs, a complex and feature-rich statistics database, and a Python scripting interface to describe systems under test and run simulations.
 
 The gem5 simulator has modular support for multiple ISAs.
 gem5 currently supports Arm, GPU ISAs, MIPS, Power, RISC-V, SPARC, and x86.
@@ -120,8 +120,8 @@ Finally, gem5 contains a detailed in-order CPU model (the ``minor'' CPU) and an 
 Underlying the memory system model in gem5 is a modular port interface which allows any component that implements the port API to be connected to any other component implementing that API.
 This allows models designed for one system to be easily used in other system designs.
 
-There are two different cache systems in gem5, Ruby which models cache coherence protocols with high fidelity, and the ``classic'' caches.
-Ruby enables user-defined cache coherence protocols, though gem5 includes many protocols out of the box.
+There are two different cache systems in gem5: Ruby which models cache coherence protocols with high fidelity, and the ``classic'' caches.
+Ruby enables user-defined cache-coherence protocols, though gem5 includes many protocols out of the box.
 There are now 12 unique protocols including GPU-specific protocols~\cite{viper}, research protocols like token coherence~\cite{token-coherence} and region-coherence protocols~\cite{Power2012hsc}, and teaching protocols~\cite{coherence-primer}.
 Users can also choose to use the detailed Garnet network mode~\cite{garnet-2} when using Ruby caches which offers cycle-level detail for the on-chip network.
 
@@ -131,7 +131,7 @@ Both Ruby and the classic caches can be used with any CPU model, any ISA, and an
 
 The gem5 simulator also includes an event-driven DRAM model.
 This DRAM model is easily configurable with the timing parameters for a variety of different DRAM controllers including DDR3, DDR4, GDDR, HBM, HMC, LPDDR4, LPDDR5, and others.
-Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{} or Ramulator~\cite{}, it is nearly as accurate while providing more flexibility and higher performance~\cite{hansson-ispass-paper}
+Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{} or Ramulator~\cite{}, it is nearly as accurate while providing more flexibility and higher performance~\cite{hansson-ispass-paper}.
 
 In addition to CPU models, gem5 also includes a cycle-level compute-based GPU~\cite{}.
 This GPU model does not support graphics applications, but supports many compute applications based on OpenCL.
@@ -142,7 +142,7 @@ gem5 supports many system-agnostic devices such as disk controllers, PCI compone
 Additionally, gem5 contains support for a ``fake'' graphics GPU to enable simulating applications that depend on graphics APIs.
 
 Finally, gem5 has been integrated with other computer architecture simulator systems to enable users with models in other simulator systems to use gem5's features.
-For instance, gem5 has been integrated with the System Simulation Toolkit (SST)~\cite{} which uses gem5's detailed CPU models in conjunction with SST's multi-node modeling capabilities.
+For instance, gem5 has been integrated with the System Simulation Toolkit (SST)~\cite{}, which uses gem5's detailed CPU models in conjunction with SST's multi-node modeling capabilities.
 The IEEE standard SystemC API~\cite{} has also been integrated with gem5 to enable users with SystemC models to use them as gem5 components.
 
 Although there are many computer architecture simulators, and many of these are open source with features that overlap with gem5, gem5 is a unique simulation infrastructure.
@@ -162,7 +162,7 @@ Below, we discuss some of the common ways to use gem5 and become part of the com
 
 \subsubsection{For researchers}
 
-Currently, the most common use case for gem5 is in computer architecture research.
+Currently, the most common use case for gem5 is in computer-architecture research.
 In this case, researchers download the gem5 source, build the simulator, and then add their own devices models on top of the models included in upstream gem5.
 This use case requires deep knowledge of the core simulation frameworks of gem5.
 However, we are working to make it easier to get started developing and researching with gem5 through efforts like the Learning gem5 materials and online course~\ref{sec:learning}.
@@ -179,5 +179,5 @@ Historically, there has been a very steep learning curve for using gem5 even for
 However, with the improved documentation, this learning curve is coming down.
 
 We will be continuing to improve gem5 with the goal of making it easier for both students and teachers to use to learn and teach computer architectures concepts.
-For example, the new Learning gem5 material created for the online course will include a set of example exercises that we hope can be used in both undergraduate and graduate computer architecture courses.
+For example, the new Learning gem5 material created for the online course will include a set of example exercises that we hope can be used in both undergraduate and graduate computer-architecture courses.
 Additionally, we are working to develop a new GUI-based frontend for gem5 and to develop known-good models that do not required deep knowledge of simulator internals to configure and use.
