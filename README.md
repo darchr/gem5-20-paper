@@ -1,8 +1,8 @@
 # gem5-20 paper repo
 
-First of all, I want to thank you for your contributions to gem5! Your contributions to the shared community research infrastructure has a huge impact to computer architecture research as a whole. Due to your contribution to the gem5 community, I would like to invite you to be an author on the gem5-20+ paper. See below for what you need to do if you want to be included in the author list. If you don't want to be included feel free to ignore this email!
+First of all, I want to thank you for your contributions to gem5! Your contributions to the shared community research infrastructure has a huge impact to computer architecture research as a whole. Due to your contribution to the gem5 effort, I would like to invite you to be an author on the gem5-20+ paper. See below for what you need to do if you want to be included in the author list. If you don't want to be included feel free to ignore this email!
 
-Please see below for details on what I need from you. I am planning to post this paper to arXiv on Tuesday June 2. If I don't hear from you by then, you will not be included as an author at that time. However, on arXiv we can (and will) update the manuscript after that date, so if you get back to me late, you can be included on future revisions.
+I am planning to post this paper to arXiv on Tuesday June 2. If I don't hear from you by then, you will not be included as an author at that time. However, on arXiv we can (and will) update the manuscript after that date, so if you get back to me late, you can be included on future revisions.
 
 The canonical version of this paper lives on github: https://github.com/darchr/gem5-20-paper/blob/master/main.pdf.
 
@@ -12,22 +12,22 @@ Note that this paper is currently a draft. We're still working on finalizing the
 
 Right now, we will be posting a preprint of this paper to arXiv so people can start citing it when they use gem5-20+ in their research.
 
-In the future, I am hopeful to submit and publish this paper at an archived ACM or IEEE computer architecture venue. However, we have no immediate plans on how we will do this. We will contact you again before this paper is submitted to peer review or any other venue.
+In the future, I hope to submit and publish this paper at an archived ACM or IEEE computer architecture venue. However, we have no immediate plans on how and when we will do this. I will contact you again when we decide to do that.
 
 ## Paper goals
 
-As you're likely aware, we just pushed an ["official" gem5 release](http://www.gem5.org/project/2020/05/21/gem5-20.html). As part of this release, I'm working on a new gem5 paper to advertise gem5 to the wider computer architecture community. In this paper, I'm planning to include an overview of gem5, the changes in gem5's governance, and, most importantly, what has changed (including your work!) over the past 9 years since the original gem5 paper.
+As you are probably aware, we just pushed an ["official" gem5 release](http://www.gem5.org/project/2020/05/21/gem5-20.html). As part of this release, I am working on a new gem5 paper to advertise gem5 to the wider computer architecture community. In this paper, I am planning to include an overview of gem5, the changes in gem5's governance, and, most importantly, what has changed (including your contributions!) over the past 9 years since the original gem5 paper.
 
 The goals of this paper are twofold:
 
 1. Advertise gem5 to the new generation of computer architecture researchers
 2. Give credit to everyone who has contributed to this shared community infrastructure
 
-I think it's important to recognize *everyone's* contributions to gem5, not just those that contributed a large new model and published their own paper (which is great, too!).
+I think it is important to recognize *everyone's* contributions to gem5, not just those that contributed a large new model and published their own paper (which is great, too!).
 
 Thus, I am asking everyone who has pushed any code changes to gem5 over the past 9 years (since the last gem5 paper) to be an author.
 
-As you can see, we've already had many contributions from those in the community which contributed "significant" new features. For each of these, one or a few people have contributed a significant chunk of text which I have tried my best to attribute to the right person. Please let me know if I'm wrong.
+As you can see, we have already had many contributions from those in the community which contributed "significant" new features. For each of these, one or a few people have contributed a significant chunk of text which I have tried my best to attribute to the right person. Please let me know if I am wrong.
 
 ## What I need from you:
 
