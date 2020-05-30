@@ -1,25 +1,25 @@
 \subsection[RISC-V ISA Support]{RISC-V ISA Support}
 
 RISC-V is a new ISA which has quickly gained popularity since its creation in 2010, only one year before the initial gem5 release~\cite{Waterman2011riscv}.
-In that time, the number of users RISC-V has grown significantly, especially in the computer architecture research community.
+In that time, the number of RISC-V users has grown significantly, especially in the computer-architecture research community.
 Thus, the addition of RISC-V as a supported ISA for gem5 is one of the main new features in the past nine years.
 
-\subsubsection[General RISC-V ISA Implementation]{General RISC-V ISA Implementation\footnote{By Alec Rokle}}
+\subsubsection[General RISC-V ISA Implementation]{General RISC-V ISA Implementation\footnote{By Alec Roelke}}
 
 \textbf{TODO: CITE (\url{https://carrv.github.io/2017/papers/roelke-risc5-carrv2017.pdf}) and (\url{https://carrv.github.io/2018/papers/CARRV_2018_paper_3.pdf}).}
 
 The motivation for implementing the RISC-V ISA into gem5 stemmed from needing a way to explore architectural parameters for RISC-V designs.
-At the time of implementation, the only means of simulating RISC-V was using spike (its simplified, single-cycle RTL simulator), QEMU, or full RTL simulation or emulation on FPGA.
-Spike and QEMU aren’t detailed enough and RTL simulation is too time consuming for these methods to be feasible for architectural parameter exploration, and FPGA emulation is difficult to retrieve performance information from without modifying both the RTL design and executed software to track and present it.
+At the time of implementation, the only means of simulating RISC-V was using spike (its simplified, single-cycle RTL simulator), QEMU, or full RTL simulation, or emulation on FPGA.
+Spike and QEMU are not detailed enough and RTL simulation is too time consuming for these methods to be feasible for architectural parameter exploration. With FPGA emulation, it is difficult to retrieve performance information without modifying both the RTL design and the system software.
 The gem5 simulator provides an easy means of performing this type of analysis through its detailed hardware models that do not require software modification and allows for variable levels of detail.
-By adding RISC-V to gem5, this type of analysis is enabled for the rapidly-growing ISA.
+By adding RISC-V to gem5, this type of analysis is enabled for this rapidly-growing ISA.
 
 The implementation was done by following the divisions of the instruction set into its base ISA and extensions, beginning with the 32-bit integer base set, RV32I.
 It was modeled off of the existing gem5 code for MIPS and Alpha, which are also RISC instruction sets that share many of the same operations as RISC-V.
 Including support for 64-bit addresses and data (RV64) and for the multiply (M) extension mainly involved adding the new instructions and changing some parameters to expand register and data path widths.
 The next two extensions, atomic (A) and floating point (F and D for single- and double-precision, respectively), were more complicated.
 The A extension includes both load-reserved/store-conditional (LR/SC) sequence of instructions for performing complex atomic operations on memory and a set of read-modify-write instructions for performing simple ones.
-The former two instructions had analogues in MIPS, but, at the time of implementation, gem5 did not have support for single instructions that both read and wrote memory atomically.
+The former two instructions had analogues in MIPS, but, at the time of implementation, gem5 did not have support for single instructions that both read and write memory atomically.
 These instructions were implemented as a pair of micro-ops that acted like an LR/SC pair with one of the pair additionally performing the specified operation.
 Floating-point instructions required many special cases to ensure correct error handling and reporting, and we were not able to implement one of the five possible rounding modes (round away from zero) RISC-V specifies for inexact calculations due to the fact that C++ does not support it.
 Finally, support for the non-standard compressed (C) extension, which adds 16-bit versions of high-usage instructions, was added when it was discovered that this extension was included by default in many RISC-V software toolchains.
@@ -31,7 +31,8 @@ Future work by others would then go on to improve the implementation of atomic i
 \subsubsection[RISC-V Full System Support]{RISC-V Full System Support\footnote{By Nils Asmussen}}
 
 To simulate complete operating systems as well, full system simulation was added for RISC-V.
-More specifically, Sv39 paging with a 39-bit virtual address space, a three-level translation and a translation lookaside buffer has been added.
-Additionally, gem5's version of the~\cite{} (RISC-V test-suite (\url{https://github.com/riscv/riscv-tests})) has been updated to the latest version and several corner cases in gem5 have been fixed, so that now most of the tests are working correctly.
+More specifically, Sv39 paging according to the privileged ISA 1.11\footnote{\url{https://riscv.org/specifications/privileged-isa/}} with a 39-bit virtual address space, a page-table walker performing a three-level translation, and a translation lookaside buffer has been added.
+The page-table walker code has been based on the existing gem5 code for x86 due to the structural similarities.
+Additionally, gem5's version of the RISC-V test-suite\footnote{\url{https://github.com/riscv/riscv-tests}} has been updated to the latest version and several corner cases in gem5 have been fixed, so that now most of the tests are working correctly.
 While a few steps are still missing to run Linux, general support to run a complete RISC-V operating system on gem5 is available now.
 
