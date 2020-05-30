@@ -26,7 +26,7 @@ bit long (in 128-bit increments). SVE code is arranged in a way that is agnostic
 underlying vector length (Vector Length Agnostic Programming), and a single SVE
 instruction will perform its operation on as many elements as the vector
 register can fit, depending on its length. On top of the 32 variable-length
-vector registers, SVE also adds 16 variable length perdicate registers for
+vector registers, SVE also adds 16 variable length predicate registers for
 predicated execution. These registers store one bit per byte (the minimum
 element size) in the vector register, and can be used to select specific
 elements in your vector for operation~\cite{white-paper-on-SVE-and-VLA-programming}.
@@ -47,7 +47,7 @@ with arbitrarily large vector registers.
 \subsubsection[Trusted Firmware Support]{Trusted Firmware Support\footnote{by Adrian Herrera}}
 
 Trusted Firmware (TF-A) is Arm's reference implementation of Secure World software for A-profile architectures.
-It enables Secure Boot flow models, and provides implementations for the Secure Monitor executing at Exception Level 3 (EL3) as well as for several Arm low-level software interface standards, including System Control and Management Interface (SCMI) driver for accessing System Control Processors (SCP), Power State Coordination Interface (PSCI) library support for power management, and Secure Monitor Call5 (SMC) handling.
+It enables Secure Boot flow models, and provides implementations for the Secure Monitor executing at Exception Level 3 (EL3) as well as for several Arm low-level software interface standards, including System Control and Management Interface (SCMI) driver for accessing System Control Processors (SCP), Power State Coordination Interface (PSCI) library support for power management, and Secure Monitor Call (SMC) handling.
 
 TF-A is supported on multiple Platforms, each of them characterized by its set of hardware components and their location in the memory map.
 From the list of ADPs (Arm Development Platforms), it is worth mentioning the Juno ADP and the Fixed Virtual Platforms (FVP) ADP family.
