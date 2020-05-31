@@ -50,7 +50,7 @@ Our ambition is to completely phase out Python 2 support in the near future to b
 The difficulties of writing a complex device/hw model within gem5 is that your model needs to be able to work and be representative of the simulated hardware in both atomic and timing mode.
 
 For simple devices which only respond to requests, this is usually not a concern.
-The situation gets worse when the device can send requests and response or has DMA capabilities.
+The situation gets worse when the device can send requests and responses or has DMA capabilities.
 A method generating and forwarding a read packet needs to differentiate between atomic and timing behavior by handling the first with a blocking operation (the read returns the value as soon as the forwarding method returns) and the second with a non-blocking call: the value will be returned later in time.
 The situation becomes dramatic in timing mode if multiple sequential DMAs are stacked so that any read operation depends on previous ones; this is the case for page table walks for example.
 
