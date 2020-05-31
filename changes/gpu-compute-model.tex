@@ -5,7 +5,7 @@ Heard back, waiting for text.
 \subsubsection[Autonomous Data-Race-Free GPU Tester]{Autonomous Data-Race-Free GPU Tester\footnote{by Tuan Ta}}
 
 The Ruby coherence protocol tester is designed for CPU-like memory systems that implement relatively strong memory consistency models (e.g., TSO) and hardware-based coherence protocols (e.g., MESI).
-In such systems, once a processor sends a memory request to memory, the request appears globally to the rest of the system.
+In such systems, once a processor sends a request to memory, this one appears globally to the rest of the system.
 Without knowing implementation details of target memory systems, the tester can rely on the issuing order of reads and writes to determine the current state of shared memory.
 However, existing GPU memory systems are often based on weaker consistency models (e.g., sequential consistency for data-race-free) and implement software-directed cache coherence protocols (e.g., VIPER requiring explicit cache flushes and invalidations from software to maintain cache coherence).
 The order in which reads and writes appear globally can be different from the order they are issued from GPU cores.
