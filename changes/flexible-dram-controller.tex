@@ -55,8 +55,9 @@ For the efficient integration of DRAMPower into gem5, we changed the tool from a
 Furthermore, we integrate the power-down modes into the DRAM controller model of gem5~\cite{jagjun_17} in order to provide the research community a tool for power-down analysis for a breadth of use cases. We further evaluated the model with real HPC workloads, illustrating the value of integrating low power functionality into a full system simulator.
 %
 \subsubsection[Future Improvements to Off Chip Memory Models]{Future Improvements to Off Chip Memory Models\footnote{by Wendy Elsasser}}
+\label{sec:nvm}
 
-With the advent of SCM (storage class memory), emerging NVM could also exist on a memory interface, potentially alongside DRAM.
+With the advent of SCM (storage class memory), emerging NVM (Non-Volatile Memory) could also exist on a memory interface, potentially alongside DRAM.
 To enable support of NVM and future memory interfaces, a systematic approach was chosen to refactor the DRAM controller.
 The DRAM interface was pulled out of the controller and moved to a separate DRAM interface object.
 In parallel, an NVM interface was created to model an agnostic interface to emerging memory.
