@@ -15,7 +15,7 @@ The original full-system implementation was later extended to support syscall em
 Support for hardware virtualization in gem5 enabled research into novel ways of accelerating simulation.
 The original intention was to use KVM to generate checkpoints and later simulate those checkpoints in parallel.
 However, we quickly realized that the checkpointing step could be eliminated by cloning the simulator state at runtime.
-This led to the introduction of the fork call in gem5’s Python API.
+This led to the introduction of the fork call in gem5's Python API.
 Under the hood, this call drains the simulator to make sure everything is in a consistent state, it then uses the UNIX fork call to create a copy of the simulator.
 A typical use case uses a main process that generates samples that are simulated in parallel.
 More advanced use cases use fork semantics to simulate multiple outcomes of a sample to quantify the cache warming errors introduced by using KVM to fast-forward between samples~\cite{} (Full speed ahead).
