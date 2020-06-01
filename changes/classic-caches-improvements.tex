@@ -1,33 +1,28 @@
 \subsection[Classic Caches Improvements]{Classic Caches Improvements\footnote{by Nikos Nikoleris}}
 
-The classic memory system implements a snooping MOESI-like coherence protocol that allows for flexible, configurable cache hierarchies that do not need a change of the coherence protocol for different topologies.
-The coherence protocol is primarily implemented in the Cache with some support also implemented in CoherentXBar and crucial optimizations in the SnoopFilter.
+The classic memory system implements a snooping MOESI-like coherence protocol that allows for flexible, configurable cache hierarchies.
+The coherence protocol is primarily implemented in the Cache and the CoherentXBar and the SnoopFilter implements a common optimisation to reduce unnecessary coherence traffic.
 
-Over the years, the components of the classic memory systems have received a lot of contributions that enhanced the accuracy and allowed for more flexibility in gem5 to model the on-chip memory system.
+Over the years, the components of the classic memory system have received a lot of contributions with a primary focus is adding support for future technologies and enhancing its accuracy.
 
 \subsubsection[Non-Coherent Cache]{Non-Coherent Cache}
 The cache model in gem5 implements the full coherence protocol and as a result can be used in any level of the coherent memory subsystem (e.g., L1 data cache or instruction cache, last-level cache).
-The non-coherent cache is a stripped down version of the cache model and can only be placed below the point-of-coherence (closer to memory).
-Below the point-of-coherence, the non-coherent cache receives only requests for fetches and writebacks and itself performs only fetches and writebacks to memory below.
-As such the non-coherent cache is a greatly simplified version in terms of handling the coherence protocol compared to the regular Cache while otherwise supporting the same flexibility (e.g., configurable tags, replacement policies, inclusive or exclusive, etc.).
+The non-coherent cache is a stripped down version of the cache design to be used below the point-of-coherence (closer to memory).
+Below the point-of-coherence, the non-coherent cache receives only requests for fetches and writebacks and itself send requests for fetches and writebacks to memory below. As opposed to the regular cache, the non-coherent cache will not send any snoops to invalidate or fetch data from caches above.
+As such the non-coherent cache is a greatly simplified version in terms of handling the coherence protocol compared to the regular cache while otherwise supporting the same flexibility (e.g., configurable tags, replacement policies, inclusive or exclusive, etc.).
 
-The non-coherent cache can be used to model system-level caches.
-System-level Caches are often larger in size and can be used by CPUs and other devices in the system.
+The non-coherent cache can model large system-level caches which are used by the CPUs and other devices in the system.
 
 \subsubsection[Write Streaming Optimizations]{Write Streaming Optimizations}
 
-Write streaming is a common access pattern that is typically encountered when software initializes or copies large memory buffers (e.g., memset, memcpy).
-Write streaming can create a lot of pressure to the memory system both for off-chip memory bandwidth and on-chip cache capacity.
-These streaming writes will result in invalidation to other caches and fetches from off-chip memory to fill-in cache lines that are immediately overwritten with new data.
-In addition, these fills can thrash the L1 or L2 cache.
+Write streaming is a common access pattern which is typically encountered when software initialises or copies large memory buffers (e.g., memset, memcpy).
+When executed, the core issues a large number of write requests to the data cache. The data cache receives these write requests and issues requests for exclusive copies of the corresponding cache lines. To get an exclusive copy, it has to invalidate copies of that line and fetch a copy of the data (e.g., from off-chip memory). As soon as it receives data, it performs all writes for that line and often will overwrite it completely. As a result, the data cache unnecessarily fetches data only to overwrite it shortly after. Often these write buffers are large in size and also trash the data cache.
 
-Common optimizations~\cite{} ([1] Conway, Pat, Nathan Kalyanasundharam, Gregg Donley, Kevin Lepak, and Bill Hughes. Cache hierarchy and memory subsystem of the AMD Opteron processor. IEEE micro 30, no. 2 (2010): 16-29) coalesce writes to form full cache line writes and avoid unnecessary data fetches.
-As a result, we can achieve significant reduction in on-chip memory traffic and off-chip memory bandwidth.
-In addition, when the buffer we write to is larger than the size of the L1 cache we need to avoid thrashing the L1.
+Common optimizations~\cite{10.1145/173682.165154} coalesce writes to form full cache line writes, avoid unnecessary data fetches and achieve significant reduction in memory bandwidth.
+In addition, when the written memory buffer is large, we can also avoid thrashing the data cache by bypassing allocation.
 
-We have implemented a simple mechanism to detect write streaming memory access patterns.
-The mechanism can attach to any cache in the system but has been primarily designed for use in L1 data cache.
-It can detect a single write-streaming access pattern with configurable thresholds for switching to write coalescing and switching to bypassing allocation in the current cache level and avoid thrashing.
+We have implemented a simple mechanism to detect write streaming access patterns and enable coalescing and bypassing.
+The mechanism attaches to the data cache and analyses incoming write requests. When the number of sequential writes reaches a first threshold, it enables write coalescing and when a second threshold is reached, in addition, the cache will bypass allocation for the writes in the stream.
 
 \subsubsection[Cache Maintenance Operations]{Cache Maintenance Operations}
 
@@ -43,7 +38,7 @@ An operation can either clean and/or invalidate a cache line.
 A clean
 operation will find the dirty copy and trigger a writeback and an invalidate operation will find all copies of the cache line and invalidate them and the combined operation will perform both actions.
 The effects of CMOs are defined with reference to a configurable point in the system.
-For example, a clean and invalidate to the point-of-coherence will all copies of the block above the point-of-coherence, invalidate them, and if any of them is dirty trigger a writeback to the memory below the point-of-coherence.
+For example, a clean and invalidate to the point-of-coherence will find all copies of the block above the point-of-coherence, invalidate them, and if any of them is dirty also trigger a writeback to the memory below the point-of-coherence.
 
 \subsubsection[Snooping Support and Snoop Filtering]{Snooping Support and Snoop Filtering}
 
