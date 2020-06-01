@@ -8,11 +8,10 @@ Over the years, the components of the classic memory systems have received a lot
 \subsubsection[Non-Coherent Cache]{Non-Coherent Cache}
 The cache model in gem5 implements the full coherence protocol and as a result can be used in any level of the coherent memory subsystem (e.g., L1 data cache or instruction cache, last-level cache).
 The non-coherent cache is a stripped down version of the cache model and can only be placed below the point-of-coherence (closer to memory).
-Below the point-of-coherence, the non-coherent cache receives only requests for fetches and writebacks and itself performs only fetches and writebacks to memory below.
+Below this point, the non-coherent cache receives only requests for fetches and writebacks and itself performs only fetches and writebacks to memory below.
 As such the non-coherent cache is a greatly simplified version in terms of handling the coherence protocol compared to the regular Cache while otherwise supporting the same flexibility (e.g., configurable tags, replacement policies, inclusive or exclusive, etc.).
 
-The non-coherent cache can be used to model system-level caches.
-System-level Caches are often larger in size and can be used by CPUs and other devices in the system.
+The non-coherent cache can be used to model system-level caches, which are often larger in size and can be used by CPUs and other devices in the system.
 
 \subsubsection[Write Streaming Optimizations]{Write Streaming Optimizations}
 
