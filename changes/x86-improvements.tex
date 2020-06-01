@@ -15,4 +15,4 @@ Memory consistency models decide the amount of parallelism available in a memory
 The x86 architecture is based on the Total Store Order (TSO) memory model~\cite{coherenceprimer}.
 We added support for TSO to gem5 for the x86 architecture.
 This meant ensuring that a later load from a thread can bypass earlier loads/stores, but stores from the same thread are always executed in order.
-The out-of-order CPU model in gem5 has been improved to implement both TSO and more relaxed consistency models (e.g., those in the RISC-V~\ref{sec:riscv} and ARM~\ref{sec:arm} architectures).
+The out-of-order CPU model in gem5 has been improved to implement both TSO and more relaxed consistency models (e.g., those in the RISC-V~\ref{sec:riscv} and Arm~\ref{sec:arm} architectures).
