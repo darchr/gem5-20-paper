@@ -17,7 +17,7 @@ Within each gem5 process, dist-gem5 launches a receiver thread that runs in para
 synchronization barrier for performing quantum-based synchronization.
 dist-gem5 schedules a global
 sync event every quantum in each gem5 process.
-The process() method of the global sync event in
+The \verb|process()| method of the global sync event in
 compute nodes sends out a ``sync request'' message through the TCP connection to the network node
 and waits for the reception of a ``sync ack'' to start the next quantum simulation.
 On the other hand, the \verb|process()| method of the network node waits for the reception of ``sync requests'' from all compute nodes and then sends out ``sync acks'' to each compute node.
