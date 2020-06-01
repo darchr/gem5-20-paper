@@ -19,7 +19,7 @@ This enables running simulations from regions of interest, rather than having to
 To enable checkpoints, we support accessing the memory system functionally i.e. without any notion of time or events.
 The absence of timed events allows much higher simulation speeds.
 
-Additionally, a new three level coherence protocol has been added to gem5.
+Additionally, a new three level coherence protocol (MESI\_Three\_Level) has been added to gem5.
 For simplicity, this protocol was built on top of a prior two level protocol by adding an L0 cache at the CPU cores.
 At level 0, the protocol has separate caches for instructions and data.
 The first and the second levels do not distinguish between instructions and data.
