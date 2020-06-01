@@ -21,9 +21,9 @@ The absence of timed events allows much higher simulation speeds.
 
 Additionally, a new three level coherence protocol has been added to gem5.
 For simplicity, this protocol was built on top of a prior two level protocol by adding an L0 cache at the CPU cores.
-At level 0, the protocol has separate caches for instruction and data.
-The first and the second levels do not distinguish between instruction and data.
-Levels 0 and 1 are private to the CPU core, which the second level is shared across (possibly a subset) cores.
+At level 0, the protocol has separate caches for instructions and data.
+The first and the second levels do not distinguish between instructions and data.
+Levels 0 and 1 are private to each CPU core while the second level is shared across cores, all of them or possibly a subset.
 
 \subsubsection[GPU Coherence Protocols]{GPU Coherence Protocols\footnote{by Blake Hectman}}
 
