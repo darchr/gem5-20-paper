@@ -12,7 +12,7 @@ It consists of a simulator core and models for everything from out of order proc
 The gem5 project consists of the gem5 simulator\footnote{\url{https://gem5.googlesource.com/public/gem5}}, documentation\footnote{\url{https://www.gem5.org/}}, and common resources\footnote{\url{https://gem5.googlesource.com/public/gem5-resources}} that enable computer architecture research.
 
 The gem5 project is governed by a meritocratic, consensus-based community governance document\footnote{\url{https://www.gem5.org/governance/}} with a goal to provide a tool to further the state of the art in computer architecture.
-%The goal of gem5 is to provide a tool to further the state of the art in computer architecture. 
+%The goal of gem5 is to provide a tool to further the state of the art in computer architecture.
 gem5 can be used for (but is not limited to) computer-architecture research, advanced development, system-level performance analysis and design-space exploration, hardware-software co-design, and low-level software performance analysis.
 Another goal of gem5 is to be a common framework for computer architecture.
 A common framework in the academic community makes it easier for other researchers to share workloads as well as models and to compare and contrast with other architectural techniques.
@@ -40,7 +40,12 @@ We have tried to include everyone who has contributed and documented all of the 
 
 \subsection{The past, present, and future of gem5}
 
-The gem5 simulator has been wildly successful since its initial release nine years ago.
+The gem5 simulator was born when the m5 simulator~\cite{}(https://www.computer.org/csdl/magazine/mi/2006/04/m4052/13rRUxYIMRJ) created at University of Michigan merged with the GEMS simulator~\cite{}(Multifacet's General Execution-Driven Multiprocessor Simulator (GEMS) Toolset) from University of Wisconsin.
+These were two academic-oriented simulators, neither of which had an open development community (both simulators had their source available for free\footnote{\url{https://sourceforge.net/projects/m5sim/}}\footnote{https://research.cs.wisc.edu/gems/home.html}, but did not have a community-oriented development process).
+Both of these simulators were quite popular on their own.
+The GEMS paper has been cited over 1800 times and the m5 paper has been cited over 1000 times.
+
+Since its initial release nine years ago the gem5 simulator has been wildly successful.
 In this time, the use of gem5 has exploded.
 Although not a perfect metric, the gem5 paper has received over 3600 citations according to Google Scholar.
 
@@ -81,12 +86,20 @@ Importantly, members of the project management committee (PMC) do not have signi
 
 To simplify the contribution process, we have instituted many industry-standard development methodologies including providing a \verb|CONTRIBUTING| document in the gem5 source.
 In the past, gem5 code contributions were managed with a number of esoteric software packages.
-Now, all gem5 code is stored in a git repository\footnote{\url{googlesource}}, code review is managed on gerrit\footnote{url{gem5-review}}, we have continuous integration support (see Section~\ref{sec:testing}), our website is implemented with jekyll and markdown\footnote{\url{gem5-website-repo}}, and we have a Jira-based issue tracker\footnote{\url{https://gem5.atlassian.net/}}.
-After transitioning to these more well known tools, we have seen a rise in the number of community contributors.
+Now, all gem5 code is stored in a git repository\footnote{\url{googlesource}}, code review is managed on Gerrit\footnote{url{gem5-review}}, we have continuous integration support (see Section~\ref{sec:testing}), our website is implemented with jekyll and markdown\footnote{\url{gem5-website-repo}}, and we have a Jira-based issue tracker\footnote{\url{https://gem5.atlassian.net/}}.
 
+After transitioning to these more well known tools and improved development practices, we have seen a rise in the number of community contributors and using gem5 has become frustrating.
+Continuous integration enables us to test every single changeset before it is committed.
+This allows us to catch bugs \emph{before} they are committed into the mainline repository which makes gem5 more stable.
+Similarly, by implementing a bug tracking system, we can track issues that effect gem5.
+In the first six months of using a bug tracker we have closed over 250 issues.
+
+\subsubsection*{The future of gem5}
 The future of gem5 is bright.
 We will be continuing to work with the community to define the roadmap for gem5 development for gem5 version 20.1 and beyond.
 In the short term, we are excited to to be improving the underlying infrastructure of gem5 with better testing, refactoring aging code (some of gem5's code is from 20 years ago!), and adding well-defined stable APIs.
+By defining stable APIs, we will make it easier for the community to build off of gem5.
+For instance, the inter-simulator interface is currently being defined so that gem5 can be used in conjuction with other simulators (e.g., SST~\cite{}, SystemC~\ref{sec:systemc}, and many others).
 We are also working on improving the interconnect model~\ref{sec:garnet} and adding support for non-volatile memory controllers~\ref{sec:nvm}.
 
 One of the most exciting features coming to gem5 is that we will provide the community with a set of \emph{publicly validated} models which will model current architectural system components including CPU cores, GPU compute units (CUs), caches, main memory systems, and devices.
