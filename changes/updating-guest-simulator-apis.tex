@@ -1,3 +1,57 @@
-\subsection[Updating Guest<->Simulator APIs]{Updating Guest<->Simulator APIs\footnote{By Gabriel Black}}
+\subsection[Updating Guest<->Simulator APIs]{Updating Guest$\leftrightarrow$Simulator APIs\footnote{By Gabriel Black}}
 
-Haven't heard anything back, yet.
+It is sometimes helpful or necessary for gem5 to interact with the software running inside the simulation in some non-architectural way.
+For instance, gem5 might want to intervene and adjust the guest's behavior to skip over some uninteresting function, like one that sets all of physical memory to zeroes, or which uses a loop to measure CPU speed or implement a delay.
+It might also want to monitor guest behavior to know when something important like a kernel panic has happened.
+Guest software might also want to purposefully request some behavior from gem5.
+It could, for instance, request that gem5 exit, record the current value of the simulation statistics, take a checkpoint, read or write a file on the host, etc.
+
+One way gem5 reacts to guest behavior is by requesting a callback when the guest executes a certain program counter (PC).
+The PC would generally come from the table of symbols loaded with, for instance, an OS kernel, and would let gem5 detect when certain kernel functions were about to execute.
+This mechanism has been improved to make it easier for different types of CPU models to implement.
+These include the CPU models which use KVM and the ARM Fast Model based CPUs.
+
+The gem5$\leftrightarrow$guest interaction might also be triggered by the guest itself.
+One common way to use these mechanisms from within the guest is to use the ``m5'' utility which parses command line arguments and then triggers whatever gem5 behavior was requested.
+This utility is in the process of being revamped so that support is consistent across ISAs, along with many other improvements including supporting all the back end mechanisms described above.
+
+Because it is not possible to universally predict what PCs correspond to requests from the guest, a different signaling mechanism is necessary.
+Traditional gem5 CPU models redefined unused opcodes from the target ISA for that purpose.
+However, this mechanism is not universal.
+For instance, when using the KVM-based CPU model instructions behave like they would on real hardware since they are running on real hardware.
+In these special cases, we require other APIs.
+
+Finally, the gem5 simulator code must be able to decipher the calling convention of guest code. Historically this was done in several different ways.
+These were somewhat redundant, inconsistent, incomplete, and difficult to maintain.
+
+We have implemented a new system of templates to pull apart a function's signature and marshal arguments from within the guest automatically.
+Those arguments are then used to call an arbitrary function in gem5.
+Once the function finishes, it can optionally return a value into the guest if it wants to override or just observe guest behavior.
+
+For instance, suppose we had the function shown in Figure~\ref{fig:code1}.
+If we wanted to call it from within the guest using calling convention AAPCS32, once gem5 had detected the call (as described above), it could call \verb|foo()| with arguments from the guest as shown in Figure~\ref{fig:code2}.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.48\linewidth}
+        \begin{lstlisting}[frame=single]
+int
+foo(char bar, float baz)
+{
+    return (baz < 0) ? bar : bar + 1;
+}
+        \end{lstlisting}
+        \caption{Example guest$\leftrightarrow$function.}
+        \label{fig:code1}
+    \end{subfigure}
+    \hspace{3em}
+    \begin{subfigure}{0.40\linewidth}
+        \begin{lstlisting}[frame=single]
+invokeSimcall<Aapcs32>(tc, foo);
+        \end{lstlisting}
+        \caption{Example gem5 code.}
+        \label{fig:code2}
+    \end{subfigure}
+\end{figure}
+
+
