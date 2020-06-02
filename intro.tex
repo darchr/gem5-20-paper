@@ -113,28 +113,37 @@ This course will cover how to get started using gem5, how to develop new models 
 In addition to the online version of the course, we will continue to conduct tutorials and workshops at computer architecture and computer systems conferences.
 
 \subsection{gem5's main features}
+\label{sec:main-features}
 
 The gem5 simulator is a cycle-level computer system simulation environment.
 At its core, gem5 contains an event-driven simulation engine.
 On top of this simulation engine, gem5 implements a large number of models for system components from CPUs (out-of-order designs, in-order designs, and others), memories (such as DDR3/4, GDDR5, HBM, and HMC), on-chip interconnects, coherent caches, I/O devices, and many others.
+Many of these different models are shown in Figure~\ref{fig:gem5-big-picture}
 The gem5 project also contains tests to help find bugs, a complex and feature rich statistics database, and a Python scripting interface to describe systems under test and run simulations.
 
-The gem5 simulator has modular support for multiple ISAs.
+\begin{figure*}
+  \centering
+  \includegraphics[width=\textwidth]{fig/gem5-big-picture}
+  \caption{An overview of gem5's architecture. Its modular components allow any of each model type to be used in system configuration via Python scripts. Users can choose the fidelity of the memory system, CPU model, etc. while being able to select any ISA, devices, etc. The port interface allows any memory component to be connected to any other memory component as specified by the Python script. Details of each of these simulator components are discussed in Section~\ref{sec:main-features}}
+  \label{fig:gem5-big-picture}
+\end{figure*}
+
+The gem5 simulator has modular support for multiple ISAs (see Figure~\ref{fig:gem5-big-picture}~\textcircled{1}).
 gem5 currently supports Arm, GPU ISAs, MIPS, Power, RISC-V, SPARC, and x86.
 These ISAs not only include the details to execute each instruction, but also the system-specific devices necessary for full system simulation.
 There is robust full system support for Linux on Arm and x86 and many other ISAs have some level of full system support.
 
-All of these ISAs can be used with any of gem5's CPU models as the CPU models are designed to be ISA-agnostic.
+All of these ISAs can be used with any of gem5's CPU models as the CPU models are designed to be ISA-agnostic (Figure~\ref{fig:gem5-big-picture}~\textcircled{2}).
 gem5 includes four different CPU models which span the fidelity performance continuum.
 The highest performance CPU model is based on the kernel virtual machine (KVM) and leverages hardware virtualization to execute \emph{at native speeds}~\cite{full-speed-ahead}.
 Although the KVM CPU model can execute at native speed, it does not model the timing of execution or memory.
 gem5 also contains ``simple'' CPU models which are single-cycle models that can be used for memory system studies or other studies that do not require high-fidelity execution models.
 Finally, gem5 contains a detailed in-order CPU model (the ``minor'' CPU) and an out-of-order CPU model (the ``O3'' CPU).
 
-Underlying the memory system model in gem5 is a modular port interface which allows any component that implements the port API to be connected to any other component implementing that API.
+Underlying the memory system model in gem5 is a modular port interface which allows any component that implements the port API to be connected to any other component implementing that API ( Figure~\ref{fig:gem5-big-picture}~\textcircled{3}).
 This allows models designed for one system to be easily used in other system designs.
 
-There are two different cache systems in gem5: Ruby, which models cache coherence protocols with high fidelity, and the ``classic'' caches.
+There are two different cache systems in gem5: Ruby (Figure~\ref{fig:gem5-big-picture} \textcircled{4}), which models cache coherence protocols with high fidelity, and the ``classic'' caches (Figure~\ref{fig:gem5-big-picture}~\textcircled{5}).
 Ruby enables user-defined cache coherence protocols, though gem5 includes many protocols out of the box.
 %There are now 12 unique protocols including GPU-specific protocols~\cite{viper}, research protocols like token coherence~\cite{token-coherence} and region-coherence protocols~\cite{Power2012hsc}, and teaching protocols~\cite{coherence-primer}.
 Users can also choose to use the detailed Garnet network mode~\cite{garnet-2} when using Ruby caches which offers cycle-level detail for the on-chip network.
@@ -143,19 +152,20 @@ The classic caches have a single hard-coded hierarchical MOESI coherence protoco
 However, this cache model is easily composable allowing users to construct hierarchical cache topologies without worrying about the correctness of the coherence protocol.
 Both Ruby and the classic caches can be used with any CPU model, any ISA, and any memory controller model.
 
-The gem5 simulator also includes an event-driven DRAM model.
+The gem5 simulator also includes an event-driven DRAM model (Figure~\ref{fig:gem5-big-picture}~\textcircled{6}).
 This DRAM model is easily configurable with the timing parameters for a variety of different DRAM controllers including DDR3, DDR4, GDDR, HBM, HMC, LPDDR4, LPDDR5, and others.
 Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{} or Ramulator~\cite{}, it is nearly as accurate while providing more flexibility and higher performance~\cite{hansson-ispass-paper}
 
-In addition to CPU models, gem5 also includes a cycle-level compute-based GPU~\cite{}.
-This GPU model does not support graphics applications, but supports many compute applications based on OpenCL.
-(Should probably add a couple more sentences.)
+In addition to CPU models, gem5 also includes a cycle-level compute-based GPU~\cite{} (Figure~\ref{fig:gem5-big-picture}~\textcircled{7}).
+This GPU model does not support graphics applications, but supports many compute applications based on the heterogeneous system architecture (HSA) and ROCm runtime.
+The GPU model is based on AMD's Graphics Core Next architecture.
+The GPU model has a modular ISA similar to the CPU model in gem5, and can be extended to support other GPU ISAs in the future.
 
-An important component to full system simulation is supporting I/O and other devices.
+An important component to full system simulation is supporting I/O and other devices (Figure~\ref{fig:gem5-big-picture}~\textcircled{8}).
 gem5 supports many system-agnostic devices such as disk controllers, PCI components, ethernet controllers, etc. and system-specific devices such as the Arm GIC and SMMU and x86 PC devices.
 Additionally, gem5 contains support for a ``fake'' graphics GPU to enable simulating applications that depend on graphics APIs.
 
-Finally, gem5 has been integrated with other computer architecture simulator systems to enable users with models in other simulator systems to use gem5's features.
+Finally, gem5 has been integrated with other computer architecture simulator systems to enable users with models in other simulator systems to use gem5's features (Figure~\ref{fig:gem5-big-picture}~\textcircled{9}).
 For instance, gem5 has been integrated with the System Simulation Toolkit (SST)~\cite{} which uses gem5's detailed CPU models in conjunction with SST's multi-node modeling capabilities.
 The IEEE standard SystemC API~\cite{} has also been integrated with gem5 to enable users with SystemC models to use them as gem5 components.
 
