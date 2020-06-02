@@ -40,6 +40,9 @@ We therefore define here QoS in Systems on Chips on the following two principles
 
 Quality of Service is the ability of a system to provide differential treatment to its clients, in a quantifiable and predictable way.
 
+The contribution involved the definition of a QoS-aware memory controller in gem5, and the definition of basic (example) policies modelling the prioritization algorithm of the memory controller. Those are the Fixed priority policy (every master in the system has a fixed priority assigned) and the Proportional Fair policy (where the priority of a master is dynamically adjusted at runtime based on utilization).
+The DRAM controller in gem5 had been rewritten to include the QoS changes; with the framework in place a user can write its own policy and seamlessly plug it into a real memory controller model to unlock system wide explorations under its own arbitration algorithm.
+
 \subsubsection[DRAMPower and DRAM Power-Down Modes]{DRAMPower and DRAM Power-Down Modes\footnote{by Matthias Jung, Wendy Elsasser, Radhika Jagtap, Subash Kannoth, Omar Naji, Éder F.
 Zulian, Andreas Hansson, Christian Weis, and Norbert Wehn }}
 %
