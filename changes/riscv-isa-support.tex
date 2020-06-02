@@ -27,12 +27,12 @@ Its implementation required the creation of a state machine in the instruction d
 
 With this implementation, most RISC-V Linux programs are supported for execution in system-call-emulation mode.
 Future work by others would then go on to improve the implementation of atomic instructions, including actual atomic read-modify-write accesses in a single instruction and steps toward support for full-system simulation.
+Additionally, gem5's version of the RISC-V test-suite\footnote{\url{https://github.com/riscv/riscv-tests}} has been updated to the latest version and several corner cases in gem5 have been fixed, so that now most of the tests are working correctly.
 
 \subsubsection[RISC-V Full System Support]{RISC-V Full System Support\footnote{By Nils Asmussen}}
 
 To simulate complete operating systems as well, full system simulation was added for RISC-V.
 More specifically, Sv39 paging according to the privileged ISA 1.11\footnote{\url{https://riscv.org/specifications/privileged-isa/}} with a 39-bit virtual address space, a page-table walker performing a three-level translation, and a translation lookaside buffer has been added.
 The page-table walker code has been based on the existing gem5 code for x86 due to the structural similarities.
-Additionally, gem5's version of the RISC-V test-suite\footnote{\url{https://github.com/riscv/riscv-tests}} has been updated to the latest version and several corner cases in gem5 have been fixed, so that now most of the tests are working correctly.
 While a few steps are still missing to run Linux, general support to run a complete RISC-V operating system on gem5 is available now.
 
