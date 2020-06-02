@@ -31,4 +31,8 @@ Haven't heard anything, yet.
 
 \subsubsection[Arm Support and Extensions]{Arm Support in Ruby Coherence Protocols\footnote{by Tiago M{\"u}ck}}
 
-Haven't heard anything, yet.
+Until recently, configurations combining Ruby and multicore Arm systems were not properly supported.
+We have revamped the \verb|MOESI_CMP_directory| protocol and made it the default when building gem5 for Arm.
+Several issues that resulted in protocol deadlocks (especially when scaling up to many-core configurations) were fixed.
+Other fixes include support for functional accesses, DMA bugs, and improved modeling of cache and directory latencies.
+Additionally, support for load-locked/store-conditional (LL/SC) operations was added to the \verb|MESI_Three_Level| protocol, which enables it to be used with Arm as well.
