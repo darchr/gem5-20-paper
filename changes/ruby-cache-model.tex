@@ -9,7 +9,7 @@ When gem5 was first released, Ruby had just been integrated into the project.
 In the nine years since, Ruby and the SLICC protocols have become much more deeply integrated into the general gem5 memory system.
 Today, Ruby shares the same replacement protocols~\ref{sec:replacement}, the same port system to send requests into and out of the cache system, and the same flexible DRAM controller models~\ref{sec:dramcontroller}.
 
-Looking forward, we will be further integrating Ruby into gem5.
+Looking forward, we will be further unifying the Ruby and classic cache models.
 Our goal is to one day have a unified cache model which has the composability and speed of the classic caches and the flexibility and fidelity of SLICC protocols.
 
 \subsubsection[General Improvements]{General Improvements\footnote{by Nilay Vaish}}
@@ -31,4 +31,8 @@ Haven't heard anything, yet.
 
 \subsubsection[Arm Support and Extensions]{Arm Support in Ruby Coherence Protocols\footnote{by Tiago M{\"u}ck}}
 
-Haven't heard anything, yet.
+Until recently, configurations combining Ruby and multicore Arm systems were not properly supported.
+We have revamped the \verb|MOESI_CMP_directory| protocol and made it the default when building gem5 for Arm.
+Several issues that resulted in protocol deadlocks (especially when scaling up to many-core configurations) were fixed.
+Other fixes include support for functional accesses, DMA bugs, and improved modeling of cache and directory latencies.
+Additionally, support for load-locked/store-conditional (LL/SC) operations was added to the \verb|MESI_Three_Level| protocol, which enables it to be used with Arm as well.
