@@ -154,7 +154,7 @@ Both Ruby and the classic caches can be used with any CPU model, any ISA, and an
 
 The gem5 simulator also includes an event-driven DRAM model (Figure~\ref{fig:gem5-big-picture}~\textcircled{6}).
 This DRAM model is easily configurable with the timing parameters for a variety of different DRAM controllers including DDR3, DDR4, GDDR, HBM, HMC, LPDDR4, LPDDR5, and others.
-Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{} or Ramulator~\cite{}, it is nearly as accurate while providing more flexibility and higher performance~\cite{hansson-ispass-paper}
+Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{dramsim, dramsim2, dramsim3} or Ramulator~\cite{ramulator}, it is nearly as accurate while providing more flexibility and higher performance~\cite{hansson-ispass-paper}
 
 In addition to CPU models, gem5 also includes a cycle-level compute-based GPU~\cite{} (Figure~\ref{fig:gem5-big-picture}~\textcircled{7}).
 This GPU model does not support graphics applications, but supports many compute applications based on the heterogeneous system architecture (HSA) and ROCm runtime.
@@ -163,11 +163,11 @@ The GPU model has a modular ISA similar to the CPU model in gem5, and can be ext
 
 An important component to full system simulation is supporting I/O and other devices (Figure~\ref{fig:gem5-big-picture}~\textcircled{8}).
 gem5 supports many system-agnostic devices such as disk controllers, PCI components, ethernet controllers, etc. and system-specific devices such as the Arm GIC and SMMU and x86 PC devices.
-Additionally, gem5 contains support for a ``fake'' graphics GPU to enable simulating applications that depend on graphics APIs.
+Additionally, gem5 contains support for a ``fake'' graphics GPU to enable simulating applications that depend on graphics APIs~\cite{nomali}.
 
 Finally, gem5 has been integrated with other computer architecture simulator systems to enable users with models in other simulator systems to use gem5's features (Figure~\ref{fig:gem5-big-picture}~\textcircled{9}).
-For instance, gem5 has been integrated with the System Simulation Toolkit (SST)~\cite{} which uses gem5's detailed CPU models in conjunction with SST's multi-node modeling capabilities.
-The IEEE standard SystemC API~\cite{} has also been integrated with gem5 to enable users with SystemC models to use them as gem5 components.
+For instance, gem5 has been integrated with the System Simulation Toolkit (SST)~\cite{sst-gem5} which uses gem5's detailed CPU models in conjunction with SST's multi-node modeling capabilities.
+The IEEE standard SystemC API~\cite{menard2017-system-systemc} has also been integrated with gem5 to enable users with SystemC models to use them as gem5 components.
 
 Although there are many computer architecture simulators, and many of these are open source with features that overlap with gem5, gem5 is a unique simulation infrastructure.
 \begin{itemize}
