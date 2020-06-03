@@ -1,5 +1,6 @@
 \documentclass[manuscript, review, screen, timestamp]{acmart}
 
+\usepackage{listings}
 \usepackage{subcaption}
 
 \begin{document}
@@ -7,6 +8,8 @@
 \title{The gem5 Simulator: Version 20.0+}
 \subtitle{A new era for the open-source computer architecture simulator}
 %\input{author-list}
+
+\titlenote{gem5 is the result of the merger of the GEMS project started in 1999, and the m5 project started in 2003. Development of gem5 has been active for about 20 years, and this version is being published in 2020. Thus, ``gem5-20''.}
 
 \setcopyright{none}
 
@@ -29,8 +32,11 @@
 \section{Acknowledgements}
 
 The development of gem5 is distributed.
-It is likely we have missed someone that should be acknowledged.
-Until this paper is submitted, please contact Jason Lowe-Power if you have any questions about the contributions.
+The contributions to the gem5 community go beyond just the source code, and many people who have contributed to the broader gem5 community are not acknowledged here.
+Note that until this paper is submitted, please contact Jason Lowe-Power if you have any questions about the contributions.
+
+We would like to specially acknowledge the late Nathan Binkert.
+Nate was a driving force behind the creation of gem5 and without his vision and his dedication to code quality this open-source community infrastructure would not be the success that it is today.
 
 The gem5 project management committee consists of Bradford Beckmann, Gabriel Black, Anthony Gutierrez, Jason Lowe-Power (chair), Steven Reinhardt, Ali Saidi, Andreas Sandberg, Matthew Sinclair, Giacomo Travaglini, and David Wood.
 Previous members include Nathan Binkert, and Andreas Hansson.

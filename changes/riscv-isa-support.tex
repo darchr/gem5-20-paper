@@ -19,7 +19,6 @@ It was modeled off of the existing gem5 code for MIPS and Alpha, which are also 
 Including support for 64-bit addresses and data (RV64) and for the multiply (M) extension mainly involved adding the new instructions and changing some parameters to expand register and data path widths.
 The next two extensions, atomic (A) and floating point (F and D for single- and double-precision, respectively), were more complicated.
 The A extension includes both load-reserved/store-conditional (LR/SC) sequence of instructions for performing complex atomic operations on memory and a set of read-modify-write instructions for performing simple ones.
-The former two instructions had analogues in MIPS, but, at the time of implementation, gem5 did not have support for single instructions that both read and write memory atomically.
 These instructions were implemented as a pair of micro-ops that acted like an LR/SC pair with one of the pair additionally performing the specified operation.
 Floating-point instructions required many special cases to ensure correct error handling and reporting, and we were not able to implement one of the five possible rounding modes (round away from zero) RISC-V specifies for inexact calculations due to the fact that C++ does not support it.
 Finally, support for the non-standard compressed (C) extension, which adds 16-bit versions of high-usage instructions, was added when it was discovered that this extension was included by default in many RISC-V software toolchains.
@@ -27,12 +26,12 @@ Its implementation required the creation of a state machine in the instruction d
 
 With this implementation, most RISC-V Linux programs are supported for execution in system-call-emulation mode.
 Future work by others would then go on to improve the implementation of atomic instructions, including actual atomic read-modify-write accesses in a single instruction and steps toward support for full-system simulation.
+Additionally, gem5's version of the RISC-V test-suite\footnote{\url{https://github.com/riscv/riscv-tests}} has been updated to the latest version and several corner cases in gem5 have been fixed, so that now most of the tests are working correctly.
 
 \subsubsection[RISC-V Full System Support]{RISC-V Full System Support\footnote{By Nils Asmussen}}
 
 To simulate complete operating systems as well, full system simulation was added for RISC-V.
 More specifically, Sv39 paging according to the privileged ISA 1.11\footnote{\url{https://riscv.org/specifications/privileged-isa/}} with a 39-bit virtual address space, a page-table walker performing a three-level translation, and a translation lookaside buffer has been added.
 The page-table walker code has been based on the existing gem5 code for x86 due to the structural similarities.
-Additionally, gem5's version of the RISC-V test-suite\footnote{\url{https://github.com/riscv/riscv-tests}} has been updated to the latest version and several corner cases in gem5 have been fixed, so that now most of the tests are working correctly.
 While a few steps are still missing to run Linux, general support to run a complete RISC-V operating system on gem5 is available now.
 

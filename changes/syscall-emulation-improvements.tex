@@ -1,3 +1,79 @@
 \subsection[Syscall Emulation Improvements]{Syscall Emulation Improvements\footnote{by Brandon Potter}}
 
-Heard back, waiting for text.
+System call emulation mode (SE mode) allows gem5 to execute user-mode binaries without executing the kernel-mode system calls of a real operating system.
+Basic functionality existed in the original gem5 release~\cite{Binkert-gem5-2011}, but major improvements have been made in the past few years.
+Recent additions improve the usability and increase the variety of workloads which may run in SE mode.
+
+\subsubsection{Dynamic Executables}
+
+For many years, gem5 supported only statically linked executables.
+This limitation prevented evaluation of workloads which require dynamic linking and loading.
+To support these workloads, the SE mode infrastructure was modified to support dynamic executables using ELF~\cite{}(ELF spec).
+
+At a high level, the internal ELF loader was altered to detect the requirement of an interpreter---the tool responsible for handling dynamic loaded libraries.
+If the interpreter is required, the ELF loader will load the both the interpreter and the workload into the process address space within the simulator.
+The ELF loader will also initialize stack variables to help the interpreter and the workload find each other.
+With the interpreter in the address space, the workload will delegate lookups (function bindings) to the interpreter which will fixup function call invocation points on behalf of the workload.
+
+Several system calls were modified to enable the functionality.
+Most of the changes were related to file handling and memory mappings.
+
+This dynamic executable support can be combined with the virtual file system described below in Section~\ref{sec:vfs} to enable cross-platform compatibility.
+With this support, users can run dynamically linked SE mode binaries for any ISA on any host ISA as long as the dynamic linker, loader, and libraries are present on the host machine.
+
+\subsubsection{Threading Library Support}
+
+With dynamic executable support, users encounter issues with libraries which depend on pthreads.
+Many common libraries have a dependency on the pthread library.
+This results in a transitive dependency from the perspective of the workload.
+To meet the dependency, we decided to directly support usage of native threading libraries.
+There are currently two options to support threading in SE mode: m5threads and native threading libraries (i.e. pthreads).
+
+The first option, m5threads, is a custom threading library originally conceived to provide threading support specifically for gem5.
+The library predates dynamic executable support and therefore is statically linked against the workloads which require threading.
+The m5threads library is an incomplete threading library; it does not implement the entire API supported by a library like pthreads.
+
+The second option, native threading libraries, utilizes dynamic executable support to make standard system libraries like pthreads available to the workload.
+To use this feature, the user must ensure that enough thread contexts have been allocated in their configuration script to support all threads.
+
+The threading library support required changes to the SE mode infrastructure.
+Specifically, the clone system call required support for many new options and the futex system call required significant work.
+
+\subsubsection{Virtual File System}
+\label{sec:vfs}
+
+In SE mode, many system call implementations rely on functionality provided by the host machine.
+For example, a workload's invocation of the ``open'' system call will cause the gem5 CPU model to hand control over to the simulator.
+The SE mode ``open'' implementation will then call the glibc open function on the host machine (which in-turn uses the host machine’s open system call).
+Effectively, the system call is passed from the simulated process space down to the host machine.
+This pass-through method has been utilized since SE mode has existed.
+
+There are several reasons to employ pass-through:
+\begin{enumerate}
+    \item It avoids reimplementing complicated operating system features.
+    \item It promotes code reuse by not specializing the system call implementation for each ISA.
+    \item It allows the host resources to be utilized directly from the simulated process.
+\end{enumerate}
+
+There are several drawbacks stemming from pass-through:
+\begin{enumerate}
+    \item It creates API mismatches for system calls which rely on glibc library implementations. Specifically, a system call's options may differ for simulated ISA and the host ISA.
+    \item It creates ABI mismatches for system calls which directly call into the host system call without interpreting system call parameters.
+    \item It creates issues when utilizing some host resources.
+\end{enumerate}
+
+The virtual file system provides a solution for the third drawback specifically for filesystem handling.
+When files are touched by the simulated process, the results of the accesses or modifications pass-through to the host filesystem.
+For some cases, this causes problems.
+For example, reading the contents of ``/proc/cpuinfo'' will report back results which differ from the simulated system's configuration.
+In another example, the workload might try to open ``/dev/thing'' for device access.
+
+To obviate these problem, the virtual file system provides a level of indirection to catch filesystem path evaluations and modify them before pass-through occurs.
+Any path on the simulator can be redirected to any location on the host similar to mounting volumes in docker.
+The \verb|key:value| strings for path redirection can be set via the Python configuration files.
+
+\subsubsection{AMD ROCm v1.6}
+
+At the time of publication, a dated version of the ROCm software stack can be used with x86 ISA builds.
+The ROCm~v1.6 libraries can be loaded and used on both RHEL6 and Ubuntu 16.04 operating systems.
+We distribute a set of docker containers and dockerfiles to help users get started using this specific version of ROCm with gem5.
