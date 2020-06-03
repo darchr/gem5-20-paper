@@ -9,7 +9,7 @@ state offering support for 64-bit addressing via the A64 instruction set. gem5
 currently supports all of the above instruction sets, and the interworking
 between them. In addition, on top of the user-level features, several
 contributions have targeted important system-level extensions, e.g. the
-Security (aka TrustZone~\cite{ArmTustZone}) and virtualization extensions~\cite{ArmARM}, thus opening up new
+Security (aka TrustZone~\cite{ArmTustZone}) and Virtualization Extensions~\cite{ArmARM}, thus opening up new
 avenues for architectural and micro-architectural research.
 
 While Armv8-A was a major iteration of the architecture, there have been
@@ -37,8 +37,8 @@ as two separated classes, a container and an interface, decoupling one from the
 other. The vector registers can be of any arbitrary size and be accessed as
 vectors of elements of any particular type, depending on the operand types of
 each instruction. This not only facilitates handling variable size registers,
-it also abstracts the nuances of handling predicate registers, where the values
-stored have to be grouped and interpreted differently depending on the operand
+it also abstracts the nuances of handling predicate registers, where the stored
+values have to be grouped and interpreted differently depending on the operand
 type.
 
 This design provides enough flexibility to support any vector instruction sets

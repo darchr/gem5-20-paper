@@ -1,13 +1,13 @@
 \subsection[Off-Chip Memory System Models]{Off-Chip Memory System Models\footnote{by Nikos Nikoleris}}
 
 gem5 can model a large number of configurations in the off-chip memory system.
-Its memory controller handles requests from the on-chip memory system and issues read and write commands for the actual memory device~\cite{}() and models their timing behavior.
+Its memory controller handles requests from the on-chip memory system and issues read and write commands for the actual memory device~\cite{}(), furthermore it models the timing behavior of the latter.
 Over the years a number of contributions have added features that allow modeling of emerging new technologies and features.
 
 \subsubsection[New memory controller features]{New memory controller features\footnote{by Wendy Elsasser}}
 
 The gem5 DRAM controller provides the interface to external memory, which is traditionally DRAM.
-The controller consists of 2 main components: the memory controller and the DRAM interface.
+It consists of two main components: the memory controller itself and the DRAM interface.
 The DRAM interface contains media specific information, defining the architecture and timing parameters of the DRAM as well as the functions that manage the media specific operations like activation, precharge, refresh and low power modes.
 
 \subsubsection[Low-power DDR]{Low-power DDR\footnote{by Wendy Elsasser}}
@@ -52,7 +52,7 @@ Therefore, an accurate and fast power estimation is crucial for an efficient des
 DRAMPower~\cite{kargoo_14} is an open source tool for fast and accurate power and energy estimation for several DRAM memories based on JEDEC standards.
 It supports unique features like power-down, bank-wise power estimation, per bank refresh, partial array self-refresh, and many more.
 In contrast to Micron’s DRAM Power estimation spread sheet\footnote{\url{https://www.micron.com/support/tools-and-utilities/power-calc}}, which estimates the power from device manufacturer’s data sheet and workload specifications (e.g. Rowbuffer-Hit-Rate or Read-Write-Ratio), DRAMPower uses the actual timings from the memory transactions, which leads to a much higher accuracy in power estimation.
-Furthermore, the DRAMPower tool performs DRAM command trace analysis based on memory state transitions and hence, avoids cycle-by-cycle evaluation, thus speeding up simulations.
+Furthermore, the DRAMPower tool performs DRAM command trace analysis based on memory state transitions and hence avoids cycle-by-cycle evaluation, thus speeding up simulations.
 
 For the efficient integration of DRAMPower into gem5, we changed the tool from a standalone simulator to a library that could be used in discrete event-based simulators for calculating the power consumption online during the simulation.
 Furthermore, we integrate the power-down modes into the DRAM controller model of gem5~\cite{jagjun_17} in order to provide the research community a tool for power-down analysis for a breadth of use cases. We further evaluated the model with real HPC workloads, illustrating the value of integrating low power functionality into a full system simulator.
@@ -64,6 +64,6 @@ To enable support of NVM and future memory interfaces, a systematic approach was
 The DRAM interface was pulled out of the controller and moved to a separate DRAM interface object.
 In parallel, an NVM interface was created to model an agnostic interface to emerging memory.
 
-The DRAM interface and the NVM Interface have configurable address ranges allowing flexible heterogeneous memory configurations.
+The DRAM interface and the NVM interface have configurable address ranges allowing flexible heterogeneous memory configurations.
 For example, single memory controller can have a DRAM interface, an NVM interface, of both interfaces defined.
 Other configurations are feasible, providing a flexible framework to study new memory topologies and evaluate the placement of emerging NVM in the memory sub-system.
