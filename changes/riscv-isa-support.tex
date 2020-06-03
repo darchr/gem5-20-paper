@@ -19,7 +19,6 @@ It was modeled off of the existing gem5 code for MIPS and Alpha, which are also 
 Including support for 64-bit addresses and data (RV64) and for the multiply (M) extension mainly involved adding the new instructions and changing some parameters to expand register and data path widths.
 The next two extensions, atomic (A) and floating point (F and D for single- and double-precision, respectively), were more complicated.
 The A extension includes both load-reserved/store-conditional (LR/SC) sequence of instructions for performing complex atomic operations on memory and a set of read-modify-write instructions for performing simple ones.
-The former two instructions had analogues in MIPS, but, at the time of implementation, gem5 did not have support for single instructions that both read and write memory atomically.
 These instructions were implemented as a pair of micro-ops that acted like an LR/SC pair with one of the pair additionally performing the specified operation.
 Floating-point instructions required many special cases to ensure correct error handling and reporting, and we were not able to implement one of the five possible rounding modes (round away from zero) RISC-V specifies for inexact calculations due to the fact that C++ does not support it.
 Finally, support for the non-standard compressed (C) extension, which adds 16-bit versions of high-usage instructions, was added when it was discovered that this extension was included by default in many RISC-V software toolchains.

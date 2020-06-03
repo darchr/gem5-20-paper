@@ -1,5 +1,7 @@
 \subsection[Updating Guest<->Simulator APIs]{Updating Guest$\leftrightarrow$Simulator APIs\footnote{By Gabriel Black}}
 
+% TODO: Could add a picture to explain guest, host, simulator, etc.
+
 It is sometimes helpful or necessary for gem5 to interact with the software running inside the simulation in some non-architectural way.
 For instance, gem5 might want to intervene and adjust the guest's behavior to skip over some uninteresting function, like one that sets all of physical memory to zeroes, or which uses a loop to measure CPU speed or implement a delay.
 It might also want to monitor guest behavior to know when something important like a kernel panic has happened.

@@ -3,6 +3,7 @@
 In general, hardware components frequently contain tables, whose contents are managed by replacement policies.
 In gem5, multiple replacement policies are available, which can paired with any table-like structure, allowing users to carry research on the effects of different replacement algorithms in various hardware units.
 Currently, gem5 supports 13 different replacement policies including several standard policies such as LRU, FIFO, and Pseudo-LRU, and various RRIPs~\cite{Jaleel2010rrip}.
+These policies can be used with both the classic caches and Ruby caches.
 This list is easily expandable to cover schemes with greater complexity as well.
 
 The simulator also supports cache compression by providing several state-of-the-art compression algorithms~\cite{sardashti2015primer} and a default compression-oriented cache organization.
