@@ -5,7 +5,7 @@ Heard back, waiting for text.
 \subsubsection[Autonomous Data-Race-Free GPU Tester]{Autonomous Data-Race-Free GPU Tester\footnote{by Tuan Ta}}
 
 The Ruby coherence protocol tester is designed for CPU-like memory systems that implement relatively strong memory consistency models (e.g., TSO) and hardware-based coherence protocols (e.g., MESI).
-In such systems, once a processor sends a memory request to memory, the request appears globally to the rest of the system.
+In such systems, once a processor sends a request to memory, the request appears globally to the rest of the system.
 Without knowing implementation details of target memory systems, the tester can rely on the issuing order of reads and writes to determine the current state of shared memory.
 However, existing GPU memory systems are often based on weaker consistency models (e.g., sequential consistency for data-race-free) and implement software-directed cache coherence protocols (e.g., VIPER requiring explicit cache flushes and invalidations from software to maintain cache coherence).
 The order in which reads and writes appear globally can be different from the order they are issued from GPU cores.
@@ -15,5 +15,5 @@ The gem5 simulator currently supports an autonomous random data-race-free testin
 The tester works by randomly generating and injecting sequences of data-race-free reads and writes that are well synchronized by proper atomic operations and memory fences to a target memory system.
 By maintaining the data-race freedom of all generated sequences, the tester is able to validate responses from the system under test.
 The tester is also able to periodically check for forward progress of the system and report possible deadlock and livelock issues.
-Once encountering a failure, the tester generates an event log that captures only related memory transactions related to the failure, which significantly eases the debugging process.
+Once encountering a failure, the tester generates an event log that captures only memory transactions related to the failure, which significantly eases the debugging process.
 Tuan Ta et al. showed how the tester effectively detected bugs in the implementation of VIPER protocol in gem5~\cite{Ta2019gputesting}.
