@@ -105,7 +105,7 @@ We will be continuing to work with the community to define the roadmap for gem5 
 In the short term, we are excited to be improving the underlying infrastructure of gem5 with better testing, refactoring aging code (some of gem5's code is over 20 years old!), and adding well-defined stable APIs.
 By defining stable APIs, we will make it easier for the community to build off of gem5.
 For instance, the inter-simulator interface is currently being defined so that gem5 can be used in conjunction with other simulators (e.g., SST~\cite{}, SystemC~\ref{sec:systemc}, and many others).
-We are also working on improving the interconnect model~\ref{sec:garnet} and adding support for non-volatile memory controllers~\ref{sec:nvm}.
+We are also working on improving the interconnect model~\ref{sec:garnet}, adding support for non-volatile memory controllers~\ref{sec:nvm}, and a graphical user interface (GUI).
 
 One of the most exciting features coming to gem5 is that we will provide the community with a set of \emph{publicly validated} models which will model current architectural system components including CPU cores, GPU compute units (CUs), caches, main memory systems, and devices.
 Past research~\cite{butko2012accuracy, nowatzki2015architectural, endo2014micro, akram201686, asri2016simulator, akram2019validation, gutierrez2014sources, jo2018diagsim, tanimoto2017dependence, walker2018hardware} has shown that some gem5 models can be imprecise.
@@ -137,14 +137,16 @@ The gem5 project also contains tests to help find bugs, a complex and feature-ri
 The gem5 simulator has modular support for multiple ISAs (see Figure~\ref{fig:gem5-big-picture}~\textcircled{1}).
 The gem5 simulator currently supports Arm, GPU ISAs, MIPS, Power, RISC-V, SPARC, and x86.
 These ISAs not only include the details to execute each instruction, but also the system-specific devices necessary for full system simulation.
-There is robust full system support for Linux on Arm and x86 and many other ISAs have some level of full system support.
+There is robust full system support for Linux on Arm and x86.
+Additionally, many other ISAs have some level of full system support.
 
 All of these ISAs can be used with any of gem5's CPU models as the CPU models are designed to be ISA-agnostic (Figure~\ref{fig:gem5-big-picture}~\textcircled{2}).
 Four different CPU models are included which span the fidelity performance continuum.
-The highest performance CPU model is based on the kernel virtual machine (KVM) and leverages hardware virtualization to execute \emph{at native speeds}~\cite{full-speed-ahead}.
+The gem5 simulator contains ``simple'' CPU models which are single-cycle models that can be used for memory system studies or other studies that do not require high-fidelity execution models.
+Additionally, gem5 contains a detailed in-order CPU model (the ``minor'' CPU) and an out-of-order CPU model (the ``O3'' CPU).
+Finally, gem5 includes a CPU model is based on the kernel virtual machine (KVM) that leverages hardware virtualization to execute \emph{at native speeds}~\cite{full-speed-ahead} resulting in minimal simulator overhead compared to native execution.
 Although the KVM CPU model can execute at native speed, it does not model the timing of execution or memory requests.
-The gem5 simulator also contains ``simple'' CPU models which are single-cycle models that can be used for memory system studies or other studies that do not require high-fidelity execution models.
-Finally, gem5 contains a detailed in-order CPU model (the ``minor'' CPU) and an out-of-order CPU model (the ``O3'' CPU).
+
 
 Underlying the memory system model in gem5 is a modular port interface which allows any component that implements the port API to be connected to any other component implementing that API ( Figure~\ref{fig:gem5-big-picture}~\textcircled{3}).
 This allows models designed for one system to be easily used in other system designs.
@@ -155,7 +157,7 @@ Ruby enables user-defined cache coherence protocols, though gem5 includes many p
 Users can also choose to use a simple network model or the detailed Garnet model~\cite{garnet-2} when using Ruby caches which offers cycle-level detail for the on-chip network.
 
 The classic caches have a single hard-coded hierarchical MOESI coherence protocol.
-However, this cache model is easily composable allowing users to construct hierarchical cache topologies without worrying about the correctness of the coherence protocol.
+However, this cache model is easily composable allowing users to construct hierarchical cache topologies without worrying about the details of the coherence protocol.
 Both Ruby and the classic caches can be used with any CPU model, any ISA, and any memory controller model.
 
 The gem5 simulator also includes an event-driven DRAM model (Figure~\ref{fig:gem5-big-picture}~\textcircled{6}).
@@ -197,7 +199,7 @@ In this case, researchers download the gem5 source, build the simulator, and the
 This use case requires deep knowledge of the core simulation frameworks of gem5.
 However, we are working to make it easier to get started developing and researching with gem5 through efforts like the \emph{Learning gem5} materials and online course~\ref{sec:learning}.
 
-After using gem5 in their research, we encourage these users to contribute their improvements and fixes to the gem5 back to the mainline codebase.
+After using gem5 in their research, we encourage these users to contribute their improvements and fixes to gem5 back to the mainline codebase.
 Not only does this improve gem5 for others, but it also makes reproducing research results easier.
 Rather than managing many local changes and trying to keep up with new releases of gem5, when code is contributed upstream it is the responsibility of \emph{others in the community} to ensure that the code stays up to date.
 Additionally the gem5 project employs a permissive BSD license to lower the barrier of contribution for both academics and industry researchers.
@@ -206,7 +208,7 @@ Additionally the gem5 project employs a permissive BSD license to lower the barr
 
 The gem5 simulator can be used as a tool for teaching computer architecture as well.
 Historically, there has been a very steep learning curve for using gem5 even for simple experiments.
-However, with the improved documentation, this learning curve is coming down.
+However, we are improving the documentation for new users.
 
 We will be continuing to improve gem5 with the goal of making it easier for both students and teachers to learn and teach computer architectures concepts.
 For example, the new \emph{Learning gem5} material created for the online course will include a set of example exercises that we hope can be used in both undergraduate and graduate computer architecture courses.
