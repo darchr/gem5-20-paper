@@ -1,4 +1,51 @@
-\subsection[Testing in gem5]{Testing in gem5\footnote{by Sean Wilson and Robert R. Bruce}}
+\subsection[Testing in gem5]{Testing in gem5\footnote{by Sean Wilson and Bobby R. Bruce}}
 \label{sec:testing}
 
-Heard back, waiting for the text.
+In order to ensure the quality of gem5, we have continued to improve our
+testing. Testing ensures errors during development are caught and rectified
+early, prior to release. As testing gives certain guarantees that new
+modifications do not unintentionally break functionality, a good testing
+infrastructure is essential to open-source projects, such as gem5, that are
+contributed to regularly, from many different individuals with varying levels
+of expertise and familiarity with the project.
+
+Due to gem5's age and size, tests give developers a degree of confidence when
+undertaking engineering on seldom touched components. They are thereby crucial
+in ensuring the smooth running of gem5 project both presently and into the
+future.
+
+\subsubsection{The TestLib Framework}
+
+The majority of gem5 tests are run via our \emph{TestLib} testing framework.
+This framework enables us to test compiled instances of gem5 on specific
+computer architecture simulations, and verify that they run as intended. The
+TestLib framework has been designed for tests to be easily added, thereby
+allowing tests for new gem5 configurations to be quickly developed. While
+powerful, it's important to note that these are system-level tests, and are
+therefore not designed to test individual components.
+
+\subsubsection{Unit Tests}
+
+In order to test at a finer granularity, unit tests have been developed and
+incorporated into our testing procedures. Unlike our TestLib tests, these unit
+tests ensure the functionality of gem5 classes and functions. Thus, if broken,
+the source of the bugs can more quickly be determined. While a relatively new
+component in our testing infrastructure, we are currently in the process of
+expanding these tests with the goal of per-SimObject unit tests, and greater
+coverage over-all
+
+\subsubsection{Continuous Integration}
+
+Via our Gerrit code-review system, we run tests for each
+submitted patch prior to incorporation to the gem5 code base. These tests
+compile gem5 against key ISA targets, and run a set tests designed to cover all
+major gem5 components. This procedure supplements our code review system, thereby
+reducing the possibility of new contributions introducing bugs.
+
+In addition to the tests run prior to submission, a larger set of tests are
+available for more ``in-depth'' testing. These can take several hours complete
+execution, and  test functionality such as
+full-system booting. We run these tests regularly to ensure gem5 meets our
+standards. While these are currently triggered manually, we hope to
+automatically run these tests nightly and automatically send error reports to
+the developers.
