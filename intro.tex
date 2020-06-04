@@ -6,7 +6,7 @@ The gem5 simulator~\cite{Binkert-gem5-2011} is currently one of the most popular
 Since its publication in 2011, the gem5 paper has been cited over 3600 times\footnote{\url{https://scholar.google.com/scholar?q=gem5}}, and every year many papers published in the top computer architecture venues use gem5 as their main evaluation technique.
 
 The gem5 simulator~\cite{Binkert-gem5-2011} is an open source community-supported computer architecture simulator system.
-It consists of a simulator core and models for a wide number of components from out of order processors, to DRAM, to network devices.
+It consists of a simulator core and models for a wide number of components from out-of-order processors, to DRAM, to network devices.
 The gem5 project consists of the gem5 simulator\footnote{\url{https://gem5.googlesource.com/public/gem5}}, documentation\footnote{\url{https://www.gem5.org/}}, and common resources\footnote{\url{https://gem5.googlesource.com/public/gem5-resources}} that enable computer architecture research.
 
 The gem5 project is governed by a meritocratic, consensus-based community governance document\footnote{\url{https://www.gem5.org/governance/}} with a goal to provide a tool to further the state of the art in computer architecture.
@@ -85,7 +85,7 @@ We now have a formal governance structure, we have improved our documentation (s
 To institute a formal governance model, we followed the best practices from other successful open source projects.
 We chose to institute a meritocratic governance model where anyone with an interest in the project can join the community, contribute to the project design and participate in the decision-making process.
 The governance structure also defines the roles and responsibilities of members of the community including users, contributors, and maintainers.
-We also formed a project management committee (PMC) to help ensure smooth running of the project.
+We also formed a project management committee~(PMC) to help ensure smooth running of the project.
 Importantly, members of the PMC do not have significant authority over other members of the community or of the direction of the project.
 
 To simplify the contribution process, we have instituted many industry-standard development methodologies including providing a \verb|CONTRIBUTING| document in the gem5 source.
@@ -125,7 +125,7 @@ The gem5 simulator is a cycle-level computer system simulation environment.
 At its core, gem5 contains an event-driven simulation engine.
 On top of this simulation engine, gem5 implements a large number of models for system components from CPUs (out-of-order designs, in-order designs, and others), memories (such as DDR3/4, GDDR5, HBM, and HMC), on-chip interconnects, coherent caches, I/O devices, and many others.
 Many of these different models are shown in Figure~\ref{fig:gem5-big-picture}
-The gem5 project also contains tests to help find bugs, a complex and feature rich statistics database, and a Python scripting interface to describe systems under test and run simulations.
+The gem5 project also contains tests to help find bugs, a complex and feature-rich statistics database, and a Python scripting interface to describe systems under test and run simulations.
 
 \begin{figure*}
   \centering
@@ -208,6 +208,6 @@ The gem5 simulator can be used as a tool for teaching computer architecture as w
 Historically, there has been a very steep learning curve for using gem5 even for simple experiments.
 However, with the improved documentation, this learning curve is coming down.
 
-We will be continuing to improve gem5 with the goal of making it easier for both students and teachers to use to learn and teach computer architectures concepts.
+We will be continuing to improve gem5 with the goal of making it easier for both students and teachers to learn and teach computer architectures concepts.
 For example, the new \emph{Learning gem5} material created for the online course will include a set of example exercises that we hope can be used in both undergraduate and graduate computer architecture courses.
 Additionally, we are working to develop a new GUI-based frontend for gem5 and to develop known-good models that do not required deep knowledge of simulator internals to configure and use.
