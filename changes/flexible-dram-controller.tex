@@ -8,7 +8,7 @@ Over the years a number of contributions have added features that allow modeling
 
 The gem5 DRAM controller provides the interface to external memory, which is traditionally DRAM.
 It consists of two main components: the memory controller itself and the DRAM interface.
-The DRAM interface contains media specific information, defining the architecture and timing parameters of the DRAM as well as the functions that manage the media specific operations like activation, precharge, refresh and low power modes.
+The DRAM interface contains media specific information, defining the architecture and timing parameters of the DRAM as well as the functions that manage the media specific operations like activation, precharge, refresh and low power modes~\cite{hansson-ispass}.
 
 \subsubsection[Low-power DDR]{Low-power DDR\footnote{by Wendy Elsasser}}
 
@@ -30,6 +30,7 @@ It allows the system to minimize costs by improving the resources utilization an
 This, however, comes at the cost of potential severe performance degradation due to interference on shared resources, and increased uncertainty in terms of workload performance predictability.
 
 To compensate for these shortcomings, we stress the need to introduce a mechanism for predictively and deterministically managing such systems resources, i.e., providing Quality of Service (QoS).
+Quality of Service is the ability of a system to provide differential treatment to its clients, in a quantifiable and predictable way.
 The concept and challenges of QoS itself are not new and achieving QoS is generally hard in complex systems, as we learned from Computer Networking.
 We therefore define here QoS in Systems on Chips on the following two principles:
 \begin{enumerate}
@@ -37,8 +38,6 @@ We therefore define here QoS in Systems on Chips on the following two principles
     \item \emph{QoS is quantifiable and predictable:} the set of guarantees a QoS-enabled resource can provide are known a priori and characteristic of the implemented QoS arbitration schemes.
     The level of service that a QoS enabled resource will guarantee to its users must therefore be predictable to a certain extent given a specific set of policies and their configurations.
 \end{enumerate}
-
-Quality of Service is the ability of a system to provide differential treatment to its clients, in a quantifiable and predictable way.
 
 The contribution involved the definition of a QoS-aware memory controller in gem5, and the definition of basic (example) policies modelling the prioritization algorithm of the memory controller. Those are the Fixed priority policy (every master in the system has a fixed priority assigned) and the Proportional Fair policy (where the priority of a master is dynamically adjusted at runtime based on utilization).
 The DRAM controller in gem5 had been rewritten to include the QoS changes; with the framework in place a user can write its own policy and seamlessly plug it into a real memory controller model to unlock system wide explorations under its own arbitration algorithm.
@@ -60,10 +59,11 @@ Furthermore, we integrate the power-down modes into the DRAM controller model of
 \subsubsection[Future Improvements to Off Chip Memory Models]{Future Improvements to Off Chip Memory Models\footnote{by Wendy Elsasser}}
 \label{sec:nvm}
 
-With the advent of SCM (storage class memory), emerging NVM (Non-Volatile Memory) could also exist on a memory interface, potentially alongside DRAM.
-To enable support of NVM and future memory interfaces, a systematic approach was chosen to refactor the DRAM controller.
-The DRAM interface was pulled out of the controller and moved to a separate DRAM interface object.
-In parallel, an NVM interface was created to model an agnostic interface to emerging memory.
+We are currently working to refactor the DRAM interface to be extensible and enable modeling of other memory devices.
+For instance, with the advent of SCM (storage class memory), emerging NVM (Non-Volatile Memory) could also exist on a memory interface, potentially alongside DRAM.
+To enable support of NVM and future memory interfaces, a we use a systematic approach to refactor the DRAM controller.
+We pull the DRAM interface out of the controller and moved to a separate DRAM interface object.
+In parallel, we create an NVM interface to model an agnostic interface to emerging memory.
 
 The DRAM interface and the NVM interface have configurable address ranges allowing flexible heterogeneous memory configurations.
 For example, single memory controller can have a DRAM interface, an NVM interface, of both interfaces defined.

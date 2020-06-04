@@ -1,12 +1,12 @@
 \subsection[Classic Caches Improvements]{Classic Caches Improvements\footnote{by Nikos Nikoleris}}
 
 The classic memory system implements a snooping MOESI-like coherence protocol that allows for flexible, configurable cache hierarchies.
-The coherence protocol is primarily implemented in the Cache and the CoherentXBar and the SnoopFilter implements a common optimization to reduce unnecessary coherence traffic.
+The coherence protocol is primarily implemented in the \verb|Cache| and the \verb|CoherentXBar| classes and the \verb|SnoopFilter| object implements a common optimization to reduce unnecessary coherence traffic.
 
 Over the years, the components of the classic memory system have received significant contributions with a primary focus is adding support for future technologies and enhancing its accuracy.
 
 \subsubsection[Non-Coherent Cache]{Non-Coherent Cache}
-The cache model in gem5 implements the full coherence protocol and as a result can be used in any level of the coherent memory subsystem (e.g., L1 data cache or instruction cache, last-level cache).
+The cache model in gem5 implements the full coherence protocol and as a result can be used in any level of the coherent memory subsystem (e.g., as an L1 data cache or instruction cache, last-level cache).
 The non-coherent cache is a stripped down version of the cache model designed to be used below the point-of-coherence (closer to memory).
 Below the point-of-coherence, the non-coherent cache receives only requests for fetches and writebacks and itself send requests for fetches and writebacks to memory below.
 As opposed to the regular cache, the non-coherent cache will not send any snoops to invalidate or fetch data from caches above.
@@ -39,14 +39,14 @@ An operation can either clean and/or invalidate a cache line.
 A clean
 operation will find the dirty copy and trigger a writeback and an invalidate operation will find all copies of the cache line and invalidate them and the combined operation will perform both actions.
 The effects of CMOs are defined with reference to a configurable point in the system.
-For example, a clean and invalidate to the point-of-coherence will find all copies of the block above the point-of-coherence, invalidate them, and if any of them is dirty also trigger a writeback to the memory below the point-of-coherence.
+For example, a clean and invalidate sent to the point-of-coherence will find all copies of the block above the point-of-coherence, invalidate them, and if any of them is dirty also trigger a writeback to the memory below the point-of-coherence.
 
 \subsubsection[Snooping Support and Snoop Filtering]{Snooping Support and Snoop Filtering}
 
 In large systems, broadcasting snoop messages is slow; costs energy and time; and can cause significant scalability bottlenecks.
 Therefore, directories and filters are used to keep track of which caches / nodes are keeping a copy of a particular cached line.
 We added a snoop filter to gem5 which is a distributed component that keeps track of the coherence state of all lines cached “above” it, similar to the AMD Probe Filter~\cite{} (Conway, Pat, Nathan Kalyanasundharam).
-For example, if the snoop filter sits next to (in front of) the L3 cache, it knows about all lines in the L2 and L1 caches that are connected to that L3 cache.
+For example, if the snoop filter sits next to the L3 cache and is accessed before the L3, then, it knows about all lines in the L2 and L1 caches that are connected to that L3 cache.
 
 Using the snoop filter, we can reduce the amount of messages from $O(N^2)$ to $O(N)$ with $N$ concurrent masters in the system.
 Modelling the snoop filter / directory separately from the cache allows us to use different organizations for the filter and the cache, and distributing area between shared caches vs coherence tracking filters / directories.
