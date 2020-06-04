@@ -1,0 +1,20 @@
+\subsection[gem5 resources]{gem5 resources\footnote{by Ayaz Akram, Hoa Nguyen, Mahyar Samani}}
+
+The gem5 simulator provides support for simulating many different system configurations. However,
+setting up the simulator to run experiments, specifically in full system mode, could take significant
+amount of time and become very complicated. To improve the reproducibility of gem5 experiments
+many details such as code version should be documented so that created components are identical for
+reuse.
+
+gem5 resources consist of components used to conduct certain computer systems architecture
+research on known-good configurations using gem5. They include anything from the configuration
+files used to build a Linux kernel that works with gem5 to the configuration scripts that
+describe the computer system to be simulated. The provided resources have been tested with gem5-20
+and their working status and initial statistics along with their creation processes have been documented\footnote{\url{https://www.gem5.org/documentation/benchmark_status/}\footnote{\url{https://gem5.googlesource.com/public/gem5-resources}}}.
+They could be used to do research with different system configurations and to save the user substantial amount of time.
+Moreover, some of the provided resources could be modified per user requirements such as the working Ubuntu 20.04 disk-image.
+One of the most important resources required by any full system experiment with gem5 is the disk-image
+which has one of the most time consuming and error prone build procedures. The disk-images provided by
+gem5 resources have been created by packer. We also provide gem5 resources to conduct experiments with many
+popular benchmark suites like SPEC 2006~\cite{spec06}, SPEC 2017~\cite{spec17}, PARSEC~\cite{parsec},
+NAS Parallel Benchmarks (NPB)~\cite{npb}, GAP Benhmark Suite (GAPBS)~\cite{gapbs} and the Linux Kernel.
