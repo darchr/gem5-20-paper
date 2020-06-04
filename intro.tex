@@ -1,5 +1,3 @@
-
-
 \section{The gem5 Simulator}
 
 There is ``a new golden age for computer architecture''~\cite{turinglecture,cacm} driven by changes in technology (e.g., the slowdown of Moore's Law and Dennard Scaling) and ever increasing computational needs.
@@ -8,13 +6,13 @@ The gem5 simulator~\cite{Binkert-gem5-2011} is currently one of the most popular
 Since its publication in 2011, the gem5 paper has been cited over 3600 times\footnote{\url{https://scholar.google.com/scholar?q=gem5}}, and every year many papers published in the top computer architecture venues use gem5 as their main evaluation technique.
 
 The gem5 simulator~\cite{Binkert-gem5-2011} is an open source community-supported computer architecture simulator system.
-It consists of a simulator core and models for everything from out of order processors, to DRAM, to network devices.
+It consists of a simulator core and models for a wide number of components from out of order processors, to DRAM, to network devices.
 The gem5 project consists of the gem5 simulator\footnote{\url{https://gem5.googlesource.com/public/gem5}}, documentation\footnote{\url{https://www.gem5.org/}}, and common resources\footnote{\url{https://gem5.googlesource.com/public/gem5-resources}} that enable computer architecture research.
 
 The gem5 project is governed by a meritocratic, consensus-based community governance document\footnote{\url{https://www.gem5.org/governance/}} with a goal to provide a tool to further the state of the art in computer architecture.
 %The goal of gem5 is to provide a tool to further the state of the art in computer architecture.
-gem5 can be used for (but is not limited to) computer-architecture research, advanced development, system-level performance analysis and design-space exploration, hardware-software co-design, and low-level software performance analysis.
-Another goal of gem5 is to be a common framework for computer architecture.
+The gem5 simulator can be used for (but is not limited to) computer-architecture research, advanced development, system-level performance analysis and design-space exploration, hardware-software co-design, and low-level software performance analysis.
+Another goal of gem5 is to be a common framework for computer architectures.
 A common framework in the academic community makes it easier for other researchers to share workloads as well as models and to compare and contrast with other architectural techniques.
 
 The gem5 community strives to balance the needs of its three categories of users: academic researchers, industry researchers, and students learning computer architecture.
@@ -29,9 +27,9 @@ Specific user needs important to the community are enumerated below:
 \end{itemize}
 
 In this paper, we discuss the current state of gem5.
-We first discuss the past, present and future of gem5.
+We first discuss the past, present and future of the gem5 project.
 Then, we give an overview of gem5's main features available today and describe how to become a member of the gem5 community for researchers, students, and teachers.
-Finally, we include a significant section which describes the major changes in gem5 in the past nine years since the initial gem5 release.
+Finally, we include a significant section which describes the major changes in gem5 in the past nine years since the initial release.
 Each subsection was contributed by at least one of the people who developed that part of the simulator as noted in the footnotes.
 
 It has taken a huge number of people to make gem5 what it is today.
@@ -92,7 +90,8 @@ Importantly, members of the PMC do not have significant authority over other mem
 
 To simplify the contribution process, we have instituted many industry-standard development methodologies including providing a \verb|CONTRIBUTING| document in the gem5 source.
 In the past, gem5 code contributions were managed with a number of esoteric software packages.
-Now, all gem5 code is stored in a git repository\footnote{\url{googlesource}}, code review is managed on Gerrit\footnote{url{gem5-review}}, we have continuous integration support (see Section~\ref{sec:testing}), our website is implemented with jekyll and markdown\footnote{\url{gem5-website-repo}}, and we have a Jira-based issue tracker\footnote{\url{https://gem5.atlassian.net/}}.
+Now, all gem5 code is stored in a git repository\footnote{\url{https://gem5.googlesource.com/}}, code review is managed on gerrit\footnote{\url{https://gem5-review.googlesource.com/}}, we have continuous integration support (see Section~\ref{sec:testing}), our website is implemented with jekyll and markdown\footnote{\url{https://gem5.googlesource.com/public/gem5-website}}, and we have a Jira-based issue tracker\footnote{\url{https://gem5.atlassian.net/}}.
+After transitioning to these more well known tools, we have seen a rise in the number of community contributors.
 
 After transitioning to these more well known tools and improved development practices, we have seen a rise in the number of community contributors and using gem5 has become less frustrating.
 Continuous integration enables us to test every single changeset before it is committed.
@@ -110,7 +109,7 @@ We are also working on improving the interconnect model~\ref{sec:garnet} and add
 
 One of the most exciting features coming to gem5 is that we will provide the community with a set of \emph{publicly validated} models which will model current architectural system components including CPU cores, GPU compute units (CUs), caches, main memory systems, and devices.
 Past research~\cite{butko2012accuracy, nowatzki2015architectural, endo2014micro, akram201686, asri2016simulator, akram2019validation, gutierrez2014sources, jo2018diagsim, tanimoto2017dependence, walker2018hardware} has shown that some gem5 models can be imprecise.
-We will strive for accuracy compared to real systems; however, since most systems are proprietary and complex, accuracy for all workloads will be difficult.
+We strive for accuracy compared to real systems; however, since most systems are proprietary and complex, accuracy for all workloads will be difficult.
 Thus, we will broadly advertise the relative performance, power, and other metrics when providing these models so users can make an informed decision when choosing their baseline configurations.
 This will reduce the researcher's time spent on configuring baselines and allow them to concentrate more effort on analyzing and developing their novel research ideas.
 The first step towards this goal of validated baselines is the gem5 resources repository described in Section~\ref{sec:resources}.
@@ -136,15 +135,15 @@ The gem5 project also contains tests to help find bugs, a complex and feature ri
 \end{figure*}
 
 The gem5 simulator has modular support for multiple ISAs (see Figure~\ref{fig:gem5-big-picture}~\textcircled{1}).
-gem5 currently supports Arm, GPU ISAs, MIPS, Power, RISC-V, SPARC, and x86.
+The gem5 simulator currently supports Arm, GPU ISAs, MIPS, Power, RISC-V, SPARC, and x86.
 These ISAs not only include the details to execute each instruction, but also the system-specific devices necessary for full system simulation.
 There is robust full system support for Linux on Arm and x86 and many other ISAs have some level of full system support.
 
 All of these ISAs can be used with any of gem5's CPU models as the CPU models are designed to be ISA-agnostic (Figure~\ref{fig:gem5-big-picture}~\textcircled{2}).
-gem5 includes four different CPU models which span the fidelity performance continuum.
+Four different CPU models are included which span the fidelity performance continuum.
 The highest performance CPU model is based on the kernel virtual machine (KVM) and leverages hardware virtualization to execute \emph{at native speeds}~\cite{full-speed-ahead}.
 Although the KVM CPU model can execute at native speed, it does not model the timing of execution or memory requests.
-gem5 also contains ``simple'' CPU models which are single-cycle models that can be used for memory system studies or other studies that do not require high-fidelity execution models.
+The gem5 simulator also contains ``simple'' CPU models which are single-cycle models that can be used for memory system studies or other studies that do not require high-fidelity execution models.
 Finally, gem5 contains a detailed in-order CPU model (the ``minor'' CPU) and an out-of-order CPU model (the ``O3'' CPU).
 
 Underlying the memory system model in gem5 is a modular port interface which allows any component that implements the port API to be connected to any other component implementing that API ( Figure~\ref{fig:gem5-big-picture}~\textcircled{3}).
@@ -161,7 +160,7 @@ Both Ruby and the classic caches can be used with any CPU model, any ISA, and an
 
 The gem5 simulator also includes an event-driven DRAM model (Figure~\ref{fig:gem5-big-picture}~\textcircled{6}).
 This DRAM model is easily configurable with the timing parameters for a variety of different DRAM controllers including DDR3, DDR4, GDDR, HBM, HMC, LPDDR4, LPDDR5, and others.
-Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{dramsim, dramsim2, dramsim3} or Ramulator~\cite{ramulator}, it is nearly as accurate while providing more flexibility and higher performance~\cite{hansson-ispass-paper}
+Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{wang_05, dramsim2, dramsim3} or Ramulator~\cite{yoongy_16}, it is nearly as accurate while providing more flexibility and higher performance~\cite{hansson-ispass-paper}
 
 In addition to CPU models, gem5 also includes a cycle-level compute-based GPU~\cite{} (Figure~\ref{fig:gem5-big-picture}~\textcircled{7}).
 This GPU model does not support graphics applications, but supports many compute applications based on the heterogeneous system architecture (HSA) and ROCm runtime.
@@ -173,7 +172,7 @@ gem5 supports many system-agnostic devices such as disk controllers, PCI compone
 Additionally, gem5 contains support for a functional-only GPU model to enable simulating applications that depend on graphics APIs but do not depend on graphics performance~\cite{nomali}.
 
 Finally, gem5 has been integrated with other computer architecture simulator systems to enable users with models in other simulator systems to use gem5's features (Figure~\ref{fig:gem5-big-picture}~\textcircled{9}).
-For instance, gem5 has been integrated with the Structural Simulation Toolkit (SST)~\cite{sst-gem5} which uses gem5's detailed CPU models in conjunction with SST's multi-node modeling capabilities.
+For instance, gem5 has been integrated with the Structural Simulation Toolkit (SST)~\cite{rodriguez_11,sst-gem5} which uses gem5's detailed CPU models in conjunction with SST's multi-node modeling capabilities.
 The IEEE standard SystemC API~\cite{menard2017-system-systemc} has also been integrated with gem5 to enable users with SystemC models to use them as gem5 components.
 
 Although there are many computer architecture simulators, and many of these are open source with features that overlap with gem5, gem5 is a unique simulation infrastructure.
