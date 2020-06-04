@@ -4,10 +4,10 @@ With the introduction of KVM support, it quickly became apparent that some of ge
 We also realized that these devices do not provide any relevant timing information in most experimental setups.
 In fact, they are not even representative of the devices found in modern computer systems.
 Similarly, when simulating mobile workload, such as Android, the GPU has a large impact on system behavior.
-While it is possible to simulate an Android system without a GPU (the system resorts to software rendering), such simulations are wildly inaccurate for many CPU-side metrics~\cite{} (NoMali: Simulating a realistic graphics driver stack using a stub GPU).
+While it is possible to simulate an Android system without a GPU (the system resorts to software rendering), such simulations are wildly inaccurate for many CPU-side metrics~\cite{nomali}.
 
 These problems lead to the development of a new class of device timing-agnostic models in gem5.
 For block devices, pass through file systems, and serial ports, we developed a set of VirtIO-based device models.
-These models only provide limited memory system interactions and no timing. To solve the software rendering issue, we introduced a NoMali stub GPU model~\cite{} (NoMali: Simulating a realistic graphics driver stack using a stub GPU) that exposes the same register interface as an Arm Mali T-series and early G-series of GPUs.
+These models only provide limited memory system interactions and no timing. To solve the software rendering issue, we introduced a NoMali stub GPU model~\cite{nomali} that exposes the same register interface as an Arm Mali T-series and early G-series of GPUs.
 This makes it possible to use a full production GPU driver stack in a simulated system without simulating the actual GPU.
 
