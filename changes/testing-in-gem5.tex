@@ -4,7 +4,7 @@
 In order to ensure the quality of gem5, we have continued to improve our
 testing. Testing ensures errors during development are caught and rectified
 early, prior to release. As testing gives certain guarantees that new
-modifications do not unintentially break functionality, a good testing
+modifications do not unintentionally break functionality, a good testing
 infrastructure is essential to open-source projects, such as gem5, that are
 contributed to regularly, from many different individuals with varying levels
 of expertise and familiarity with the project.
@@ -27,19 +27,19 @@ therefore not designed to test individual components.
 \subsubsection{Unit Tests}
 
 In order to test at a finer granularity, unit tests have been developed and
-incorporated into our testing procedures. Unline our TestLib tests, these unit
+incorporated into our testing procedures. Unlike our TestLib tests, these unit
 tests ensure the functionality of gem5 classes and functions. Thus, if broken,
 the source of the bugs can more quickly be determined. While a relatively new
 component in our testing infrastructure, we are currently in the process of
 expanding these tests with the goal of per-SimObject unit tests, and greater
 coverage over-all
 
-\subsubsection{Continious Integration}
+\subsubsection{Continuous Integration}
 
 Via our Gerrit code-review system, we run tests for each
 submitted patch prior to incorporation to the gem5 code base. These tests
 compile gem5 against key ISA targets, and run a set tests designed to cover all
-major gem5 components. This proceedure suppliments our code review system, thereby
+major gem5 components. This procedure supplements our code review system, thereby
 reducing the possibility of new contributions introducing bugs.
 
 In addition to the tests run prior to submission, a larger set of tests are
