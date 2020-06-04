@@ -13,7 +13,7 @@ A good overview of the KVM implementation can be found in the technical report b
 The original full-system implementation was later extended to support syscall emulation mode on x86~\cite{} (Alex Dutu in a gem5 workshop a few years ago).
 
 Support for hardware virtualization in gem5 enabled research into novel ways of accelerating simulation.
-The original intention was to use KVM to generate checkpoints and later simulate those checkpoints in parallel.
+The original intention was to use KVM to generate checkpoints and later simulate those checkpoints in parallel with different system parameters (e.g., to do design space exploration).
 However, we quickly realized that the checkpointing step could be eliminated by cloning the simulator state at runtime.
 This led to the introduction of the fork call in gem5's Python API.
 Under the hood, this call drains the simulator to make sure everything is in a consistent state, it then uses the UNIX fork call to create a copy of the simulator.
