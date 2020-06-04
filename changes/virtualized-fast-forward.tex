@@ -7,7 +7,7 @@ However, despite these challenges, we had a working prototype that booted Linux 
 This prototype was refined and merged into gem5 in April 2013, just one month after qemu gained support for Arm KVM.
 Support for x86 followed later that year.
 A good overview of the KVM implementation can be found in the technical report by Sandberg et. al~\cite{full-speed-ahead}.
-The original full-system implementation was later extended to support syscall emulation mode on x86~\cite{} (Alex Dutu in a gem5 workshop a few years ago, http://www.m5sim.org/wiki/images/5/53/2015_ws_12_KVM-in-SE.pdf).
+The original full-system implementation was later extended to support syscall emulation mode on x86~\cite{} (Alex Dutu in a gem5 workshop a few years ago, \url{http://www.m5sim.org/wiki/images/5/53/2015_ws_12_KVM-in-SE.pdf}).
 
 Support for hardware virtualization in gem5 enabled research into novel ways of accelerating simulation.
 The original intention was to use KVM to generate checkpoints and later simulate those checkpoints in parallel with different system parameters (e.g., to do design space exploration).
