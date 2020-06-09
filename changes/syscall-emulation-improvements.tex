@@ -1,4 +1,4 @@
-\subsection[Syscall Emulation Improvements]{Syscall Emulation Improvements\footnote{by Brandon Potter}}
+\subsection[System Call Emulation Mode Improvements]{System Call Emulation Mode Improvements\footnote{by Brandon Potter}}
 
 System call emulation mode (SE mode) allows gem5 to execute user-mode binaries without executing the kernel-mode system calls of a real operating system.
 Basic functionality existed in the original gem5 release~\cite{Binkert-gem5-2011}, but major improvements have been made in the past few years.
@@ -11,7 +11,7 @@ This limitation prevented evaluation of workloads which require dynamic linking 
 To support these workloads, the SE mode infrastructure was modified to support dynamic executables using ELF~\cite{}(ELF spec).
 
 At a high level, the internal ELF loader was altered to detect the requirement of an interpreter---the tool responsible for handling dynamic loaded libraries.
-If the interpreter is required, the ELF loader will load the both the interpreter and the workload into the process address space within the simulator.
+If the interpreter is required, the ELF loader will load both the interpreter and the workload into the process address space within the simulator.
 The ELF loader will also initialize stack variables to help the interpreter and the workload find each other.
 With the interpreter in the address space, the workload will delegate lookups (function bindings) to the interpreter which will fixup function call invocation points on behalf of the workload.
 
@@ -27,7 +27,7 @@ With dynamic executable support, users encounter issues with libraries which dep
 Many common libraries have a dependency on the pthread library.
 This results in a transitive dependency from the perspective of the workload.
 To meet the dependency, we decided to directly support usage of native threading libraries.
-There are currently two options to support threading in SE mode: m5threads and native threading libraries (i.e. pthreads).
+There are currently two options to support threading in SE mode: m5threads and native threading libraries (e.g., pthreads).
 
 The first option, m5threads, is a custom threading library originally conceived to provide threading support specifically for gem5.
 The library predates dynamic executable support and therefore is statically linked against the workloads which require threading.
@@ -74,6 +74,6 @@ The \verb|key:value| strings for path redirection can be set via the Python conf
 
 \subsubsection{AMD ROCm v1.6}
 
-At the time of publication, a dated version of the ROCm software stack can be used with x86 ISA builds.
+At the time of publication, a dated version of the ROCm software stack can be used with x86 ISA builds and the GPU compute model~\ref{sec:gpu}.
 The ROCm~v1.6 libraries can be loaded and used on both RHEL6 and Ubuntu 16.04 operating systems.
 We distribute a set of docker containers and dockerfiles to help users get started using this specific version of ROCm with gem5.

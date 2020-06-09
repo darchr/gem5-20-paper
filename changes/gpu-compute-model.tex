@@ -1,4 +1,5 @@
 \subsection[GPU Compute Model]{GPU Compute Model\footnote{by Anthony Gutierrez}}
+\label{sec:gpu}
 
 GPUs have become an important part of the system design for high-performance computing, machine learning, and many other workloads.
 Thus, we have integrated a compute-based GPU model into gem5~\cite{gutierrez-hpca-gpu} (\url{https://ieeexplore.ieee.org/document/8327041}).
@@ -8,7 +9,7 @@ Thus, we have integrated a compute-based GPU model into gem5~\cite{gutierrez-hpc
 The Ruby coherence protocol tester is designed for CPU-like memory systems that implement relatively strong memory consistency models (e.g., TSO) and hardware-based coherence protocols (e.g., MESI).
 In such systems, once a processor sends a request to memory, the request appears globally to the rest of the system.
 Without knowing implementation details of target memory systems, the tester can rely on the issuing order of reads and writes to determine the current state of shared memory.
-However, existing GPU memory systems are often based on weaker consistency models (e.g., sequential consistency for data-race-free) and implement software-directed cache coherence protocols (e.g., VIPER requiring explicit cache flushes and invalidations from software to maintain cache coherence).
+However, existing GPU memory systems are often based on weaker consistency models (e.g., sequential consistency for data-race-free) and implement software-directed cache coherence protocols (e.g., the VIPER Ruby protocol which requires explicit cache flushes and invalidations from software to maintain cache coherence).
 The order in which reads and writes appear globally can be different from the order they are issued from GPU cores.
 Therefore, the previous CPU-centric Ruby tester is not applicable to testing GPU memory systems.
 

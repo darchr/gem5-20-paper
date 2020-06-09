@@ -2,7 +2,7 @@
 
 The gem5 simulator can model a large number of configurations in the off-chip memory system.
 Its memory controller handles requests from the on-chip memory system and issues read and write commands for the actual memory device~\cite{}(), and it models the timing behavior of the latter.
-Over the years a number of contributions have added features that allow modeling of emerging new technologies and features.
+Over the years a number of contributions have added features that allow modeling emerging new technologies and features.
 
 \subsubsection[New memory controller features]{New memory controller features\footnote{by Wendy Elsasser}}
 
@@ -18,7 +18,7 @@ The specification defines a flexible architecture and multiple options to optimi
 To evaluate these tradeoffs, we have updated the memory controller to support the new features and added LPDDR5 configurations.
 
 While these changes have been incorporated for LPDDR5, some of them could be applicable to other memory technologies as well.
-The gem5 changes incorporate new timing parameters, support of multi-cycle commands and support of interleaved bursts.
+The gem5 changes incorporate new timing parameters, support for multi-cycle commands, and support for interleaved bursts.
 These features require new checks and optimizations in gem5 to ensure the model integrity when comparing to real hardware.
 For example, support for multi-cycle commands along with the changes to LPDDR5 clocking motivated a new check in gem5 to verify command bandwidth.
 Previously, the DRAM controller did not verify contention on the command bus and assumed adequate command bandwidth, but with the evolution of new technologies this assumption is not always valid.
@@ -67,7 +67,7 @@ Furthermore, we integrate the power-down modes into the DRAM controller model of
 
 We are currently working to refactor the DRAM interface to be extensible and enable modeling of other memory devices.
 For instance, with the advent of SCM (storage class memory), emerging NVM (Non-Volatile Memory) could also exist on a memory interface, potentially alongside DRAM.
-To enable support of NVM and future memory interfaces, a we use a systematic approach to refactor the DRAM controller.
+To enable support of NVM and future memory interfaces, we use a systematic approach to refactor the DRAM controller.
 We pull the DRAM interface out of the controller and moved to a separate DRAM interface object.
 In parallel, we create an NVM interface to model an agnostic interface to emerging memory.
 

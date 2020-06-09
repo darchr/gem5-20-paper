@@ -1,7 +1,7 @@
 \subsection[Branch Predictor Improvements]{Branch Predictor Improvements\footnote{by Dibakar Gope}}
 
 In gem5, multiple branch prediction models are available, many of which were added since the initial release of gem5.
-Currently, gem5 supports $5$ different branch prediction techniques including the well-known TAGE predictor besides standard predictors such as bi-mode, tournament, etc.
+Currently, gem5 supports five different branch prediction techniques including the well-known TAGE predictor as well as standard predictors such as bi-mode, tournament, etc.
 This list can easily be expanded to cover different variants of these well-known branch predictors.
 Besides, the support for loop predictor and indirect branch predictor is also available.
 
@@ -9,6 +9,6 @@ Furthermore, the modularity of the implementation of different branch predictors
 For example, TAGE can be seamlessly augmented with a loop predictor to predict loops with constant iteration numbers.
 Indirect branch predictor can be made to use complex TAGE-like scheme instead of simple history-based predictors with only a few hours of development effort.
 In addition to this, these different predictors can be configured with different sizes of history registers and table-like structures.
-For example, TAGE predictor can be configured to run with different sizes of the history register and consequently different number of predictor tables, allowing users to carry research on the effects of different predictor sizes in various performance metrics.
+For example, TAGE predictor can be configured to run with different sizes of the history register and consequently a different number of predictor tables, allowing users to investigate the effects of different predictor sizes in various performance metrics.
 
 Future development is planned to include the support of neural branch predictors (e.g., perceptron branch predictor, etc.) and different variants of TAGE and perceptron predictors that have demonstrated significant improvement in branch misses in recent years.

@@ -10,7 +10,7 @@ The motivation for implementing the RISC-V ISA into gem5 stemmed from needing a 
 At the time of implementation, the only means of simulating RISC-V was using Spike (its simplified, single-cycle RTL simulator), QEMU, full RTL simulation, or emulation on FPGA.
 Spike and QEMU are not detailed enough and RTL simulation is too time consuming for these methods to be feasible for architectural parameter exploration. With FPGA emulation, it is difficult to retrieve performance information without modifying both the RTL design and the system software.
 The gem5 simulator provides an easy means of performing this type of analysis through its detailed hardware models that do not require software modification and allows for variable levels of detail.
-By adding RISC-V to gem5, this type of analysis is enabled for this rapidly-growing ISA.
+By adding RISC-V to gem5, this type of analysis is enabled for this increasingly important ISA.
 
 The implementation was done by following the divisions of the instruction set into its base ISA and extensions, beginning with the 32-bit integer base set, RV32I.
 It was modeled off of the existing gem5 code for MIPS and Alpha, which are also RISC instruction sets that share many of the same operations as RISC-V.

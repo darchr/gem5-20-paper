@@ -4,12 +4,12 @@ Designing distributed systems requires careful analysis of the complex interplay
 microarchitecture, memory subsystem, inter-node network, and software layers.
 However, simulating a multi-node computer system using one gem5 process can take an eon.
 Responding to the need for efficient simulation of multi-node computer systems, dist-gem5 enables parallel, distributed simulation of a hierarchical, computer cluster using multiple gem5 processes.
-dist-gem5 spawns several gem5 processes, in which each of them can simulate one or several computer systems (i.e., compute node) or a scale-out network topology (i.e., network node).
-dist-gem5 automatically launches these gem5 processes, forward simulated packets between them through real TCP connections, and performs quantum-based synchronization to ensure correct and deterministic simulation.
+The dist-gem5 configuration script spawns several gem5 processes, in which each of them can simulate one or several computer systems (i.e., compute node) or a scale-out network topology (i.e., network node).
+Then, dist-gem5 automatically launches these gem5 processes, forwards simulated packets between them through TCP connections, and performs quantum-based synchronization to ensure correct and deterministic simulation.
 
 More specifically, dist-gem5 consists of the following three main components:
 
-\textbf{Packet forwarding:} dist-gem5 establishes a TCP socket connection between each compute node and a corresponding port of the network node to (i) forward simulated packets between compte nodes
+\textbf{Packet forwarding:} dist-gem5 establishes a TCP socket connection between each compute node and a corresponding port of the network node to (i) forward simulated packets between compute nodes
 through the simulated network topology and (ii) exchange synchronization messages.
 Within each gem5 process, dist-gem5 launches a receiver thread that runs in parallel with the main simulation thread to free the main simulation thread from polling on the TCP connections.
 

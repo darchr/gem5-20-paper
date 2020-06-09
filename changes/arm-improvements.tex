@@ -29,8 +29,7 @@ register can fit, depending on its length. On top of the 32 variable-length
 vector registers, SVE also adds 16 variable length predicate registers for
 predicated execution. These registers store one bit per byte (the minimum
 element size) in the vector register, and can be used to select specific
-elements in your vector for operation~\cite{white-paper-on-SVE-and-VLA-programming}.
-
+elements in the vector for operation~\cite{white-paper-on-SVE-and-VLA-programming}.
 
 In order to support SVE, gem5 implements register storage and register access
 as two separated classes, a container and an interface, decoupling one from the
