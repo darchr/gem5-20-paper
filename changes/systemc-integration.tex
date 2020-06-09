@@ -21,7 +21,7 @@ organized as a set of components that communicate by exchanging data packets
 via a well defined protocol. The protocol abstracts over the physical
 connection wires that would be used in a register transfer level (RTL)
 simulation and thereby significantly increases simulation speed. In gem5,
-components use \emph{master} and \emph{slave} ports to communicate to other
+components use \emph{requestor} and \emph{responder} ports to communicate to other
 components, whereas in SystemC TLM, connections are established via
 \emph{initiator} and \emph{target} sockets. Also, the three protocols
 \emph{atomic}, \emph{timing} and \emph{functional} provided by gem5 find their
