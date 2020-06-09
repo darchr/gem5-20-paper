@@ -26,21 +26,27 @@ Previously, the DRAM controller did not verify contention on the command bus and
 \subsubsection[Quality of Service Extensions]{Quality of Service Extensions\footnote{by Matteo Andreozzi}}
 
 The coexistence of heterogeneous tasks/workloads on a single computer system is common practice in modern systems, from the automotive to the high-performance computing use-case.
-It allows the system to minimize costs by improving the resources utilization and improving the efficiency of data sharing across workloads.
-This, however, comes at the cost of potential severe performance degradation due to interference on shared resources, and increased uncertainty in terms of workload performance predictability.
+Quality of Service (QoS) is the ability of a system to provide differential treatment to its clients, in a quantifiable and predictable way.
 
-To compensate for these shortcomings, we stress the need to introduce a mechanism for predictively and deterministically managing such systems resources, i.e., providing Quality of Service (QoS).
-Quality of Service is the ability of a system to provide differential treatment to its clients, in a quantifiable and predictable way.
-The concept and challenges of QoS itself are not new and achieving QoS is generally hard in complex systems, as we learned from Computer Networking.
-We therefore define here QoS in Systems on Chips on the following two principles:
-\begin{enumerate}
-    \item \emph{QoS is resource access arbitration}: a QoS-enabled resource (e.g., memory) guarantees certain Levels of Service (memory access bandwidth and latency, compute time, peripheral access, etc.) to its serviced users (e.g., software threads)
-    \item \emph{QoS is quantifiable and predictable:} the set of guarantees a QoS-enabled resource can provide are known a priori and characteristic of the implemented QoS arbitration schemes.
-    The level of service that a QoS enabled resource will guarantee to its users must therefore be predictable to a certain extent given a specific set of policies and their configurations.
-\end{enumerate}
+% It allows the system to minimize costs by improving the resource utilization and improving the efficiency of data sharing across workloads.
+% This, however, comes at the cost of potential severe performance degradation due to interference on shared resources, and increased uncertainty in terms of workload performance predictability.
 
-The contribution involved the definition of a QoS-aware memory controller in gem5, and the definition of basic (example) policies modelling the prioritization algorithm of the memory controller. Those are the Fixed priority policy (every master in the system has a fixed priority assigned) and the Proportional Fair policy (where the priority of a master is dynamically adjusted at runtime based on utilization).
-The DRAM controller in gem5 had been rewritten to include the QoS changes; with the framework in place a user can write its own policy and seamlessly plug it into a real memory controller model to unlock system wide explorations under its own arbitration algorithm.
+% To compensate for these shortcomings, we stress the need to introduce a mechanism for predictively and deterministically managing such systems resources, i.e., providing Quality of Service (QoS).
+% Quality of Service is the ability of a system to provide differential treatment to its clients, in a quantifiable and predictable way.
+% The concept and challenges of QoS itself are not new and achieving QoS is generally hard in complex systems, as we learned from Computer Networking.
+% We therefore define here QoS in Systems on Chips on the following two principles:
+% \begin{enumerate}
+%     \item \emph{QoS is resource access arbitration}: a QoS-enabled resource (e.g., memory) guarantees certain Levels of Service (memory access bandwidth and latency, compute time, peripheral access, etc.) to its serviced users (e.g., software threads)
+%     \item \emph{QoS is quantifiable and predictable:} the set of guarantees a QoS-enabled resource can provide are known a priori and characteristic of the implemented QoS arbitration schemes.
+%     The level of service that a QoS enabled resource will guarantee to its users must therefore be predictable to a certain extent given a specific set of policies and their configurations.
+% \end{enumerate}
+
+We now include a QoS-aware memory controller in gem5, and the definition of basic (example) policies modelling the prioritization algorithm of the memory controller.
+We include models for a \emph{fixed} priority policy (every requestor in the system has a fixed priority assigned) and the \emph{proportional fair} policy (where the priority of a requestor is dynamically adjusted at runtime based on utilization).
+
+The default timing-based DRAM controller described above has been rewritten to include the QoS changes.
+These changes separate out the QoS policy from the DRAM timing model.
+With the framework in place a user can write its own policy and seamlessly plug it into a real memory controller model to unlock system wide explorations under its own arbitration algorithm.
 
 \subsubsection[DRAMPower and DRAM Power-Down Modes]{DRAMPower and DRAM Power-Down Modes\footnote{by Matthias Jung, Wendy Elsasser, Radhika Jagtap, Subash Kannoth, Omar Naji, Éder F.
 Zulian, Andreas Hansson, Christian Weis, and Norbert Wehn }}
