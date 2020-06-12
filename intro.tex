@@ -3,7 +3,7 @@
 % Define "simulated perf" and simulator perf
 % define guest, host, simulator, etc.
 
-There is ``a new golden age for computer architecture''~\cite{turinglecture,cacm} driven by changes in technology (e.g., the slowdown of Moore's Law and Dennard Scaling) and ever increasing computational needs.
+There is ``a new golden age for computer architecture''~\cite{HennessyPatterson-turingLect-isca18, HennessyPatterson-CACM19} driven by changes in technology (e.g., the slowdown of Moore's Law and Dennard Scaling) and ever increasing computational needs.
 One of the first steps in research and development of new hardware architectures is software-based modeling and simulation.
 The gem5 simulator~\cite{Binkert-gem5-2011} is currently one of the most popular academic-focused computer architecture simulation frameworks.
 Since its publication in 2011, the gem5 paper has been cited over 3600 times\footnote{\url{https://scholar.google.com/scholar?q=gem5}}, and every year many papers published in the top computer architecture venues use gem5 as their main evaluation technique.
@@ -107,7 +107,7 @@ The future of gem5 is bright.
 We will be continuing to work with the community to define the roadmap for gem5 development for gem5 version 20.1 and beyond.
 In the short term, we are excited to be improving the underlying infrastructure of gem5 with better testing, refactoring aging code (some of gem5's code is over 20 years old!), and adding well-defined stable APIs.
 By defining stable APIs, we will make it easier for the community to build off of gem5.
-For instance, the inter-simulator interface is currently being defined so that gem5 can be used in conjunction with other simulators (e.g., SST~\cite{}, SystemC~\ref{sec:systemc}, and many others).
+For instance, the inter-simulator interface is currently being defined so that gem5 can be used in conjunction with other simulators (e.g., SST~\cite{RodriguesHemmert2011-sst, HsiehPedretti2012-sst-gem5}, SystemC~\ref{sec:systemc}, and many others).
 We are also working on improving the interconnect model~\ref{sec:garnet}, adding support for non-volatile memory controllers~\ref{sec:nvm}, and a graphical user interface (GUI).
 
 One of the most exciting features coming to gem5 is that we will provide the community with a set of \emph{publicly validated} models which will model current architectural system components including CPU cores, GPU compute units (CUs), caches, main memory systems, and devices.
@@ -130,7 +130,7 @@ For instance, they may be interested in the run time, the memory bandwidth, numb
 The gem5 simulator allows users to run applications and simulates the timing of hardware structures.
 It contains models for the processor core (CPU), memory, and devices.
 
-Many of gem5's features are also useful for other computer systems and programming languages research (e.g., as a platform for developing JIT compilers~\cite{}((Shingarov, "Live Introspection of Target-Agnostic JIT in Simulation"))).
+Many of gem5's features are also useful for other computer systems and programming languages research (e.g., as a platform for developing JIT compilers~\cite{Shingarov2015-jit}).
 
 The gem5 simulator is an ``execute-in-execute'' simulator.
 Each operation (e.g., instruction, memory request, I/O operation) is functionally completed at the point that the timing simulation specifies.
@@ -212,7 +212,7 @@ This allows models designed for one system to be easily used in other system des
 
 There are two different cache systems in gem5: Ruby (Figure~\ref{fig:gem5-big-picture} \textcircled{4}), which models cache coherence protocols with high fidelity, and the ``classic'' caches (Figure~\ref{fig:gem5-big-picture}~\textcircled{5}) which lack cache coherence fidelity and flexibility.
 Ruby enables user-defined cache coherence protocols, though gem5 includes many protocols out of the box.
-%There are now 12 unique protocols including GPU-specific protocols~\cite{viper}, research protocols like token coherence~\cite{token-coherence} and region-coherence protocols~\cite{Power2012hsc}, and teaching protocols~\cite{coherence-primer}.
+%There are now 12 unique protocols including GPU-specific protocols~\cite{viper}, research protocols like token coherence~\cite{token-coherence} and region-coherence protocols~\cite{PowerBasu2013-hsc}, and teaching protocols~\cite{coherence-primer}.
 Users can also choose to use a simple network model or the detailed Garnet model~\cite{garnet-2} when using Ruby caches which offers cycle-level detail for the on-chip network.
 
 The classic caches have a single hard-coded hierarchical MOESI coherence protocol.
@@ -221,11 +221,11 @@ Both Ruby and the classic caches can be used with any CPU model, any ISA, and an
 
 The gem5 simulator also includes an event-driven DRAM model (Figure~\ref{fig:gem5-big-picture}~\textcircled{6}).
 This DRAM model is easily configurable with the timing parameters for a variety of different DRAM controllers including DDR3, DDR4, GDDR, HBM, HMC, LPDDR4, LPDDR5, and others.
-Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{wang_05, dramsim2, dramsim3} or Ramulator~\cite{yoongy_16}, it is nearly as accurate while providing more flexibility and higher performance~\cite{hansson-ispass-paper}
+Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{wang_05, dramsim2, dramsim3} or Ramulator~\cite{yoongy_16}, it is nearly as accurate while providing more flexibility and higher performance~\cite{HanssonAgarwal2014-gem5DRAM}
 
-In addition to CPU models, gem5 also includes a cycle-level compute-based GPU~\cite{} (Figure~\ref{fig:gem5-big-picture}~\textcircled{7}).
+In addition to CPU models, gem5 also includes a cycle-level compute-based GPU~\cite{GutierrezBeckmann2018-amdAPU, Ta2019gputesting} (Figure~\ref{fig:gem5-big-picture}~\textcircled{7}).
 This GPU model does not support graphics applications, but supports many compute applications based on the heterogeneous system architecture (HSA) and ROCm runtime.
-The GPU model is based on AMD's Graphics Core Next (GCN) architecture~\cite{}(AMD. AMD Graphics Core Next (GCN) Architecture. \url{https://www.techpowerup.com/gpu-specs/docs/amd-gcn1-architecture.pdf}, June 2012).
+The GPU model is based on AMD's Graphics Core Next (GCN) architecture~\cite{gcnWhitepaper, gcn3Manual}.
 The GPU model has a modular ISA similar to the CPU model in gem5, and can be extended to support other GPU ISAs in the future.
 
 An important component to full system simulation is supporting I/O and other devices (Figure~\ref{fig:gem5-big-picture}~\textcircled{8}).
@@ -233,7 +233,7 @@ Thus, gem5 supports many system-agnostic devices such as disk controllers, PCI c
 Additionally, gem5 contains support for a functional-only GPU model to enable simulating applications that depend on graphics APIs but do not depend on graphics performance~\cite{nomali}.
 
 Finally, gem5 has been integrated with other computer architecture simulator systems to enable users with models in other simulator systems to use gem5's features (Figure~\ref{fig:gem5-big-picture}~\textcircled{9}).
-For instance, gem5 has been integrated with the Structural Simulation Toolkit (SST)~\cite{rodriguez_11,sst-gem5} which uses gem5's detailed CPU models in conjunction with SST's multi-node modeling capabilities.
+For instance, gem5 has been integrated with the Structural Simulation Toolkit (SST)~\cite{RodriguesHemmert2011-sst, HsiehPedretti2012-sst-gem5} which uses gem5's detailed CPU models in conjunction with SST's multi-node modeling capabilities.
 The IEEE standard SystemC API~\cite{menard2017-system-systemc} has also been integrated with gem5 to enable users with SystemC models to use them as gem5 components.
 
 Although there are many computer architecture simulators, and many of these are open source with features that overlap with gem5, gem5 is a unique simulation infrastructure.
