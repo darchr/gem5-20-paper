@@ -1,11 +1,12 @@
 \subsection[dist-gem5: Support for Distributed System Modeling]{dist-gem5: Support for Distributed System Modeling\footnote{by Mohammad Alian}}
+\label{sec:dist-gem5}
 
 Designing distributed systems requires careful analysis of the complex interplay between processor
 microarchitecture, memory subsystem, inter-node network, and software layers.
 However, simulating a multi-node computer system using one gem5 process can take an eon.
 Responding to the need for efficient simulation of multi-node computer systems, dist-gem5 enables parallel, distributed simulation of a hierarchical, computer cluster using multiple gem5 processes.
 The dist-gem5 configuration script spawns several gem5 processes, in which each of them can simulate one or several computer systems (i.e., compute node) or a scale-out network topology (i.e., network node).
-Then, dist-gem5 automatically launches these gem5 processes, forwards simulated packets between them through TCP connections, and performs quantum-based synchronization to ensure correct and deterministic simulation.
+Then, dist-gem5 automatically launches these gem5 processes, forwards simulated packets between them through TCP connections, and performs quantum-based synchronization to ensure correct and deterministic simulation~\cite{AlianDarbaz2016-gem5Dist, AlianKim2016-pd-gem5}.
 
 More specifically, dist-gem5 consists of the following three main components:
 
@@ -25,4 +26,4 @@ On the other hand, the \verb|process()| method of the network node waits for the
 \textbf{Distributed checkpointing:} dist-gem5 supports distributed checkpointing by capturing the external, inter gem5 process states, including the in-flight packets inside the network node.
 To ensure that no in-flight message exists between gem5 processes when the distributed checkpoint is taken, dist-gem5 only initiates checkpoints at a periodic global sync event.
 
-Cite ``dist-gem5: Distributed Simulation of Computer Clusters'' and ``pd-gem5: Simulation Infrastructure for Parallel/Distributed Computer Systems''
+%Cite ``dist-gem5: Distributed Simulation of Computer Clusters'' and ``pd-gem5: Simulation Infrastructure for Parallel/Distributed Computer Systems''

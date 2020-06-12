@@ -1,4 +1,5 @@
 \subsection[Off-Chip Memory System Models]{Off-Chip Memory System Models\footnote{by Nikos Nikoleris}}
+\label{sec:dramcontroller}
 
 The gem5 simulator can model a large number of configurations in the off-chip memory system.
 Its memory controller handles requests from the on-chip memory system and issues read and write commands for the actual memory device~\cite{}(), and it models the timing behavior of the latter.
@@ -8,7 +9,7 @@ Over the years a number of contributions have added features that allow modeling
 
 The gem5 DRAM controller provides the interface to external memory, which is traditionally DRAM.
 It consists of two main components: the memory controller itself and the DRAM interface.
-The DRAM interface contains media specific information, defining the architecture and timing parameters of the DRAM as well as the functions that manage the media specific operations like activation, precharge, refresh and low power modes~\cite{hansson-ispass}.
+The DRAM interface contains media specific information, defining the architecture and timing parameters of the DRAM as well as the functions that manage the media specific operations like activation, precharge, refresh and low power modes~\cite{HanssonAgarwal2014-gem5DRAM}.
 
 \subsubsection[Low-power DDR]{Low-power DDR\footnote{by Wendy Elsasser}}
 
