@@ -42,7 +42,7 @@ Quality of Service (QoS) is the ability of a system to provide differential trea
 %     The level of service that a QoS enabled resource will guarantee to its users must therefore be predictable to a certain extent given a specific set of policies and their configurations.
 % \end{enumerate}
 
-We now include a QoS-aware memory controller in gem5, and the definition of basic (example) policies modelling the prioritization algorithm of the memory controller.
+We now include a QoS-aware memory controller in gem5, and the definition of basic (example) policies modeling the prioritization algorithm of the memory controller.
 We include models for a \emph{fixed} priority policy (every requestor in the system has a fixed priority assigned) and the \emph{proportional fair} policy (where the priority of a requestor is dynamically adjusted at runtime based on utilization).
 
 The default timing-based DRAM controller described above has been rewritten to include the QoS changes.

@@ -49,6 +49,6 @@ We added a snoop filter to gem5 which is a distributed component that keeps trac
 For example, if the snoop filter sits next to the L3 cache and is accessed before the L3, then, it knows about all lines in the L2 and L1 caches that are connected to that L3 cache.
 
 Using the snoop filter, we can reduce the amount of messages from $O(N^2)$ to $O(N)$ with $N$ concurrent requestors in the system.
-Modelling the snoop filter / directory separately from the cache allows us to use different organizations for the filter and the cache, and distributing area between shared caches vs coherence tracking filters / directories.
+Modeling the snoop filter / directory separately from the cache allows us to use different organizations for the filter and the cache, and distributing area between shared caches vs coherence tracking filters / directories.
 We also model the effect of limited filter capacity through back-invalidations that remove cache entries if the filter becomes full; allowing for more realistic cache performance metrics.
 Finally, the more centralized coherence tracking in the filter allows for more tight checking of correct function of the distributed coherence protocol in the classic memory system.
