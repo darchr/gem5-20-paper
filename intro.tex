@@ -49,7 +49,7 @@ The GEMS paper has been cited over 1800 times and the m5 paper has been cited ov
 
 Since its initial release nine years ago the gem5 simulator has been wildly successful.
 In this time, the use of gem5 has exploded.
-Although not a perfect metric, the gem5 paper has received over 3600 citations according to Google Scholar (see Figure~\ref{fig:citations}).
+Although not a perfect metric, as shown in Figure~\ref{fig:citations} the gem5 paper has received over 3600 citations according to Google Scholar.
 
 \begin{figure}
     \centering
@@ -83,7 +83,7 @@ With this acceleration in use and development of gem5 came growing pains~\cite{P
 The gem5 community was going through a shift from a small project with most contributors from one or two academic labs to a project with worldwide-distributed contributors.
 Additionally, given the growing user base, we could no longer assume that all gem5 users were also going to be main developers.
 
-To solve the problems brought up by the gem5 community, the gem5 project has made major changes in the past nine years.
+To solve the problems brought up by the expanding gem5 community, the gem5 project has made major changes in the past nine years.
 We now have a formal governance structure, we have improved our documentation (see Section~\ref{sec:learning}), we have moved to a better distributed development platform, and improved our community outreach.
 
 To institute a formal governance model, we followed the best practices from other successful open source projects.
@@ -96,16 +96,16 @@ To simplify the contribution process, we have instituted many industry-standard 
 In the past, gem5 code contributions were managed with a number of esoteric software packages.
 Now, all gem5 code is stored in a git repository\footnote{\url{https://gem5.googlesource.com/}}, code review is managed on gerrit\footnote{\url{https://gem5-review.googlesource.com/}}, we have continuous integration support (see Section~\ref{sec:testing}), our website is implemented with jekyll and markdown\footnote{\url{https://gem5.googlesource.com/public/gem5-website}}, and we have a Jira-based issue tracker\footnote{\url{https://gem5.atlassian.net/}}.
 
-After transitioning to these more well known tools and improving our development practices, we have seen a rise in the number of community contributors and using gem5 has become less frustrating.
+After transitioning to these more well known tools and improving our development practices, we have seen a further rise in the number of community contributors and using gem5 has become easier.
 Continuous integration enables us to test every single changeset before it is committed.
 This allows us to catch bugs \emph{before} they are committed into the mainline repository which makes gem5 more stable.
-Similarly, by implementing a bug tracking system, we can track issues that effect gem5.
-In the first six months of using a bug tracker we have closed over 250 issues.
+Similarly, by implementing a bug tracking system, we can track issues that affect gem5.
+For example, in the first six months of using a bug tracker we have closed over 250 issues.
 
 \subsubsection*{The future of gem5}
 The future of gem5 is bright.
-We will be continuing to work with the community to define the roadmap for gem5 development for gem5 version 20.1 and beyond.
-In the short term, we are excited to be improving the underlying infrastructure of gem5 with better testing, refactoring aging code (some of gem5's code is over 20 years old!), and adding well-defined stable APIs.
+We are continuing to work with the community to define the roadmap for gem5 development for gem5 version 20.1 and beyond.
+In the short term, we are excited about improvements to the underlying infrastructure of gem5 with better testing, refactoring of aging code (some of gem5's code is over 20 years old!), and adding well-defined stable APIs.
 By defining stable APIs, we will make it easier for the community to build off of gem5.
 For instance, the inter-simulator interface is currently being defined so that gem5 can be used in conjunction with other simulators (e.g., SST~\cite{RodriguesHemmert2011-sst, HsiehPedretti2012-sst-gem5}, SystemC~\ref{sec:systemc}, and many others).
 We are also working on improving the interconnect model~\ref{sec:garnet}, adding support for non-volatile memory controllers~\ref{sec:nvm}, and a graphical user interface (GUI).
@@ -256,7 +256,7 @@ Below, we discuss some of the common ways to use gem5 and become part of the com
 Currently, the most common use case for gem5 is in computer architecture research.
 In this case, researchers download the gem5 source, build the simulator, and then add their own device models on top of the models included in upstream gem5.
 This use case requires deep knowledge of the core simulation frameworks of gem5.
-However, we are working to make it easier to get started developing and researching with gem5 through efforts like the \emph{Learning gem5} materials and online course~\ref{sec:learning}.
+However, we are working to make it easier to get started developing and researching with gem5 through efforts like the \emph{Learning gem5} materials and online course (Section~\ref{sec:learning}).
 
 After using gem5 in their research, we encourage these users to contribute their improvements and fixes to gem5 back to the mainline codebase.
 Not only does this improve gem5 for others, but it also makes reproducing research results easier.
