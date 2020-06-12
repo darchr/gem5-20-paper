@@ -30,7 +30,8 @@ Specific user needs important to the community are enumerated below:
 \end{itemize}
 
 In this paper, we discuss the current state of gem5.
-We first discuss the past, present and future of the gem5 project.
+We first discuss how to use gem5 for its main use case: computer architecture simulation.
+Next, we describe the past, present and future of the gem5 project.
 Then, we give an overview of gem5's main features available today and describe how to become a member of the gem5 community for researchers, students, and teachers.
 Finally, we include a significant section which describes the major changes in gem5 in the past nine years since the initial release.
 Each subsection was contributed by at least one of the people who developed that part of the simulator as noted in the footnotes.
@@ -122,6 +123,62 @@ In addition to the online version of the course, we will continue to conduct tut
 
 \subsection{gem5's main features}
 \label{sec:main-features}
+
+The gem5 simulator is mainly used to conduct computer architecture research.
+In most cases, researchers have an application or benchmark for which they want to measure some \emph{statistic} under different hardware configurations.
+For instance, they may be interested in the run time, the memory bandwidth, number of branch predictor mis-speculations, etc.
+The gem5 simulator allows users to run applications and simulates the timing of hardware structures.
+It contains models for the processor core (CPU), memory, and devices.
+
+Many of gem5's features are also useful for other computer systems and programming languages research (e.g., as a platform for developing JIT compilers~\cite{}((Shingarov, "Live Introspection of Target-Agnostic JIT in Simulation"))).
+
+The gem5 simulator is an ``execute-in-execute'' simulator.
+Each operation (e.g., instruction, memory request, I/O operation) is functionally completed at the point that the timing simulation specifies.
+For instance, each instruction is executed when it is in the execute stage of the pipeline.
+This is in contrast to trace-based and execute-ahead simulators.
+
+The main benefit of the execute-in-execute is when running applications whose code path depends on the timing of multiple threads or I/O.
+Trace-based or execute-ahead simulation may hide potential behaviors and produce different timing results than real hardware.
+
+The gem5 simulator separates the \emph{functional} execution from the \emph{timing} in most of its models.
+For instance, each of gem5's CPU models can be used with any ISA as the ISA's functional implementation is separate from the CPU timing model.
+This separation allows gem5 to create checkpoints during execution, fast-forward to the region of interest using low fidelity models, and introspection from the simulator into the simulated system at runtime.
+
+\begin{figure*}
+  \begin{subfigure}{0.28\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig/gem5-fs-normal}
+    \caption{The common hardware/software abstraction layers.}
+    \label{fig:gem5-fs-normal}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.28\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig/gem5-fs-fs}
+    \caption{The hardware/software abstraction layers when using gem5 for full system simulation.}
+    \label{fig:gem5-fs-fs}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.28\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig/gem5-fs-se}
+    \caption{The hardware/software abstraction layers when using gem5 in system call emulation mode.}
+    \label{fig:gem5-fs-se}
+  \end{subfigure}
+  \caption{A comparison of gem5's different modes of operation.}
+  \label{fig:gem5-fs}
+\end{figure*}
+
+The gem5 simulator can be used in two different modes: full system simulation or system call emulation (syscall emul or SE-mode).
+Figure~\ref{fig:gem5-fs} shows the hardware/software abstraction layers in each of these cases.
+In \emph{full system} mode, gem5 can boot a full Linux-based operating system (e.g., Ubuntu 20.04).
+After booting the OS, the researcher can run the application of interest to generate statistics.
+In system call emulation mode, the gem5 simulator itself emulates the operating system.
+The support for Linux system calls has been greatly improved recently (see Section~\ref{sec:se-mode}).
+
+Still working on this...
+
+\subsubsection{gem5 design}
 
 The gem5 simulator is a cycle-level computer system simulation environment.
 At its core, gem5 contains an event-driven simulation engine.
