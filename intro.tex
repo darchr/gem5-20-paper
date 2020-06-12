@@ -130,6 +130,22 @@ For instance, they may be interested in the run time, the memory bandwidth, numb
 The gem5 simulator allows users to run applications and simulates the timing of hardware structures.
 It contains models for the processor core (CPU), memory, and devices.
 
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.7\linewidth]{fig/gem5-usage}
+  \caption{How gem5 is used for computer architecture research. An example system is shown on the left, the sketch of a simulation script is shown in the middle, and the results of the gem5 simulation are shown on the right.}
+  \label{fig:gem5-usage}
+\end{figure*}
+
+An overview of gem5's usage is shown in Figure~\ref{fig:gem5-usage}.
+First, the user chooses a system to simulate (e.g., a two core system with two levels of cache shown on the left of Figure~\ref{fig:gem5-usage}).
+Then, the user writes a Python script that describes the system under test by instantiating model objects (\verb|SimObjects| in gem5 terminology).
+Each object has a number of parameters that the user can modify in their script by setting member variables of the Python objects.
+This script is also used to control the simulator and can start the simulation, stop the simulation, save the simulation state, and complete other simulator interactions.
+To execute the simulation, the user passes this Python script to the gem5 binary, which acts as a Python interpreter and executes the script.
+This instantiates the system and runs the simulation as specified in the script.
+The output of gem5 is the output of the application (e.g., standard output or the serial terminal in full system mode) and statistics for each of the simulated models.
+
 Many of gem5's features are also useful for other computer systems and programming languages research (e.g., as a platform for developing JIT compilers~\cite{Shingarov2015-jit}).
 
 The gem5 simulator is an ``execute-in-execute'' simulator.
