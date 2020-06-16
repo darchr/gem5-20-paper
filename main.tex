@@ -3,6 +3,17 @@
 \usepackage{listings}
 \usepackage{subcaption}
 
+% Separate multiple footnotes with comas
+\let\oldFootnote\footnote
+\newcommand\nextToken\relax
+
+\renewcommand\footnote[1]{%
+    \oldFootnote{#1}\futurelet\nextToken\isFootnote}
+
+\newcommand\isFootnote{%
+    \ifx\footnote\nextToken\textsuperscript{,}\fi}
+
+
 \begin{document}
 % Title portion
 \title{The gem5 Simulator: Version 20.0+}
