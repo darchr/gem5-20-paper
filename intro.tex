@@ -223,10 +223,10 @@ Finally, gem5 includes a CPU model that is based on the kernel virtual machine (
 Although the KVM CPU model can execute at native speed, it does not model the timing of execution or memory requests.
 The KVM-based CPU model can be used for fast-forwarding to the region of interest, sampled simulation, and fast-forwarding to checkpoint locations.
 
-Underlying the memory system model in gem5 is a modular port interface which allows any component that implements the port API to be connected to any other component implementing that API ( Figure~\ref{fig:gem5-big-picture}~\textcircled{3}).
+To connect the different compute, memory, and I/O device models gem5 provides a modular port interface which allows any component that implements the port API to be connected to any other component implementing the same API (Figure~\ref{fig:gem5-big-picture}~\textcircled{3}).
 This allows models designed for one system to be easily used in other system designs.
 
-There are two different cache systems in gem5: Ruby (Figure~\ref{fig:gem5-big-picture} \textcircled{4}), which models cache coherence protocols with high fidelity, and the ``classic'' caches (Figure~\ref{fig:gem5-big-picture}~\textcircled{5}) which lack cache coherence fidelity and flexibility.
+There are two different cache systems in gem5: Ruby (Figure~\ref{fig:gem5-big-picture} \textcircled{4}), which models cache coherence protocols with high fidelity; and the ``classic'' caches (Figure~\ref{fig:gem5-big-picture}~\textcircled{5}), which lack cache coherence fidelity and flexibility.
 Ruby enables user-defined cache coherence protocols, though gem5 includes many protocols out of the box.
 %There are now 12 unique protocols including GPU-specific protocols~\cite{viper}, research protocols like token coherence~\cite{token-coherence} and region-coherence protocols~\cite{PowerBasu2013-hsc}, and teaching protocols~\cite{coherence-primer}.
 Users can also choose to use a simple network model or the detailed Garnet model~\cite{garnet-2} when using Ruby caches which offers cycle-level detail for the on-chip network.
@@ -237,7 +237,7 @@ Both Ruby and the classic caches can be used with any CPU model, any ISA, and an
 
 The gem5 simulator also includes an event-driven DRAM model (Figure~\ref{fig:gem5-big-picture}~\textcircled{6}).
 This DRAM model is easily configurable with the timing parameters for a variety of different DRAM controllers including DDR3, DDR4, GDDR, HBM, HMC, LPDDR4, LPDDR5, and others.
-Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{wang_05, dramsim2, dramsim3} or Ramulator~\cite{yoongy_16}, it is nearly as accurate while providing more flexibility and higher performance~\cite{HanssonAgarwal2014-gem5DRAM}
+Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{wang_05, dramsim2, dramsim3} or Ramulator~\cite{yoongy_16}, it is nearly as accurate while providing more flexibility and higher performance~\cite{HanssonAgarwal2014-gem5DRAM}.
 
 In addition to CPU models, gem5 also includes a cycle-level compute-based GPU~\cite{GutierrezBeckmann2018-amdAPU, Ta2019gputesting} (Figure~\ref{fig:gem5-big-picture}~\textcircled{7}).
 This GPU model does not support graphics applications, but supports many compute applications based on the heterogeneous system architecture (HSA) and ROCm runtime.
