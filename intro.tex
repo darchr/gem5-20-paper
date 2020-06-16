@@ -242,11 +242,11 @@ Although this is not a cycle-accurate DRAM model like DRAMSim~\cite{wang_05, dra
 In addition to CPU models, gem5 also includes a cycle-level compute-based GPU~\cite{GutierrezBeckmann2018-amdAPU, Ta2019gputesting} (Figure~\ref{fig:gem5-big-picture}~\textcircled{7}).
 This GPU model does not support graphics applications, but supports many compute applications based on the heterogeneous system architecture (HSA) and ROCm runtime.
 The GPU model is based on AMD's Graphics Core Next (GCN) architecture~\cite{gcnWhitepaper, gcn3Manual}.
-The GPU model has a modular ISA similar to the CPU model in gem5, and can be extended to support other GPU ISAs in the future.
+The GPU model has a modular ISA similar to the CPU model in gem5, and can be extended to support other GPU ISAs in the future. Additionally, gem5 contains support for a functional-only GPU model to enable simulating applications that depend on graphics APIs but do not depend on graphics performance~\cite{nomali}.
 
 An important component to full system simulation is supporting I/O and other devices (Figure~\ref{fig:gem5-big-picture}~\textcircled{8}).
-Thus, gem5 supports many system-agnostic devices such as disk controllers, PCI components, Ethernet controllers, etc. and system-specific devices such as the Arm GIC and SMMU and x86 PC devices.
-Additionally, gem5 contains support for a functional-only GPU model to enable simulating applications that depend on graphics APIs but do not depend on graphics performance~\cite{nomali}.
+Thus, gem5 supports many system-agnostic devices such as disk controllers, PCI components, Ethernet controllers, etc. In addition, system-specific devices such as the Arm GIC and SMMU, and x86 PC devices.
+
 
 Finally, gem5 has been integrated with other computer architecture simulator systems to enable users with models in other simulator systems to use gem5's features (Figure~\ref{fig:gem5-big-picture}~\textcircled{9}).
 For instance, gem5 has been integrated with the Structural Simulation Toolkit (SST)~\cite{RodriguesHemmert2011-sst, HsiehPedretti2012-sst-gem5} which uses gem5's detailed CPU models in conjunction with SST's multi-node modeling capabilities.
