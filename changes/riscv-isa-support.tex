@@ -23,8 +23,8 @@ Floating-point instructions required many special cases to ensure correct error 
 Finally, support for the non-standard compressed (C) extension, which adds 16-bit versions of high-usage instructions, was added when it was discovered that this extension was included by default in many RISC-V software toolchains.
 Its implementation required the creation of a state machine in the instruction decoder to keep track of whether the current instruction is compressed or not, to increment the PC by the correct amount based on the size of the instruction, and to handle cases where a full-length instruction crosses a 32-bit word boundary.
 
-With this implementation, most RISC-V Linux programs are supported for execution in system-call-emulation mode.
-Future work by others would then go on to improve the implementation of atomic instructions, including actual atomic read-modify-write accesses in a single instruction and steps toward support for full-system simulation.
+With this implementation, most RISC-V Linux programs are supported for execution in system call emulation mode.
+Future work by others would then go on to improve the implementation of atomic instructions, including actual atomic read-modify-write accesses in a single instruction and steps toward support for full system simulation.
 Additionally, gem5's version of the RISC-V test-suite\footnote{\url{https://github.com/riscv/riscv-tests}} has been updated to the latest version and several corner cases in gem5 have been fixed, so that now most of the tests are working correctly.
 
 \subsubsection[RISC-V Full System Support]{RISC-V Full System Support\footnote{By Nils Asmussen}}
