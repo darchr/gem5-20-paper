@@ -45,7 +45,7 @@ Specifically, the clone system call required support for many new options and th
 
 In SE mode, many system call implementations rely on functionality provided by the host machine.
 For example, a workload's invocation of the ``open'' system call will cause the gem5 CPU model to hand control over to the simulator.
-The SE mode ``open'' implementation will then call the glibc open function on the host machine (which in-turn uses the host machine’s open system call).
+The SE mode ``open'' implementation will then call the glibc open function on the host machine (which in-turn uses the host machine's open system call).
 Effectively, the system call is passed from the simulated process space down to the host machine.
 This pass-through method has been utilized since SE mode has existed.
 
