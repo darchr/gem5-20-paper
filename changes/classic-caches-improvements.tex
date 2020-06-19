@@ -45,7 +45,7 @@ For example, a clean and invalidate sent to the point-of-coherence will find all
 
 In large systems, broadcasting snoop messages is slow; costs energy and time; and can cause significant scalability bottlenecks.
 Therefore, directories and filters are used to keep track of which caches / nodes are keeping a copy of a particular cached line.
-We added a snoop filter to gem5 which is a distributed component that keeps track of the coherence state of all lines cached “above” it, similar to the AMD Probe Filter~\cite{} (Conway, Pat, Nathan Kalyanasundharam).
+We added a snoop filter to gem5 which is a distributed component that keeps track of the coherence state of all lines cached ``above'' it, similar to the AMD Probe Filter~\cite{Conway:opteron:2010}.
 For example, if the snoop filter sits next to the L3 cache and is accessed before the L3, then, it knows about all lines in the L2 and L1 caches that are connected to that L3 cache.
 
 Using the snoop filter, we can reduce the amount of messages from $O(N^2)$ to $O(N)$ with $N$ concurrent requestors in the system.
