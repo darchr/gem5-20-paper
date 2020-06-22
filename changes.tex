@@ -3,42 +3,90 @@
 
 In addition to the systematic changes in project management discussed in Section~\ref{sec:current-gem5} there has also been innumerable improvements to the codebase.
 This section contains descriptions of some of the major changes to gem5.
-There are too many changes to list.
 There were 7015 commits between when gem5 was released and the release of gem5-20 by at least 250 unique contributors.
 This section is a comprehensive, but not exhaustive list of the major changes in gem5.
 Along with the description of the changes in gem5, we also recognize the individuals or groups who made significant contributions to each of these features with separate by-lines for each subsection.
 However, there are many unlisted contributors that were indispensable in getting gem5 where it is today.
 
+Table~\ref{table:overview} gives and overview of the major changes in gem5 with pointers to subsections which contain more detail on each change.
+
+\begin{table}
+    \begin{tabular}{|p{0.95\linewidth}|}
+        \hline
+        \multicolumn{1}{|c|}{\textbf{General usability improvements} } \\
+        \hline
+        \textbf{Section~\ref{sec:resources}:} Added new resources repository with disk images, kernel images, etc. \\
+        \textbf{Section~\ref{sec:learning}:} Learning gem5 book and class. Provides a way to get started using and developing with gem5. \\
+        \hline \hline
+        \multicolumn{1}{|c|}{ \textbf{ISA improvements} } \\
+        \hline
+        \textbf{Section~\ref{sec:riscv}:} RISC-V ISA added. User mode fully supported. Some support for full system. \\
+        \textbf{Section~\ref{sec:arm}:} ARM ISA improvements. Added support for Armv8, SVE instructions, and trusted firmware. \\
+        \textbf{Section~\ref{sec:x86}:} x86 ISA improvements. Better support for out-of-order CPU models, many instructions added, and support for TSO memory consistency. \\
+        \hline \hline
+        \multicolumn{1}{|c|}{\textbf{Execution model improvements} } \\
+        \hline
+        \textbf{Section~\ref{sec:predictor}:} New branch predictors including L-TAGE.\\
+        \textbf{Section~\ref{sec:virtualized-ff}:} New CPU model based on KVM added. Uses host hardware to accelerate simulator. \\
+        \textbf{Section~\ref{sec:elastic}:} Elastic trace execution added. Trace capture and playback with dynamic dependencies for fast flexible simulation. \\
+        \hline \hline
+        \multicolumn{1}{|c|}{\textbf{Memory system improvements} }\\
+        \hline
+        \textbf{Section~\ref{sec:dramcontroller}:} Configurable DRAM controller. Added support for many DRAM devices, low-power DRAM, quality of service, and power models. \\
+        \textbf{Section~\ref{sec:classic}:} Classic cache improvements. Added non-coherent caches, write streaming optimizations, cache maintenance operations, and snoop filtering. \\
+        \textbf{Section~\ref{sec:replacement}:} General replacement policy framework and cache compressions support added. \\
+        \textbf{Section~\ref{sec:ruby}:} Ruby model improvements. Many general improvements, GPU coherence protocols, and support for ARM ISA. \\
+        \textbf{Section~\ref{sec:garnet}:} Garnet network improved to version 2.0 with more detailed router and network models. \\
+        \hline \hline
+        \multicolumn{1}{|c|}{\textbf{New models} } \\
+        \hline
+        \textbf{Section~\ref{sec:gpu}:} GPU compute model added. Models AMD's GCN architecture in SE-mode with support for shared memory systems. Tests for GPU-like coherence protocols also added. \\
+        \textbf{Section~\ref{sec:dvfs}:} Runtime power modeling and DVFS support added. \\
+        \textbf{Section~\ref{sec:virtio-nomali}:} Support for timing-agnostic device models added. VirtIO enables more flexible guest-simulator interaction and the NoMali GPU model allows graphic-based applications to execute more realistically. \\
+        \textbf{Section~\ref{sec:dist-gem5}:} Support for modeling multiple distributed systems added. \\
+        \textbf{Section~\ref{sec:systemc}:} SystemC model integration. Added a bridge from SystemC TLM models to gem5 models, and added an implementation of SystemC for tight gem5-SystemC integration. \\
+        \hline \hline
+        \multicolumn{1}{|c|}{\textbf{General infrastructure improvements} } \\
+        \hline
+        \textbf{Section~\ref{sec:se-mode}:} SE-mode improvements. Support for dynamically-linked binaries, more system calls, multi-threaded applications, and a virtual file system. \\
+        \textbf{Section~\ref{sec:testing}:} Testing improvements. New unit test framework and continuous integration support. \\
+        \textbf{Section~\ref{sec:internal}:} General infrastructure improvements. Added support for HD5F output for statistics, Python 3 support, and asynchronous modeling. \\
+        \textbf{Section~\ref{sec:guest-sim}:} Updated guest$\leftrightarrow$simulator APIs. \\
+        \hline
+    \end{tabular}
+    \caption{Overview of major change in gem5.}
+    \label{table:overview}
+\end{table}
+
+% Usability
+\input{changes/gem5-resources}
+\input{changes/learning-gem5}
+% ISA improvements
 \input{changes/riscv-isa-support}
 \input{changes/arm-improvements}
 \input{changes/x86-improvements}
-\input{changes/syscall-emulation-improvements}
-\input{changes/gpu-compute-model}
+% Execution models
 % \input{changes/minor-in-order-cpu-model}
 \input{changes/predictor-improvements}
 \input{changes/virtualized-fast-forward}
 \input{changes/elastic-traces}
 % \input{changes/memory-traces-and-traffic-generator}
+% Memory system
 \input{changes/flexible-dram-controller}
 \input{changes/classic-caches-improvements}
 \input{changes/cache-replacement-policies}
 \input{changes/ruby-cache-model}
 \input{changes/garnet-network-model}
+% New models
+\input{changes/gpu-compute-model}
 \input{changes/power-modeling-and-dvfs-support}
-%\input{changes/arm-fastmodel.tex}
+\input{changes/virtio-nomail}
 \input{changes/dist-gem5}
 \input{changes/systemc-integration}
+%\input{changes/arm-fastmodel.tex}
 % \input{changes/gem5-and-sst-integration}
+% Infrastructure
+\input{changes/syscall-emulation-improvements}
+\input{changes/testing-in-gem5}
 \input{changes/internal-gem5-improvements-and-features}
 \input{changes/updating-guest-simulator-apis}
-\input{changes/testing-in-gem5}
-\input{changes/gem5-resources}
-\input{changes/learning-gem5}
-
-
-
-
-
-
-
-
