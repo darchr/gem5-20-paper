@@ -1,9 +1,8 @@
 \subsection[Virtualized Fast Forwarding]{Virtualized Fast Forwarding\footnote{by Andreas Sandberg}}
 \label{sec:virtualized-ff}
 
-Support for hardware virtualization in gem5 might have seemed like a non-obvious enhancement to the simulator when we started to work on it in 2012.
-However, it has turned out to be a very useful feature for bring up, model development, testing, and novel simulation research~\cite{full-speed-ahead, NikolerisSHC16, NikolerisEHC19}.
-Work on the original implementation started in the summer 2012 in Arm Research and targeted the Arm Cortex A15 chip. Some of the most challenging parts of the development were the lack of a stable kernel API for KVM on Arm and the limited availability of production silicon.
+Support for hardware virtualization (e.g., AMD-V, Intel VT-x, and ARM virtualization extensions) is a very useful feature for bring up, model development, testing, and novel simulation research~\cite{full-speed-ahead, NikolerisSHC16, NikolerisEHC19}.
+Work on the original implementation of hardware virtualization support started in the summer 2012 in Arm Research and targeted the Arm Cortex A15 chip. Some of the most challenging parts of the development were the lack of a stable kernel API for KVM on Arm and the limited availability of production silicon.
 However, despite these challenges, we had a working prototype that booted Linux in autumn.
 This prototype was refined and merged into gem5 in April 2013, just one month after qemu gained support for Arm KVM.
 Support for x86 followed later that year.
