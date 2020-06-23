@@ -8,10 +8,9 @@ AArch32, supporting the A32 and T32 instruction sets (backward-compatible with
 Armv7-A and Thumb instruction sets, respectively), and AArch64, a new
 state offering support for 64-bit addressing via the A64 instruction set. Currently, gem5
 supports all of the above instruction sets and the interworking
-between them. In addition, on top of the user-level features, several
-contributions have targeted important system-level extensions, e.g. the
-Security (aka TrustZone~\cite{ArmTustZone}) and virtualization extensions~\cite{ArmARM}, thus opening up new
-avenues for architectural and micro-architectural research.
+between them.
+On top of the user-level features, several important system-level extensions, e.g. the
+security (aka TrustZone~\cite{ArmTustZone}) and virtualization extensions~\cite{ArmARM}, have been contributed opening up new avenues for architectural and micro-architectural research.
 
 While Armv8-A was a major iteration of the architecture, there have been
 several smaller iterations introduced by Arm with a yearly cadence, and various
@@ -32,7 +31,7 @@ predicated execution. These registers store one bit per byte (the minimum
 element size) in the vector register, and can be used to select specific
 elements in the vector for operation~\cite{white-paper-on-SVE-and-VLA-programming}.
 
-In order to support SVE, gem5 implements register storage and register access
+To support SVE, gem5 implements register storage and register access
 as two separated classes, a container and an interface, decoupling one from the
 other. The vector registers can be of any arbitrary size and be accessed as
 vectors of elements of any particular type, depending on the operand types of
@@ -49,8 +48,7 @@ with arbitrarily large vector registers.
 Trusted Firmware (TF-A) is Arm's reference implementation of Secure World software for A-profile architectures.
 It enables Secure Boot flow models, and provides implementations for the Secure Monitor executing at Exception Level 3 (EL3) as well as for several Arm low-level software interface standards, including System Control and Management Interface (SCMI) driver for accessing System Control Processors (SCP), Power State Coordination Interface (PSCI) library support for power management, and Secure Monitor Call (SMC) handling.
 
-TF-A is supported on multiple Platforms, each of them characterized by its set of hardware components and their location in the memory map.
-From the list of ADPs (Arm Development Platforms), it is worth mentioning the Juno ADP and the Fixed Virtual Platforms (FVP) ADP family.
+TF-A is supported on multiple Arm Development Platforms (APDs), each of them characterized by its set of hardware components and their location in the memory map (e.g., Juno ADP and the Fixed Virtual Platforms (FVP) ADP family).
 However, the Arm reference platforms in gem5 are part of the \verb|VExpress_GEM5_Base| family.
 These are loosely based on a Versatile Express RS1 platform with a slightly modified memory map. TF-A implementations are provided for both Juno and FVPs, however not for \verb|VExpress_GEM5_Base|.
 
