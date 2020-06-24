@@ -47,19 +47,9 @@ The SE-mode ``open'' implementation will then call the glibc open function on th
 Effectively, the system call is passed from the simulated process space down to the host machine.
 In Figure~\ref{fig:gem5-fs-se}, the ``Syscall Emul'' layer is implemented as a passthrough to the host operating system in many cases.
 
-There are several reasons to employ passthrough:
-\begin{enumerate}
-    \item It avoids reimplementing complicated operating system features.
-    \item It promotes code reuse by not specializing the system call implementation for each ISA.
-    \item It allows the host resources to be utilized directly from the simulated process.
-\end{enumerate}
+There are several reasons to employ passthrough. (1) It avoids reimplementing complicated operating system features. (2) It promotes code reuse by not specializing the system call implementation for each ISA. (3) It allows the host resources to be utilized directly from the simulated process.
 
-However, there are several drawbacks stemming from passthrough as well:
-\begin{enumerate}
-    \item It creates API mismatches for system calls which rely on glibc library implementations. Specifically, a system call's options may differ for simulated ISA and the host ISA.
-    \item It creates ABI mismatches for system calls which directly call into the host system call without interpreting system call parameters.
-    \item It creates issues when utilizing some host resources.
-\end{enumerate}
+However, there are several drawbacks stemming from passthrough as well. (1) It creates API mismatches for system calls which rely on glibc library implementations. Specifically, a system call's options may differ for simulated ISA and the host ISA. (2) It creates ABI mismatches for system calls which directly call into the host system call without interpreting system call parameters. (3) It creates issues when utilizing some host resources.
 
 The virtual file system provides a solution for the third drawback, specifically, for filesystem handling.
 When files are touched by the simulated process, the results of the accesses or modifications passthrough to the host filesystem.
