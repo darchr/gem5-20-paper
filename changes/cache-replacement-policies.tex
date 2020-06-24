@@ -1,14 +1,14 @@
 \subsection[Cache Replacement Policies and New Compression Support]{Cache Replacement Policies and New Compression Support\footnote{By Daniel Rodrigues Carvalho}}
 \label{sec:replacement}
 
-In general, hardware components frequently contain tables, whose contents are managed by replacement policies.
+In general, hardware components frequently contain tables whose contents are managed by replacement policies.
 In gem5, multiple replacement policies are available, which can be paired with any table-like structure, allowing users to carry out research on the effects of different replacement algorithms in various hardware units.
 Currently, gem5 supports 13 different replacement policies including several standard policies such as LRU, FIFO, and Pseudo-LRU, and various RRIPs~\cite{Jaleel2010rrip}.
 These policies can be used with both the classic caches and Ruby caches.
 This list is easily expandable to cover schemes with greater complexity as well.
 
 The simulator also supports cache compression by providing several state-of-the-art compression algorithms~\cite{sardashti2015primer} and a default compression-oriented cache organization.
-This basic organization scheme is derived from accepted approaches in the literature: adjacent blocks share a tag entry, yet they can only be co-allocated in a data entry if each of them compresses to at least a specific percentage of the cache line size.
+This basic organization scheme is derived from accepted approaches in the literature: adjacent blocks share a tag entry, yet they can only be co-allocated in a data entry if each block compresses to at least a specific percentage of the cache line size.
 Currently, only BDI~\cite{pekhimenko2012base}, C-Pack~\cite{chen2010c}, and FPCD~\cite{alameldeen2018opportunistic} are implemented, but the modularity of the compressors allows for simple implementation of other dictionary-based and pattern-based compression algorithms.
 
 These replacement policies are a great example of gem5's modularity and how code developed for one purpose can be reused in many other parts of the simulator.
