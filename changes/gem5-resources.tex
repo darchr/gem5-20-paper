@@ -1,39 +1,28 @@
-\subsection[gem5 resources]{gem5 resources\footnote{by Ayaz Akram, Bobby R. Bruce Hoa Nguyen, and Mahyar Samani}}
+\subsection[gem5 resources]{gem5 resources\footnote{by Ayaz Akram, Bobby R. Bruce, Hoa Nguyen, and Mahyar Samani}}
 \label{sec:resources}
 
-While the gem5 simulator permits the simulation of many different systems on
-different benchmarks and tests, gathering and compiling the resources do to so
-can be a laborious process. To provide
-a better user-experience we have began maintaining \emph{gem5
-resources}; a set of artifacts
-that are not required to build or run gem5, but that may be utilized to carry out
-particular simulations. For example, Linux kernels, disk images, popular
-benchmark suites, and commonly used tests binaries. As part of our gem5-20
-release, these resources, with source code and build instructions for each, are
-gradually being centralized in a common repository\footnote{
-\url{https://gem5.googlesource.com/public/gem5-resources}}.
+The gem5 simulator permits the simulation of many different systems
+using a variety of benchmarks and tests.
+However, gathering and compiling the resources to perform experiments with gem5 can be a laborious process.
+To provide a better user-experience we have began maintaining \emph{gem5 resources}, which we broadly define as a set of artifacts that are not required to build or run gem5, but that may be utilized to carry out experiments and simulations.
+For example, Linux kernels, disk images, popular benchmark suites, and commonly used tests binaries are frequently needed by users of gem5 but are not distributed as part of the gem5 itself.
+As part of our gem5-20 release, these resources, with source code and build instructions for each, are gradually being centralized in a common repository\footnote{\url{https://gem5.googlesource.com/public/gem5-resources}}.
 
-A key goal of this repository is to ensure reproducibility of gem5
-experiments. As a case in point, it can often be difficult to ascertain what exact
-kernel configuration was used to test booting within a particular architecture
-simulation. With gem5 resources, the correct kernel can be cited more easily,
-thereby improving reproducibility of experiments and tests.
+A key goal of this repository is to ensure reproducibility of gem5 experiments.
+The gem5 resources repository provides researchers with a suite of disk images with pre-installed operating systems and benchmarks as well as kernel binaries.
+Thus, all researchers which use the resources are starting from a common point and can more easily reproduce experiments.
+Additionally, all of the sources and scripts to build each artifact are also included in the repository which can be modified to create custom resources.
 
 \subsubsection{Testing gem5-20 with gem5 resources}
 
-Another important aim of creating a common set of gem5 resources is to more
-regularly test gem5 on a suite of benchmarks and common Linux booting setups.
-As part of gem5-20, we have tested the simulator's effectiveness
-at running SPEC 2006~\cite{spec06}, SPEC 2017~\cite{spec17},
-PARSEC~\cite{parsec}, the NAS Parallel Benchmarks (NPB)~\cite{npb},
-and the GAP Benchmark Suite (GAPBS)~\cite{gapbs}. We have also shown gem5-20's
-performance at running 5 different LTS Linux Kernel releases on a set of
-different CPU and memory configurations. This results from these investigations
-can be found on our website~\footnote{
-\url{http://www.gem5.org/documentation/benchmark_status}}.
+Another important aim of creating a common set of gem5 resources is to more regularly test gem5 on a suite of common benchmarks, operating systems Linux kernels.
+As part of gem5-20, we have tested the simulator's capability to run SPEC 2006~\cite{spec06}, SPEC 2017~\cite{spec17}, PARSEC~\cite{parsec}, the NAS Parallel Benchmarks (NPB)~\cite{npb}, and the GAP Benchmark Suite (GAPBS)~\cite{gapbs}.
+We have also shown gem5-20's performance when running five different long-term service (LTS) Linux kernel releases on a set of different CPU and memory configurations.
+The results from these investigations can be found on our website~\footnote{\url{http://www.gem5.org/documentation/benchmark_status}}.
+We plan use this information, and gem5 resources repository, to better target problem areas in the gem5 project.
 
-Moving forward, we can use this information and the gem5 resources to better target problem areas in the gem5 project.
-Also, with a shared set of common resources and knowledge of what configurations work best with gem5, we can provide the community with a set of ``known good'' gem5 configurations to facilitate computer architecture research.
+Furthermore, with a shared set of common resources and knowledge of what configurations work best with gem5, we can provide the community with a set of ``known good'' gem5 configurations to facilitate computer architecture research.
+We intend for these configurations to replicate the functionality and performance of architectural components at a high level of fidelity.
 
 %The gem5 simulator provides support for simulating many different system configurations. However,
 %setting up the simulator to run simulations, specifically in full system mode, could take significant
