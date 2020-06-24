@@ -9,11 +9,8 @@ levels of expertise and familiarity with the project. Testing gives assurances
 that these regular contributions are not breaking key pieces of functionality,
 thus allowing for a relatively high throughput of changes.
 
-Furthermore, due to gem5's age and size, tests give developers a degree of
-confidence when undertaking engineering on seldom touched components, thus
-improving the productivity of even the most experienced of developers. Good
-tests and regular testing are thereby critical in ensuring the smooth running
-of the project both presently and into the future.
+Furthermore, due to gem5's age and size, tests give developers a degree of confidence when undertaking engineering on seldom touched components and improve productivity of all developers.
+Good tests and regular testing are thereby critical in ensuring the smooth running of the project both presently and into the future.
 
 \subsubsection{The TestLib Framework}
 
@@ -38,14 +35,14 @@ future releases of gem5.
 
 Via our Gerrit code-review system, we run tests for each
 submitted patch prior to merging into the gem5 code base. These tests
-compile gem5 against key ISA targets, and run a suite of tests designed to
+compile gem5 against key ISA targets and run a suite of tests designed to
 cover all major gem5 components (in practice, all unit tests and a subset of
 the TestLib tests). This procedure supplements our code review system, thereby
 reducing the possibility of new contributions introducing bugs.
 
 In addition to the tests run prior to submission, a larger set of tests are
 available for more ``in-depth'' testing. These can take several hours to complete
-execution, and  test functionality such as
+execution, and test functionality such as
 full-system booting. We run these tests regularly to ensure gem5 meets our
 standards. While these are currently triggered manually, we hope to
 automatically run these tests nightly and automatically send error reports to
