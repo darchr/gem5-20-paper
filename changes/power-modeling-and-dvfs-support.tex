@@ -1,8 +1,10 @@
 \subsection[Runtime Power Modeling and DVFS Support]{Runtime Power Modeling and DVFS Support\footnote{by Stephan Diestelhorst}}
 \label{sec:dvfs}
 
-Virtually all processing today needs to consider not just aspects of performance, but also that of energy and power consumption. Systems are either constrained on power or thermal run conditions (mobile devices, boosting of desktop systems), or need to operate as energy efficiently as possible (in HPC and data centers).
+Virtually all processing today needs to consider not just aspects of performance, but also that of energy and power consumption.
+Many systems are constrained by power or thermal conditions (mobile devices, boosting of desktop systems) or need to operate as energy efficiently as possible (in HPC and data centers).
 We have added support to gem5 to model power-relevant silicon structures: voltage and frequency domains.
-We have also added a model for enabling DVFS (dynamic voltage and frequency scaling), devices that allow for DVFS control by operating system governors and autonomous control.
-Finally, we added an activity-based power modeling framework that measures key micro-architectural events, voltage, and frequency and allows detailed aggregation of power consumed over time similar to McPAT~\cite{LiAhn2009-mcpat, LiAhn2013-mcpat}.
-We have reported on that work in earlier material~\cite{SpiliopoulosBHAK13}, and have extended the flexibility of the power equation models and available activities since, for example including power consumption caused by the activity of the SVE vector units.
+We have also added a model for enabling DVFS (dynamic voltage and frequency scaling) and support devices that allow for DVFS control by operating system governors and autonomous control.
+Finally, we added an activity-based power modeling framework that measures key microarchitectural events, voltage, and frequency and allows detailed aggregation of power consumed over time similar to McPAT~\cite{LiAhn2009-mcpat, LiAhn2013-mcpat}.
+Spiliopoulos et al. show that gem5's DVFS support can be integrated into both Linux and Android operating systems to provide end-to-end power and energy modeling~\cite{SpiliopoulosBHAK13}.
+Additionally, these model have been extended to include power consumption caused by the activity of the SVE vector units.
