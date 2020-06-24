@@ -1,7 +1,7 @@
 \subsection[Timing-agnostic models: VirtIO and NoMali]{Timing-agnostic models: VirtIO and NoMali\footnote{By Andreas Sandberg}}
 \label{sec:virtio-nomali}
 
-With the introduction of KVM support, it quickly became apparent that some of gem5’s device models, such as the IDE disk interface or the UART, were not efficient in a virtualized environment.
+With the introduction of KVM support, it quickly became apparent that some of gem5's device models, such as the IDE disk interface and the UART, were not efficient in a virtualized environment.
 We also realized that these devices do not provide any relevant timing information in most experimental setups.
 In fact, they are not even representative of the devices found in modern computer systems.
 Similarly, when simulating mobile workload, such as Android, the GPU has a large impact on system behavior.
@@ -9,5 +9,6 @@ While it is possible to simulate an Android system without a GPU (the system res
 
 These problems lead to the development of a new class of device timing-agnostic models in gem5.
 For block devices, pass through file systems, and serial ports, we developed a set of VirtIO-based device models.
-These models only provide limited memory system interactions and no timing. To solve the software rendering issue, we introduced a NoMali stub GPU model~\cite{nomali} that exposes the same register interface as an Arm Mali T-series and early G-series of GPUs.
+These models only provide limited memory system interactions and no timing.
+To solve the software rendering issue, we introduced a NoMali stub GPU model~\cite{nomali} that exposes the same register interface as an Arm Mali T-series and early G-series of GPUs.
 This makes it possible to use a full production GPU driver stack in a simulated system without simulating the actual GPU.
