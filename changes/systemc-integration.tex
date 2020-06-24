@@ -2,7 +2,7 @@
 \label{sec:systemc}
 
 While the open and configurable architecture of gem5 is of particular interest
-in academia, the industry's main tool for virtual prototyping is SystemC
+in academia, one of industry's main tools for virtual prototyping is SystemC
 Transaction Level Modeling (TLM)~\cite{systemc_ieee11}. Many hardware vendors
 provide SystemC TLM models of their IP and there are tools, such as Synopsys
 Platform Architect\footnote{\url{https://www.synopsys.com/verification/virtual-prototyping/platform-architect.html}},
@@ -10,8 +10,8 @@ that assist in building a virtual system and analyzing it. Also, many research
 projects use SystemC TLM, as they benefit from the rich ecosystem of accurate
 off-the-shelf models of real hardware components. However, there is a lack of
 accurate and modifiable CPU models in SystemC since the model providers want to
-protect their IP. This makes the combination of gem5 with SystemC very
-attractive.
+protect their IP.
+Thus, we have taken steps to make gem5 and SystemC models compatible so that researchers can construct systems using models from both frameworks at the same time.
 
 \subsubsection[gem5 to SystemC Bridge]{gem5 to SystemC Bridge\footnote{By Christian Menard, Matthias Jung, Abdul Mutaal Ahmad, and Jeronimo Castrillon}}
 
@@ -69,4 +69,4 @@ Existing models and \verb|c_main| implementations can generally be used as-is wi
 While some parts of gem5's SystemC implementation are taken from the open source reference implementation (most of the data structure library and TLM), the core implementation is new and based off of the SystemC standard.
 This means that code which depends on nonstandard features, behaviors, and implementation specific details of the reference implementation may not compile or work properly within gem5.
 That said, gem5's SystemC kernel passes almost all of the reference implementation's test suite.
-The few exceptions are tests that are broken, explicitly test for implementation specific behavior, or test for deprecated and undocumented features.
+The few exceptions are tests that are broken, tests that explicitly check for implementation specific behavior, or tests for deprecated and undocumented features.
