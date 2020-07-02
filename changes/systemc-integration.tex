@@ -32,18 +32,27 @@ backpressure, which is implemented by a retry phase in gem5 and with the
 exclusion rule of TLM.
 
 \begin{figure}
+  \begin{subfigure}{0.22\linewidth}
     \centering
-    \subcaptionbox{gem5 to SystemC\label{fig:example:gem5_to_sc}}[.25\linewidth]{
-      \includegraphics[height=4cm]{fig/gem5_to_systemc.pdf}
-    }
-    \subcaptionbox{SystemC to gem5\label{fig:example:sc_to_gem5}}[.25\linewidth]{
-      \includegraphics[height=4cm]{fig/systemc_to_gem5.pdf}
-    }
-    \subcaptionbox{both directions\label{fig:example:twoway}}[.25\linewidth]{
-      \includegraphics[height=4cm]{fig/twoway.pdf}
-    }
-    \caption{Possible scenarios for binding gem5 and SystemC.}
-    \label{fig:gem5_tlm_example}
+    \includegraphics[height=4cm]{fig/gem5_to_systemc.pdf}
+    \caption{gem5 to SystemC}
+    \label{fig:example:gem5_to_sc}
+  \end{subfigure}
+  ~
+  \begin{subfigure}{0.22\linewidth}
+    \centering
+    \includegraphics[height=4cm]{fig/systemc_to_gem5.pdf}
+    \caption{SystemC to gem5}
+    \label{fig:example:sc_to_gem5}
+  \end{subfigure}
+  \begin{subfigure}{0.52\linewidth}
+    \centering
+    \includegraphics[height=4cm]{fig/twoway.pdf}
+    \caption{Both directions}
+    \label{ffig:example:twoway}
+  \end{subfigure}
+  \caption{Possible scenarios for binding gem5 and SystemC.}
+  \label{fig:gem5_tlm_example}
 \end{figure}
 
 The similarity of the two approaches enabled us to create a light-weight

@@ -34,7 +34,7 @@ If we wanted to call it from within the guest using calling convention AAPCS32, 
 
 \begin{figure}
     \centering
-    \begin{subfigure}{0.45\linewidth}
+    \begin{subfigure}{\linewidth}
         \begin{lstlisting}[frame=single,basicstyle=\small]
 int
 foo(char bar, float baz)
@@ -42,11 +42,11 @@ foo(char bar, float baz)
     return (baz < 0) ? bar : bar + 1;
 }
         \end{lstlisting}
-        \caption{Example guest$\leftrightarrow$function.}
+        \caption{Example guest$\leftrightarrow$function. \vspace{10pt}}
         \label{fig:code1}
     \end{subfigure}
-    \hspace{2em}
-    \begin{subfigure}{.38\linewidth}
+
+    \begin{subfigure}{\linewidth}
         \begin{lstlisting}[frame=single,basicstyle=\small]
 invokeSimcall<Aapcs32>(tc, foo);
         \end{lstlisting}
