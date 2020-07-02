@@ -1,4 +1,4 @@
-\documentclass[acmlarge,nonacm,screen=true]{acmart}
+\documentclass[sigconf,nonacm,screen=true]{acmart}
 
 \usepackage{listings}
 \usepackage{subcaption}
@@ -13,12 +13,11 @@
 \newcommand\isFootnote{%
     \ifx\footnote\nextToken\textsuperscript{,}\fi}
 
-
 \begin{document}
 % Title portion
 \title{The gem5 Simulator: Version 20.0+}
 \subtitle{A new era for the open-source computer architecture simulator}
-% \input{author-list}
+\input{author-list}
 
 \titlenote{
     gem5 is the result of the merger of the GEMS project started in 1999, and the m5 project started in 2003.
@@ -33,6 +32,8 @@
     In this paper, we give and overview of gem5's usage and features, describe the current state of the gem5 simulator, and enumerate the major changes since the initial release of gem5.
     We also discuss how the gem5 simulator has transitioned to a formal governance model to enable continued improvement and community support for the next 20 years of computer architecture research.
 \end{abstract}
+
+\settopmatter{authorsperrow=6}
 
 \maketitle
 \renewcommand{\shortauthors}{Lowe-Power and the gem5 Community}
