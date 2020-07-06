@@ -311,6 +311,11 @@ def create_acks():
 
     print(', '.join(sorted(all_authors, key=lambda i: i.split(' ')[-1])))
 
-if __name__=="__main__":
-    create_acks()
+def print_authors():
+    entries = get_authors()
+    for e in entries.values():
+        name = e.split('\n')[0][8:-1]
+        print(name, end=',')
 
+if __name__=="__main__":
+    pass
