@@ -7,10 +7,10 @@ There is ``a new golden age for computer architecture''~\cite{HennessyPatterson-
 One of the first steps in research and development of new hardware architectures is software-based modeling and simulation.
 The gem5 simulator~\cite{Binkert-gem5-2011} is currently one of the most popular academic-focused computer architecture simulation frameworks.
 Since its publication in 2011, the gem5 paper has been cited over 3600 times\footnote{\url{https://scholar.google.com/scholar?q=gem5}}, and every year many papers published in the top computer architecture venues use gem5 as their main evaluation infrastructure.
-Additionally, gem5 is one of the tools used to design RIKEN, one of the first exascale systems~\cite{Kodama:Riken:2019}.
+Additionally, gem5 is one of the tools used to design the Fugaku supercomputer, one of the first exascale systems~\cite{Kodama:Riken:2019}.
 
 The gem5 simulator~\cite{Binkert-gem5-2011} is an open source community-supported computer architecture simulator system.
-It consists of a simulator core and models for a wide number of components from out-of-order processors, to DRAM, to network devices.
+It consists of a simulator core and parametrized models for a wide number of components from out-of-order processors, to DRAM, to network devices.
 The gem5 project consists of the gem5 simulator\footnote{\url{https://gem5.googlesource.com/public/gem5}}, documentation\footnote{\url{https://www.gem5.org/}}, and common resources\footnote{\url{https://gem5.googlesource.com/public/gem5-resources}} that enable computer architecture research.
 
 The gem5 project is governed by a meritocratic, consensus-based community governance document\footnote{\url{https://www.gem5.org/governance/}} with a goal to provide a tool to further the state of the art in computer architecture.
@@ -112,7 +112,7 @@ By defining stable APIs, we will make it easier for the community to build off o
 For instance, the inter-simulator interface is currently being defined so that gem5 can be used in conjunction with other simulators (e.g., SST~\cite{RodriguesHemmert2011-sst, HsiehPedretti2012-sst-gem5}, SystemC (Section ~\ref{sec:systemc}), and many others).
 We are also working on improving the interconnect model (Section~\ref{sec:garnet}), adding support for non-volatile memory controllers (Section~\ref{sec:nvm}), and a graphical user interface (GUI).
 
-One of the most exciting features coming to gem5 is that we will provide the community with a set of \emph{publicly validated} models which will model current architectural system components including CPU cores, GPU compute units (CUs), caches, main memory systems, and devices.
+One of the most exciting features coming to gem5 is that we will provide the community with a set of \emph{publicly validated} models and parameters which will model current architectural system components including CPU cores, GPU compute units (CUs), caches, main memory systems, and devices.
 Past research~\cite{butko2012accuracy, nowatzki2015architectural, endo2014micro, akram201686, asri2016simulator, akram2019validation, gutierrez2014sources, jo2018diagsim, tanimoto2017dependence, walker2018hardware} has shown that some gem5 models can be imprecise.
 We strive for accuracy compared to real systems; however, since most systems are proprietary and complex, accuracy for all workloads will be difficult.
 Thus, we will broadly advertise the relative performance, power, and other metrics when providing these models so users can make an informed decision when choosing their baseline configurations.
@@ -153,7 +153,7 @@ However, we are improving the documentation for new users.
 
 We will be continuing to improve gem5 with the goal of making it easier for both students and teachers to learn and teach computer architectures concepts.
 For example, the new \emph{Learning gem5} material created for the online course will include a set of example exercises that we hope can be used in both undergraduate and graduate computer architecture courses.
-Additionally, we are working to develop a new GUI-based front-end for gem5 and to develop known-good models that do not required deep knowledge of simulator internals to configure and use.
+Additionally, we are working to develop a new graphical front-end for gem5 and to develop known-good models that do not required deep knowledge of simulator internals to configure and use.
 
 gem5 can be used in a computer architecture course by having the students download and build gem5 themselves or by providing them with a pre-built binary.
 Then, the students can create different gem5 configurations which vary hardware parameters (e.g., issue width, cache associativity, etc.).
@@ -166,12 +166,12 @@ The gem5 simulator is mainly used to conduct computer architecture research.
 In most cases, researchers have an application or benchmark for which they want to measure some \emph{statistics} under different hardware configurations.
 For instance, they may be interested in the run time, the memory bandwidth, number of branch predictor mis-speculations, etc.
 The gem5 simulator allows users to run applications and simulate the timing of hardware structures.
-It contains models for the processor core (CPU), memory, and devices.
+It contains parameterized models for the processor core (CPU), memory, and devices.
 
 Although there are many computer architecture simulators, and many of these are open source with features that overlap with gem5, gem5 is a unique simulation infrastructure.
 \begin{itemize}
     \item gem5 is \emph{dynamically configurable} through a robust Python-based scripting interface. Most other simulators are configured statically with flat text files (e.g., json) or at compilation time. On the other hand, gem5 allows users to simulate complex systems much more easily by using object-oriented Python scripts to compose simpler systems into more complex ones.
-    \item gem5 is \emph{extensible} through a clean model API. The gem5 simulator has over 300 models and adding new models is straightforward and well documented.
+    \item gem5 is \emph{extensible} through a clean model API. The gem5 simulator has over 300 parameterized models and adding new models and parameters is straightforward and well documented.
     \item gem5 is a \emph{full system} simulator. Its high-fidelity models can support booting unmodified operating systems and running unmodified applications with cycle-level statistics.
     \item gem5 is a \emph{community-driven} and \emph{frequently updated} project. The gem5 community is thriving. Since its original release nine years ago, there have been over 250 unique contributors and over 7500 commits. Even in the last six months, gem5 has had over 850 commits and 50 unique contributors.
 \end{itemize}
@@ -245,7 +245,8 @@ Thus, researchers should use caution when running experiments in SE-mode and ens
 
 The gem5 simulator is a cycle-level computer system simulation environment.
 At its core, gem5 contains an event-driven simulation engine.
-On top of this simulation engine, gem5 implements a large number of models for system components from CPUs (out-of-order designs, in-order designs, and others), memories (such as DDR3/4, GDDR5, HBM, and HMC), on-chip interconnects, coherent caches, I/O devices, and many others.
+On top of this simulation engine, gem5 implements a large number of models for system components including CPU cores (out-of-order designs, in-order designs, and others), a detailed DRAM model, on-chip interconnects, coherent caches, I/O devices, and many others.
+All of these models are parameterized, and they can be customized for different systems (e.g., there are fully specified models for different DRAM devices including DDR3/4, GDDR5, HBM, and HMC, users can change the width of the out-of-order core, etc.).
 Many of these different models are shown in Figure~\ref{fig:gem5-big-picture}.
 The gem5 project also contains tests to help find bugs, a complex and feature-rich statistics database, and a Python scripting interface to describe systems under test and run simulations.
 
@@ -264,9 +265,14 @@ Additionally, many other ISAs have some level of full system support.
 
 All of these ISAs can be used with any of gem5's CPU models as the CPU models are designed to be ISA-agnostic (Figure~\ref{fig:gem5-big-picture}~\textcircled{2}).
 Four different CPU models are included which span the fidelity-performance spectrum.
-The gem5 simulator contains ``simple'' CPU models that can be used for memory system studies or other studies that do not require high-fidelity execution models.
+The gem5 simulator contains ``simple'' CPU models that can be used for memory system studies or other studies that do not require high fidelity execution models.
+When using the ``simple'' CPU model, gem5 simulates the system faster, but has less fidelity when compared to real devices.
 Additionally, gem5 contains a detailed in-order CPU model (the ``minor'' CPU) and an out-of-order CPU model (the ``O3'' CPU).
-Finally, gem5 includes a CPU model that is based on the kernel virtual machine (KVM) that leverages hardware virtualization to execute \emph{at native speeds}~\cite{full-speed-ahead} resulting in minimal simulator overhead compared to native execution.
+When using these high-fidelity models, gem5 runs slower, but can provide more realistic results.
+
+Finally, gem5 includes a CPU ``model'' that bypasses simulation and allows the binaries running in gem5 to use the underlying host's processor, if the host ISA is the same as the application running in gem5.
+In this mode, the performance of gem5 is nearly the same as when running natively~\cite{full-speed-ahead}.
+This CPU model is based on the kernel virtual machine (KVM) API in Linux and leverages the hardware virtualization support available in many modern processors.
 Although the KVM CPU model can execute at native speed, it does not model the timing of execution or memory requests.
 The KVM-based CPU model can be used for sampled simulation and fast-forwarding to the region of interest and checkpoint locations.
 
