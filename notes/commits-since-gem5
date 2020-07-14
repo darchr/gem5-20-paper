@@ -245,8 +245,8 @@
      1	Yuan Yao <yuanyao@seas.harvard.edu>
      1	Zhang Zheng <perise@gmail.com>
      1	Zicong Wang <wangzicong@nudt.edu.cn>
-     1	jiegec <noc@jiegec.ac.cn>
-     1	seanzw <seanyukigeek@gmail.com>
+     1	Jiajie Chen <noc@jiegec.ac.cn>
+     1	Zhengrong Wang <seanyukigeek@gmail.com>
 Gabe Black <gabeblack@google.com> (1564):
       gcc 4.0: Add some virtual destructors to make gcc 4.0 happy.
       ISA parser: Loosen the regular expressions matching filenames.

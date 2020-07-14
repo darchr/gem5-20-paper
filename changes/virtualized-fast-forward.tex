@@ -1,21 +1,18 @@
 \subsection[Virtualized Fast Forwarding]{Virtualized Fast Forwarding\footnote{by Andreas Sandberg}}
+\label{sec:virtualized-ff}
 
-Support for hardware virtualization in gem5 might have seemed like a non-obvious enhancement to the simulator when we started to work on it in 2012.
-However, it has turned out to be a very useful feature for bring up, model development, testing, and novel simulation research~\cite{}(
-Full Speed Ahead: Detailed Architectural Simulation at Near-Native Speed (\url{http://urn.kb.se/resolve?urn=urn%3Anbn%3Ase%3Auu%3Adiva-220649})
-CoolSim: Statistical techniques to replace cache warming with efficient, virtualized profiling
-Directed Statistical Warming through Time Traveling).
-Work on the original implementation started in the summer 2012 in Arm Research and targeted the Arm Cortex A15 chip. Some of the most challenging parts of the development were the lack of a stable kernel API for KVM on Arm and the limited availability of production silicon.
+Support for hardware virtualization (e.g., AMD-V, Intel VT-x, and ARM virtualization extensions) is a very useful feature for bring up, model development, testing, and novel simulation research~\cite{full-speed-ahead, NikolerisSHC16, NikolerisEHC19}.
+Work on the original implementation of hardware virtualization support started in the summer 2012 in Arm Research and targeted the Arm Cortex A15 chip. Some of the most challenging parts of the development were the lack of a stable kernel API for KVM on Arm and the limited availability of production silicon.
 However, despite these challenges, we had a working prototype that booted Linux in autumn.
 This prototype was refined and merged into gem5 in April 2013, just one month after qemu gained support for Arm KVM.
 Support for x86 followed later that year.
-A good overview the KVM implementation can be found in the technical report by Sandberg et. al~\cite{} (Full Speed Ahead: Detailed Architectural Simulation at Near-Native Speed (\url{http://urn.kb.se/resolve?urn=urn%3Anbn%3Ase%3Auu%3Adiva-220649})).
-The original full-system implementation was later extended to support syscall emulation mode on x86~\cite{} (Alex Dutu in a gem5 workshop a few years ago).
+A good overview of the KVM implementation can be found in the technical report by Sandberg et. al~\cite{full-speed-ahead}.
+The original full-system implementation was later extended to support syscall emulation mode on x86~\cite{DutuSlice2015-kvm}.
 
 Support for hardware virtualization in gem5 enabled research into novel ways of accelerating simulation.
-The original intention was to use KVM to generate checkpoints and later simulate those checkpoints in parallel.
+The original intention was to use KVM to generate checkpoints and later simulate those checkpoints in parallel with different system parameters (e.g., to do design space exploration).
 However, we quickly realized that the checkpointing step could be eliminated by cloning the simulator state at runtime.
-This led to the introduction of the fork call in gem5’s Python API.
+This led to the introduction of the fork call in gem5's Python API.
 Under the hood, this call drains the simulator to make sure everything is in a consistent state, it then uses the UNIX fork call to create a copy of the simulator.
 A typical use case uses a main process that generates samples that are simulated in parallel.
-More advanced use cases use fork semantics to simulate multiple outcomes of a sample to quantify the cache warming errors introduced by using KVM to fast-forward between samples~\cite{} (Full speed ahead).
+More advanced use cases use fork semantics to simulate multiple outcomes of a sample to quantify the cache warming errors introduced by using KVM to fast-forward between samples~\cite{full-speed-ahead}.

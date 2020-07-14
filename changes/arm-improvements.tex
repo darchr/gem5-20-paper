@@ -1,23 +1,23 @@
-\subsection[ARM Improvements]{ARM Improvements}
+\subsection[Arm Improvements]{Arm Improvements}
+\label{sec:arm}
 
-\subsubsection[ARMv8 Support]{ARMv8 Support\footnote{by Giacomo Gabrielli, Javier Setoain, and Giacomo Travaglini}}
+\subsubsection[Armv8-A Support]{Armv8-A Support\footnote{by Giacomo Gabrielli, Andreas Sandberg, and Giacomo Travaglini}}
 
 The Armv8-A architecture introduced two different architectural states:
 AArch32, supporting the A32 and T32 instruction sets (backward-compatible with
-Armv7-A's Arm and Thumb instruction sets, respectively), and AArch64, a new
-state offering support for 64-bit addressing via the A64 instruction set. gem5
-currently supports all of the above instruction sets, and the interworking
-between them. In addition, on top of the user-level features, several
-contributions have targeted important system-level extensions, e.g. the
-Security (aka TrustZone) and virtualization extensions~\cite{ArmARM}, thus opening up new
-avenues for architectural and micro-architectural research.
+Armv7-A and Thumb instruction sets, respectively), and AArch64, a new
+state offering support for 64-bit addressing via the A64 instruction set. Currently, gem5
+supports all of the above instruction sets and the interworking
+between them.
+On top of the user-level features, several important system-level extensions, e.g. the
+security (aka TrustZone\textregistered~\cite{ArmTustZone}) and virtualization extensions~\cite{ArmARM}, have been contributed opening up new avenues for architectural and microarchitectural research.
 
 While Armv8-A was a major iteration of the architecture, there have been
 several smaller iterations introduced by Arm with a yearly cadence, and various
 contributors have implemented some of the main features from those extensions,
 up to Armv8.3-A.
 
-\subsubsection[Support for the Arm Scalable Vector Extension (SVE)]{Support for the Arm Scalable Vector Extension (SVE)\footnote{by Giacomo Gabrielli, Javier Setoain, and Giacomo Travaglini}}
+\subsubsection[Support for the Arm Scalable Vector Extension (SVE)]{Support for the Arm Scalable Vector Extension (SVE)\footnote{by Gabor Dozsa, Giacomo Gabrielli, Rekai Gonzalez-Alberquilla, Nathanael Premillieu, and Javier Setoain}}
 
 In 2016, Arm introduced their Scalable Vector Extension (SVE)~\cite{ArmARM}, a
 novel approach to vector instruction sets. Instead of having fixed-size vector
@@ -26,19 +26,18 @@ bit long (in 128-bit increments). SVE code is arranged in a way that is agnostic
 underlying vector length (Vector Length Agnostic Programming), and a single SVE
 instruction will perform its operation on as many elements as the vector
 register can fit, depending on its length. On top of the 32 variable-length
-vector registers, SVE also adds 16 variable length perdicate registers for
+vector registers, SVE also adds 16 variable length predicate registers for
 predicated execution. These registers store one bit per byte (the minimum
 element size) in the vector register, and can be used to select specific
-elements in your vector for operation~\cite{white-paper-on-SVE-and-VLA-programming}.
+elements in the vector for operation~\cite{white-paper-on-SVE-and-VLA-programming}.
 
-
-In order to support SVE, gem5 implements register storage and register access
+To support SVE, gem5 implements register storage and register access
 as two separated classes, a container and an interface, decoupling one from the
 other. The vector registers can be of any arbitrary size and be accessed as
 vectors of elements of any particular type, depending on the operand types of
 each instruction. This not only facilitates handling variable size registers,
-it also abstracts the nuances of handling predicate registers, where the values
-stored have to be grouped and interpreted differently depending on the operand
+it also abstracts the nuances of handling predicate registers, where the stored
+values have to be grouped and interpreted differently depending on the operand
 type.
 
 This design provides enough flexibility to support any vector instruction sets
@@ -47,13 +46,12 @@ with arbitrarily large vector registers.
 \subsubsection[Trusted Firmware Support]{Trusted Firmware Support\footnote{by Adrian Herrera}}
 
 Trusted Firmware (TF-A) is Arm's reference implementation of Secure World software for A-profile architectures.
-It enables Secure Boot flow models, and provides implementations for the Secure Monitor executing at Exception Level 3 (EL3) as well as for several Arm low-level software interface standards, including System Control and Management Interface (SCMI) driver for accessing System Control Processors (SCP), Power State Coordination Interface (PSCI) library support for power management, and Secure Monitor Call5 (SMC) handling.
+It enables Secure Boot flow models, and provides implementations for the Secure Monitor executing at Exception Level 3 (EL3) as well as for several Arm low-level software interface standards, including System Control and Management Interface (SCMI) driver for accessing System Control Processors (SCP), Power State Coordination Interface (PSCI) library support for power management, and Secure Monitor Call (SMC) handling.
 
-TF-A is supported on multiple Platforms, each of them characterized by its set of hardware components and their location in the memory map.
-From the list of ADPs (Arm Development Platforms), it is worth mentioning the Juno ADP and the Fixed Virtual Platforms (FVP) ADP family.
+TF-A is supported on multiple Arm Development Platforms (APDs), each of them characterized by its set of hardware components and their location in the memory map (e.g., Juno ADP and the Fixed Virtual Platforms (FVP) ADP family).
 However, the Arm reference platforms in gem5 are part of the \verb|VExpress_GEM5_Base| family.
-These are loosely based on a Versatile Express RS1 platform with a slightly modified memory map. TF-A implementations are provided for both Juno and FVPs, however not for \verb|VExpress_GEM5_Base|.
+These are loosely based on a Versatile\texttrademark Express RS1 platform with a slightly modified memory map. TF-A implementations are provided for both Juno and FVPs, however not for \verb|VExpress_GEM5_Base|.
 
 Towards unifying Arm's platform landscape, we now provide a \verb|VExpress_GEM5_Foundation| platform as part of gem5's \verb|VExpress_GEM5_Base| family.
 This is based on and compatible with FVP Foundation, meaning all Foundation software may run unmodified in gem5, including but not limited to TF-A.
-This allows for simulating boot flows based on UEFI implementations (U-boot, EDK II), and brings us a step closer to Windows support in gem5.
+This allows for simulating boot flows based on UEFI implementations (U-boot, EDK II), and brings us a step closer to support for all UEFI compatible operating systems in gem5.

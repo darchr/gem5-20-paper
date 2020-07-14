@@ -1,16 +1,20 @@
 \subsection[Garnet Network Model]{Garnet Network Model\footnote{By Srikant Bharadwaj and Tushar Krishna}}
+\label{sec:garnet}
 
 The interconnection system within gem5 is modeled in various levels of detail and provides extensive
-flexibility in terms of modeling modern systems.
-The interconnect models are present within the cache-coherent ruby memory system of gem5.
-It provides the ability to create arbitrary topologies – thereby constructing both homogeneous and heterogeneous systems.
-There are two major variants of network models available within the ruby memory system today: simple and garnet.
-The Simple network models the routers, links, and the latencies involved with minimal detailing.
-This is great for simulations that can sacrifice interconnect detailing for faster simulation.
-The Garnet model adds detailed router microarchitecture with cycle-level buffering, resource-contention and flow control mechanisms~\cite{}(N. Agarwal, T. Krishna, L. Peh and N. K. Jha, GARNET: A detailed on-chip network model inside a full-system simulator, 2009 IEEE International Symposium on Performance Analysis of Systems and Software, Boston, MA, 2009, pp. 33-42, doi: 10.1109/ISPASS.2009.4919636.).
+flexibility to model a variety of modern systems.
+The interconnect models are present within the cache-coherent Ruby memory system of gem5 (currently, Garnet cannot be used with the classic caches).
+It provides the ability to create arbitrary network topologies including both homogeneous and heterogeneous systems.
+
+There are two major variants of network models available within the Ruby memory system today: simple and Garnet.
+The simple network models the routers, links, and the latencies involved with low fidelity.
+This is appropriate for simulations that can sacrifice detailed interconnection network modeling for faster simulation.
+The Garnet model adds detailed router microarchitecture with cycle-level buffering, resource contention, and flow control mechanisms~\cite{garnet-2}.
 This model is suitable for studies that focus on interconnection units and data flow patterns.
 
-gem5 currently implements an upgraded Garnet 2.0 model which provides custom routing algorithms, routers/links that support heterogenous latencies, and standalone network simulation support.
+Currently, gem5 implements an upgraded Garnet 2.0 model which provides custom routing algorithms, routers and links that support heterogeneous latencies, and standalone network simulation support.
 These features allow detailed studies of on-chip networks as well as support for highly flexible topologies.
-Garnet is moving to version 3.0 with the release of HeteroGarnet which is underway.
-HeteroGarnet revamps Garnet to support the modern heterogenous systems such as 2.5D integration systems, MCM based architectures, and futuristic interconnect designs such as optical networks~\cite{}( S. Bharadwaj, J. Yin, B. Beckmann, T. Krishna, Kite: A Family of Heterogeneous Interposer Topologies Enabled via Accurate Interconnect Modeling, 2020 57th ACM/IEEE Design Automation Conference (DAC), San Francisco, CA, USA, 2020.).
+Garnet is moving to version 3.0 with the release of HeteroGarnet.
+HeteroGarnet will improve Garnet by supporting modern heterogeneous systems such as 2.5D integration systems, MCM based architectures, and futuristic interconnect designs such as optical networks~\cite{kite}.
+We are also working to include support for recent work on routerless NoCs~\cite{AlazemiABC18, LinPPC20}.
+

@@ -1,16 +1,18 @@
 \subsection[Off-Chip Memory System Models]{Off-Chip Memory System Models\footnote{by Nikos Nikoleris}}
+\label{sec:dramcontroller}
 
-gem5 can model a large number of configurations in the off-chip memory system.
-Its memory controller handles requests from the on-chip memory system and issues read and write commands for the actual memory device~\cite{}() and models their timing behavior.
-Over the years a number of contributions have added features that allow modeling of emerging new technologies and features.
+The gem5 simulator can model a large number of configurations in the off-chip memory system.
+Its memory controller handles requests from the on-chip memory system and issues read and write commands to the actual memory device, modeling the timing behavior of the latter.
+Over the years a number of contributions have added features that allow modeling emerging new technologies and features as documented below.
 
-\subsubsection[New memory controller features]{New memory controller features\footnote{by ...}}
+\subsubsection[New memory controller features]{New memory controller features\footnote{by Wendy Elsasser}}
 
 The gem5 DRAM controller provides the interface to external memory, which is traditionally DRAM.
-The controller consists of 2 main components: the memory controller and the DRAM interface.
-The DRAM interface contains media specific information, defining the architecture and timing parameters of the DRAM as well as the functions that manage the media specific operations like activation, precharge, refresh and low power modes.
+It consists of two main components: the memory controller itself and the DRAM interface.
+The DRAM interface contains media specific information, defining the architecture and timing parameters of the DRAM as well as the functions that manage the media specific operations like activation, precharge, refresh and low power modes~\cite{HanssonAgarwal2014-gem5DRAM}.
+These models are easily modified by extending a Python class and updating the timing parameters for a new DRAM device.
 
-\subsubsection[Low-power DDR]{Low-power DDR\footnote{by ...}}
+\subsubsection[Low-power DDR]{Low-power DDR\footnote{by Wendy Elsasser}}
 
 LPDDR5 is currently in mass production for use in multiple markets including mobile, automotive, AI, and 5G.
 This technology is expected to become the mainstream Flagship Low-Power DRAM by 2021 with anticipated longevity due to proposed speed grade extensions.
@@ -18,7 +20,7 @@ The specification defines a flexible architecture and multiple options to optimi
 To evaluate these tradeoffs, we have updated the memory controller to support the new features and added LPDDR5 configurations.
 
 While these changes have been incorporated for LPDDR5, some of them could be applicable to other memory technologies as well.
-The gem5 changes incorporate new timing parameters, support of multi-cycle commands and support of interleaved bursts.
+The gem5 changes incorporate new timing parameters, support for multi-cycle commands, and support for interleaved bursts.
 These features require new checks and optimizations in gem5 to ensure the model integrity when comparing to real hardware.
 For example, support for multi-cycle commands along with the changes to LPDDR5 clocking motivated a new check in gem5 to verify command bandwidth.
 Previously, the DRAM controller did not verify contention on the command bus and assumed adequate command bandwidth, but with the evolution of new technologies this assumption is not always valid.
@@ -26,21 +28,29 @@ Previously, the DRAM controller did not verify contention on the command bus and
 \subsubsection[Quality of Service Extensions]{Quality of Service Extensions\footnote{by Matteo Andreozzi}}
 
 The coexistence of heterogeneous tasks/workloads on a single computer system is common practice in modern systems, from the automotive to the high-performance computing use-case.
-It allows the system to minimize costs by improving the resources utilization and improving the efficiency of data sharing across workloads.
-This, however, comes at the cost of potential severe performance degradation due to interference on shared resources, and increased uncertainty in terms of workload performance predictability.
+Quality of Service (QoS) is the ability of a system to provide differential treatment to its clients, in a quantifiable and predictable way.
 
-To compensate for these shortcomings, we stress the need to introduce a mechanism for predictively and deterministically managing such systems resources, i.e., providing Quality of Service (QoS).
-The concept and challenges of QoS itself are not new and achieving QoS is generally hard in complex systems, as we learned from Computer Networking.
-We therefore define here QoS in Systems on Chips on the following two principles:
-\begin{enumerate}
-    \item \emph{QoS is resource access arbitration}: a QoS-enabled resource (e.g., memory) guarantees certain Levels of Service (memory access bandwidth and latency, compute time, peripheral access, etc.) to its serviced users (e.g., software threads)
-    \item \emph{QoS is quantifiable and predictable:} the set of guarantees a QoS-enabled resource can provide are known a priori and characteristic of the implemented QoS arbitration schemes.
-    The level of service that a QoS enabled resource will guarantee to its users must therefore be predictable to a certain extent given a specific set of policies and their configurations.
-\end{enumerate}
+% It allows the system to minimize costs by improving the resource utilization and improving the efficiency of data sharing across workloads.
+% This, however, comes at the cost of potential severe performance degradation due to interference on shared resources, and increased uncertainty in terms of workload performance predictability.
 
-Quality of Service is the ability of a system to provide differential treatment to its clients, in a quantifiable and predictable way.
+% To compensate for these shortcomings, we stress the need to introduce a mechanism for predictively and deterministically managing such systems resources, i.e., providing Quality of Service (QoS).
+% Quality of Service is the ability of a system to provide differential treatment to its clients, in a quantifiable and predictable way.
+% The concept and challenges of QoS itself are not new and achieving QoS is generally hard in complex systems, as we learned from Computer Networking.
+% We therefore define here QoS in Systems on Chips on the following two principles:
+% \begin{enumerate}
+%     \item \emph{QoS is resource access arbitration}: a QoS-enabled resource (e.g., memory) guarantees certain Levels of Service (memory access bandwidth and latency, compute time, peripheral access, etc.) to its serviced users (e.g., software threads)
+%     \item \emph{QoS is quantifiable and predictable:} the set of guarantees a QoS-enabled resource can provide are known a priori and characteristic of the implemented QoS arbitration schemes.
+%     The level of service that a QoS enabled resource will guarantee to its users must therefore be predictable to a certain extent given a specific set of policies and their configurations.
+% \end{enumerate}
 
-\subsubsection[DRAMPower and DRAM Power-Down Modes]{DRAMPower and DRAM Power-Down Modes\footnote{by Matthias Jung, Wendy Elsasser, Radhika Jagtap, Subash Kannoth, Omar Naji, Éder F.
+We now include a QoS-aware memory controller in gem5, and the definition of basic (example) policies modeling the prioritization algorithm of the memory controller.
+We include models for a \emph{fixed} priority policy (every requestor in the system has a fixed priority assigned) and the \emph{proportional fair} policy (where the priority of a requestor is dynamically adjusted at runtime based on utilization).
+
+The default timing-based DRAM controller described above has been rewritten to include the QoS changes.
+These changes separate out the QoS policy from the DRAM timing model.
+With the framework in place a user can write its own policy and seamlessly plug it into a real memory controller model to unlock system wide explorations under its own arbitration algorithm.
+
+\subsubsection[DRAMPower and DRAM Power-Down Modes]{DRAMPower and DRAM Power-Down Modes\footnote{by Matthias Jung, Wendy Elsasser, Radhika Jagtap, Subash Kannoth, Omar Naji, \'Eder F.
 Zulian, Andreas Hansson, Christian Weis, and Norbert Wehn }}
 %
 Across applications, DRAM is a significant contributor to the overall system power.
@@ -48,19 +58,21 @@ For example, the DRAM access energy per bit is up to three orders of magnitude h
 Therefore, an accurate and fast power estimation is crucial for an efficient design space exploration.
 DRAMPower~\cite{kargoo_14} is an open source tool for fast and accurate power and energy estimation for several DRAM memories based on JEDEC standards.
 It supports unique features like power-down, bank-wise power estimation, per bank refresh, partial array self-refresh, and many more.
-In contrast to Micron’s DRAM Power estimation spread sheet\footnote{\url{https://www.micron.com/support/tools-and-utilities/power-calc}}, which estimates the power from device manufacturer’s data sheet and workload specifications (e.g. Rowbuffer-Hit-Rate or Read-Write-Ratio), DRAMPower uses the actual timings from the memory transactions, which leads to a much higher accuracy in power estimation.
-Furthermore, the DRAMPower tool performs DRAM command trace analysis based on memory state transitions and hence, avoids cycle-by-cycle evaluation, thus speeding up simulations.
+In contrast to Micron's DRAM Power estimation spread sheet\footnote{\url{https://www.micron.com/support/tools-and-utilities/power-calc}}, which estimates the power from device manufacturer's data sheet and workload specifications (e.g. Rowbuffer-Hit-Rate or Read-Write-Ratio), DRAMPower uses the actual timings from the memory transactions, which leads to a much higher accuracy in power estimation.
+Furthermore, the DRAMPower tool performs DRAM command trace analysis based on memory state transitions and hence avoids cycle-by-cycle evaluation, thus speeding up simulations.
 
 For the efficient integration of DRAMPower into gem5, we changed the tool from a standalone simulator to a library that could be used in discrete event-based simulators for calculating the power consumption online during the simulation.
 Furthermore, we integrate the power-down modes into the DRAM controller model of gem5~\cite{jagjun_17} in order to provide the research community a tool for power-down analysis for a breadth of use cases. We further evaluated the model with real HPC workloads, illustrating the value of integrating low power functionality into a full system simulator.
 %
 \subsubsection[Future Improvements to Off Chip Memory Models]{Future Improvements to Off Chip Memory Models\footnote{by Wendy Elsasser}}
+\label{sec:nvm}
 
-With the advent of SCM (storage class memory), emerging NVM could also exist on a memory interface, potentially alongside DRAM.
-To enable support of NVM and future memory interfaces, a systematic approach was chosen to refactor the DRAM controller.
-The DRAM interface was pulled out of the controller and moved to a separate DRAM interface object.
-In parallel, an NVM interface was created to model an agnostic interface to emerging memory.
+We are currently working to refactor the DRAM interface to be extensible and enable modeling of other memory devices.
+For instance, with the advent of SCM (storage class memory), emerging NVM (Non-Volatile Memory) could also exist on a memory interface, potentially alongside DRAM.
+To enable support of NVM and future memory interfaces, we use a systematic approach to refactor the DRAM controller.
+We pull the DRAM interface out of the controller and moved to a separate DRAM interface object.
+In parallel, we create an NVM interface to model an agnostic interface to emerging memory.
 
-The DRAM interface and the NVM Interface have configurable address ranges allowing flexible heterogeneous memory configurations.
-For example, single memory controller can have a DRAM interface, an NVM interface, of both interfaces defined.
+The DRAM interface and the NVM interface have configurable address ranges allowing flexible heterogeneous memory configurations.
+For example, a single memory controller can have a DRAM interface, an NVM interface, or both interfaces defined.
 Other configurations are feasible, providing a flexible framework to study new memory topologies and evaluate the placement of emerging NVM in the memory sub-system.

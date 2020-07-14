@@ -1,0 +1,42 @@
+\subsection[gem5 resources]{gem5 resources\footnote{by Ayaz Akram, Bobby R. Bruce, Hoa Nguyen, and Mahyar Samani}}
+\label{sec:resources}
+
+The gem5 simulator permits the simulation of many different systems
+using a variety of benchmarks and tests.
+However, gathering and compiling the resources to perform experiments with gem5 can be a laborious process.
+To provide a better user-experience we have began maintaining \emph{gem5 resources}, which we broadly define as a set of artifacts that are not required to build or run gem5, but that may be utilized to carry out experiments and simulations.
+For example, Linux kernels, disk images, popular benchmark suites, and commonly used tests binaries are frequently needed by users of gem5 but are not distributed as part of the gem5 itself.
+As part of our gem5-20 release, these resources, with source code and build instructions for each, are gradually being centralized in a common repository\footnote{\url{https://gem5.googlesource.com/public/gem5-resources}}.
+
+A key goal of this repository is to ensure reproducibility of gem5 experiments.
+The gem5 resources repository provides researchers with a suite of disk images with pre-installed operating systems and benchmarks as well as kernel binaries.
+Thus, all researchers which use the resources are starting from a common point and can more easily reproduce experiments.
+Additionally, all of the sources and scripts to build each artifact are also included in the repository which can be modified to create custom resources.
+
+\subsubsection{Testing gem5-20 with gem5 resources}
+
+Another important aim of creating a common set of gem5 resources is to more regularly test gem5 on a suite of common benchmarks, operating systems Linux kernels.
+As part of gem5-20, we have tested the simulator's capability to run SPEC 2006~\cite{spec06}, SPEC 2017~\cite{spec17}, PARSEC~\cite{parsec}, the NAS Parallel Benchmarks (NPB)~\cite{npb}, and the GAP Benchmark Suite (GAPBS)~\cite{gapbs}.
+We have also shown gem5-20's performance when running five different long-term service (LTS) Linux kernel releases on a set of different CPU and memory configurations.
+The results from these investigations can be found on our website~\footnote{\url{http://www.gem5.org/documentation/benchmark_status}}.
+We plan to use this information, and gem5 resources repository, to better target problem areas in the gem5 project.
+
+Furthermore, with a shared set of common resources and knowledge of what configurations work best with gem5, we can provide the community with a set of ``known good'' gem5 configurations to facilitate computer architecture research.
+We intend for these configurations to replicate the functionality and performance of architectural components at a high level of fidelity.
+
+%The gem5 simulator provides support for simulating many different system configurations. However,
+%setting up the simulator to run simulations, specifically in full system mode, could take significant
+%amount of time and become very complicated. In order to ensure the reproducibility of gem5 experiments
+%many details such as code version should be documented so that created components are identical for
+%reuse. gem5 resources consist of components used to conduct certain computer systems architecture
+%research on known-good configurations using gem5. They include anything from the configuration
+%files used to build a Linux kernel that works with gem5 to the configuration scripts that
+%describe the computer system to be simulated. The provided resources have been tested with gem5-20
+%and their working status and initial statistics along with their creation processes have been documented~\cite{benchmark_status}~\cite{resources-repo}.
+%They could be used to do research with different system configurations and to save the user substantial amount of time.
+%Moreover, some of the provided resources could be modified per user requirements such as the working Ubuntu 20.04 disk-image.
+%One of the most important resources required by any full system experiment with gem5 is the disk-image
+%which has one of the most time consuming and error prone build procedures. The disk-images provided by
+%gem5 resources have been created by packer. We also provide gem5 resources to conduct experiments with many
+%popular benchmark suites like SPEC 2006~\cite{spec06}, SPEC 2017~\cite{spec17}, PARSEC~\cite{parsec},
+%NAS Parallel Benchmarks (NPB)~\cite{npb}, GAP Benhmark Suite (GAPBS)~\cite{gapbs} and Linux Kernel.

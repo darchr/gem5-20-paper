@@ -1,22 +1,36 @@
-\documentclass[manuscript, review, screen, timestamp]{acmart}
+\documentclass[sigconf,nonacm,screen=true]{acmart}
 
+\usepackage{listings}
 \usepackage{subcaption}
+
+% Separate multiple footnotes with comas
+\let\oldFootnote\footnote
+\newcommand\nextToken\relax
+
+\renewcommand\footnote[1]{%
+    \oldFootnote{#1}\futurelet\nextToken\isFootnote}
+
+\newcommand\isFootnote{%
+    \ifx\footnote\nextToken\textsuperscript{,}\fi}
 
 \begin{document}
 % Title portion
 \title{The gem5 Simulator: Version 20.0+}
 \subtitle{A new era for the open-source computer architecture simulator}
-%\input{author-list}
+\input{author-list}
 
-\setcopyright{none}
+\titlenote{
+    gem5 is the result of the merger of the GEMS project started in 1999, and the m5 project started in 2003.
+    Development of gem5 has been active for about 20 years, and this version is being published in 2020. Thus, ``gem5-20''.
+}
 
 \begin{abstract}
-    (A sentence about gem5 at a high level.)
-    (A sentence about all the features of gem5.)
-    The gem5 simulator has been under active development over the last nine years since the original gem5 paper was published.
+    The open-source and community-supported gem5 simulator is one of the most popular tools for computer architecture research.
+    This simulation infrastructure allows researchers to model modern computer hardware at the cycle level, and it has enough fidelity to boot unmodified Linux-based operating systems and run full applications for multiple architectures including x86, Arm\textregistered, and RISC-V.
+    The gem5 simulator has been under active development over the last nine years since the original gem5 release.
     In this time, there have been over 7500 commits to the codebase from over 250 unique contributors which have improved the simulator by adding new features, fixing bugs, and increasing the code quality.
-    Due to its popularity, the gem5 community has instituted a new meritocratic governance model to encourage community-centric contributions.
-    (Come back to this.)
+    In this paper, we give an overview of gem5's usage and features, describe the current state of the gem5 simulator, and enumerate the major changes since the initial release of gem5.
+    We also discuss how the gem5 simulator has transitioned to a formal governance model to enable continued improvement and community support for the next 20 years of computer architecture research.
 \end{abstract}
 
 \maketitle
@@ -26,19 +40,38 @@
 \input{changes}
 \input{other-work}
 
-\section{Acknowledgements}
+\section{Conclusion}
 
-The development of gem5 is distributed.
-It is likely we have missed someone that should be acknowledged.
-Until this paper is submitted, please contact Jason Lowe-Power if you have any questions about the contributions.
+Over the past nine years, the gem5 simulator has become an increasingly important tool in the computer architecture research community.
+This paper describes the significant strides taken to improve this community-developed infrastructure.
+Looking forward, with the continued support of the broader computer architecture research community, the gem5 simulator will continue to mature and its use will continue to grow.
+The community will continue to add new features, add new models, and increase the stability of the simulator.
+
+The overarching goal of the future development of the gem5 simulator is to increase its user base by expanding its use both within the computer architecture community and in other computer systems research fields.
+To accomplish this goal, we will be providing ``known-good'' configurations and other tools to enable reproducible computer system simulation.
+We will also provide more user support to broaden the gem5 community through improved documentation and learning materials.
+Through these efforts, we look forward to continue to grow and improve the gem5 simulation infrastructure through the next 20 years of computer system development.
+
+\section{Acknowledgements}
+\label{sec:acks}
+
+The development of gem5 is community-driven and distributed.
+The contributions to the gem5 community go beyond just the source code, and many people who have contributed to the broader gem5 community are not acknowledged here.
+
+We would like to specially acknowledge the late Nathan Binkert.
+Nate was a driving force behind the creation of gem5 and without his vision and his dedication to code quality this open-source community infrastructure would not be the success that it is today.
 
 The gem5 project management committee consists of Bradford Beckmann, Gabriel Black, Anthony Gutierrez, Jason Lowe-Power (chair), Steven Reinhardt, Ali Saidi, Andreas Sandberg, Matthew Sinclair, Giacomo Travaglini, and David Wood.
 Previous members include Nathan Binkert, and Andreas Hansson.
 The project management committee manages the administration of the project and ensures that the gem5 community runs smoothly.
 
-This work is supported in part by the National Science Foundation (CNS-1925724, CNS-1925485, CNS-1850566) and Brookhaven National Laboratory.
+This work is supported in part by the National Science Foundation (CNS-1925724, CNS-1925485, CNS-1850566, and many others) and Brookhaven National Laboratory.
+Google has donated resources to host gem5's codes, code review, continuous integration, and other web-based resources.
 
-List all contributors that did not reply to the message about this paper.
+This work was partially completed with funding from the European Union's Horizon 2020 research and innovation programme under project Mont-Blanc 2020, grant agreement 779877.
+
+We would also like to thank all of the other contributors to gem5 including
+Chris Adeniyi-Jones, Chris Adeniyi-Jones, Michael Adler, Neha Agarwal, John Alsop, Lluc Alvarez, Ricardo Alves, Matteo Andreozzi, Ruben Ayrapetyan, Erfan Azarkhish, Akash Bagdia, Jairo Balart, Marco Balboni, Marc Mari Barcelo, Andrew Bardsley, Isaac S\'anchez Barrera, Maurice Becker, Brad Beckmann, Rizwana Begum, Glenn Bergmans, Umesh Bhaskar, Nathan Binkert, Sascha Bischoff, Geoffrey Blake, Maximilien Breughe, Kevin Brodsky, Ruslan Bukin, Pau Cabre, Javier Cano-Cano, Emilio Castillo, Jiajie Chen, James Clarkson, Stan Czerniawski, Stanislaw Czerniawski, Sandipan Das, Nayan Deshmukh, Cagdas Dirik, Xiangyu Dong, Gabor Dozsa, Ron Dreslinski, Curtis Dunham, Alexandru Dutu, Yasuko Eckert, Sherif Elhabbal, Hussein Elnawawy, Marco Elver, Chris Emmons, Fernando Endo, Peter Enns, Matt Evans, Mbou Eyole, Matteo M. Fusi, Giacomo Gabrielli, Santi Galan, Victor Garcia, Mrinmoy Ghosh, Pritha Ghoshal, Riken Gohil, Rekai Gonzalez-Alberquilla, Brian Grayson, Samuel Grayson, Edmund Grimley-Evans, Thomas Grocutt, Joe Gross, David Guillen-Fandos, Deyaun Guo, Tony Gutierrez, Anders Handler, David Hashe, Mitch Hayenga, Blake Hechtman, Javier Bueno Hedo, Eric Van Hensbergen, Joel Hestness, Mark Hildebrand, Matthias Hille, Rune Holm, Chun-Chen Hsu, Lisa Hsu, Hsuan Hsu, Stian Hvatum, Tom Jablin, Nuwan Jayasena, Min Kyu Jeong, Ola Jeppsson, Jakub Jermar, Sudhanshu Jha, Ian Jiang, Dylan Johnson, Daniel Johnson, Rene de Jong, John Kalamatianos, Khalique, Do\u{g}ukan Korkmazt\"urk, Georg Kotheimer, Djordje Kovacevic, Robert Kovacsics, Rohit Kurup, Anouk Van Laer, Jan-Peter Larsson, Michael LeBeane, Jui-min Lee, Michael Levenhagen, Weiping Liao, Pin-Yen Lin, Nicholas Lindsay, Yifei Liu, Gabe Loh, Andrew Lukefahr, Palle Lyckegaard, Jiuyue Ma, Xiaoyu Ma, Andriani Mappoura, Jose Marinho, Bertrand Marquis, Maxime Martinasso, Sean McGoogan, Mingyuan, Monir Mozumder, Malek Musleh, Earl Ou, Xin Ouyang, Rutuja Oza, Andrea Pellegrini, Arthur Perais, Adrien Pesle, Polydoros Petrakis, Anis Peysieux, Christoph Pfister, Sujay Phadke, Ivan Pizarro, Matthew Poremba, Brandon Potter, Siddhesh Poyarekar, Nathanael Premillieu, Sooraj Puthoor, Jing Qu, Prakash Ramrakhyani, Steve Reinhardt, Isaac Richter, Paul Rosenfeld, Shawn Rosti, Ali Saidi, Karthik Sangaiah, Ciro Santilli, Robert Scheffel, Sophiane Senni, Korey Sewell, Faissal Sleiman, Maximilian Stein, Po-Hao Su, Chander Sudanthi, Kanishk Sugand, Dam Sunwoo, Koan-Sin Tan, Michiel Van Tol, Erik Tomusk, Christopher Torng, Ashkan Tousi, Sergei Trofimov, Avishai Tvila, Ani Udipi, Jordi Vaquero, Llu\'is Vilanova, Wade Walker, Yu-hsin Wang, Bradley Wang, William Wang, Moyang Wang, Zicong Wang, Vince Weaver, Uri Wiener, Sean Wilson, Severin Wischmann, Willy Wolff, Yuan Yao, Jieming Yin, Bjoern A. Zeeb, Dongxue Zhang, Tao Zhang, Xianwei Zhang, Zhang Zheng, Chuan Zhu, Chen Zou.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

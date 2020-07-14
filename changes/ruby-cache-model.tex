@@ -1,15 +1,15 @@
 \subsection[Ruby Cache Model Improvements]{Ruby Cache Model Improvements}
 \label{sec:ruby}
 
-The Ruby cache model, originally from the GEMS simulator~\cite{}, is one of the key differentiating features of gem5.
+The Ruby cache model, originally from the GEMS simulator~\cite{MartinSBMXAMHW05}, is one of the key differentiating features of gem5.
 The domain-specific language SLICC allows users to define new coherence protocols with high fidelity.
-In mainline gem5, there are now 12 unique protocols including GPU-specific protocols~\cite{viper}, region-coherence protocols~\cite{Power2012hsc}, research protocols like token coherence~\cite{token-coherence}, and teaching protocols~\cite{coherence-primer}.
+In mainline gem5, there are now 12 unique protocols including GPU-specific protocols, region-coherence protocols~\cite{PowerBasu2013-hsc}, research protocols like token coherence~\cite{MartinHill2003-tokenCoh}, and teaching protocols~\cite{NagarajanSorin2020-cohMCMPrimer}.
 
-When gem5 was first released, Ruby had just been integrated into gem5.
+When gem5 was first released, Ruby had just been integrated into the project.
 In the nine years since, Ruby and the SLICC protocols have become much more deeply integrated into the general gem5 memory system.
-Today, Ruby shares the same replacement protocols~\ref{sec:replacement}, the same port system to send requests into and out of the cache system, and the same flexible DRAM controller models~\ref{sec:dramcontroller}.
+Today, Ruby shares the same replacement protocols (Section~\ref{sec:replacement}), the same port system to send requests into and out of the cache system, and the same flexible DRAM controller models (Section~\ref{sec:dramcontroller}).
 
-Looking forward, we will be further integrating Ruby into gem5.
+Looking forward, we will be further unifying the Ruby and classic cache models.
 Our goal is to one day have a unified cache model which has the composability and speed of the classic caches and the flexibility and fidelity of SLICC protocols.
 
 \subsubsection[General Improvements]{General Improvements\footnote{by Nilay Vaish}}
@@ -19,16 +19,20 @@ This enables running simulations from regions of interest, rather than having to
 To enable checkpoints, we support accessing the memory system functionally i.e. without any notion of time or events.
 The absence of timed events allows much higher simulation speeds.
 
-Additionally, a new three level coherence protocol has been added to gem5.
-For simplicity, this protocol was built on top of a prior two level protocol by adding an L0 cache at the CPU cores.
-At level 0, the protocol has separate caches for instruction and data.
-The first and the second levels do not distinguish between instruction and data.
-Levels 0 and 1 are private to the CPU core, which the second level is shared across (possibly a subset) cores.
+Additionally, a new three level coherence protocol (\verb|MESI_Three_Level|) has been added to gem5.
+For simplicity, this protocol was built on top of a prior two level protocol by adding an ``zero level'' (L0) cache at the CPU cores.
+At the L0, the protocol has separate caches for instructions and data.
+The L1 and the L2 caches are unified and do not distinguish between instructions and data.
+The L0 and L1 caches are private to each CPU core while the L2 is shared across either all cores or a subset.
 
-\subsubsection[GPU Coherence Protocols]{GPU Coherence Protocols\footnote{by Blake Hectman}}
+% \subsubsection[GPU Coherence Protocols]{GPU Coherence Protocols}
 
-Haven't heard anything, yet.
+% Haven't heard anything, yet.
 
-\subsubsection[ARM Support and Extensions]{ARM Support in Ruby Coherence Protocols\footnote{by Tiago M{\"u}ck}}
+\subsubsection[Arm Support and Extensions]{Arm Support in Ruby Coherence Protocols\footnote{by Tiago M{\"u}ck}}
 
-Haven't heard anything, yet.
+Until recently, configurations combining Ruby and multicore Arm systems were not properly supported.
+We have revamped the \verb|MOESI_CMP_directory| protocol and made it the default when building gem5 for Arm.
+Several issues that resulted in protocol deadlocks (especially when scaling up to many-core configurations) were fixed.
+Other fixes include support for functional accesses, DMA bugs, and improved modeling of cache and directory latencies.
+Additionally, support for load-locked/store-conditional (LL/SC) operations was added to the \verb|MESI_Three_Level| protocol, which enables it to be used with Arm as well.
