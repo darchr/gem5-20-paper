@@ -173,7 +173,7 @@ Although there are many computer architecture simulators, and many of these are 
     \item gem5 is \emph{dynamically configurable} through a robust Python-based scripting interface. Most other simulators are configured statically with flat text files (e.g., json) or at compilation time. On the other hand, gem5 allows users to simulate complex systems much more easily by using object-oriented Python scripts to compose simpler systems into more complex ones.
     \item gem5 is \emph{extensible} through a clean model API. The gem5 simulator has over 300 parameterized models and adding new models and parameters is straightforward and well documented.
     \item gem5 is a \emph{full system} simulator. Its high-fidelity models can support booting unmodified operating systems and running unmodified applications with cycle-level statistics.
-    \item gem5 is a \emph{community-driven} and \emph{frequently updated} project. The gem5 community is thriving. Since its original release nine years ago, there have been over 250 unique contributors and over 7500 commits. Even in the last six months, gem5 has had over 850 commits and 50 unique contributors.
+    \item gem5 is a \emph{community-driven} and \emph{frequently updated} project. The gem5 community is thriving. Since its original release nine years ago, there have been over 250 unique contributors and over 7000 commits. Even in the last six months, gem5 has had over 850 commits and 50 unique contributors.
 \end{itemize}
 
 \begin{figure*}
@@ -304,5 +304,5 @@ There are also many system-specific device models such as the Arm GIC and SMMU, 
 Finally, gem5 has been integrated with other computer architecture simulator systems to enable users with models in other simulator systems to use gem5's features (Figure~\ref{fig:gem5-big-picture}~\textcircled{9}).
 For instance, gem5 has been integrated with the Structural Simulation Toolkit (SST)~\cite{RodriguesHemmert2011-sst, HsiehPedretti2012-sst-gem5}, which uses gem5's detailed CPU models in conjunction with SST's multi-node modeling capabilities.
 DRAMSim~\cite{wang_05, dramsim2, dramsim3} which provides cycle-accurate DRAM models has also been integrated with gem5.
-Additionally, the IEEE standard SystemC API~\cite{menard2017-system-systemc} has been integrated to enable users with SystemC models to use them as gem5 components (see Section~\ref{sec:systemc} for more details). 
+Additionally, the IEEE standard SystemC API~\cite{menard2017-system-systemc} has been integrated to enable users with SystemC models to use them as gem5 components (see Section~\ref{sec:systemc} for more details).
 One example for a coupling with a SystemC model is the flexible and cycle accurate DRAM subsystem design space exploration framework DRAMSys~\cite{junwei_13, junwei_15, stejun_20}, which is a based on SystemC TLM-2.0.

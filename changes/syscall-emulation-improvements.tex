@@ -2,8 +2,9 @@
 \label{sec:se-mode}
 
 System call emulation mode (SE-mode) allows gem5 to execute user-mode binaries without executing the kernel-mode system calls of a real operating system.
+This is equivalent to the ``user space emulator'' in QEMU with the addition of the timing models of gem5.
 Basic functionality existed in the original gem5 release~\cite{Binkert-gem5-2011}, but major improvements have been made in the past few years.
-Recent additions improve the usability and increase the variety of workloads which may run in S- mode.
+Recent additions improve the usability and increase the variety of workloads which may run in SE-mode.
 
 \subsubsection{Dynamic Executables}
 

@@ -48,7 +48,7 @@ Our ambition is to completely phase out Python 2 support in the near future to b
 
 \subsubsection[Asynchronous Modeling in gem5]{Asynchronous Modeling in gem5\footnote{by Giacomo Travaglini}}
 
-The difficulties of writing a complex device/hw model within gem5 is that your model needs to be able to work and be representative of the simulated hardware in both atomic and timing mode.
+The difficulties of writing a complex hardware model within gem5 is that your model needs to be able to work and be representative of the simulated hardware in both atomic and timing mode.
 
 For simple devices which only respond to requests, this is usually not a concern.
 The situation gets worse when the device can send requests and responses or has DMA capabilities.
@@ -59,7 +59,7 @@ This software design problem has been elegantly solved using coroutines.
 Coroutines allow you to execute your task, checkpoint it, and resume it later from where you stopped.
 To be more specific to our use case, you can tag your DMA packets with the coroutine itself, and you could resume the coroutine once the device receives the read response.
 
-While waiting for coroutines to be fully supported in C++20, we've implemented a coroutine library within gem5 that allows developers to use coroutines to generate asynchronous models.
+While waiting for coroutines to be fully supported in C++20, we have implemented a coroutine library within gem5 that allows developers to use coroutines to generate asynchronous models.
 The coroutine class is built on top of a ``Fiber'' class, which was a pre-existing symmetric coroutine implementation, and it provides boost-like APIs to the user.
 
 At the moment coroutines are used by the SMMUv3 model developed and the GICv3 ITS model (Interrupt Translation Service).

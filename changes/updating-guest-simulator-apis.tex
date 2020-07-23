@@ -10,7 +10,7 @@ Guest software might also want to purposefully request some behavior from gem5 s
 One way the simulator can react to guest behavior is by executing a callback when the guest executes a certain program counter (PC).
 The PC would generally come from the table of symbols loaded with, for instance, an OS kernel, and would let gem5 detect when certain kernel functions were about to execute.
 This mechanism has been improved to make it easier for different types of CPU models to implement.
-These include the CPU models which use KVM and the ARM Fast Model based CPUs.
+These include the CPU models which use KVM and the Arm Fast Model based CPUs.
 
 The gem5$\leftrightarrow$guest interaction might also be triggered by the application running on the guest itself.
 One common way to use these mechanisms from within the guest is to use the ``m5'' utility which parses command line arguments and then triggers whatever gem5 behavior was requested.
