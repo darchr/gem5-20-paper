@@ -1,8 +1,93 @@
 \subsection[GPU Compute Model]{GPU Compute Model\footnote{by Anthony Gutierrez}}
 \label{sec:gpu}
 
-GPUs have become an important part of the system design for high-performance computing, machine learning, and many other workloads.
-Thus, we have integrated a compute-based GPU model into gem5~\cite{GutierrezBeckmann2018-amdAPU}.
+GPUs have become an important part of the system design for high-performance
+computing, machine learning, and many other workloads. Thus, we have integrated
+a compute-based GPU model into gem5~\cite{GutierrezBeckmann2018-amdAPU}. The
+GPU model is based on the AMD Graphics Core Next (GCN) architecture
+\footnote{http://amd.com/en/technologies/gcn} and currently
+supports the AMD GCN3 ISA.
+
+While the initial release of the GPU model supports the GCN architecture and
+GCN3 ISA, the design provides enough flexibility to implement any
+modern GPU architecture that follows a single-instruction, multiple-data
+(SIMD) execution model. This is achieved by following the gem5
+convention of hiding ISA- and architecture-specific functionality behind a
+generic API. By following this convention, the GPU core models
+can be made generic enough to be used across a variety of GPU ISAs, similar
+to the CPU models.
+
+\subsubsection[GPU Thread Context]{GPU Thread Context}
+At a high level the GPU core's execution model can be described as a
+single-instruction, multiple-thread (SIMT) execution model. In
+this execution model threads (i.e., SIMD lanes) are grouped together into
+a \textit{wavefront}
+(using OpenCL terminology, also called a warp in CUDA terminology) and execute the
+same instruction in lock-step on a single SIMD unit.
+
+The wavefront class in gem5 includes all the relevant GPU thread state and
+executes on a single SIMD unit within a compute unit (CU). Multiple wavefronts
+can be combined to form a \textit{work-group} (also called
+a thread block in CUDA terminology) and multiple work-groups can be combined to
+form the GPU kernel. While wavefronts map to single SIMD units, a work-group maps
+to a CU.
+
+\subsubsection[Compute Unit Pipeline]{Compute Unit Pipeline}
+The CU is the primary processing unit in the GPU, which contains many
+CUs. The current model in gem5 supports in-order issue of SIMD and scalar
+instructions processor.
+The workhorse of the compute unit is the SIMD unit, which executes vector
+ALU instructions. The CU model is highly configurable, allowing users to set the
+number of SIMD units per CU as well as the width of each SIMD unit. In addition to
+the SIMD units, each CU can have some arbitrary number of scalar units, scratch
+pad memory, and global memory units (both vector and scalar memory).
+
+The SIMD unit relies on large vector register files (VRF), however the GPU can
+also be configured to include a scalar register file (SRF) for use with scalar
+execution units. Additionally, vector ALU and memory instructions may contain
+scalar operands, and thus vector operations require access to the SRF.
+
+At a high level the CU pipeline modeled in gem5 consists of four stages: \textit{fetch},
+\textit{scoreboard check}, \textit{schedule}, and \textit{execute}. The fetch stage
+is responsible for arbitrating instruction fetch, storing fetched data,
+and decoding instructions for all wavefronts on the CU. The scoreboard check stage is
+responsible for ensuring that intra-wavefront dependences are
+correctly handled before instructions can be scheduled. The schedule stage is
+responsible for arbitrating among the wavefronts presented by
+the scoreboard check stage for each execution unit type. Once an instruction is dispatched
+to an execution unit it is guaranteed to execute.
+This ``execute at execute'' approach is the same as used by the gem5 in-order and
+out-of-order CPU models. The execute stage executes the instruction by calling the \textit{execute}
+method on the instruction. It manages which resources are used and dictates the timing of
+operations and register file reads and writes.
+
+\subsubsection[Kernel Launch Flow]{Kernel Launch Flow}
+Kernel launch is initiated by a host application making the appropriate kernel
+launch call provided by the GPU's runtime library, for example the gem5 GPU model
+currently supports the ROCm software stack for GPU compute. The kernel launch
+call places a kernel launch packet (i.e., a descriptor of the kernel) in memory
+and notifies the GPU hardware of
+the kernel launch. The GPU contains a command processor (CP) that is responsible
+for handling these calls from the host as well as scheduling kernels to the GPU.
+
+When the host launches a kernel, the packet processor in gem5 receives a signal
+indicating that a kernel launch packet is ready, extracts the packet from memory,
+then reads important metadata from the packet in order to begin dispatching
+work and initializing the kernel's state. After the launch packet has been parsed,
+information about the kernel's resource requirements are sent to the dispatcher.
+
+As previously described wavefronts are dispatched to a CU's SIMD units, while a work-group is mapped
+to a single CU. Wavefronts and work-groups, however, are combined together to form an entire kernel
+which is launched to the GPU. An entire work-group (and thus all wavefronts in a work-group) must be
+launched together and on the same CU, however not all work-groups must be launched simultaneously.
+
+Kernel launch is resource limited, and the dispatcher
+in the GPU is responsible for tracking work-groups, both in-flight and waiting work-groups, and
+dispatching them to the CUs as resources become available. In order for a work-group to be dispatched
+the CU must have enough resources to support all of its wavefronts (e.g., register file space).
+Once a work-group is ready for dispatch, the CP is notified and the CU resources are reserved.
+Finally, the register file state for each wavefront in the work-group is initialized based
+on the metadata extracted by the CP.
 
 \subsubsection[Autonomous Data-Race-Free GPU Tester]{Autonomous Data-Race-Free GPU Tester\footnote{by Tuan Ta}}
 
@@ -13,8 +98,8 @@ However, existing GPU memory systems are often based on weaker consistency model
 The order in which reads and writes appear globally can be different from the order they are issued from GPU cores.
 Therefore, the previous CPU-centric Ruby tester is not applicable to testing GPU memory systems.
 
-The gem5 simulator currently supports an autonomous random data-race-free testing framework to validate GPU memory systems.
-The tester works by randomly generating and injecting sequences of data-race-free reads and writes that are synchronized by proper atomic operations and memory fences to a target a specific memory system.
+The gem5 simulator has added support for an autonomous random data-race-free testing framework to validate GPU memory systems.
+The tester works by randomly generating and injecting sequences of data-race-free reads and writes that are synchronized by proper atomic operations and memory fences.
 By maintaining the data-race freedom of all generated sequences, the tester is able to validate responses from the system under test.
 The tester is also able to periodically check for forward progress of the system and report possible deadlock and livelock.
 Once encountering a failure, the tester generates an event log that captures only memory transactions related to the failure, which significantly eases the debugging process.
