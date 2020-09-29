@@ -73,7 +73,7 @@ Alternatively, gem5 also has its own built in SystemC kernel and TLM implementat
 These models can then use gem5's configuration mechanism and be controlled from Python, and, by using modified versions of the bridges developed to run gem5 within a SystemC simulation, TLM sockets can be connected to gem5's native ports.
 
 This approach integrates models into gem5 more cleanly and fully since they are now first class gem5 models with access to all of gem5's APIs.
-Existing models and \verb|c_main| implementations can generally be used as-is without any source level modifications; they just need to be recompiled against gem5's SystemC headers and linked into a gem5 binary.
+Existing models and \lstinline|c_main| implementations can generally be used as-is without any source level modifications; they just need to be recompiled against gem5's SystemC headers and linked into a gem5 binary.
 
 While some parts of gem5's SystemC implementation are taken from the open source reference implementation (most of the data structure library and TLM), the core implementation is new and based off of the SystemC standard.
 This means that code which depends on nonstandard features, behaviors, and implementation specific details of the reference implementation may not compile or work properly within gem5.

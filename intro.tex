@@ -94,7 +94,7 @@ The governance structure also defines the roles and responsibilities of members 
 We also formed a project management committee~(PMC) with a mix of industry and academic members to help ensure smooth running of the project.
 %Importantly, members of the PMC do not have significant authority over other members of the community or of the direction of the project.
 
-To simplify the contribution process, we have instituted many industry-standard development methodologies including providing a \verb|CONTRIBUTING| document in the gem5 source.
+To simplify the contribution process, we have instituted many industry-standard development methodologies including providing a \lstinline|CONTRIBUTING| document in the gem5 source.
 In the past, gem5 code contributions were managed with a number of esoteric software packages.
 Now, all gem5 code is stored in a git repository\footnote{\url{https://gem5.googlesource.com/}}, code review is managed on gerrit\footnote{\url{https://gem5-review.googlesource.com/}}, we have continuous integration support (see Section~\ref{sec:testing}), our website is implemented with Jekyll and markdown\footnote{\url{https://gem5.googlesource.com/public/gem5-website}}, and we have a Jira-based issue tracker\footnote{\url{https://gem5.atlassian.net/}}.
 
@@ -185,7 +185,7 @@ Although there are many computer architecture simulators, and many of these are 
 
 An overview of gem5's usage is shown in Figure~\ref{fig:gem5-usage}.
 First, the user chooses a system to simulate (e.g., a two core system with two levels of cache shown on the left of Figure~\ref{fig:gem5-usage}).
-Then, the user writes a Python script that describes the system under test by instantiating model objects (\verb|SimObjects| in gem5 terminology).
+Then, the user writes a Python script that describes the system under test by instantiating model objects (\lstinline|SimObjects| in gem5 terminology).
 Each object has a number of parameters that the user can modify in their script by setting member variables of the Python objects.
 This script is also used to control the simulator and can start the simulation, stop the simulation, save the simulation state, and complete other simulator interactions.
 To execute the simulation, the user passes this Python script to the gem5 binary, which acts as a Python interpreter and executes the script.

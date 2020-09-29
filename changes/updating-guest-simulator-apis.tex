@@ -30,7 +30,7 @@ Those arguments are then used to call an arbitrary function in gem5.
 Once the function finishes, it can optionally return a value into the guest if it wants to override or just observe guest behavior.
 
 For instance, suppose we had the function shown in Figure~\ref{fig:code1}.
-If we wanted to call it from within the guest using calling convention AAPCS32, once gem5 had detected the call (as described above), it could call \verb|foo()| with arguments from the guest as shown in Figure~\ref{fig:code2}.
+If we wanted to call it from within the guest using calling convention AAPCS32, once gem5 had detected the call (as described above), it could call \lstinline|foo()| with arguments from the guest as shown in Figure~\ref{fig:code2}.
 
 \begin{figure}
     \centering

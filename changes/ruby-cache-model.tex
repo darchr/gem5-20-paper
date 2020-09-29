@@ -19,7 +19,7 @@ This enables running simulations from regions of interest, rather than having to
 To enable checkpoints, we support accessing the memory system functionally i.e. without any notion of time or events.
 The absence of timed events allows much higher simulation speeds.
 
-Additionally, a new three level coherence protocol (\verb|MESI_Three_Level|) has been added to gem5.
+Additionally, a new three level coherence protocol (\lstinline|MESI_Three_Level|) has been added to gem5.
 For simplicity, this protocol was built on top of a prior two level protocol by adding an ``zero level'' (L0) cache at the CPU cores.
 At the L0, the protocol has separate caches for instructions and data.
 The L1 and the L2 caches are unified and do not distinguish between instructions and data.
@@ -32,7 +32,7 @@ The L0 and L1 caches are private to each CPU core while the L2 is shared across 
 \subsubsection[Arm Support and Extensions]{Arm Support in Ruby Coherence Protocols\footnote{by Tiago M{\"u}ck}}
 
 Until recently, configurations combining Ruby and multicore Arm systems were not properly supported.
-We have revamped the \verb|MOESI_CMP_directory| protocol and made it the default when building gem5 for Arm.
+We have revamped the \lstinline|MOESI_CMP_directory| protocol and made it the default when building gem5 for Arm.
 Several issues that resulted in protocol deadlocks (especially when scaling up to many-core configurations) were fixed.
 Other fixes include support for functional accesses, DMA bugs, and improved modeling of cache and directory latencies.
-Additionally, support for load-linked/store-conditional (LL/SC) operations was added to the \verb|MESI_Three_Level| protocol, which enables it to be used with Arm as well.
+Additionally, support for load-linked/store-conditional (LL/SC) operations was added to the \lstinline|MESI_Three_Level| protocol, which enables it to be used with Arm as well.
