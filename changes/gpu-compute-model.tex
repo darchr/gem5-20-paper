@@ -35,7 +35,7 @@ to a CU.
 \subsubsection[Compute Unit Pipeline]{Compute Unit Pipeline}
 The CU is the primary processing unit in the GPU, which contains many
 CUs. The current model in gem5 supports in-order issue of SIMD and scalar
-instructions processor.
+instructions.
 The workhorse of the compute unit is the SIMD unit, which executes vector
 ALU instructions. The CU model is highly configurable, allowing users to set the
 number of SIMD units per CU as well as the width of each SIMD unit. In addition to
